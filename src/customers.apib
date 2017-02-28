@@ -1,0 +1,72 @@
+FORMAT: 1A
+HOST: http://api.kangaroorewards.com/
+
+# Kangaroo Rewards
+
+Welcome to the Kangaroo Rewards API documentation. 
+We hope you’ll find this resource clear and helpful. 
+Kangaroo Rewards API allows merchants to use the Kangaroo Reward platform.
+
+## Customer Collection [/customers]
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes
+        - data (array[Customer])
+
+### POST
+
++ Request (application/json)
+    + Attributes
+        - data (Customer Create)
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Customer)
+
+## Customer Resource [/customers/{id}]
+
++ Parameters
+  + id: `11e696103f8ff5eabb02089e01cf89b5` - The unique ID of the customer.
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Customer)
+
+### PUT
+
++ Request (application/json)
+    + Attributes
+        - data (Customer)
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Customer)
+
+### DELETE
+
++ Response 204
+
+# Data Structures
+
+## Customer (object)
+
+- id: `11e696103f8ff5eabb02089e01cf89b5` (string)
+- first_name: `Battery` (string)
+- last_name: `Harris` (string)
+- email: `johndoe@example.com` (string)
+- phone
+- date_of_birth: `1963-03-03` (string)
+- balance_points: `0` (number)
+- balance_amount: `0` (number)
+- member_since: `2016-06-09T21:04:50+00:00` (string)
+
+## Customer Create (object)
+
+- first_name: `Battery` (string)
+- last_name: `Harris` (string)
+- email: `johndoe@example.com` (string, required)
+- date_of_birth: `1963-03-03` (string)
