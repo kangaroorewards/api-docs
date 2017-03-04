@@ -1,0 +1,288 @@
+FORMAT: 1A
+HOST: http://api.kangaroorewards.com/
+
+# Kangaroo Rewards - API Reference
+
+The Kangaroo Rewards API uses HTTP methods and a RESTful endpoint structure. The API authorization framework is OAuth 2.0. You format requests in JSON and the APIs return JSON-formatted responses.
+
+Developers can build an app using Kangaroo Rewards API in their language of choice. To simplify integrations, Kangaroo Rewards provides REST Server SDKs and samples available on Github (in PHP).
+
+[KangarooRewards-PHP-SDK](https://github.com/kangaroorewards/KangarooRewards-PHP-SDK) - the SDK without Oauth2 support (you will need to handle authentication and request an access token using another [library](https://github.com/kangaroorewards/oauth2-kangaroo-rewards), or by making API calls directly to the authentication endpoints)
+
+[OAuth2 Kangaroo Rewards](https://github.com/kangaroorewards/oauth2-kangaroo-rewards) - the OAuth2 Client for Kangaroo Rewards API
+
+[REST API sample App](https://github.com/kangaroorewards/rest-api-sample-app-php) - a sample app built in PHP using the SDK: <a href="https://github.com/kangaroorewards/KangarooRewards-PHP-SDK">KangarooRewards-PHP-SDK</a> and OAuth2 client: [https://github.com/kangaroorewards/oauth2-kangaroo-rewards](OAuth2 Kangaroo Rewards) that helps you to build your app faster.
+
+## Build Your First App Following These Steps
+
+- Step 1: Register an app with Kangaroo Rewards
+- Step 2: Implement Authentication
+- Step 3: Access Kangaroo Rewards REST API
+
+>**Prerequisite.**
+To get started, you will need a Kangaroo Rewards Developer account with which to build and test your app.
+Sign up for free at: api.kangaroorewards.com/developers
+
+### Register an app with Kangaroo Rewards
+
+Go to [Developer Portal](https://api.kangaroorewards.com/developers/applications "Developer Portal"). Click on the “Register a new Application” button. Consider using a service account when registering your app at [Developer Portal](https://api.kangaroorewards.com/developers/applications "Developer Portal"). i.e. “apps@yourcompany.com” - This will ensure your app continues to work if you or the app creator leaves the company.
+
+<table class="table">
+    <tr class="bg-primary">
+        <th>Register a New App - Fields</th> <th>Description</th>
+    </tr>
+    <tr>
+        <td><strong>Application name</strong></td>
+        <td> The app name which will appear on Authorization dialog.</td>
+    </tr>
+    <tr>
+        <td><strong>Authorization callback URL</strong></td>
+        <td>This must be the page url where the users will be redirected after authorizing your application. Also, The Access Token will be sent to this page</td>
+    </tr>
+    <tr>
+        <td><strong>Application description</strong></td>
+        <td>Optional. This is what the users will see on Authentication page</td>
+    </tr>
+</table>
+
+![Register your app](https://api.kangaroorewards.com/img/app1.png "Register your app")
+
+Once the application is created, it will have a Client ID and Client Secret associated to it. The Client ID is public, but Client Secret must not be shared.
+
+After you finished building your app and tested it, you may request authorization from the person you are developing the application. He/She will normally be a Business Owner and will receive an email with authorization link.
+
+![Request Authorization](https://api.kangaroorewards.com/img/app2.png "Request Authorization")
+
+>**Note:**
+OAuth state is a random string that is optional, but highly recommended to mitigate CSRF attacks. 
+If you decide to use state parameter in your app and request authorization by email, you have to store the state parameter value in your callback page. A sample code for callback page can be found [here](https://gist.github.com/kangaroodev/5d33c691d5e7801d00ed31bfb0c76441)
+
+### Implement Authentication
+
+OAuth 2 is an open standard for authorization that enables third-party applications to obtain limited access to Kangaroo Rewards merchant accounts, by delegating user authentication to Kangaroo Rewards.
+
+All developers need to register their application before getting started. A registered OAuth application is assigned a unique Client ID and Client Secret. The Client Secret should not be shared.
+
+#### OAuth - Web Application Flow
+
+The Kangaroo Rewards OAuth API supports the Authorization Code flow, which is suitable for web applications running on a server. This is a description of the flow for third party applications.
+
+This scenario begins by redirecting a browser (full page or popup) to a Kangaroo Rewards URL with a set of query parameters that indicate the type of Kangaroo Rewards API access the application requires. As in other scenarios, Kangaroo Rewards handles user authentication and consent, and the result is an access token
+
+The application may access a Kangaroo Rewards API after it receives the access token.
+
+>**Note:** Your application should always use HTTPS in this scenario.
+
+**1. Request Authorization**
+The URL used when authenticating a user is `https://api.kangaroorewards.com/oauth/authorize`. This endpoint is accessible over SSL, and HTTP connections are refused.
+
+Auth Code Request Endpoint
+
+`https://api.kangaroorewards.com/oauth/authorize`
+
+The set of query string parameters supported by the Kangaroo Authorization Server for client-side applications are:
+
+<table class="table">
+    <tr class="bg-primary">
+        <th>Parameter</th> <th>Values</th> <th>Description</th>
+    </tr>
+    <tr>
+        <td><strong>client_id</strong></td>
+        <td>The client ID you obtain from the <a href="/developers">Developer Portal</a> when you registered your app</td>
+        <td>
+            Identifies the client that is making the request. 
+            The value passed in this parameter must exactly match the value shown in the <a href="/developers">Developer Portal</a>
+        </td>
+    </tr>
+    <tr>
+        <td><strong>redirect_uri</strong></td>
+        <td>The URL in your application where users will be sent after authorization. </td>
+        <td>
+            Determines where the response is sent. The value of this parameter must exactly 
+            match the url listed for this app in the <a href="/developers">Developer Portal</a> (including the http or https scheme, case, and trailing '/').
+        </td>
+    </tr>
+    <tr>
+        <td><strong>response_type</strong></td>
+        <td><strong>code</strong></td>
+        <td>
+            Must be set to "code" to request an authorization code.
+        </td>
+    </tr>
+    <tr>
+        <td><strong>scope</strong></td>
+        <td>Space-delimited set of permissions that the application requests.</td>
+        <td>
+            A space delimited list of scopes. Identifies the Kangaroo API access that your application is requesting. 
+            The values passed in this parameter inform the consent screen that is shown to the user. 
+            There is an inverse relationship between the number of permissions requested and the likelihood of 
+            obtaining user consent. For information about available scopes, <a href="#scopes">see scopes</a>.
+        </td>
+    </tr>
+    <tr>
+        <td><strong>state</strong></td>
+        <td>Random string</td>
+        <td>Optional. This parameter is optional but highly recommended. You should store the value of the CSRF token in the user’s session to be validated when they return.</td>
+    </tr>
+</table>
+
+All of these parameters will be validated by the authorization server.
+
+The user will then be asked to login to the authorization server and approve the client.
+
+An example URL is shown below
+```
+https://api.kangaroorewards.com/oauth/authorize?client_id=12345
+&redirect_uri=https://example.com/callback
+&response_type=code
+&scope=full-access manage-customers
+```
+**2. Handling the OAuth 2.0 server response**
+
+If the user approves the client they will be redirected from the authorisation server back to the client (specifically to the redirect URI) with the following parameters in the query string:
+
+- *code* with the authorization code
+- *state* with the state parameter sent in the original request. You should compare this value with the value stored in the user’s session to ensure the authorization code obtained is in response to requests made by this client rather than another client application.
+
+An error response:
+`https://example.com/callback?error=access_denied&state={CSRF}`
+
+An authorization code response:
+`https://example.com/callback?code=OtHIETVfgY4lQz9IlTx7E3HPmuCVQb8IubZ`
+
+After the web server receives the authorization code, it can exchange the authorization code for an access token.
+
+**3. Request Access Token**
+
+The client will now send a POST request to the authorization server with the following parameters:
+
+Access Token Request Endpoint:
+`https://api.kangaroorewards.com/oauth/token`
+
+<table class="table">
+    <tr class="bg-primary">
+        <th>Parameter</th> <th>Values</th> <th>Description</th>
+    </tr>
+    <tr>
+        <td><strong>client_id</strong></td>
+        <td>The client ID you obtain from the <a href="/developers">Developer Portal</a> when you registered your app</td>
+        <td>
+            Identifies the client that is making the request. 
+            The value passed in this parameter must exactly match the value shown in the <a href="/developers">Developer Portal</a>
+        </td>
+    </tr>
+    <tr>
+        <td><strong>client_secret</strong></td>
+        <td>The client secret you obtain from the <a href="/developers">Developer Portal</a> when you registered your app</td>
+        <td>
+            Identifies the client that is making the request. 
+            The value passed in this parameter must exactly match the value shown in the <a href="/developers">Developer Portal</a>
+        </td>
+    </tr>
+    <tr>
+        <td><strong>redirect_uri</strong></td>
+        <td>The URL in your application where users will be sent after authorization. </td>
+        <td>
+            Determines where the response is sent. The value of this parameter must exactly 
+            match the url listed for this app in the <a href="/developers">Developer Portal</a> (including the http or https scheme, case, and trailing '/').
+        </td>
+    </tr>
+    <tr>
+        <td><strong>grant_type</strong></td>
+        <td><strong>authorization_code</strong></td>
+        <td>
+
+        </td>
+    </tr>
+    <tr>
+        <td><strong>code</strong></td>
+        <td>Authorization code</td>
+        <td>
+           The code you received as a response to <a href="#oauth-step1">Step 1</a>
+        </td>
+    </tr>
+</table>
+
+Example Access Token Endpoint
+
+```
+https://api.kangaroorewards.com/oauth/token?grant_type=authorization_code
+&code=rye7rwer8ewr9re8
+&client_id=12345
+&client_secret=8fysa8dfds9fj283
+&redirect_uri=https://example.com/callback
+```
+            
+By default, the response will take the following form:
+
+`access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1N&scope=manage_customers&token_type=Bearer`
+
+A successful response is returned as a JSON array, similar to the following:
+
+```
+{
+"access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImI5ZTk0NTRkYTRmOTY5Y2U2ZTUxMmFlMTRkZTdkMWJhZWQ1NjUyZTcwNmNiOTk2YTE2MjdhMjg0ZDMzMTM2NDNlZmJlZjhiZWU4YWQxMDg4In0",
+"refresh_token":"2riNuUlbhlW1MWKb4Jos9FOYgIzz5ZJtK7rQjIgLDu3XsgblD5Xtn44sFieo",
+"expires_in":3920,
+"token_type":"Bearer"
+}
+```
+            
+**4. Use Access Token**
+Now you may use the access token to make requests, on behalf of the user, from the resource server via the API (endpoint: https://api.kangaroorewards.com). For more information about making API requests, the full API v1 documentation is available at our developer's portal.
+
+The access token may be used until it expires (15 days after being issued) or is otherwise invalidated (e.g. user revoked or refresh token used).
+
+Example Access Token Use
+`curl -H "Authorization: Bearer 12345678900987654321-abc34135acde13f13530" https://api.kangaroorewards.com/customers`
+
+#### Refresh Token Flow
+If you would like to request a new access token (and new refresh token), you may do so by sending the authorization server a token refresh request. A typical reason for refreshing a token is that the original access token has expired. A refresh token may only be used once, and using it invalidates the access token that it was issued with.
+
+**1. Use Refresh Token**
+
+Use the refresh_token in your token refresh request, which is a POST request to the token endpoint with the appropriate parameters.
+
+`https://api.kangaroorewards.com/oauth/token`
+
+<table class="table">
+    <tr class="bg-primary">
+        <th>Parameter</th> <th>Values</th> <th>Description</th>
+    </tr>
+    <tr>
+        <td><strong>grant_type</strong></td>
+        <td><strong>refresh_token</strong></td>
+        <td>
+            Must be set to "refresh_token" for an token refresh request.
+        </td>
+    </tr>
+    <tr>
+        <td><strong>refresh_token</strong></td>
+        <td>Refresh token string</td>
+        <td>The <strong>refresh_token</strong> that was received with the original access token.</td>
+    </tr>
+</table>
+
+**Token Refresh Response**
+
+The refresh token response looks just like the normal access token grant. It includes new access and refresh tokens.
+
+Example Refresh Token Request
+`curl -X POST "https://api.kangaroorewards.com/oauth/token?grant_type=refresh_token&refresh_token=gbnv934s8rufe9j9e8jd98h392fw"`
+
+**Scopes**
+
+Scopes limit the type of access that an access token will allow. The Kangaroo Rewards API supports one scope, "full-access".
+<table class="table">
+    <tr class="bg-primary">
+        <th>Name</th> <th>Description</th>
+    </tr>
+    <tr>
+        <td><strong>(no scope)</strong></td>
+        <td> Defaults to "full-access" scope.</td>
+    </tr>
+    <tr>
+        <td><strong>full-access</strong></td>
+        <td>Grants read/write access to user account, i.e. full access. This allows actions that can be requested using the GET, POST, PUT, and DELETE methods</td>
+    </tr>
+</table>

@@ -1,0 +1,58 @@
+FORMAT: 1A
+HOST: http://api.kangaroorewards.com/
+
+# Account
+
+### GET /me
+
+This is an object representing your Kangaroo account. You can retrieve it to see properties on the account like its current e-mail address, settings etc.
+
+Example
+
+```
+GET /me HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+
+> **NOTE:** You could also request more information using include parameter. All possible values:
+- **offers** - include business offers in the response
+- **products** - include products in the response
+- **giftcards** - include gift cards in the response
+- **catalog** - include Redemption Catalog in the response
+- **social** - include social media links in the response
+- **branches** - include business branches in the response
+
+Example
+`https://api.kangaroorewards.com/me?include[]=branches&include[]=products&include[]=offers`
+
++ Request
+    + Headers
+    
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Account Base)
+
+# Data Structures
+
+## Account Base (object)
+
+- id: `11e696103f8ff5eabb02089e01cf89b5` (string)
+- profile
+    + id: `11e696103f8ff5eabb02089e01cf89b5` (string)
+    + username: johndoe (string)
+    + email: johndoe@example.com (string)
+    + first_name: John (string)
+    + last_name: Doe (string)
+- business
+    + `id`: 22e696103f8fa5eabb02089e01cf89c1 (string)
+    + `name`: `Retrorant` (string)
+    + `loyalty_type`: `per_visit` (string)
+    + `about`: `Retrorant has cuisines in houses across the city.` (string)
+    + `logo`: `https://www.kangaroorewards.com/photos/1473392787_57d23093693fe.jpg` (string)
+    + `cover`: `https://www.kangaroorewards.com/photos/1465232980_5755ae54d57635.61967004.jpg` (string)

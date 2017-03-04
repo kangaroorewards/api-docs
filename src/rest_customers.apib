@@ -11,6 +11,13 @@ Kangaroo Rewards API allows merchants to use the Kangaroo Reward platform.
 
 ### GET
 
++Request (application/json)
+
+    + Headers
+    
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+
 + Response 200 (application/json)
     + Attributes
         - data (array[Customer])
@@ -18,6 +25,12 @@ Kangaroo Rewards API allows merchants to use the Kangaroo Reward platform.
 ### POST
 
 + Request (application/json)
+
+    + Headers
+    
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+
     + Attributes
         - data (Customer Create)
 
@@ -32,6 +45,12 @@ Kangaroo Rewards API allows merchants to use the Kangaroo Reward platform.
 
 ### GET
 
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+
 + Response 200 (application/json)
     + Attributes
         - data (Customer)
@@ -39,6 +58,11 @@ Kangaroo Rewards API allows merchants to use the Kangaroo Reward platform.
 ### PUT
 
 + Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+
     + Attributes
         - data (Customer)
 
