@@ -32,15 +32,15 @@ Go to [Developer Portal](https://api.kangaroorewards.com/developers/applications
         <th>Register a New App - Fields</th> <th>Description</th>
     </tr>
     <tr>
-        <td>**Application name**</td>
+        <td><strong>Application name</strong></td>
         <td> The app name which will appear on Authorization dialog.</td>
     </tr>
     <tr>
-        <td>**Authorization callback URL**</td>
+        <td><strong>Authorization callback URL</strong></td>
         <td>This must be the page url where the users will be redirected after authorizing your application. Also, The Access Token will be sent to this page</td>
     </tr>
     <tr>
-        <td>**Application description**</td>
+        <td><strong>Application description</strong></td>
         <td>Optional. This is what the users will see on Authentication page</td>
     </tr>
 </table>
@@ -87,7 +87,7 @@ The set of query string parameters supported by the Kangaroo Authorization Serve
         <th>Parameter</th> <th>Values</th> <th>Description</th>
     </tr>
     <tr>
-        <td>**client_id**</td>
+        <td><strong>client_id</strong></td>
         <td>The client ID you obtain from the <a href="/developers">Developer Portal</a> when you registered your app</td>
         <td>
             Identifies the client that is making the request. 
@@ -95,7 +95,7 @@ The set of query string parameters supported by the Kangaroo Authorization Serve
         </td>
     </tr>
     <tr>
-        <td>**redirect_uri**</td>
+        <td><strong>redirect_uri</strong></td>
         <td>The URL in your application where users will be sent after authorization. </td>
         <td>
             Determines where the response is sent. The value of this parameter must exactly 
@@ -103,14 +103,14 @@ The set of query string parameters supported by the Kangaroo Authorization Serve
         </td>
     </tr>
     <tr>
-        <td>**response_type**</td>
-        <td>**code**</td>
+        <td><strong>response_type</strong></td>
+        <td><strong>code</strong></td>
         <td>
             Must be set to "code" to request an authorization code.
         </td>
     </tr>
     <tr>
-        <td>**scope**</td>
+        <td><strong>scope</strong></td>
         <td>Space-delimited set of permissions that the application requests.</td>
         <td>
             A space delimited list of scopes. Identifies the Kangaroo API access that your application is requesting. 
@@ -120,7 +120,7 @@ The set of query string parameters supported by the Kangaroo Authorization Serve
         </td>
     </tr>
     <tr>
-        <td>**state**</td>
+        <td><strong>state</strong></td>
         <td>Random string</td>
         <td>Optional. This parameter is optional but highly recommended. You should store the value of the CSRF token in the user’s session to be validated when they return.</td>
     </tr>
@@ -164,7 +164,7 @@ Access Token Request Endpoint:
         <th>Parameter</th> <th>Values</th> <th>Description</th>
     </tr>
     <tr>
-        <td>**client_id**</td>
+        <td><strong>client_id</strong></td>
         <td>The client ID you obtain from the <a href="/developers">Developer Portal</a> when you registered your app</td>
         <td>
             Identifies the client that is making the request. 
@@ -172,7 +172,7 @@ Access Token Request Endpoint:
         </td>
     </tr>
     <tr>
-        <td>**client_secret**</td>
+        <td><strong>client_secret</strong></td>
         <td>The client secret you obtain from the <a href="/developers">Developer Portal</a> when you registered your app</td>
         <td>
             Identifies the client that is making the request. 
@@ -180,7 +180,7 @@ Access Token Request Endpoint:
         </td>
     </tr>
     <tr>
-        <td>**redirect_uri**</td>
+        <td><strong>redirect_uri</strong></td>
         <td>The URL in your application where users will be sent after authorization. </td>
         <td>
             Determines where the response is sent. The value of this parameter must exactly 
@@ -188,14 +188,14 @@ Access Token Request Endpoint:
         </td>
     </tr>
     <tr>
-        <td>**grant_type**</td>
-        <td>**authorization_code**</td>
+        <td><strong>grant_type</strong></td>
+        <td><strong>authorization_code</strong></td>
         <td>
             The authorization code
         </td>
     </tr>
     <tr>
-        <td>**code**</td>
+        <td><strong>code</strong></td>
         <td>Authorization code</td>
         <td>
            The code you received as a response to <a href="#oauth-step1">Step 1</a>
@@ -250,16 +250,16 @@ Use the refresh_token in your token refresh request, which is a POST request to 
         <th>Parameter</th> <th>Values</th> <th>Description</th>
     </tr>
     <tr>
-        <td>**grant_type**</td>
-        <td>**refresh_token**</td>
+        <td><strong>grant_type</strong></td>
+        <td><strong>refresh_token</strong></td>
         <td>
             Must be set to "refresh_token" for an token refresh request.
         </td>
     </tr>
     <tr>
-        <td>**refresh_token**</td>
+        <td><strong>refresh_token</strong></td>
         <td>Refresh token string</td>
-        <td>The **refresh_token** that was received with the original access token.</td>
+        <td>The <strong>refresh_token</strong> that was received with the original access token.</td>
     </tr>
 </table>
 
@@ -278,11 +278,11 @@ Scopes limit the type of access that an access token will allow. The Kangaroo Re
         <th>Name</th> <th>Description</th>
     </tr>
     <tr>
-        <td>**(no scope)**</td>
+        <td><strong>(no scope)</strong></td>
         <td> Defaults to "full-access" scope.</td>
     </tr>
     <tr>
-        <td>**full-access**</td>
+        <td><strong>full-access</strong></td>
         <td>Grants read/write access to user account, i.e. full access. This allows actions that can be requested using the GET, POST, PUT, and DELETE methods</td>
     </tr>
 </table>
