@@ -1,0 +1,64 @@
+FORMAT: 1A
+HOST: https://api.kangaroorewards.com
+
+# Branches
+
+# Group Branches
+
+### GET /branches
+
+Provides the details for all of a business's branches.
+
+Example
+
+```
+GET /branches HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+    "data": [
+        {
+            "id": "11e696101aadf216bb02089e01cf89b5",
+            "name": "Retrorant (Gauchetiere)",
+            "address": "1060 Boulevard Robert-Bourassa",
+            "web_site": "",
+            "city": "Montreal",
+            "region": "Quebec",
+            "country": "Canada",
+            "lat": 45.4851685,
+            "long": -73.5809891
+        }
+    ]
+}
+```
+
++ Request
+    + Headers
+    
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Branch Base)
+
+# Data Structures
+
+## Branch Base (object)
+
++ id: `11e696103f8ff5eabb02089e01cf89b5` (string)
++ name: `Retrorant (Gauchetiere)` (string)
++ address
+    + formatted: `1060 Boulevard Robert-Bourassa` (string)
+    + city: Montreal (string)
+    + region: Quebec (string)
+    + country: Canada (string)
+    + country: Canada (string)
+    + lat: `45.4851685` (number)
+    + long: `-73.5809891` (number)
