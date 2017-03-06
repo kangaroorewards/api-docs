@@ -204,7 +204,22 @@ Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
 ```
 
-+ Attributes (Customer)
+Response Body
+```
+{
+    "data": {
+        "id": "11e69610400894b2bb02089e01cf89b5",
+        "email": "johndoe@example.com",
+        "phone": "5140000001",
+        "first_name": "John",
+        "last_name": "Doe"
+        "balance": {
+            "active_points": 1000,
+            "active_punches": 0
+        }
+    }
+}
+```
 
 + Parameters
     + id: `11e696103f8ff5eabb02089e01cf89b5` - The unique ID of the customer.
@@ -218,6 +233,9 @@ Content-Type: application/json
 + Response 200 (application/json)
     + Attributes
         - data (Customer)
+
++ Response 404 (application/json)
+    + Attributes (Error 404)
 
 ### PUT
 Updates the details of an existing customer.
@@ -308,7 +326,7 @@ Deletes the customer with the requested id.
 + first_name: `Battery` (string) - First name for the Customer.
 + last_name: `Harris` (string) - Last name for the Customer.
 + email: `johndoe@example.com` (string)
-+ phone: (string)
++ phone: `5141234567` (string)
 + date_of_birth: `1963-03-28` (string) - Birthday
 + gender: `male` (string) - Customer's gender. Can be male or female
 + balance
@@ -339,6 +357,8 @@ Deletes the customer with the requested id.
 
 ## Error 422 (object)
 
-+ email: `The email field is required` (string)
-+ phone: `The phone field is required` (string)
++ email: (array)
+    + `The email field is required` (string)
++ phone: (array)
+    + `The phone field is required` (string)
 
