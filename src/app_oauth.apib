@@ -242,7 +242,9 @@ Now you may use the access token to make requests, on behalf of the user, from t
 The access token may be used until it expires (15 days after being issued) or is otherwise invalidated (e.g. user revoked or refresh token used).
 
 Example Access Token Use
-`curl -H "Authorization: Bearer 12345678900987654321-abc34135acde13f13530" https://api.kangaroorewards.com/customers`
+```
+curl -H "Authorization: Bearer 12345678900987654321-abc34135acde13f13530" https://api.kangaroorewards.com/customers
+```
 
 #### Refresh Token Flow
 If you would like to request a new access token (and new refresh token), you may do so by sending the authorization server a token refresh request. A typical reason for refreshing a token is that the original access token has expired. A refresh token may only be used once, and using it invalidates the access token that it was issued with.
@@ -251,7 +253,9 @@ If you would like to request a new access token (and new refresh token), you may
 
 Use the refresh_token in your token refresh request, which is a POST request to the token endpoint with the appropriate parameters.
 
-```https://api.kangaroorewards.com/oauth/token```
+```
+https://api.kangaroorewards.com/oauth/token
+```
 
 <table class="table">
     <tr class="bg-primary">
@@ -276,7 +280,9 @@ Use the refresh_token in your token refresh request, which is a POST request to 
 The refresh token response looks just like the normal access token grant. It includes new access and refresh tokens.
 
 Example Refresh Token Request
-```curl -X POST "https://api.kangaroorewards.com/oauth/token?grant_type=refresh_token&refresh_token=gbnv934s8rufe9j9e8jd98h392fw"```
+```
+curl -X POST "https://api.kangaroorewards.com/oauth/token?grant_type=refresh_token&refresh_token=gbnv934s8rufe9j9e8jd98h392fw"
+```
 
 **Scopes**
 
