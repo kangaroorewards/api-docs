@@ -45,13 +45,13 @@ Go to [Developer Portal](https://api.kangaroorewards.com/developers/applications
     </tr>
 </table>
 
-![Register your app](https://api.kangaroorewards.com/img/app1.png "Register your app")
+<img src="https://api.kangaroorewards.com/img/app1.png" title="Register your app" style="width: 100%;">
 
 Once the application is created, it will have a Client ID and Client Secret associated to it. The Client ID is public, but Client Secret must not be shared.
 
 After you finished building your app and tested it, you may request authorization from the person you are developing the application. He/She will normally be a Business Owner and will receive an email with authorization link.
 
-![Request Authorization](https://api.kangaroorewards.com/img/app2.png "Request Authorization")
+<img src="https://api.kangaroorewards.com/img/app2.png" title="Request Authorization" style="width: 100%;">
 
 >**Note:**
 OAuth state is a random string that is optional, but highly recommended to mitigate CSRF attacks. 
@@ -145,10 +145,14 @@ If the user approves the client they will be redirected from the authorisation s
 - *state* with the state parameter sent in the original request. You should compare this value with the value stored in the user’s session to ensure the authorization code obtained is in response to requests made by this client rather than another client application.
 
 An error response:
-```https://example.com/callback?error=access_denied&state={CSRF}```
+```
+https://example.com/callback?error=access_denied&state={CSRF}
+```
 
 An authorization code response:
-```https://example.com/callback?code=OtHIETVfgY4lQz9IlTx7E3HPmuCVQb8IubZ```
+```
+https://example.com/callback?code=OtHIETVfgY4lQz9IlTx7E3HPmuCVQb8IubZ
+```
 
 After the web server receives the authorization code, it can exchange the authorization code for an access token.
 
@@ -157,7 +161,9 @@ After the web server receives the authorization code, it can exchange the author
 The client will now send a POST request to the authorization server with the following parameters:
 
 Access Token Request Endpoint:
-```https://api.kangaroorewards.com/oauth/token```
+```
+https://api.kangaroorewards.com/oauth/token
+```
 
 <table class="table">
     <tr class="bg-primary">
@@ -215,7 +221,9 @@ https://api.kangaroorewards.com/oauth/token?grant_type=authorization_code
             
 By default, the response will take the following form:
 
-```access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1N&scope=manage_customers&token_type=Bearer```
+```
+access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1N&scope=manage_customers&token_type=Bearer
+```
 
 A successful response is returned as a JSON array, similar to the following:
 
