@@ -145,10 +145,10 @@ If the user approves the client they will be redirected from the authorisation s
 - *state* with the state parameter sent in the original request. You should compare this value with the value stored in the user’s session to ensure the authorization code obtained is in response to requests made by this client rather than another client application.
 
 An error response:
-`https://example.com/callback?error=access_denied&state={CSRF}`
+```https://example.com/callback?error=access_denied&state={CSRF}```
 
 An authorization code response:
-`https://example.com/callback?code=OtHIETVfgY4lQz9IlTx7E3HPmuCVQb8IubZ`
+```https://example.com/callback?code=OtHIETVfgY4lQz9IlTx7E3HPmuCVQb8IubZ```
 
 After the web server receives the authorization code, it can exchange the authorization code for an access token.
 
@@ -157,7 +157,7 @@ After the web server receives the authorization code, it can exchange the author
 The client will now send a POST request to the authorization server with the following parameters:
 
 Access Token Request Endpoint:
-`https://api.kangaroorewards.com/oauth/token`
+```https://api.kangaroorewards.com/oauth/token```
 
 <table class="table">
     <tr class="bg-primary">
@@ -215,7 +215,7 @@ https://api.kangaroorewards.com/oauth/token?grant_type=authorization_code
             
 By default, the response will take the following form:
 
-`access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1N&scope=manage_customers&token_type=Bearer`
+```access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1N&scope=manage_customers&token_type=Bearer```
 
 A successful response is returned as a JSON array, similar to the following:
 
@@ -243,7 +243,7 @@ If you would like to request a new access token (and new refresh token), you may
 
 Use the refresh_token in your token refresh request, which is a POST request to the token endpoint with the appropriate parameters.
 
-`https://api.kangaroorewards.com/oauth/token`
+```https://api.kangaroorewards.com/oauth/token```
 
 <table class="table">
     <tr class="bg-primary">
@@ -268,7 +268,7 @@ Use the refresh_token in your token refresh request, which is a POST request to 
 The refresh token response looks just like the normal access token grant. It includes new access and refresh tokens.
 
 Example Refresh Token Request
-`curl -X POST "https://api.kangaroorewards.com/oauth/token?grant_type=refresh_token&refresh_token=gbnv934s8rufe9j9e8jd98h392fw"`
+```curl -X POST "https://api.kangaroorewards.com/oauth/token?grant_type=refresh_token&refresh_token=gbnv934s8rufe9j9e8jd98h392fw"```
 
 **Scopes**
 
