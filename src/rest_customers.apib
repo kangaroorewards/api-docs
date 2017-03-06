@@ -1,11 +1,13 @@
 FORMAT: 1A
 HOST: https://api.kangaroorewards.com
 
+#Customers
+
 # Group Customers
 
 ## Customer Collection [/customers]
 
-### List All Customers [GET]
+### GET
 
 Returns a list of your customers
 
@@ -151,8 +153,7 @@ Respone Body
             Authorization: Bearer <access_token>
             Accept: application/vnd.kangaroorewards.api.v1+json;
 
-    + Attributes
-        - data (Customer Create)
+    + Attributes (Customer Create)
 
 + Response 200 (application/json)
     + Attributes
@@ -165,6 +166,8 @@ Respone Body
     + Attributes (Error 422)
 
 ## Customer Resource [/customers/{id}]
+
+### GET
 
 Returns a single customer.
 
@@ -201,27 +204,10 @@ Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
 ```
 
-Response Body
-```
-{
-    "data": {
-        "id": "11e69610400894b2bb02089e01cf89b5",
-        "email": "johndoe@example.com",
-        "phone": "5140000001",
-        "first_name": "John",
-        "last_name": "Doe"
-        "balance": {
-            "active_points": 1000,
-            "active_punches": 0
-        }
-    }
-}
-```
++ Attributes (Customer)
 
 + Parameters
     + id: `11e696103f8ff5eabb02089e01cf89b5` - The unique ID of the customer.
-
-### GET
 
 + Request (application/json)
     + Headers
@@ -234,6 +220,50 @@ Response Body
         - data (Customer)
 
 ### PUT
+Updates the details of an existing customer.
+
+Body parameters
+<table class="table">
+        <tr class="bg-warning">
+            <th>Name</th> <th>Type</th> <th>Description</th>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>string</td>
+            <td><strong>Optional.</strong> The customer's email address.</td>
+        </tr>
+        <tr>
+            <td>phone</td>
+            <td>string</td>
+            <td><strong>Optional.</strong> The customer's phone number.</td>
+        </tr>
+        <tr>
+            <td>country_code</td>
+            <td>string</td>
+            <td><strong>Optional.</strong> Required only if phone number supplied. The customer's country, in ISO 3166-1-alpha-2 format.</td>
+        </tr>
+        <tr>
+            <td>first_name</td>
+            <td>string</td>
+            <td><strong>Optional.</strong> First Name</td>
+        </tr>
+        <tr>
+            <td>last_name</td>
+            <td>string</td>
+            <td><strong>Optional.</strong> Last Name</td>
+        </tr>
+        <tr>
+            <td>language</td>
+            <td>string</td>
+            <td><strong>Optional.</strong> Communication language. Possible values <code>en</code> - English, <code>fr</code> - French, <code>es</code> - Spanish </td>
+        </tr>
+        <tr>
+            <td>gender</td>
+            <td>string</td>
+            <td><strong>Optional.</strong> Possible values <code>male</code>, <code>female</code> </td>
+        </tr>
+    </table>
+
 
 + Request (application/json)
     + Headers
@@ -241,45 +271,74 @@ Response Body
             Authorization: Bearer <access_token>
             Accept: application/vnd.kangaroorewards.api.v1+json;
 
-    + Attributes
-        - data (Customer)
+    + Attributes (Customer)
 
 + Response 200 (application/json)
     + Attributes
         - data (Customer)
 
-### DELETE
++ Response 400 (application/json)
+    + Attributes (Error 400)
 
-+ Response 204
++ Response 404 (application/json)
+    + Attributes (Error 404)
+
++ Response 422 (application/json)
+    + Attributes (Error 422)
+
+### DELETE
+Deletes the customer with the requested id.
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+
++ Parameters
+    + id: `11e696103f8ff5eabb02089e01cf89b5` - The unique ID of the customer.
+
++ Response 204 (application/json)
 
 # Data Structures
 
 ## Customer (object)
 
-- id: `11e696103f8ff5eabb02089e01cf89b5` (string)
-- first_name: `Battery` (string)
-- last_name: `Harris` (string)
-- email: `johndoe@example.com` (string)
-- phone
-- date_of_birth: `1963-03-03` (string)
-- balance_points: `0` (number)
-- balance_amount: `0` (number)
-- member_since: `2016-06-09T21:04:50+00:00` (string)
++ id: `11e696103f8ff5eabb02089e01cf89b5` (string)
++ first_name: `Battery` (string) - First name for the Customer.
++ last_name: `Harris` (string) - Last name for the Customer.
++ email: `johndoe@example.com` (string)
++ phone: (string)
++ date_of_birth: `1963-03-28` (string) - Birthday
++ gender: `male` (string) - Customer's gender. Can be male or female
++ balance
+    + active_points: 135 (number)
+    + amount: 1.35 (number)
++ member_since: `2016-06-09T21:04:50+00:00` (string)
 
 ## Customer Create (object)
 
-- first_name: `Battery` (string)
-- last_name: `Harris` (string)
-- email: `johndoe@example.com` (string, required)
-- date_of_birth: `1963-03-03` (string)
-
-## Error 422 (object)
-
-- email: `The email field is required` (string)
-- phone: `The phone field is required` (string)
++ first_name: `Battery` (string)
++ last_name: `Harris` (string)
++ email: `johndoe@example.com` (string, required)
++ date_of_birth: `1963-03-28` (string) - Birthday
++ language: `en` (string) - Communication language. Possible values `en` - English, `fr` - French, `es` - Spanish
++ gender: `male` (string) - Customer's gender. Can be male or female
 
 ## Error 400 (object)
 
-- code: `400` (number)
-- error: `Bad Request` (string)
-- message: `Invalid ID supplied` (string)
++ code: `400` (number)
++ error: `Bad Request` (string)
++ message: `Invalid ID supplied` (string)
+
+## Error 404 (object)
+
++ code: `404` (number)
++ error: `Not found` (string)
++ message: `Customer not found` (string)
+
+## Error 422 (object)
+
++ email: `The email field is required` (string)
++ phone: `The phone field is required` (string)
+
