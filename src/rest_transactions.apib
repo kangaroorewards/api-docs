@@ -1,0 +1,89 @@
+
+# Transactions
+
+# Group Transactions
+
+### POST /transactions
+
+Create a new transaction: Reward, Redeem, Refund
+
+*Body parameters*
+|Name|Type|Description|
+|-----|----|-----------|
+|type|string|Transaction Type: `reward`, `redeem` or `refund`|
+|amount|number|Required if none of `points`, *visits* are present|
+|points|number|Required if none of `amount`, *visits* are present|
+|visits|number|Required if none of `amount`, *points* are present|
+|customer.id|string|Required if none of `customer.email`, `customer.phone` are present|
+|customer.email|string|Required if none of `customer.id`, `customer.phone` are present|
+|customer.phone|string|Required if none of `customer.email`, `customer.phone` are present|
+
+>**Note**
+>Transaction type is required and `reward`, `redeem` or `refund`
+
+>**Note**
+>One of the following attributes is required `amount`, `points` or `visits`
+
+>**Note**
+>Customer is required and at least `id`, `email` or `phone` is required
+
+Example
+
+```
+GET /transactions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+    "type": "reward",
+    "amount": 5.25,
+    "customer": {
+        "id": "11e696103f8ff5eabb02089e01cf89b5"
+    }
+}
+```
+
+Response Body
+```
+{
+    "data": {
+        "id": 256560,
+        "created_at": "2017-03-06T20:19:24+0000",
+        "amount": 5.25,
+        "units": 5,
+        "name": "Reward"
+    }
+}
+```
+
++ Request
+    + Headers
+    
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json
+            Content-Type: application/json
+
+    + Attributes (Reward Amount Create)
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Reward Response)
+
+# Data Structures
+
+## Reward Amount Create(object)
+
++ type: `reward` (string)
++ amount: `5.25` (number)
++ customer
+    + id: `11e696103f8ff5eabb02089e01cf89b5` (string)
+
+## Reward Response(object)
+
++ id: `256559` (number)
++ amount: `5.25` (number)
++ units: `5` (number)
++ name: `Reward` (string)
++ created_at: `2017-03-06T19:45:47+0000` (string)
