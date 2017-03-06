@@ -25,6 +25,9 @@ Create a new transaction: Reward, Redeem, Refund
 >One of the following attributes is required `amount`, `points` or `visits`
 
 >**Note**
+>To apply visits aggregation set `visits` value greater than 1. The Employee PIN code is also required.
+
+>**Note**
 >Customer is required and at least `id`, `email` or `phone` is required
 
 Example
@@ -71,6 +74,9 @@ Response Body
     + Attributes
         - data (Reward Response)
 
++ Response 422 (application/json)
+    + Attributes (Error 422)
+
 # Data Structures
 
 ## Reward Amount Create(object)
@@ -87,3 +93,8 @@ Response Body
 + units: `5` (number)
 + name: `Reward` (string)
 + created_at: `2017-03-06T19:45:47+0000` (string)
+
+## Error 422 (object)
+
++ customer.id (array)
+    + `The selected customer.id is invalid.` (string)
