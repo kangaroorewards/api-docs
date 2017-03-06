@@ -1,5 +1,3 @@
-FORMAT: 1A
-HOST: https://api.kangaroorewards.com
 
 # Access Kangaroo Rewards REST API
 
@@ -17,25 +15,25 @@ through the API, allowing you to script the complex actions that your situation 
         <th>Method</th> <th>Usage</th>
     </tr>
     <tr>
-        <td>**GET**</td>
+        <td<strong>GET</strong></td>
         <td>
             For simple retrieval of information about your account, offers, customers etc., you should use the GET method. The information you request will be returned to you as a JSON object.
             The attributes defined by the JSON object can be used to form additional requests. Any request using the GET method is read-only and will not affect any of the objects you are querying.
         </td>
     </tr>
     <tr>
-        <td>**POST**</td>
+        <td<strong>POST</strong></td>
         <td>
             To create a new object, your request should specify the POST method.
             The POST request includes all of the attributes necessary to create a new object. When you wish to create a new object, send a POST request to the target endpoint.
         </td>
     </tr>
     <tr>
-        <td>**PUT**</td>
+        <td<strong>PUT</strong></td>
         <td>To update the information about a resource in your account, the PUT method is available.</td>
     </tr>
     <tr>
-        <td>**DELETE**</td>
+        <td<strong>DELETE</strong></td>
         <td>To destroy a resource and remove it from your account, the DELETE method should be used. This will remove the specified object if it is found. If it is not found, the operation will return a response indicating that the object was not found (404 error code).</td>
     </tr>
 </table>
@@ -48,13 +46,13 @@ error codes.
 In the event of a problem, the status will contain the error code, while the body of the response will 
 usually contain additional information about the problem that was encountered.
 
-In general, if the status returned is in the 200 range, it indicates that the request was fulfilled 
+In general, if the status returned is in the `200` range, it indicates that the request was fulfilled 
 successfully and that no error was encountered.
 
-Return codes in the 400 range typically indicate that there was an issue with the request that was sent. 
+Return codes in the `400` range typically indicate that there was an issue with the request that was sent. 
 Among other things, this could mean that you did not authenticate correctly, that you are requesting an action that you do not have authorization for, that the object you are requesting does not exist, or that your request is malformed.
 
-If you receive a status in the 500 range, this generally indicates a server-side problem. This means that 
+If you receive a status in the `500` range, this generally indicates a server-side problem. This means that 
 we are having an issue on our end and cannot fulfill your request currently.
 
 ## Responses
