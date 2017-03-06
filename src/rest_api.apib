@@ -106,9 +106,11 @@ The rate limiting information is contained within the response headers of each r
 - **X-RateLimit-Reset** - This represents the time when you are allowed to make requests again. The value 
 - is given in [Unix epoch time](http://en.wikipedia.org/wiki/Unix_time "Unix epoch time") You'll only get **X-RateLimit-Reset** if you've hit the limit
 
+Example
 ```
 X-RateLimit-Limit: 60
 X-RateLimit-Remaining: 0
 X-RateLimit-Reset: 1476571703
 ```
+
 
