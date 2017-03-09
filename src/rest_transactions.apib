@@ -140,6 +140,9 @@ Response Body with relations
     + Attributes
         - data (Reward Response)
 
++ Response 400 (application/json)
+    + Attributes (Transactions Error 400)
+
 + Response 422 (application/json)
     + Attributes (Transactions Error 422)
 
@@ -164,3 +167,13 @@ Response Body with relations
 
 + customer.id (array)
     + `The selected customer.id is invalid.` (string)
+
+## Transactions Error 400 (object)
+
++ error (object)
+    + status_code: 400 (number)
+    + message: Bad Request (string)
+    + description: Invalid Employee ID (string)
+    + link: https://api.kangaroorewards.local/docs (string)
+
+
