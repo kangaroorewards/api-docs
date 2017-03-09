@@ -14,20 +14,24 @@ Create a new transaction: Reward, Redeem, Refund
 |amount|number|Required if none of `points`, *visits* are present|
 |points|number|Required if none of `amount`, *visits* are present|
 |visits|number|Required if none of `amount`, *points* are present|
+|customer|object|Required. The customer object and at least `id`, `email` or `phone` must be provided|
 |customer.id|string|Required if none of `customer.email`, `customer.phone` are present|
 |customer.email|string|Required if none of `customer.id`, `customer.phone` are present|
 |customer.phone|string|Required if none of `customer.email`, `customer.phone` are present|
+|employee|object|Optional. The customer object and at least `id`, `email` or `phone` must be provided|
+|employee.id|string|Optional. If provided, the Employee will be attached the transaction|
+|employee.pin_code|number|Optional. Required only if the rule: "*Employee must enter his ID when Purchase Amount exceeds ...*" is active|
 
->**Note**
+>**Note:**
 >Transaction type is required and must be: `reward`, `redeem` or `refund`
 
->**Note**
+>**Note:**
 >One of the following attributes is required `amount`, `points` or `visits`
 
->**Note**
+>**Note:**
 >To apply visits aggregation set `visits` value greater than 1. The Employee PIN code is also required.
 
->**Note**
+>**Note:**
 >Customer is required and at least `id`, `email` or `phone` is required
 
 Example
@@ -57,6 +61,68 @@ Response Body
         "amount": 5.25,
         "units": 5,
         "name": "Reward"
+    }
+}
+```
+
+Example with Employee PIN Code required
+```
+GET /transactions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+    "type": "reward",
+    "amount": 3,
+    "customer": {
+        "phone": "6043345025"
+    },
+    "employee":{
+        "pin_code": "3333"
+    }
+}
+```
+
+Response Body with relations
+```
+{
+    "data": {
+        "id": 256775,
+        "created_at": "2017-03-08T21:15:54+0000",
+        "amount": 3,
+        "units": 3,
+        "name": "Reward",
+        "offer": {
+            "id": 558,
+            "units": 0,
+            "expires_at": "2017-04-01T03:59:59+0000",
+            "discount_value": 0,
+            "multip_factor": 0,
+            "real_value": 25.00,
+            "type": 2,
+            "title": "Free product",
+            "description": "Free product",
+            "images": [
+                {
+                    "default": true,
+                    "path": "http://localkangaroo.dev/photos/business/127/offers/medium/1489005428_58c06b7454494.png"
+                }
+            ]
+        },
+        "customer": {
+            "id": "11e6fd0b9882cd0d84a5089e01cf89b5",
+            "email": "",
+            "phone": "6043345025",
+            "first_name": "John",
+            "last_name": "Doe",
+            "member_since": "2017-03-08T21:15:54+0000",
+            "balance": {
+                "units": 259,
+                "amount": 2.59
+            }
+        }
     }
 }
 ```
