@@ -81,7 +81,17 @@ Content-Type: application/json
     },
     "employee":{
         "pin_code": "3333"
-    }
+    },
+    "product_rewards": [
+        {
+          "id": 123,
+          "quantity": 3
+        },
+        {
+          "id": 124,
+          "quantity": 1
+        }
+    ]
 }
 ```
 
@@ -140,6 +150,19 @@ Response Body with relations
     + Attributes
         - data (Reward Response)
 
++ Request
+    + Headers
+    
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json
+            Content-Type: application/json
+
+    + Attributes (Reward With Products Create)
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Reward Response With Customer)
+
 + Response 400 (application/json)
     + Attributes (Transactions Error 400)
 
@@ -155,6 +178,20 @@ Response Body with relations
 + customer
     + id: `11e696103f8ff5eabb02089e01cf89b5` (string)
 
+## Reward With Products Create(object)
+
++ type: `reward` (string)
++ amount: `5.25` (number)
++ customer
+    + email: `john@example.com` (string)
++ product_rewards (array)
+    + (object) 
+        * id: 123 (number) 
+        * quantity: 3 (number)
+    + (object) 
+        * id: 124 (number) 
+        * quantity: 1 (number)
+
 ## Reward Response(object)
 
 + id: `256559` (number)
@@ -162,6 +199,20 @@ Response Body with relations
 + units: `5` (number)
 + name: `Reward` (string)
 + created_at: `2017-03-06T19:45:47+0000` (string)
+
+## Reward Response With Customer (object)
+
++ id: `256559` (number)
++ amount: `5.25` (number)
++ units: `5` (number)
++ name: `Reward` (string)
++ created_at: `2017-03-06T19:45:47+0000` (string)
++ customer (object)
+    + id: `11e6fd0b9882cd0d84a5089e01cf89b5` (string)
+    + email: john@example.com (string)
+    + balance (object)
+        + units: 259 (number)
+        + amount: 2.59 (number)
 
 ## Transactions Error 422 (object)
 

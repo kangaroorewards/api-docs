@@ -135,7 +135,7 @@ An example URL is shown below
 https://api.kangaroorewards.com/oauth/authorize?client_id=12345
 &redirect_uri=https://example.com/callback
 &response_type=code
-&scope=full-access manage-customers
+&scope=all manage-customers
 ```
 **2. Handling the OAuth 2.0 server response**
 
@@ -286,17 +286,17 @@ curl -X POST "https://api.kangaroorewards.com/oauth/token?grant_type=refresh_tok
 
 **Scopes**
 
-Scopes limit the type of access that an access token will allow. The Kangaroo Rewards API supports one scope, "full-access".
+Scopes limit the type of access that an access token will allow. The Kangaroo Rewards API supports one scope, "all".
 <table class="table">
     <tr class="bg-primary">
         <th>Name</th> <th>Description</th>
     </tr>
     <tr>
         <td><strong>(no scope)</strong></td>
-        <td> Defaults to "full-access" scope.</td>
+        <td> Defaults to "all" scope.</td>
     </tr>
     <tr>
-        <td><strong>full-access</strong></td>
+        <td><strong>all</strong></td>
         <td>Grants read/write access to user account, i.e. full access. This allows actions that can be requested using the GET, POST, PUT, and DELETE methods</td>
     </tr>
 </table>
