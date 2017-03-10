@@ -19,8 +19,9 @@ Create a new transaction: Reward, Redeem, Refund
 |customer.email|string|Required if none of `customer.id`, `customer.phone` are present|
 |customer.phone|string|Required if none of `customer.email`, `customer.phone` are present|
 |employee|object|Optional. The customer object and at least `id`, `email` or `phone` must be provided|
-|employee.id|string|Optional. If provided, the Employee will be attached the transaction|
-|employee.pin_code|number|Optional. Required only if the rule: "*Employee must enter his ID when Purchase Amount exceeds ...*" is active|
+|employee.id|string|Optional. If provided, the Employee will be attached to the transaction|
+|employee.pin_code|number|Optional. Required only if the rule: "*Employee must enter his ID when Purchase Amount exceeds ...*" is active. It will override the employee.id|
+|branch.id|string|Optional. To set the physical location where the transaction took place. By default it will be the main branch|
 
 >**Note:**
 >Transaction type is required and must be: `reward`, `redeem` or `refund`
@@ -65,7 +66,10 @@ Response Body
 }
 ```
 
-Example with Employee PIN Code required
+>**Note:**
+>When `employee.pin_code` is supplied, the Employee that has that Pin Code will override the Employee attached to the transaction
+
+Example with Employee PIN Code required and Product Rewards
 ```
 GET /transactions HTTP/1.1
 Host: api.kangaroorewards.com
@@ -104,23 +108,19 @@ Response Body with relations
         "amount": 3,
         "units": 3,
         "name": "Reward",
-        "offer": {
-            "id": 558,
-            "units": 0,
-            "expires_at": "2017-04-01T03:59:59+0000",
-            "discount_value": 0,
-            "multip_factor": 0,
-            "real_value": 25.00,
-            "type": 2,
-            "title": "Free product",
-            "description": "Free product",
-            "images": [
-                {
-                    "default": true,
-                    "path": "http://localkangaroo.dev/photos/business/127/offers/medium/1489005428_58c06b7454494.png"
-                }
-            ]
-        },
+        "offers": [
+            {
+                "id": 558,
+                "units": 0,
+                "expires_at": "2017-04-01T03:59:59+0000",
+                "discount_value": 0,
+                "multip_factor": 0,
+                "real_value": 25,
+                "type": "free_product",
+                "title": "Free product",
+                "description": "Free product"
+            }
+        ],
         "customer": {
             "id": "11e6fd0b9882cd0d84a5089e01cf89b5",
             "email": "",
@@ -137,6 +137,56 @@ Response Body with relations
 }
 ```
 
+
+>**Note:**
+>You could pass the `branch.id` - wich will define where the transaction took place.
+
+Example with Branch ID
+```
+GET /transactions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+    "type": "reward",
+    "amount": 3,
+    "customer": {
+        "id": "11e696103f8ff5eabb02089e01cf89b5"
+    },
+    "branch":{
+        "id": "11e7038ade3780aca64e089e01cf89b5"
+    }
+}
+```
+
+>**Note:**
+>To attach an Employee to the transaction, you must set the `employee.id` in the payload
+
+Example with Branch ID
+```
+GET /transactions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+    "type": "reward",
+    "amount": 3,
+    "customer": {
+        "id": "31e692103f8ef5eabd02089e01cf89b4"
+    },
+    "branch":{
+        "id": "11e696101aab59a4bb02089e01cf89b5"
+    },
+    "employee":{
+        "id": "21e3038a5e3780aca24e089e01cf84b2"
+    }
+}
+```
+
 + Request
     + Headers
     
@@ -149,6 +199,12 @@ Response Body with relations
 + Response 200 (application/json)
     + Attributes
         - data (Reward Response)
+
++ Response 400 (application/json)
+    + Attributes (Transactions Error 400)
+
++ Response 422 (application/json)
+    + Attributes (Transactions Error 422)
 
 + Request
     + Headers
