@@ -5,12 +5,12 @@
 
 ### POST /transactions
 
-Create a new transaction: Reward, Redeem, Refund
+Create a new transaction: Reward, Redeem, Return
 
 *Body parameters*
 |Name|Type|Description|
 |-----|----|-----------|
-|type|string|Transaction Type: `reward`, `redeem` or `refund`|
+|type|string|Transaction Type: `reward`, `redeem` or `return`|
 |amount|number|Required if none of `points`, *visits* are present|
 |points|number|Required if none of `amount`, *visits* are present|
 |visits|number|Required if none of `amount`, *points* are present|
@@ -24,7 +24,7 @@ Create a new transaction: Reward, Redeem, Refund
 |branch.id|string|Optional. To set the physical location where the transaction took place. By default it will be the main branch|
 
 >**Note:**
->Transaction type is required and must be: `reward`, `redeem` or `refund`
+>Transaction type is required and must be: `reward`, `redeem` or `return`
 
 >**Note:**
 >One of the following attributes is required `amount`, `points` or `visits`
@@ -183,6 +183,42 @@ Content-Type: application/json
     },
     "employee":{
         "id": "21e3038a5e3780aca24e089e01cf84b2"
+    }
+}
+```
+
+Example Redeem Amount
+```
+GET /transactions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+    "type": "redeem",
+    "amount": 3.99,
+    "customer": {
+        "id": "11e6fd0b9882cd0d84a5089e01cf89b5",
+        "pin_code": 1111
+    }
+}
+```
+
+Example Return Amount
+```
+GET /transactions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+    "type": "return",
+    "amount": 2.25,
+    "customer": {
+        "id": "11e6fd0b9882cd0d84a5089e01cf89b5",
+        "pin_code": 1111
     }
 }
 ```
