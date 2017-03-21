@@ -5,7 +5,24 @@
 
 ### POST /transactions
 
-Create a new transaction: Reward, Redeem, Return
+Use `/transactions` resource to create a **reward**, **redeem** or **return** transaction.
+
+A `reward` transaction will increase the balance for the customer based on the amount included in the JSON request body.
+To create a reward transaction, set the amount, points, or visits. Use `visits` when "Claim Points" option is active.
+
+Include `product_rewards` object when you want to apply "À La Carte Rewards" (Custom Rewards) for `reward` transaction only.
+
+The total points earned is calculated based on the current Earning Rule value configured in Business Portal.
+If there are offers to apply, ex. Points Multiplier than it will automatically multiply the points and update the customer's balance.
+
+A `redeem` transaction will decrease the balance for the customer based on the amount included.
+To create a redeem transaction, set the amount or points.
+
+Include `catalog_items` object when you want to redeem a "Redemption Catalog" item for `redeem` transaction only.
+
+The `customer` object is required for all transaction types, but only id, email or phone field is required.
+
+The `employee.pin_code` is required only when redeeming on behalf of the customer or when the rule: "*Employee must enter his ID when Purchase Amount exceeds ...*" is active
 
 *Body parameters*
 |Name|Type|Description|
@@ -18,7 +35,7 @@ Create a new transaction: Reward, Redeem, Return
 |customer.id|string|Required if none of `customer.email`, `customer.phone` are present|
 |customer.email|string|Required if none of `customer.id`, `customer.phone` are present|
 |customer.phone|string|Required if none of `customer.email`, `customer.phone` are present|
-|employee|object|Optional. The customer object and at least `id`, `email` or `phone` must be provided|
+|employee|object|Optional. The employee object that will be attached to the transaction|
 |employee.id|string|Optional. If provided, the Employee will be attached to the transaction|
 |employee.pin_code|number|Optional. Required only if the rule: "*Employee must enter his ID when Purchase Amount exceeds ...*" is active. It will override the employee.id|
 |branch.id|string|Optional. To set the physical location where the transaction took place. By default it will be the main branch|
@@ -33,7 +50,7 @@ Create a new transaction: Reward, Redeem, Return
 >To apply visits aggregation set `visits` value greater than 1. The Employee PIN code is also required.
 
 >**Note:**
->Customer is required and at least `id`, `email` or `phone` is required
+>Customer object is required and at least `id`, `email` or `phone` is required
 
 Example
 
