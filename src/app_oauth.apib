@@ -25,25 +25,29 @@ Sign up for free at: api.kangaroorewards.com/developers
 
 ### Register an app with Kangaroo Rewards
 
-Go to [Developer Portal](https://api.kangaroorewards.com/developers/applications "Developer Portal"). Click on the “Register a new Application” button. Consider using a service account when registering your app at [Developer Portal](https://api.kangaroorewards.com/developers/applications "Developer Portal"). i.e. “apps@yourcompany.com” - This will ensure your app continues to work if you or the app creator leaves the company.
+#### App capabilities
 
-<table class="table">
-    <tr class="bg-primary">
-        <th>Register a New App - Fields</th> <th>Description</th>
-    </tr>
-    <tr>
-        <td><strong>Application name</strong></td>
-        <td> The app name which will appear on Authorization dialog.</td>
-    </tr>
-    <tr>
-        <td><strong>Authorization callback URL</strong></td>
-        <td>This must be the page url where the users will be redirected after authorizing your application. Also, The Access Token will be sent to this page</td>
-    </tr>
-    <tr>
-        <td><strong>Application description</strong></td>
-        <td>Optional. This is what the users will see on Authentication page</td>
-    </tr>
-</table>
+Your app can do these things and more.
+
+- Access your account information
+- Access Business information including branches, offers, rewards etc.
+- List all Customers and new Customers
+- Reward your customers
+- List Custom Rewards and Catalog Items
+- Redeem based on amount, points or Catalog Item
+
+#### Creating apps
+
+Go to [Developer Portal](https://api.kangaroorewards.com/developers/applications "Developer Portal"). 
+Click on the “Register a new Application” button. Consider using a service account when registering your app at 
+[Developer Portal](https://api.kangaroorewards.com/developers/applications "Developer Portal"). i.e. “apps@yourcompany.com” - 
+This will ensure your app continues to work if you or the app creator leaves the company.
+
+|Register a New App - Fields|Description|
+|-----|-----------|
+|Application name|The app name which will appear on Authorization dialog.|
+|Authorization callback URL|This must be the page url where the users will be redirected after authorizing your application. Also, The Access Token will be sent to this page|
+|Application description|Optional. This is what the users will see on Authentication page|
 
 <img src="https://api.kangaroorewards.com/img/app1.png" title="Register your app" style="width: 100%;">
 
@@ -56,6 +60,7 @@ After you finished building your app and tested it, you may request authorizatio
 >**Note:**
 OAuth state is a random string that is optional, but highly recommended to mitigate CSRF attacks. 
 If you decide to use state parameter in your app and request authorization by email, you have to store the state parameter value in your callback page. A sample code for callback page can be found [here](https://gist.github.com/kangaroodev/5d33c691d5e7801d00ed31bfb0c76441)
+
 
 ### Implement Authentication
 

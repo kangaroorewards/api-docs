@@ -10,7 +10,7 @@ Use `/transactions` resource to create a **reward**, **redeem** or **return** tr
 A `reward` transaction will increase the balance for the customer based on the amount included in the JSON request body.
 To create a reward transaction, set the amount, points, or visits. Use `visits` when "Claim Points" option is active.
 
-Include `product_rewards` object when you want to apply "À La Carte Rewards" (Custom Rewards) for `reward` transaction only.
+Include `custom_rewards` object when you want to apply "À La Carte Rewards" (Custom Rewards) for `reward` transaction only.
 
 The total points earned is calculated based on the current Earning Rule value configured in Business Portal.
 If there are offers to apply, ex. Points Multiplier than it will automatically multiply the points and update the customer's balance.
@@ -103,7 +103,7 @@ Content-Type: application/json
     "employee":{
         "pin_code": "3333"
     },
-    "product_rewards": [
+    "custom_rewards": [
         {
           "id": 123,
           "quantity": 3
@@ -293,7 +293,7 @@ Content-Type: application/json
 + amount: `5.25` (number)
 + customer
     + email: `john@example.com` (string)
-+ product_rewards (array)
++ custom_rewards (array)
     + (object) 
         * id: 123 (number) 
         * quantity: 3 (number)

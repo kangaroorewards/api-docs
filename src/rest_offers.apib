@@ -1,0 +1,71 @@
+
+# Offers
+
+# Group Offers
+
+### GET /offers
+
+Provides the details for all of a business's offers.
+
+Example
+
+```
+GET /offers HTTP/1.1
+Host: api.kangaroooffers.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+Accept: application/vnd.kangaroooffers.api.v1+json;
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+  "data": [
+    {
+        "id": 552,
+        "units": 0,
+        "expires_at": "2017-04-01T03:59:59+0000",
+        "discount_value": 0,
+        "multip_factor": 2,
+        "real_value": 0,
+        "type": "points_multiplier",
+        "title": "Multiply your points",
+        "description": "Come on Monday and Multiply your points",
+        "images": [
+            {
+              "default": true,
+              "path": ""
+            }
+        ]
+    },
+    . . .
+  ]
+}
+```
+
++ Request
+    + Headers
+    
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroooffers.api.v1+json;
+
++ Response 200 (application/json)
+    + Attributes
+        - data (array[Offer])
+
+# Data Structures
+
+## Offer (object)
+
++ id": 552
++ units: 0
++ expires_at: `2017-04-01T03:59:59+0000` (string)
++ discount_value: 0
++ multip_factor: 2
++ real_value: 0
++ type: `points_multiplier` (string)
++ title: `Multiply your points` (string)
++ description: `Come on Monday and Multiply your points` (string)
++ images: (array)
+    + default: true (boolean)
+    + path: `https://example.com/image1.png` (string)
