@@ -27,7 +27,7 @@ The `employee.pin_code` is required only when redeeming on behalf of the custome
 *Body parameters*
 |Name|Type|Description|
 |-----|----|-----------|
-|type|string|Transaction Type: `reward`, `redeem` or `return`|
+|intent|string|Set the `intent` to: `reward`, `redeem`, `return`, `purchase_giftcard`, `send_giftcard` or `adjust_balance`|
 |amount|number|Required if none of `points`, *visits* are present|
 |points|number|Required if none of `amount`, *visits* are present|
 |visits|number|Required if none of `amount`, *points* are present|
@@ -41,7 +41,7 @@ The `employee.pin_code` is required only when redeeming on behalf of the custome
 |branch.id|string|Optional. To set the physical location where the transaction took place. By default it will be the main branch|
 
 >**Note:**
->Transaction type is required and must be: `reward`, `redeem` or `return`
+>Transaction intent is required and must be: `reward`, `redeem`, `return`, `purchase_giftcard`, `send_giftcard` or `adjust_balance`
 
 >**Note:**
 >One of the following attributes is required `amount`, `points` or `visits`
@@ -62,7 +62,7 @@ Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
 
 {
-    "type": "reward",
+    "intent": "reward",
     "amount": 5.25,
     "customer": {
         "id": "11e696103f8ff5eabb02089e01cf89b5"
@@ -95,7 +95,7 @@ Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
 
 {
-    "type": "reward",
+    "intent": "reward",
     "amount": 3,
     "customer": {
         "phone": "6043345025"
@@ -167,7 +167,7 @@ Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
 
 {
-    "type": "reward",
+    "intent": "reward",
     "amount": 3,
     "customer": {
         "id": "11e696103f8ff5eabb02089e01cf89b5"
@@ -190,7 +190,7 @@ Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
 
 {
-    "type": "reward",
+    "intent": "reward",
     "amount": 3,
     "customer": {
         "id": "31e692103f8ef5eabd02089e01cf89b4"
@@ -213,7 +213,7 @@ Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
 
 {
-    "type": "redeem",
+    "intent": "redeem",
     "amount": 3.99,
     "customer": {
         "id": "11e6fd0b9882cd0d84a5089e01cf89b5",
@@ -231,7 +231,7 @@ Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
 
 {
-    "type": "return",
+    "intent": "return",
     "amount": 2.25,
     "customer": {
         "id": "11e6fd0b9882cd0d84a5089e01cf89b5",
@@ -282,14 +282,14 @@ Content-Type: application/json
 
 ## Reward Amount Create(object)
 
-+ type: `reward` (string)
++ intent: `reward` (string)
 + amount: `5.25` (number)
 + customer
     + id: `11e696103f8ff5eabb02089e01cf89b5` (string)
 
 ## Reward With Products Create(object)
 
-+ type: `reward` (string)
++ intent: `reward` (string)
 + amount: `5.25` (number)
 + customer
     + email: `john@example.com` (string)
