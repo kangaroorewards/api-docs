@@ -55,7 +55,7 @@ The `employee.pin_code` is required only when redeeming on behalf of the custome
 Example
 
 ```
-GET /transactions HTTP/1.1
+POST /transactions HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLC
 Accept: application/vnd.kangaroorewards.api.v1+json;
@@ -88,7 +88,7 @@ Response Body
 
 Example with Employee PIN Code required and Product Rewards
 ```
-GET /transactions HTTP/1.1
+POST /transactions HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLC
 Accept: application/vnd.kangaroorewards.api.v1+json;
@@ -160,7 +160,7 @@ Response Body with relations
 
 Example with Branch ID
 ```
-GET /transactions HTTP/1.1
+POST /transactions HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLC
 Accept: application/vnd.kangaroorewards.api.v1+json;
@@ -183,7 +183,7 @@ Content-Type: application/json
 
 Example with Branch ID
 ```
-GET /transactions HTTP/1.1
+POST /transactions HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLC
 Accept: application/vnd.kangaroorewards.api.v1+json;
@@ -204,9 +204,9 @@ Content-Type: application/json
 }
 ```
 
-Example Redeem Amount
+Example Redeem a Catalog Item
 ```
-GET /transactions HTTP/1.1
+POST /transactions HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLC
 Accept: application/vnd.kangaroorewards.api.v1+json;
@@ -214,17 +214,22 @@ Content-Type: application/json
 
 {
     "intent": "redeem",
-    "amount": 3.99,
     "customer": {
         "id": "11e6fd0b9882cd0d84a5089e01cf89b5",
         "pin_code": 1111
-    }
+    },
+    "catalog_items": [
+        {
+            "id": 123,
+            "quantity": 1
+        }
+    ]
 }
 ```
 
 Example Return Amount
 ```
-GET /transactions HTTP/1.1
+POST /transactions HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLC
 Accept: application/vnd.kangaroorewards.api.v1+json;
