@@ -77,7 +77,7 @@ Response Body
         "id": 256560,
         "created_at": "2017-03-06T20:19:24+0000",
         "amount": 5.25,
-        "units": 5,
+        "points": 5,
         "name": "Reward"
     }
 }
@@ -123,12 +123,12 @@ Response Body with relations
         "id": 256775,
         "created_at": "2017-03-08T21:15:54+0000",
         "amount": 3,
-        "units": 3,
+        "points": 3,
         "name": "Reward",
         "offers": [
             {
                 "id": 558,
-                "units": 0,
+                "points": 0,
                 "expires_at": "2017-04-01T03:59:59+0000",
                 "discount_value": 0,
                 "multip_factor": 0,
@@ -146,7 +146,7 @@ Response Body with relations
             "last_name": "Doe",
             "member_since": "2017-03-08T21:15:54+0000",
             "balance": {
-                "units": 259,
+                "points": 259,
                 "amount": 2.59
             }
         }
@@ -181,7 +181,7 @@ Content-Type: application/json
 >**Note:**
 >To attach an Employee to the transaction, you must set the `employee.id` in the payload
 
-Example with Branch ID
+Example with Employee ID
 ```
 POST /transactions HTTP/1.1
 Host: api.kangaroorewards.com
@@ -310,7 +310,7 @@ Content-Type: application/json
 
 + id: `256559` (number)
 + amount: `5.25` (number)
-+ units: `5` (number)
++ points: `5` (number)
 + name: `Reward` (string)
 + created_at: `2017-03-06T19:45:47+0000` (string)
 
@@ -318,14 +318,14 @@ Content-Type: application/json
 
 + id: `256559` (number)
 + amount: `5.25` (number)
-+ units: `5` (number)
++ points: `5` (number)
 + name: `Reward` (string)
 + created_at: `2017-03-06T19:45:47+0000` (string)
 + customer (object)
     + id: `11e6fd0b9882cd0d84a5089e01cf89b5` (string)
     + email: john@example.com (string)
     + balance (object)
-        + units: 259 (number)
+        + points: 259 (number)
         + amount: 2.59 (number)
 
 ## Transactions Error 422 (object)
