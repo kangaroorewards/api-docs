@@ -5,6 +5,14 @@
 
 ### POST /transactions
 
+A Transaction is a single event where a customer earns or spends points.
+
+You can create a transaction in one of two ways: by Customer ID or customer's email address/phone number.
+If that customer exists, we'll simply add that Transaction for that customer.  If the customer doesn't exist, 
+we'll create a new customer, award the Transaction, and then send the customer a welcome email/SMS.
+
+In addition, you can retrieve a specific transaction or a list of transactions.
+
 Use `/transactions` resource to create a **reward**, **redeem** or **return** transaction.
 
 A `reward` transaction will increase the balance for the customer based on the amount included in the JSON request body.

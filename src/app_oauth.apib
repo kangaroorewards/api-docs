@@ -3,6 +3,9 @@ HOST: https://api.kangaroorewards.com
 
 # Kangaroo Rewards - API Reference
 
+>**Note.**
+If you are looking for Users API Reference, it is awailable at [User API Reference](https://api.kangaroorewards.com/docs/user)
+
 The Kangaroo Rewards API uses HTTP methods and a RESTful endpoint structure. The API authorization framework is OAuth 2.0. You format requests in JSON and the APIs return JSON-formatted responses.
 
 Developers can build an app using Kangaroo Rewards API in their language of choice. To simplify integrations, Kangaroo Rewards provides REST Server SDKs and samples available on Github (in PHP).
@@ -138,7 +141,7 @@ An example URL is shown below
 https://api.kangaroorewards.com/oauth/authorize?client_id=12345
 &redirect_uri=https://example.com/callback
 &response_type=code
-&scope=all manage-customers
+&scope=admin user
 ```
 **2. Handling the OAuth 2.0 server response**
 
@@ -225,7 +228,7 @@ https://api.kangaroorewards.com/oauth/token?grant_type=authorization_code
 By default, the response will take the following form:
 
 ```
-access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1N&scope=manage_customers&token_type=Bearer
+access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1N&scope=admin&token_type=Bearer
 ```
 
 A successful response is returned as a JSON array, similar to the following:
@@ -240,7 +243,7 @@ A successful response is returned as a JSON array, similar to the following:
 ```
             
 **4. Use Access Token**
-Now you may use the access token to make requests, on behalf of the user, from the resource server via the API (endpoint: https://api.kangaroorewards.com). For more information about making API requests, the full API v1 documentation is available at our developer's portal.
+Now you may use the access token to make requests, on behalf of the user, from the resource server via the API (endpoint: https://api.kangaroorewards.com).
 
 The access token may be used until it expires (15 days after being issued) or is otherwise invalidated (e.g. user revoked or refresh token used).
 
@@ -289,18 +292,18 @@ curl -X POST "https://api.kangaroorewards.com/oauth/token?grant_type=refresh_tok
 
 **Scopes**
 
-Scopes limit the type of access that an access token will allow. The Kangaroo Rewards API supports one scope, "all".
+Scopes limit the type of access that an access token will allow. The Kangaroo Rewards API currently supports one scope, "admin".
 <table class="table">
     <tr class="bg-primary">
         <th>Name</th> <th>Description</th>
     </tr>
     <tr>
         <td><strong>(no scope)</strong></td>
-        <td> Defaults to "all" scope.</td>
+        <td> Is not allowed </td>
     </tr>
     <tr>
-        <td><strong>all</strong></td>
-        <td>Grants read/write access to user account, i.e. full access. This allows actions that can be requested using the GET, POST, PUT, and DELETE methods</td>
+        <td><strong>admin</strong></td>
+        <td>Grants read/write access to business account, i.e. full access. This allows actions that can be requested using the GET, POST, PUT, and DELETE methods</td>
     </tr>
 </table>
 
