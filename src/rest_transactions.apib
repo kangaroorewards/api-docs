@@ -3,12 +3,150 @@
 
 # Group Transactions
 
-### POST /transactions
+## Transaction Collection [/transactions]
+
+### GET
+
+Returns a list of transactions
+
+**Query Parameters**
+
+|Name|Type|Description|
+|-----|----|-----------|
+|page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
+|relationships|enum|`Optional.` You can optionally request that the response include the customer object. To do so, specify relationships=customer in your request.|
+|created_at|string|`Optional.` Filter by created date. See #Filter|
+|updated_at|string|`Optional.` Filter by updated date. See #Filter|
+
+Examples
+```
+GET /transactions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFmODNk
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+    "data": [
+        {
+            "id": 1991625373,
+            "amount": 0,
+            "points": 100,
+            "name": "Redemption",
+            "created_at": "2017-10-06T15:55:06+00:00",
+            "utc_updated": "2017-10-06T15:55:06+00:00"
+        },
+        {
+            "id": 599112524,
+            "amount": 5,
+            "points": 50,
+            "name": "Reward",
+            "created_at": "2017-03-24T22:13:15+00:00",
+            "utc_updated": "2017-03-24T22:13:15+00:00"
+        }
+        ...
+    ],
+    "cursor": {
+        "count": 30,
+        "next": 2,
+        "next_uri": "transactions?page=2"
+    },
+    "meta": {
+        "total": 30,
+        "amount": 0
+    }
+}
+```
+
+**Relationships**
+
+> **NOTE:** You could also request more information using relationship parameter. All possible values:
+> - **customer** - includes customer object in the response
+
+The value of the relationships parameter MUST be a comma-separated (",") list of relationship names.
+
+Example
+```
+GET /transactions?relationships=customer HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+Accept: application/vnd.kangaroorewards.api.v1+json;
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+    "data": [
+        {
+            "id": 1991625373,
+            "amount": 0,
+            "points": 100,
+            "name": "Redemption",
+            "created_at": "2017-10-06T15:55:06+00:00",
+            "utc_updated": "2017-10-06T15:55:06+00:00",
+            "customer": {
+                "id": "11e7aa159d83fae9bf8d000c296d46ef",
+                "email": "john@example.com",
+                "phone": null,
+                "first_name": "John",
+                "last_name": "Doe",
+                "created_at": "2017-10-05T21:39:07+00:00",
+                "updated_at": "2017-10-05T21:39:09+00:00"
+            }
+        },
+        ...
+    ],
+    "cursor": {
+        "count": 30,
+        "next": 2,
+        "next_uri": "transactions?page=2"
+    },
+    "meta": {
+        "total": 30,
+        "amount": 0
+    }
+}
+```
+
+**Filtering**
+
+When submitting a GET request, you can ask it to return only transactions that meet specific criteria.
+To filter transactions, in the query string, specify one or more fields with an operator separator (`|`)
+and the values for the following:
+
+Fields:
+`created_at` - Filter by created date
+`updated_at` - Filter by updated date
+
+Operators:
+`gt` - Greater Than
+`gte` - Greater Than or Equal
+`lt` - Less Than
+`lte` - Less Than or Equal
+
+Filter Syntax
+A single filter uses the form: `field=operator|VALUE`
+
+Each URL query parameter **must be URL encoded**.
+
+Example:
+Retrieve all transactions that have created date greather than 2014-01-08T15:29:18+00:00
+/transactions?created_at=gt%3B2014-01-08T15%3A29%3A18%2B00%3A00
+
+## Transaction Collection [/transactions]
+
+### POST
 
 A Transaction is a single event where a customer earns or spends points.
 
 You can create a transaction in one of two ways: by Customer ID or customer's email address/phone number.
-If that customer exists, we'll simply add that Transaction for that customer.  If the customer doesn't exist, 
+If that customer exists, we'll simply add that Transaction for that customer.  If the customer doesn't exist,
 we'll create a new customer, award the Transaction, and then send the customer a welcome email/SMS.
 
 In addition, you can retrieve a specific transaction or a list of transactions.
@@ -46,7 +184,9 @@ The `employee.pin_code` is required only when redeeming on behalf of the custome
 |employee|object|Optional. The employee object that will be attached to the transaction|
 |employee.id|string|Optional. If provided, the Employee will be attached to the transaction|
 |employee.pin_code|number|Optional. Required only if the rule: "*Employee must enter his ID when Purchase Amount exceeds ...*" is active. It will override the employee.id|
-|branch.id|string|Optional. To set the physical location where the transaction took place. By default it will be the main branch|
+|branch|object|Optional. To set the physical location where the transaction took place. By default it will be the main branch|
+|branch.id|string|Optional. The branch ID where the transaction took place|
+|catalog_items|object|The Catalog Item to be redeemed|
 
 >**Note:**
 >Transaction intent is required and must be: `reward`, `redeem`, `return`, `purchase_giftcard`, `send_giftcard` or `adjust_balance`
@@ -66,6 +206,7 @@ Example
 POST /transactions HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
 Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
 
@@ -99,6 +240,7 @@ Example with Employee PIN Code required and Product Rewards
 POST /transactions HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
 Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
 
@@ -171,6 +313,7 @@ Example with Branch ID
 POST /transactions HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
 Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
 
@@ -194,6 +337,7 @@ Example with Employee ID
 POST /transactions HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
 Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
 
@@ -217,6 +361,7 @@ Example Redeem a Catalog Item
 POST /transactions HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
 Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
 
@@ -240,6 +385,7 @@ Example Return Amount
 POST /transactions HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
 Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
 
@@ -255,8 +401,9 @@ Content-Type: application/json
 
 + Request
     + Headers
-    
+
             Authorization: Bearer <access_token>
+            X-Application-Key: <X-Application-Key>
             Accept: application/vnd.kangaroorewards.api.v1+json
             Content-Type: application/json
 
@@ -274,8 +421,9 @@ Content-Type: application/json
 
 + Request
     + Headers
-    
+
             Authorization: Bearer <access_token>
+            X-Application-Key: <X-Application-Key>
             Accept: application/vnd.kangaroorewards.api.v1+json
             Content-Type: application/json
 
@@ -307,11 +455,11 @@ Content-Type: application/json
 + customer
     + email: `john@example.com` (string)
 + custom_rewards (array)
-    + (object) 
-        * id: 123 (number) 
+    + (object)
+        * id: 123 (number)
         * quantity: 3 (number)
-    + (object) 
-        * id: 124 (number) 
+    + (object)
+        * id: 124 (number)
         * quantity: 1 (number)
 
 ## Reward Response(object)

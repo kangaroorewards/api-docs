@@ -147,7 +147,7 @@ Respone Body
 + Request (application/json)
 
     + Headers
-    
+
             Authorization: Bearer <access_token>
             Accept: application/vnd.kangaroorewards.api.v1+json;
 
@@ -224,7 +224,7 @@ Response Body
 
 + Request (application/json)
     + Headers
-    
+
             Authorization: Bearer <access_token>
             Accept: application/vnd.kangaroorewards.api.v1+json;
 
@@ -286,7 +286,7 @@ Body parameters
 
 + Request (application/json)
     + Headers
-    
+
             Authorization: Bearer <access_token>
             Accept: application/vnd.kangaroorewards.api.v1+json;
 
@@ -310,7 +310,7 @@ Deletes the customer with the requested id.
 
 + Request (application/json)
     + Headers
-    
+
             Authorization: Bearer <access_token>
             Accept: application/vnd.kangaroorewards.api.v1+json;
 
@@ -328,11 +328,11 @@ Deletes the customer with the requested id.
 + last_name: `Harris` (string) - Last name for the Customer.
 + email: `johndoe@example.com` (string)
 + phone: `5141234567` (string)
-+ birthday: `1963-03-28` (string) - Birthday
++ birth_date: `1963-03-28` (string) - Date of birth
 + gender: `male` (string) - Customer's gender. Can be male or female
 + balance
     + points: 135 (number)
-    + amount: 1.35 (number)
+    + giftcard: 21.35 (number)
 + member_since: `2016-06-09T21:04:50+00:00` (string)
 
 ## Customer Create (object)
@@ -340,7 +340,7 @@ Deletes the customer with the requested id.
 + first_name: `Battery` (string)
 + last_name: `Harris` (string)
 + email: `johndoe@example.com` (string, required)
-+ birthday: `1963-03-28` (string) - Birthday
++ birth_date: `1963-03-28` (string) - Date of birth
 + language: `en` (string) - Communication language. Possible values `en` - English, `fr` - French, `es` - Spanish
 + gender: `male` (string) - Customer's gender. Can be male or female
 
