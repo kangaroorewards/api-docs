@@ -6,7 +6,7 @@
 
 ### List all offers [GET]
 
-Provides the details for all of a business's offers.
+Retrieve all offers.
 
 Query Parameters
 |Name|Type|Description|
@@ -118,6 +118,92 @@ Response Body
         - data (Offers Base)
 
 
+## Offer [/offers/{offer_id}]
+
++ Parameters
+    + offer_id: me (required, number) - ID of the Offers
+
+### Retrieve an offer [GET]
+
+Returns a single offer.
+
+Path Parameters
+|Name|Type|Description|
+|-----|----|-----------|
+|offer_id|number|`Required.` The ID of the offer|
+
+Query Parameters
+|Name|Type|Description|
+|-----|----|-----------|
+|relationships|enum|`Optional.` You can optionally request that the response include related objects. To do so, specify for example: relationships=branch in your request.|
+
+
+Example
+```
+GET /offers/{offer_id}?relationships=branch HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+Accept: application/vnd.kangaroorewards.api.v1+json;
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+  "data": {
+    "id": 123,
+    "points": 0,
+    "expires_at": "2017-07-01T03:59:59+0000",
+    "discount_value": 0,
+    "multip_factor": 0,
+    "real_value": 0,
+    "type": "free_product",
+    "title": "Offer Title",
+    "description": "",
+    "images": [
+      {
+        "default": true,
+        "path": "1498064009_594aa4895e8c7.jpg"
+      }
+    ],
+    "branch": {
+      "id": "11e6a34f8e89eb0e9708089e01cf89b5",
+      "name": "Pizza Nova",
+      "web_site": null,
+      "logo": {
+        "large": null,
+        "medium": null,
+        "thumbnail": null
+      },
+      "cover_photo": {
+        "large": null,
+        "medium": null,
+        "thumbnail": null
+      }
+    }
+  }
+}
+```
+
++ Parameters
+    + offer_id: `123` - The unique ID of the offer.
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Application-Key: <your_application_key>
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Offer)
+
++ Response 404 (application/json)
+    + Attributes (Offer Error 404)
+
+
 # Data Structures
 
 ## Offer (object)
@@ -153,4 +239,11 @@ Response Body
     * description: `Some Offer Description` (string)
     * expires_at: `2027-04-27T02:59:59+00:00` (string)
     * multip_factor: 0 (number)
+
+## Offer Error 404 (object)
+
++ error (object)
+    - status_code: 404 (number)
+    - message: `Offer 112 Not Found` (string)
+    - description: `The requested resource doesn't exist.` (string)
 
