@@ -11,16 +11,11 @@ Returns a list of your customers
 
 **Query Parameters**
 
-<table class="table">
-    <tr class="bg-default">
-        <th>Name</th> <th>Type</th> <th>Description</th>
-    </tr>
-    <tr>
-        <td>page</td>
-        <td>integer</td>
-        <td><strong>Optional.</strong> Provide this to retrieve the next set of results for your original query. Default value page=1</td>
-    </tr>
-</table>
+|Name|Type|Description|
+|-----|----|-----------|
+|page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
+|created_at|string|`Optional.` Filter by created date. [See Filtering](#filtering-customers)|
+|updated_at|string|`Optional.` Filter by updated date. [See Filtering](#filtering-customers)|
 
 Examples
 ```
@@ -62,6 +57,36 @@ Response Body
     }
 }
 ```
+
+<a name="filtering-customers"></a>
+
+**Filtering**
+
+When submitting a GET request, you can ask it to return only customers that meet specific criteria.
+To filter customers, in the query string, specify one or more fields with an operator, followed by a separator (`|`)
+and the values for the following:
+
+Fields:
+- `created_at` - Filter by created date
+- `updated_at` - Filter by updated date
+
+Operators:
+- `gt` - Greater Than
+- `gte` - Greater Than or Equal
+- `lt` - Less Than
+- `lte` - Less Than or Equal
+
+Filter Syntax
+
+A single filter uses the form: `field=operator|VALUE`
+
+Each URL query parameter **must be URL encoded**.
+
+Example:
+Retrieve all customers that have created date greather than 2014-01-08T15:29:18+00:00
+
+`GET /customers?created_at=gt%3B2014-01-08T15%3A29%3A18%2B00%3A00`
+
 
 + Request (application/json)
 
