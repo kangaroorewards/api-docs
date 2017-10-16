@@ -13,6 +13,7 @@ Example
 GET /branches HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
 Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
 ```
@@ -38,13 +39,14 @@ Response Body
 
 + Request
     + Headers
-    
+
             Authorization: Bearer <access_token>
+            X-Application-Key: eyXai0XD7SLLzaOeJW
             Accept: application/vnd.kangaroorewards.api.v1+json;
 
 + Response 200 (application/json)
     + Attributes
-        - data (Branch Base)
+        - data (array[Branch Base])
 
 # Data Structures
 
