@@ -14,8 +14,8 @@ Returns a list of transactions
 |-----|----|-----------|
 |page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
 |relationships|enum|`Optional.` You can optionally request that the response include the customer object. To do so, specify relationships=customer in your request.|
-|created_at|string|`Optional.` Filter by created date. [See Filtering](#filtering)|
-|updated_at|string|`Optional.` Filter by updated date. [See Filtering](#filtering)|
+|created_at|string|`Optional.` Filter by created date. ( [See Filtering](#filtering) )|
+|updated_at|string|`Optional.` Filter by updated date. ( [See Filtering](#filtering) )|
 
 Examples
 ```
@@ -111,7 +111,7 @@ Response Body
 }
 ```
 
-**<a href="#filtering">Filtering</a>**
+**Filtering** <a href="#filtering"></a>
 
 When submitting a GET request, you can ask it to return only transactions that meet specific criteria.
 To filter transactions, in the query string, specify one or more fields with an operator separator (`|`)
@@ -134,7 +134,8 @@ Each URL query parameter **must be URL encoded**.
 
 Example:
 Retrieve all transactions that have created date greather than 2014-01-08T15:29:18+00:00
-/transactions?created_at=gt%3B2014-01-08T15%3A29%3A18%2B00%3A00
+
+`GET /transactions?created_at=gt%3B2014-01-08T15%3A29%3A18%2B00%3A00`
 
 + Request (application/json)
 
