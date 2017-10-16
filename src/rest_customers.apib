@@ -27,6 +27,7 @@ Examples
 GET /customers HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFmODNk
+X-Application-Key: eyXai0XD7SLLzaOeJW
 Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
 ```
@@ -67,6 +68,7 @@ Response Body
     + Headers
 
             Authorization: Bearer <access_token>
+            X-Application-Key: eyXai0XD7SLLzaOeJW
             Accept: application/vnd.kangaroorewards.api.v1+json;
 
 + Response 200 (application/json)
@@ -125,6 +127,7 @@ Example
 POST /customers HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFmODNk
+X-Application-Key: eyXai0XD7SLLzaOeJW
 Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
 
@@ -149,6 +152,7 @@ Respone Body
     + Headers
 
             Authorization: Bearer <access_token>
+            X-Application-Key: eyXai0XD7SLLzaOeJW
             Accept: application/vnd.kangaroorewards.api.v1+json;
 
     + Attributes (Customer Create)
@@ -198,6 +202,7 @@ Example
 GET /customers/11e69610400894b2bb02089e01cf89b5?include[]=balance HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFmODNk
+X-Application-Key: eyXai0XD7SLLzaOeJW
 Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
 ```
@@ -226,6 +231,7 @@ Response Body
     + Headers
 
             Authorization: Bearer <access_token>
+            X-Application-Key: eyXai0XD7SLLzaOeJW
             Accept: application/vnd.kangaroorewards.api.v1+json;
 
 + Response 200 (application/json)
@@ -288,6 +294,7 @@ Body parameters
     + Headers
 
             Authorization: Bearer <access_token>
+            X-Application-Key: eyXai0XD7SLLzaOeJW
             Accept: application/vnd.kangaroorewards.api.v1+json;
 
     + Attributes (Customer)
@@ -312,6 +319,7 @@ Deletes the customer with the requested id.
     + Headers
 
             Authorization: Bearer <access_token>
+            X-Application-Key: eyXai0XD7SLLzaOeJW
             Accept: application/vnd.kangaroorewards.api.v1+json;
 
 + Parameters
