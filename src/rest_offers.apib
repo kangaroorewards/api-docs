@@ -1,9 +1,17 @@
-
 # Offers
 
 # Group Offers
 
-### GET /offers
+## Offer [/offers]
+
+### List all offers [GET]
+
+Provides the details for all of a business's offers.
+
+Query Parameters
+|Name|Type|Description|
+|-----|----|-----------|
+|relationships|enum|`Optional.` You can optionally request that the response include the branch object. To do so, specify relationships=branch in your request.|
 
 Provides the details for all of a business's offers.
 
@@ -13,6 +21,7 @@ Example
 GET /offers HTTP/1.1
 Host: api.kangaroooffers.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
 Accept: application/vnd.kangaroooffers.api.v1+json;
 Content-Type: application/json
 ```
@@ -44,19 +53,88 @@ Response Body
 
 + Request
     + Headers
-    
+
             Authorization: Bearer <access_token>
+            X-Application-Key: eyXai0XD7SLLzaOeJW
             Accept: application/vnd.kangaroooffers.api.v1+json;
 
 + Response 200 (application/json)
     + Attributes
         - data (array[Offer])
 
+
+**Relationships**
+
+> **NOTE:** You could also request more information using relationship parameter. All possible values:
+> - **branch** - includes branch object in the response
+
+The value of the relationships parameter MUST be a comma-separated (",") list of relationship names.
+
+Example
+```
+GET /offers?relationships=branch HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+Accept: application/vnd.kangaroorewards.api.v1+json;
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+  "data": {
+    "id": 123,
+    "points": 0,
+    "expires_at": "2017-07-01T03:59:59+0000",
+    "discount_value": 0,
+    "multip_factor": 0,
+    "real_value": 0,
+    "type": "free_product",
+    "title": "Offer Title",
+    "description": "",
+    "images": [
+      {
+        "default": true,
+        "path": "1498064009_594aa4895e8c7.jpg"
+      }
+    ],
+    "branch": {
+      "id": "11e6a34f8e89eb0e9708089e01cf89b5",
+      "name": "Pizza Nova",
+      "web_site": null,
+      "logo": {
+        "large": null,
+        "medium": null,
+        "thumbnail": null
+      },
+      "cover_photo": {
+        "large": null,
+        "medium": null,
+        "thumbnail": null
+      }
+    }
+  }
+}
+```
+
++ Request
+    + Headers
+
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Application-Key: <your_application_key>
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Offers Base)
+
+
 # Data Structures
 
 ## Offer (object)
 
-+ id": 552 (number)
++ id: 552 (number)
 + points: 0 (number)
 + expires_at: `2017-04-01T03:59:59+0000` (string)
 + discount_value: 0 (number)
@@ -67,4 +145,24 @@ Response Body
 + description: `Come on Monday and Multiply your points` (string)
 + images (array)
     + default: true (boolean)
-    + path: `https://example.com/image1.png` (string)
+    + path: `https://www.kangaroorewards.com/photos/image1.png` (string)
+
+## Offers Base (array)
+
++ (object)
+    * id: 111
+    * title: `Offer Title` (string)
+    * points: 3000
+    * type: `free_product` (string)
+    * description: `Some Offer Description` (string)
+    * expires_at: `2027-06-27T02:59:59+00:00` (string)
+    * multip_factor: 2 (number)
++ (object)
+    * id: 112
+    * title: `Offer Title 2` (string)
+    * points: 50000
+    * type: `free_product` (string)
+    * description: `Some Offer Description` (string)
+    * expires_at: `2027-04-27T02:59:59+00:00` (string)
+    * multip_factor: 0 (number)
+
