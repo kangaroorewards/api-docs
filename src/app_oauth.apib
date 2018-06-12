@@ -39,9 +39,9 @@ Your app can do these things and more.
 
 ### Register an app with Kangaroo Rewards
 
-Go to [Developer Portal](https://api.kangaroorewards.com/developers/applications "Developer Portal"). 
-Click on the “Register a new Application” button. Consider using a service account when registering your app at 
-[Developer Portal](https://api.kangaroorewards.com/developers/applications "Developer Portal"). i.e. “apps@yourcompany.com” - 
+Go to [Developer Portal](https://api.kangaroorewards.com/developers/applications "Developer Portal").
+Click on the “Register a new Application” button. Consider using a service account when registering your app at
+[Developer Portal](https://api.kangaroorewards.com/developers/applications "Developer Portal"). i.e. “apps@yourcompany.com” -
 This will ensure your app continues to work if you or the app creator leaves the company.
 
 |Register a New App - Fields|Description|
@@ -59,7 +59,7 @@ After you finished building your app and tested it, you may request authorizatio
 <img src="https://api.kangaroorewards.com/img/app2.png" title="Request Authorization" style="width: 100%;">
 
 >**Note:**
-OAuth state is a random string that is optional, but highly recommended to mitigate CSRF attacks. 
+OAuth state is a random string that is optional, but highly recommended to mitigate CSRF attacks.
 If you decide to use state parameter in your app and request authorization by email, you have to store the state parameter value in your callback page. A sample code for callback page can be found [here](https://gist.github.com/kangaroodev/5d33c691d5e7801d00ed31bfb0c76441)
 
 
@@ -96,7 +96,7 @@ The set of query string parameters supported by the Kangaroo Authorization Serve
         <td><strong>client_id</strong></td>
         <td>The client ID you obtain from the <a href="/developers">Developer Portal</a> when you registered your app</td>
         <td>
-            Identifies the client that is making the request. 
+            Identifies the client that is making the request.
             The value passed in this parameter must exactly match the value shown in the <a href="/developers">Developer Portal</a>
         </td>
     </tr>
@@ -104,7 +104,7 @@ The set of query string parameters supported by the Kangaroo Authorization Serve
         <td><strong>redirect_uri</strong></td>
         <td>The URL in your application where users will be sent after authorization. </td>
         <td>
-            Determines where the response is sent. The value of this parameter must exactly 
+            Determines where the response is sent. The value of this parameter must exactly
             match the url listed for this app in the <a href="/developers">Developer Portal</a> (including the http or https scheme, case, and trailing '/').
         </td>
     </tr>
@@ -119,9 +119,9 @@ The set of query string parameters supported by the Kangaroo Authorization Serve
         <td><strong>scope</strong></td>
         <td>Space-delimited set of permissions that the application requests.</td>
         <td>
-            A space delimited list of scopes. Identifies the Kangaroo API access that your application is requesting. 
-            The values passed in this parameter inform the consent screen that is shown to the user. 
-            There is an inverse relationship between the number of permissions requested and the likelihood of 
+            A space delimited list of scopes. Identifies the Kangaroo API access that your application is requesting.
+            The values passed in this parameter inform the consent screen that is shown to the user.
+            There is an inverse relationship between the number of permissions requested and the likelihood of
             obtaining user consent. For information about available scopes, <a href="#scopes">see scopes</a>.
         </td>
     </tr>
@@ -141,7 +141,7 @@ An example URL is shown below
 https://api.kangaroorewards.com/oauth/authorize?client_id=12345
 &redirect_uri=https://example.com/callback
 &response_type=code
-&scope=admin user
+&scope=admin
 ```
 **2. Handling the OAuth 2.0 server response**
 
@@ -179,7 +179,7 @@ https://api.kangaroorewards.com/oauth/token
         <td><strong>client_id</strong></td>
         <td>The client ID you obtain from the <a href="/developers">Developer Portal</a> when you registered your app</td>
         <td>
-            Identifies the client that is making the request. 
+            Identifies the client that is making the request.
             The value passed in this parameter must exactly match the value shown in the <a href="/developers">Developer Portal</a>
         </td>
     </tr>
@@ -187,7 +187,7 @@ https://api.kangaroorewards.com/oauth/token
         <td><strong>client_secret</strong></td>
         <td>The client secret you obtain from the <a href="/developers">Developer Portal</a> when you registered your app</td>
         <td>
-            Identifies the client that is making the request. 
+            Identifies the client that is making the request.
             The value passed in this parameter must exactly match the value shown in the <a href="/developers">Developer Portal</a>
         </td>
     </tr>
@@ -195,7 +195,7 @@ https://api.kangaroorewards.com/oauth/token
         <td><strong>redirect_uri</strong></td>
         <td>The URL in your application where users will be sent after authorization. </td>
         <td>
-            Determines where the response is sent. The value of this parameter must exactly 
+            Determines where the response is sent. The value of this parameter must exactly
             match the url listed for this app in the <a href="/developers">Developer Portal</a> (including the http or https scheme, case, and trailing '/').
         </td>
     </tr>
@@ -224,7 +224,7 @@ https://api.kangaroorewards.com/oauth/token?grant_type=authorization_code
 &client_secret=8fysa8dfds9fj283
 &redirect_uri=https://example.com/callback
 ```
-            
+
 By default, the response will take the following form:
 
 ```
@@ -241,7 +241,7 @@ A successful response is returned as a JSON array, similar to the following:
 "token_type":"Bearer"
 }
 ```
-            
+
 **4. Use Access Token**
 Now you may use the access token to make requests, on behalf of the user, from the resource server via the API (endpoint: https://api.kangaroorewards.com).
 
