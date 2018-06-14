@@ -1,12 +1,14 @@
 
 # Access Kangaroo Rewards REST API
 
-The Kangaroo Rewards API allows you to manage resources in a simple, programmatic way using conventional 
-HTTP requests. The endpoints are intuitive and powerful, allowing you to easily make calls to retrieve 
+The Kangaroo Rewards API allows you to manage resources in a simple, programmatic way using conventional
+HTTP requests. The endpoints are intuitive and powerful, allowing you to easily make calls to retrieve
 information.
 
-All of the functionality that you are familiar with in the Kangaroo Rewards App is also available 
+All of the functionality that you are familiar with in the Kangaroo Rewards App is also available
 through the API, allowing you to script the complex actions that your situation requires.
+
+>**Note:** The X-Application-Key header is required for all requests
 
 ## Requests
 
@@ -40,19 +42,19 @@ through the API, allowing you to script the complex actions that your situation 
 
 ## HTTP Statuses
 
-Along with the HTTP methods that the API responds to, it will also return standard HTTP statuses, including 
+Along with the HTTP methods that the API responds to, it will also return standard HTTP statuses, including
 error codes.
 
-In the event of a problem, the status will contain the error code, while the body of the response will 
+In the event of a problem, the status will contain the error code, while the body of the response will
 usually contain additional information about the problem that was encountered.
 
-In general, if the status returned is in the `200` range, it indicates that the request was fulfilled 
+In general, if the status returned is in the `200` range, it indicates that the request was fulfilled
 successfully and that no error was encountered.
 
-Return codes in the `400` range typically indicate that there was an issue with the request that was sent. 
+Return codes in the `400` range typically indicate that there was an issue with the request that was sent.
 Among other things, this could mean that you did not authenticate correctly, that you are requesting an action that you do not have authorization for, that the object you are requesting does not exist, or that your request is malformed.
 
-If you receive a status in the `500` range, this generally indicates a server-side problem. This means that 
+If you receive a status in the `500` range, this generally indicates a server-side problem. This means that
 we are having an issue on our end and cannot fulfill your request currently.
 
 ## Responses
@@ -75,7 +77,7 @@ The **meta** object contains a **total** key that is set to the total number of 
 The **meta** object will only be displayed when it has a value. Currently, the meta object will have a value when a request is made on a collection (like customers).
 
 ## Pagination
-The **cursor** object is returned as part of the response body when pagination is enabled. By default, 100 objects are returned per page. 
+The **cursor** object is returned as part of the response body when pagination is enabled. By default, 100 objects are returned per page.
 You can request a different page by appending ?page= to the request. For instance, to navavigate to page 2, you could add ?page=2 to the end of your query
 
 ```
@@ -101,7 +103,7 @@ The rate limiting information is contained within the response headers of each r
 
 - **X-RateLimit-Limit** - The number of requests that can be made per minute.
 - **X-RateLimit-Remaining** - The number of requests that remain before you hit your request limit.
-- **X-RateLimit-Reset** - This represents the time when you are allowed to make requests again. The value 
+- **X-RateLimit-Reset** - This represents the time when you are allowed to make requests again. The value
 - is given in [Unix epoch time](http://en.wikipedia.org/wiki/Unix_time "Unix epoch time") You'll only get **X-RateLimit-Reset** if you've hit the limit
 
 Example
