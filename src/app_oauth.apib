@@ -245,7 +245,7 @@ A successful response is returned as a JSON array, similar to the following:
 **4. Use Access Token**
 Now you may use the access token to make requests, on behalf of the user, from the resource server via the API (endpoint: https://api.kangaroorewards.com).
 
-The access token may be used until it expires (15 days after being issued) or is otherwise invalidated (e.g. user revoked or refresh token used).
+The access token may be used until it expires (24 hours after being issued) or is otherwise invalidated (e.g. user revoked or refresh token used).
 
 Example Access Token Use
 ```
@@ -263,31 +263,41 @@ Use the refresh_token in your token refresh request, which is a POST request to 
 https://api.kangaroorewards.com/oauth/token
 ```
 
-<table class="table">
-    <tr class="bg-primary">
-        <th>Parameter</th> <th>Values</th> <th>Description</th>
-    </tr>
-    <tr>
-        <td><strong>grant_type</strong></td>
-        <td><strong>refresh_token</strong></td>
-        <td>
-            Must be set to "refresh_token" for an token refresh request.
-        </td>
-    </tr>
-    <tr>
-        <td><strong>refresh_token</strong></td>
-        <td>Refresh token string</td>
-        <td>The <strong>refresh_token</strong> that was received with the original access token.</td>
-    </tr>
-</table>
+|Parameter|Values|Description|
+|-----|-----|-----------|
+|**grant_type**|`refresh_token`|Must be set to "refresh_token" for an token refresh request.|
+|**refresh_token**|`def502009d9337d94c8b7d67b05b9d05afb1b6...`|The **refresh_token** that was received with the original access token.|
+|**client_id**|Your client ID|The value passed in this parameter must exactly match the value shown in the <a href="/developers">Developer Portal</a>|
+|**client_secret**|Your client secret|The client secret you obtain from the <a href="/developers">Developer Portal</a>|
+|**scope**|`admin`|A list of scopes. Currently we support only one scope, "admin"|
+
+Example Refresh Token Request
+
+```
+Headers
+> Content-Type: application/x-www-form-urlencoded
+> X-Application-Key: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
+
+POST https://api.kangaroorewards.com/oauth/token?grant_type=refresh_token
+&refresh_token=def502009d9337d94c8b7d67b05b9d05afb1b6
+&client_id=12345
+&client_secret=8fysa8dfds9fj283
+&scope=admin
+```
 
 **Token Refresh Response**
 
 The refresh token response looks just like the normal access token grant. It includes new access and refresh tokens.
 
 Example Refresh Token Request
+
 ```
-curl -X POST "https://api.kangaroorewards.com/oauth/token?grant_type=refresh_token&refresh_token=gbnv934s8rufe9j9e8jd98h392fw"
+curl --request POST \
+  --url http://api.kangaroorewards.com/oauth/token \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --header 'x-application-key: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9' \
+  --data 'grant_type=refresh_token&refresh_token=def50200ceef1ff4664d517&client_id=1111&client_secret=cJ57RFk2CibH4o2INJb3L6&scope=admin'
+
 ```
 
 **Scopes**
