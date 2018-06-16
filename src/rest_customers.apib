@@ -218,13 +218,13 @@ Query Parameters
     <tr>
         <td>include</td>
         <td>array</td>
-        <td><strong>Optional. </strong>You can optionally request that the response include the balance object. To do so, specify include[]=balance in your request.</td>
+        <td><strong>Optional. </strong>You can optionally request that the response include the balance object. To do so, specify include=balance in your request.</td>
     </tr>
 </table>
 
 Example
 ```
-GET /customers/11e69610400894b2bb02089e01cf89b5?include[]=balance HTTP/1.1
+GET /customers/11e69610400894b2bb02089e01cf89b5?include=balance HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFmODNk
 X-Application-Key: eyXai0XD7SLLzaOeJW
