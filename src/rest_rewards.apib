@@ -21,9 +21,9 @@ Response Body
 ```
 {
   "data": {
-    "custom_rewards": [
+    [
       {
-        "id": 35,
+        "id": 123,
         "points": 500,
         "title": "Download Kangaroo App and Earn",
         "description": "",
@@ -36,7 +36,7 @@ Response Body
 
 + Request
     + Headers
-    
+
             Authorization: Bearer <access_token>
             Accept: application/vnd.kangaroorewards.api.v1+json;
 
@@ -46,15 +46,27 @@ Response Body
 
 # Data Structures
 
-## Rewards Base (object)
+## Reward Base (object)
 
-+ custom_rewards (array)
++ (object)
+    * id: 123
+    * title: `$20 Discount` (string)
+    * points: 3000
+
+## Rewards Base (array)
+
++ (object)
+    * id: 123
+    * title: `$10 Discount` (string)
+    * points: 1000
++ (object)
+    * id: 124
+    * title: `$20 Discount` (string)
+    * points: 3000
+
+<!-- + custom_rewards (array)
     + (object)
         + id: 123
         + title: `Download Kangaroo App and Earn` (string)
-        + points: 150
-+ catalog_items (array)
-    + (object)
-        * id: 345
-        * title: `$20 Discount` (string)
-        * points: 3000
+        + points: 150 -->
+<!-- + catalog_items (array) -->
