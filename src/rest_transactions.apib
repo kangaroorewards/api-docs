@@ -186,7 +186,7 @@ The `employee.pin_code` is required only when redeeming on behalf of the custome
 *Body parameters*
 |Name|Type|Description|
 |-----|----|-----------|
-|intent|string|Set the `intent` to: `reward`, `redeem`, `return`, `purchase_giftcard`, `send_giftcard` or `adjust_balance`|
+|intent|string|Set the `intent` to: `reward`, `redeem`, `return`|
 |amount|number|Required if none of `points`, *visits* are present|
 |points|number|Required if none of `amount`, *visits* are present|
 |visits|number|Required if none of `amount`, *points* are present|
@@ -201,8 +201,10 @@ The `employee.pin_code` is required only when redeeming on behalf of the custome
 |branch.id|string|Optional. The branch ID where the transaction took place|
 |catalog_items|object|The Catalog Item to be redeemed|
 
+ <!-- `purchase_giftcard`, `send_giftcard` or `adjust_balance` -->
+
 >**Note:**
->Transaction intent is required and must be: `reward`, `redeem`, `return`, `purchase_giftcard`, `send_giftcard` or `adjust_balance`
+>Transaction intent is required and must be: `reward`, `redeem`, `return`
 
 >**Note:**
 >One of the following attributes is required `amount`, `points` or `visits`
@@ -390,6 +392,27 @@ Content-Type: application/json
             "quantity": 1
         }
     ]
+}
+```
+
+Example redeem with Employee's PIN Code
+```
+POST /transactions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+    "intent": "redeem",
+    "points": 10,
+    "customer": {
+        "id": "11e6fd0b9882cd1d84a5089e01cf89b"
+    },
+    "employee":{
+        "pin_code": "1111"
+    }
 }
 ```
 
