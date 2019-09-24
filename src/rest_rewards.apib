@@ -1,11 +1,11 @@
 
-# Rewards
+# Rewards (Catalog Items)
 
 # Group Rewards
 
 ### GET /rewards
 
-Provides the details for all of a business's rewards.
+List Catalog Items.
 
 Example
 
@@ -23,10 +23,16 @@ Response Body
   "data": {
     [
       {
-        "id": 123,
-        "points": 500,
-        "title": "Download Kangaroo App and Earn",
-        "description": "",
+        "id": 12456,
+        "points": 1000,
+        "expires_at": "2026-04-02T03:59:59+00:00",
+        "amount": 25,
+        "real_value": 0,
+        "discount_value": 0,
+        "partner_reward": false,
+        "type": "redeem_discount_amount",
+        "title": "Cash back 25$",
+        "description": "Cash back 25$",
         "images": []
       }
     ]

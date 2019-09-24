@@ -169,7 +169,7 @@ Use `/transactions` resource to create a **reward**, **redeem** or **return** tr
 A `reward` transaction will increase the balance for the customer based on the amount included in the JSON request body.
 To create a reward transaction, set the amount, points, or visits. Use `visits` when "Claim Points" option is active.
 
-Include `custom_rewards` object when you want to apply "À La Carte Rewards" (Custom Rewards) for `reward` transaction only.
+Include `product_rewards` object when you want to apply "À La Carte Rewards" (Product Rewards) for `reward` transaction only.
 
 The total points earned is calculated based on the current Earning Rule value configured in Business Portal.
 If there are offers to apply, ex. Points Multiplier than it will automatically multiply the points and update the customer's balance.
@@ -193,13 +193,20 @@ The `employee.pin_code` is required only when redeeming on behalf of the custome
 |customer|object|Required. The customer object and at least `id`, `email` or `phone` must be provided|
 |customer.id|string|Required if none of `customer.email`, `customer.phone` are present|
 |customer.email|string|Required if none of `customer.id`, `customer.phone` are present|
-|customer.phone|string|Required if none of `customer.email`, `customer.phone` are present|
+|customer.phone|string|Required if none of `customer.id`, `customer.email` are present|
+|customer.country_code|string|Required when `customer.phone` is present|
 |employee|object|Optional. The employee object that will be attached to the transaction|
 |employee.id|string|Optional. If provided, the Employee will be attached to the transaction|
 |employee.pin_code|number|Optional. Required only if the rule: "*Employee must enter his ID when Purchase Amount exceeds ...*" is active. It will override the employee.id|
 |branch|object|Optional. To set the physical location where the transaction took place. By default it will be the main branch|
 |branch.id|string|Optional. The branch ID where the transaction took place|
-|catalog_items|object|The Catalog Item to be redeemed|
+|catalog_items|object|Optional. The Catalog Item to be redeemed|
+|catalog_items.id|number|Required with Catalog Item. The Catalog Item ID|
+|product_rewards|object|Optional. The Product Rewards|
+|product_rewards.id|number|Required. The Product Reward ID|
+|product_rewards.quantity|number|Required. Quantity|
+|receipt|object|Optional. The receipt object that will be attached to the transaction|
+|receipt.number|string|Optional. If provided, the receipt number will be attached to the transaction|
 
  <!-- `purchase_giftcard`, `send_giftcard` or `adjust_balance` -->
 
@@ -215,7 +222,7 @@ The `employee.pin_code` is required only when redeeming on behalf of the custome
 >**Note:**
 >Customer object is required and at least `id`, `email` or `phone` is required
 
-Example
+Example reward amount and a customer with ID
 
 ```
 POST /transactions HTTP/1.1
@@ -247,6 +254,25 @@ Response Body
 }
 ```
 
+Example reward points and a customer with email address
+
+```
+POST /transactions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+    "intent": "reward",
+    "points": 100,
+    "customer": {
+        "email": "john@example.com"
+    }
+}
+```
+
 >**Note:**
 >When `employee.pin_code` is supplied, the Employee that has that Pin Code will override the Employee attached to the transaction
 
@@ -268,7 +294,7 @@ Content-Type: application/json
     "employee":{
         "pin_code": "3333"
     },
-    "custom_rewards": [
+    "product_rewards": [
         {
           "id": 123,
           "quantity": 3
@@ -367,6 +393,27 @@ Content-Type: application/json
     },
     "employee":{
         "id": "21e3038a5e3780aca24e089e01cf84b2"
+    }
+}
+```
+
+Example with Receipt Number
+```
+POST /transactions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+    "intent": "reward",
+    "points": 100,
+    "customer": {
+        "id": "11e8bb6776ea7699b48e089e01cf89b5"
+    },
+    "receipt": {
+        "number": "12345678"
     }
 }
 ```
@@ -490,7 +537,7 @@ Content-Type: application/json
 + amount: `5.25` (number)
 + customer
     + email: `john@example.com` (string)
-+ custom_rewards (array)
++ product_rewards (array)
     + (object)
         * id: 123 (number)
         * quantity: 3 (number)
