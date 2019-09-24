@@ -69,12 +69,15 @@ and the values for the following:
 Fields:
 - `created_at` - Filter by created date
 - `updated_at` - Filter by updated date
+- `email` - Filter by email address
+- `phone` - Filter by phone number
 
 Operators:
 - `gt` - Greater Than
 - `gte` - Greater Than or Equal
 - `lt` - Less Than
 - `lte` - Less Than or Equal
+- `eq` - Equal
 
 Filter Syntax
 
@@ -86,6 +89,16 @@ Example:
 Retrieve all customers that have created date greather than 2017-01-27T14:37:16+0000
 
 `GET /customers?created_at=gt%7C2017-01-27T14%3A37%3A16%2B0000`
+
+Example:
+Retrieve all customers that have email address equal to john@example.com
+
+`GET /customers?email=eq%7Cjohn%40example.com`
+
+Example:
+Retrieve all customers that have phone number equal to 5141234567
+
+`GET /customers?email=eq%7Cphone=eq%7C5141234567`
 
 
 + Request (application/json)
