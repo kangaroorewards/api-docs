@@ -31,6 +31,7 @@ Response Body
         "real_value": 0,
         "discount_value": 0,
         "partner_reward": false,
+        "redeem_for_gift_card": false,
         "type": "redeem_discount_amount",
         "title": "Cash back 25$",
         "description": "Cash back 25$",
@@ -39,6 +40,10 @@ Response Body
     ]
 }
 ```
+
+> **Note:**
+> In order to redeem points for cashback create a transaction and use a catalog item that has `redeem_for_gift_card` attribute true.
+> This will convert points to gift card balance (wallet balance)
 
 + Request
     + Headers
@@ -50,6 +55,37 @@ Response Body
     + Attributes
         - data (Rewards Base)
 
+
+## Reward Resource [/rewards/{id}]
+
+### GET
+
+Returns a single catalog item.
+
+**Path Parameters**
+
+|Name|Type|Description|
+|-----|----|-----------|
+|id|number|Catalog Item ID|
+
++ Parameters
+    + id: `123` (required, number) - The unique ID.
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer <access_token>
+            X-Application-Key: eyXai0XD7SLLzaOeJW
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Reward Base)
+
++ Response 404 (application/json)
+    + Attributes (Error 404)
+
+
 # Data Structures
 
 ## Reward Base (object)
@@ -57,6 +93,9 @@ Response Body
 - id: 123 (number)
 - title: `$20 Discount` (string)
 - points: 3000 (number)
+- amount: 25 (number)
+- partner_reward: false (boolean) - When the item is a partner reward
+- redeem_for_gift_card: false (boolean) - When redeeming this item it will convert points to giftcard balance
 
 ## Rewards Base (array)
 
@@ -68,3 +107,9 @@ Response Body
     * id: 124 (number)
     * title: `$20 Discount` (string)
     * points: 3000 (number)
+
+## Error 404 (object)
+
++ code: `404` (number)
++ error: `Not found` (string)
++ message: `Catalog Item not found` (string)
