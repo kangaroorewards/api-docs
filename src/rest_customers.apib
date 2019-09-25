@@ -3,9 +3,9 @@
 
 # Group Customers
 
-## Customer Collection [/customers]
+## Customer Collection [/customers{?page}]
 
-### GET
+### Retrieve all customers [GET]
 
 Returns a list of your customers
 
@@ -113,7 +113,9 @@ Retrieve all customers that have phone number equal to 5141234567
     + Attributes
         - data (array[Customer])
 
-### POST
+## Customer Collection [/customers]
+
+### Create a customer [POST]
 
 Create a new customer.
 
@@ -205,35 +207,28 @@ Respone Body
 + Response 422 (application/json)
     + Attributes (Error 422)
 
-## Customer Resource [/customers/{id}]
+## Customer Resource [/customers/{id}{?include}]
 
-### GET
+### Retrieve a customer [GET]
 
 Returns a single customer.
 
-Path Parameters
-<table class="table">
-    <tr class="bg-default">
-        <th>Name</th> <th>Type</th> <th>Description</th>
-    </tr>
-    <tr>
-        <td>customer_id</td>
-        <td>string</td>
-        <td><strong>Required.</strong> The ID of the customer</td>
-    </tr>
-</table>
+**Path Parameters**
+|Name|Type|Description|
+|-----|----|-----------|
+|customer_id|string|Required. The ID of the customer|
 
-Query Parameters
-<table class="table">
-    <tr class="bg-default">
-        <th>Name</th> <th>Type</th> <th>Description</th>
-    </tr>
-    <tr>
-        <td>include</td>
-        <td>array</td>
-        <td><strong>Optional. </strong>You can optionally request that the response include the balance object. To do so, specify include=balance in your request.</td>
-    </tr>
-</table>
+**Query Parameters**
+|Name|Type|Description|
+|-----|----|-----------|
+|include|string|Optional. You can optionally request that the response include the balance object. To do so, specify include=balance in your request.|
+
+> **NOTE:** You could also request more information using include parameter. All possible values:
+> - **balance** - includes customer balance for business in the response
+> - **tier** - includes customer tier in the response
+
+
+> **NOTE:** The value of the include parameter MUST be a comma-separated (",") list of relationship names.
 
 Example
 ```
@@ -266,6 +261,7 @@ Response Body
 
 + Parameters
     + id: `11e696103f8ff5eabb02089e01cf89b5` - The unique ID of the customer.
+    + include: balance,tier (optional, enum) - related resources to include in the response
 
 + Request (application/json)
     + Headers
@@ -281,8 +277,15 @@ Response Body
 + Response 404 (application/json)
     + Attributes (Error 404)
 
-### PUT
+
+## Customer Resource [/customers/{id}]
+
+### Update a customer [PUT]
+
 Updates the details of an existing customer.
+
++ Parameters
+    + id: `11e696103f8ff5eabb02089e01cf89b5` - The unique ID of the customer.
 
 Body parameters
 <table class="table">
@@ -352,9 +355,6 @@ Respone Body
 
 ```
 
-+ Parameters
-    + id: `11e696103f8ff5eabb02089e01cf89b5` - The unique ID of the customer.
-
 + Request (application/json)
     + Headers
 
@@ -377,7 +377,10 @@ Respone Body
 + Response 422 (application/json)
     + Attributes (Error 422)
 
-### DELETE
+## Customer Resource [/customers/{id}{?}]
+
+### Delete a customer [DELETE]
+
 Deletes the customer with the requested id.
 
 + Request (application/json)
@@ -406,7 +409,6 @@ Deletes the customer with the requested id.
 + balance
     + points: 135 (number)
     + giftcard: 21.35 (number)
-+ member_since: `2016-06-09T21:04:50+00:00` (string)
 
 ## Customer Create (object)
 
