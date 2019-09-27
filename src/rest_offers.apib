@@ -6,7 +6,7 @@
 
 ### List all offers [GET]
 
-Retrieve all offers.
+List all offers, including expired and targeted
 
 Query Parameters
 |Name|Type|Description|
@@ -19,10 +19,10 @@ Example
 
 ```
 GET /offers HTTP/1.1
-Host: api.kangaroooffers.com
+Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLC
 X-Application-Key: eyXai0XD7SLLzaOeJW
-Accept: application/vnd.kangaroooffers.api.v1+json;
+Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
 ```
 
@@ -40,12 +40,7 @@ Response Body
       "type": "points_multiplier",
       "title": "Multiply your points",
       "description": "Come on Monday and Multiply your points",
-      "images": [
-        {
-          "default": true,
-          "path": ""
-        }
-      ]
+      "images": [...]
     }
   ]
 }

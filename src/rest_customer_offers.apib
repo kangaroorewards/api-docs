@@ -1,0 +1,136 @@
+# Customer Offers
+
+# Group Customer Offers
+
+## Customer Offer [/customers/{customer_id}/offers]
+
+### List all offers [GET]
+
+List all offers for a customer. Each offer might have a list of actions for that customer
+
+Query Parameters
+|Name|Type|Description|
+|-----|----|-----------|
+|relationships|enum|`Optional.` You can optionally request that the response include the branch object. To do so, specify relationships=branch in your request.|
+
+Example
+
+```
+GET /customers/12e6a34f8e89eb1e9708089e01cf89b5/offers HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+  "data": [
+    {
+        "id": 552,
+        "points": 0,
+        "expires_at": "2017-04-01T03:59:59+0000",
+        "discount_value": 0,
+        "multip_factor": 2,
+        "real_value": 0,
+        "type": "points_multiplier",
+        "title": "Multiply your points",
+        "description": "Come on Monday and Multiply your points",
+        "images": [...],
+        "actions": [
+            {
+                "type": "get_coupon"
+            }
+        ]
+    }
+  ]
+}
+```
+
+**Relationships**
+
+> **NOTE:** You could also request more information using relationship parameter. All possible values:
+> - **branch** - includes branch object in the response
+
+The value of the relationships parameter MUST be a comma-separated (",") list of relationship names.
+
+Example
+```
+GET /customers/12e6a34f8e89eb1e9708089e01cf89b5/offers?relationships=branch HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+Accept: application/vnd.kangaroorewards.api.v1+json;
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+  "data": [
+    "id": 123,
+    "points": 0,
+    "expires_at": "2017-07-01T03:59:59+0000",
+    "discount_value": 0,
+    "multip_factor": 0,
+    "real_value": 0,
+    "type": "free_product",
+    "title": "Offer Title",
+    "description": "",
+    "images": [...],
+    "branch": {
+      "id": "11e6a34f8e89eb0e9708089e01cf89b5",
+      "name": "Pizza Nova",
+      "web_site": null,
+      "logo": {
+        "large": null,
+        "medium": null,
+        "thumbnail": null
+      },
+      "cover_photo": {
+        "large": null,
+        "medium": null,
+        "thumbnail": null
+      }
+    }
+  ]
+}
+```
+
++ Parameters
+    + customer_id: `12e6a34f8e89eb1e9708089e01cf89b5` (required, string) - ID of the customer
+
++ Request
+    + Headers
+
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Application-Key: <your_application_key>
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Customer Offers Base)
+
+
+# Data Structures
+
+## Customer Offers Base (array)
+
++ (object)
+    * id: 111
+    * title: `Offer Title` (string)
+    * points: 3000
+    * type: `free_product` (string)
+    * description: `Some Offer Description` (string)
+    * expires_at: `2027-06-27T02:59:59+00:00` (string)
+    * multip_factor: 2 (number)
++ (object)
+    * id: 112
+    * title: `Offer Title 2` (string)
+    * points: 50000
+    * type: `free_product` (string)
+    * description: `Some Offer Description` (string)
+    * expires_at: `2027-04-27T02:59:59+00:00` (string)
+    * multip_factor: 0 (number)

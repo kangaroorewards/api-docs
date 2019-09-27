@@ -16,6 +16,8 @@ Returns a list of your customers
 |page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
 |created_at|string|`Optional.` Filter by created date. [See Filtering](#filtering-customers)|
 |updated_at|string|`Optional.` Filter by updated date. [See Filtering](#filtering-customers)|
+|email|string|`Optional.` Filter by email address. [See Filtering](#filtering-customers)|
+|phone|string|`Optional.` Filter by phone number. [See Filtering](#filtering-customers)|
 
 Examples
 ```
@@ -137,7 +139,7 @@ Body parameters
     <tr>
         <td>country_code</td>
         <td>string</td>
-        <td><strong>Required.</strong> The customer's country, in ISO 3166-1-alpha-2 format.</td>
+        <td><strong>Required with phone.</strong> The customer's country, in ISO 3166-1-alpha-2 format.</td>
     </tr>
     <tr>
         <td>first_name</td>
@@ -221,18 +223,21 @@ Returns a single customer.
 **Query Parameters**
 |Name|Type|Description|
 |-----|----|-----------|
-|include|string|Optional. You can optionally request that the response include the balance object. To do so, specify include=balance in your request.|
+|include|string|Optional. You can optionally request that the response includes other resources. To do so, specify include=balance in your request.|
+|relationships|string|Optional. You can optionally request that the response includes other related resources. To do so, specify relationships=address in your request.|
 
 > **NOTE:** You could also request more information using include parameter. All possible values:
-> - **balance** - includes customer balance for business in the response
-> - **tier** - includes customer tier in the response
+> - **balance** - includes customer's balance for business in the response
+> - **current_tier** - includes customer's current tier status in the response
 
+> **NOTE:** You could also request related resources using include relationships. All possible values:
+> - **address** - includes customer's address in the response
 
-> **NOTE:** The value of the include parameter MUST be a comma-separated (",") list of relationship names.
+> **NOTE:** The value of the include or relationships parameter MUST be a comma-separated (",") list of relationship names.
 
 Example
 ```
-GET /customers/11e69610400894b2bb02089e01cf89b5?include=balance HTTP/1.1
+GET /customers/11e69610400894b2bb02089e01cf89b5?include=balance,current_tier HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFmODNk
 X-Application-Key: eyXai0XD7SLLzaOeJW
@@ -254,9 +259,26 @@ Response Body
         "balance": {
             "points": 1000,
             "giftcard": 10.00
+        },
+        "current_tier": {
+            "id": 1,
+            "name": "Platinum",
+            "reach_spend": 2,
+            "reach_visits": 2,
+            "reach_points": 2
         }
     }
 }
+```
+
+Example with customer's address in the response
+```
+GET /customers/11e69610400894b2bb02089e01cf89b5?relationships=address HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFmODNk
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
 ```
 
 + Parameters
@@ -283,9 +305,6 @@ Response Body
 ### Update a customer [PUT]
 
 Updates the details of an existing customer.
-
-+ Parameters
-    + id: `11e696103f8ff5eabb02089e01cf89b5` - The unique ID of the customer.
 
 Body parameters
 <table class="table">
@@ -354,6 +373,8 @@ Respone Body
 }
 
 ```
++ Parameters
+    + id: `11e696103f8ff5eabb02089e01cf89b5` - The unique ID of the customer.
 
 + Request (application/json)
     + Headers
