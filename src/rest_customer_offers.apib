@@ -8,10 +8,18 @@
 
 List all offers for a customer. Each offer might have a list of actions for that customer
 
-Query Parameters
+**Path Parameters**
+|Name|Type|Description|
+|-----|----|-----------|
+|customer_id|string|Required. The ID of the customer|
+
+**Query Parameters**
 |Name|Type|Description|
 |-----|----|-----------|
 |relationships|enum|`Optional.` You can optionally request that the response include the branch object. To do so, specify relationships=branch in your request.|
+|per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15; Maximum value 100|
+|page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
+
 
 Example
 
