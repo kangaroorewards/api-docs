@@ -69,6 +69,16 @@ OAuth 2 is an open standard for authorization that enables third-party applicati
 
 All developers need to register their application before getting started. A registered OAuth application is assigned a unique Client ID and Client Secret. The Client Secret should not be shared.
 
+Currently Kangaroo Rewards API supports 2 types of authorization:
+
+- <a href="#header-oauth-web-application-flow">Web Application Flow (or Authorization Code flow)</a>
+- <a href="#header-oauth-password-credentials-grant">Password Credentials Grant (or Resource Owner Credentials)</a>
+
+>**NOTE:**
+>When creating a new application please make sure to select the corresponding grant type for your application
+>- For `Authorization Code` flow the Grant Type MUST be **Authorization Code**
+>- For `Resource Owner Credentials` flow the Grant Type MUST be **Password Grant**
+
 #### OAuth - Web Application Flow
 
 The Kangaroo Rewards OAuth API supports the Authorization Code flow, which is suitable for web applications running on a server. This is a description of the flow for third party applications.
@@ -164,7 +174,7 @@ After the web server receives the authorization code, it can exchange the author
 
 **3. Request Access Token**
 
-The client will now send a POST request to the authorization server with the following parameters:
+The client will now send a **POST** request to the authorization server with the following parameters:
 
 Access Token Request Endpoint:
 ```
@@ -218,11 +228,30 @@ https://api.kangaroorewards.com/oauth/token
 Example Access Token Endpoint
 
 ```
-https://api.kangaroorewards.com/oauth/token?grant_type=authorization_code
-&code=rye7rwer8ewr9re8
-&client_id=12345
-&client_secret=8fysa8dfds9fj283
-&redirect_uri=https://example.com/callback
+> POST /oauth/token HTTP/2
+> Host: api.kangaroorewards.com
+> User-Agent: curl/7.65.1
+> Accept: application/x-www-form-urlencoded
+> Content-Type: application/x-www-form-urlencoded
+> X-Application-Key: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+> Content-Length: 366
+
+| grant_type=authorization_code&client_id=12345&client_secret=8fysa8dfds9fj283&code=def502009ac5c81&redirect_uri=https://example.com/callback&scope=admin
+```
+
+Example with curl
+
+```bash
+curl -v -X POST https://api.kangaroorewards.com/oauth/token \
+   -H "Accept: application/x-www-form-urlencoded" \
+   -H "Content-Type: application/x-www-form-urlencoded" \
+   -H "X-Application-Key: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..." \
+   -d "grant_type=authorization_code \
+        &code=def502009ac5c81 \
+        &client_id=12345 \
+        &client_secret=8fysa8dfds9fj283 \
+        &redirect_uri=https://example.com/callback \
+        &scope=admin"
 ```
 
 By default, the response will take the following form:
@@ -233,7 +262,7 @@ access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1N&scope=admin&token_type=Bearer
 
 A successful response is returned as a JSON array, similar to the following:
 
-```
+```json
 {
 "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImI5ZTk0NTRkYTRmOTY5Y2U2ZTUxMmFlMTRkZTdkMWJhZWQ1NjUyZTcwNmNiOTk2YTE2MjdhMjg0ZDMzMTM2NDNlZmJlZjhiZWU4YWQxMDg4In0",
 "refresh_token":"2riNuUlbhlW1MWKb4Jos9FOYgIzz5ZJtK7rQjIgLDu3XsgblD5Xtn44sFieo",
@@ -248,7 +277,7 @@ Now you may use the access token to make requests, on behalf of the user, from t
 The access token may be used until it expires (24 hours after being issued) or is otherwise invalidated (e.g. user revoked or refresh token used).
 
 Example Access Token Use
-```
+```bash
 curl -H "Authorization: Bearer 12345678900987654321-abc34135acde13f13530" https://api.kangaroorewards.com/customers
 ```
 
@@ -291,7 +320,7 @@ The refresh token response looks just like the normal access token grant. It inc
 
 Example Refresh Token Request
 
-```
+```bash
 curl --request POST \
   --url http://api.kangaroorewards.com/oauth/token \
   --header 'content-type: application/x-www-form-urlencoded' \
@@ -299,6 +328,71 @@ curl --request POST \
   --data 'grant_type=refresh_token&refresh_token=def50200ceef1ff4664d517&client_id=1111&client_secret=cJ57RFk2CibH4o2INJb3L6&scope=admin'
 
 ```
+
+#### OAuth - Password Credentials Grant
+
+The Kangaroo Rewards OAuth API also supports the Password Credentials Grant flow, where the resource owner has a trust relationship with the client.
+
+This grant type is suitable for clients capable of obtaining the resource owner’s credentials (username and password, typically using an interactive form).
+
+The application may access a Kangaroo Rewards API after it receives the access token.
+
+>**Note:** Your application should always use HTTPS in this scenario.
+
+**1. Requesting Tokens**
+
+Access Token Request Endpoint:
+```
+https://api.kangaroorewards.com/oauth/token
+```
+
+Once you have created an application with type `password grant`, you may request an access token by issuing a POST request to
+the `/oauth/token` route with the user's email address and password. If the request is successful, you will receive an access_token
+and refresh_token in the JSON response from the server.
+
+|Parameter|Values|Description|
+|-----|-----|-----------|
+|**client_id**|The client ID you obtain from the <a href="/developers">Developer Portal</a> when you registered your app|Identifies the client that is making the request. The value passed in this parameter must exactly match the value shown in the <a href="/developers">Developer Portal</a>|
+|**client_secret**|The client secret you obtain from the <a href="/developers">Developer Portal</a> when you registered your app|Identifies the client that is making the request. The value passed in this parameter must exactly match the value shown in the <a href="/developers">Developer Portal</a>|
+|**grant_type**|**password**|For password grant|
+|**username**|john@example.com|The email address|
+|**password**|YourPass$ord|The password|
+|**scope**|`admin`|Scopes allow the clients to request a specific set of permissions when requesting authorization to access an account|
+|**application_key**|The Application Key|The business owner has to provide The Application Key. He can get it from his business portal.|
+
+Example Token Request
+
+```php
+$http = new GuzzleHttp\Client;
+
+$response = $http->post('https://api.kangaroorewards.com/oauth/token', [
+    'form_params' => [
+        'grant_type' => 'password',
+        'client_id' => '{YOUR_CLIENT_ID}',
+        'client_secret' => '{YOUR_CLIENT_SECRET}',
+        'username' => 'john@example.com',
+        'password' => 'my-super-password',
+        'application_key' => '{YOUR_APPLICATION_KEY}',
+        'scope' => 'admin',
+    ],
+]);
+
+$token = json_decode((string) $response->getBody(), true);
+
+print_r($token);
+```
+
+A successful response is returned as a JSON array, similar to the following:
+
+```
+{
+    "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImI5ZTk0NTRkYTRmOTY5Y2U2ZTUxMmFlMTRkZTdkMWJhZWQ1NjUyZTcwNmNiOTk2YTE2MjdhMjg0ZDMzMTM2NDNlZmJlZjhiZWU4YWQxMDg4In0",
+    "refresh_token":"2riNuUlbhlW1MWKb4Jos9FOYgIzz5ZJtK7rQjIgLDu3XsgblD5Xtn44sFieo",
+    "expires_in":3920,
+    "token_type":"Bearer"
+}
+```
+
 
 **Scopes**
 

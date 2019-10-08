@@ -186,7 +186,7 @@ The `employee.pin_code` is required only when redeeming on behalf of the custome
 *Body parameters*
 |Name|Type|Description|
 |-----|----|-----------|
-|intent|string|Set the `intent` to: `reward`, `redeem`, `return`|
+|intent|string|Set the `intent` to: `reward`, `redeem`, `return`, `get_coupon`, `claim_coupon`|
 |amount|number|Required if none of `points`, *visits* are present|
 |points|number|Required if none of `amount`, *visits* are present|
 |visits|number|Required if none of `amount`, *points* are present|
@@ -207,20 +207,25 @@ The `employee.pin_code` is required only when redeeming on behalf of the custome
 |product_rewards.quantity|number|Required. Quantity|
 |receipt|object|Optional. The receipt object that will be attached to the transaction|
 |receipt.number|string|Optional. If provided, the receipt number will be attached to the transaction|
+|offer|object|Optional. Required when intent is `get_coupon` or `claim_coupon`. The Offer to assign a coupon or when redeeming a coupon|
+|offer.id|number|Required with Offer. The Offer ID|
+|coupon|object|Optional. Required when intent is `claim_coupon`. The coupon to be redeemed (claimed)|
+|coupon.id|number|Required with coupon. The Coupon ID|
 
  <!-- `purchase_giftcard`, `send_giftcard` or `adjust_balance` -->
 
 >**Note:**
->Transaction intent is required and must be: `reward`, `redeem`, `return`
+>Transaction intent is required and must be: `reward`, `redeem`, `return`, `get_coupon`, `claim_coupon`
 
 >**Note:**
->One of the following attributes is required `amount`, `points` or `visits`
+>One of the following attributes is required `amount`, `points` or `visits` when intent is on of the following: `reward`, `redeem`, `return`
 
 >**Note:**
 >To apply visits aggregation set `visits` value greater than 1. The Employee PIN code is also required.
 
 >**Note:**
 >Customer object is required and at least `id`, `email` or `phone` is required
+>country_code is required when phone number is used
 
 Example reward amount and a customer with ID
 
@@ -478,6 +483,72 @@ Content-Type: application/json
     "customer": {
         "id": "11e6fd0b9882cd0d84a5089e01cf89b5",
         "pin_code": 1111
+    }
+}
+```
+
+Example assign a coupon to customer
+```
+POST /transactions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+    "intent": "get_coupon",
+    "customer": {
+        "id": "11e696103f8ff5eabb02089e01cf89b5"
+    },
+    "offer": {
+        "id": 1234
+    }
+}
+```
+
+Response Body
+```
+{
+    "data": {
+        "id": 1892267,
+        "amount": 0,
+        "points": 0,
+        "name": "Coupon Tagged",
+        "created_at": "2019-10-04T16:07:33+00:00",
+        "updated_at": "2019-10-04T16:07:33+00:00",
+        "offers": [...],
+        "coupon": {
+            "id": 512572,
+            "qrcode": "12428967",
+            "coupon_locked": false,
+            "coupon_type_id": 74,
+            "expires_at": "2019-10-14T16:07:33+00:00",
+            "offer": {...}
+        }
+    }       
+}
+```
+
+Example claim a coupon (redeem)
+```
+POST /transactions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+    "intent": "claim_coupon",
+    "customer": {
+        "id": "11e696103f8ff5eabb02089e01cf89b5"
+    },
+    "offer": {
+        "id": 1234
+    },
+    "coupon": {
+        "id": 512572
     }
 }
 ```
