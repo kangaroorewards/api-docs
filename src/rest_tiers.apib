@@ -1,0 +1,160 @@
+# Tiers
+Business tier setup and tier levels
+
+# Group Tiers
+
+### GET /tiers
+
+List Tiers.
+
+**Query Parameters**
+
+|Name|Type|Description|
+|-----|----|-----------|
+|page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
+|per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15; Maximum value 100|
+|relationships|enum|`Optional.` You can optionally request that the response include related resources. To do so, specify relationships=tier_levels in your request.|
+
+
+Example
+
+```
+GET /tiers HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+  "data": [
+        {
+            "id": 32,
+            "tiers_sequence": [
+                "1",
+                "2",
+                "3"
+            ],
+            "tiers_relation": 0,
+            "reset_type": 1,
+            "reset_period_month": 1,
+            "base_previous_period": 0,
+            "enabled": true
+        }
+    ]
+}
+```
+
+Example with Tier Levels
+
+```
+GET /tiers?relationships=tier_levels HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+  "data": [
+        {
+            "id": 32,
+            "tiers_sequence": [
+                "1",
+                "2",
+                "3"
+            ],
+            "tiers_relation": 0,
+            "reset_type": 1,
+            "reset_period_month": 1,
+            "base_previous_period": 0,
+            "enabled": true,
+            "tier_levels": [
+                {
+                    "id": 25,
+                    "name": "VIP",
+                    "reach_spend": 1,
+                    "reach_visits": 1,
+                    "reach_points": 1
+                },
+                {
+                    "id": 26,
+                    "name": "Platinum",
+                    "reach_spend": 2,
+                    "reach_visits": 2,
+                    "reach_points": 2
+                },
+                {
+                    "id": 27,
+                    "name": "Gold",
+                    "reach_spend": 3,
+                    "reach_visits": 3,
+                    "reach_points": 3
+                }
+            ]
+        }
+    ],
+}
+```
+
++ Request
+    + Headers
+
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Tiers Base)
+
+
+# Data Structures
+
+## Tier Base (object)
+
+- id: 123 (number)
+- tiers_sequence: ["1", "2", "3"] (array)
+- tiers_relation: 0 (number)
+- reset_type: 1 (number) - based on future period spending, previous period spending or defined manually
+- reset_period_month: 1 (number) - Reset period month
+- base_previous_period: 0 (number) - Reset period
+- enabled: false (boolean) - Active or Inactive
+- tier_levels: [] (array) - Tier Levels
+
+## Tiers Base (array)
+
++ (object)
+    - id: 123 (number)
+    - tiers_sequence: `1`, `2`, `3` (array)
+    - tiers_relation: 0 (number)
+    - reset_type: 1 (number) - based on future period spending, previous period spending or defined manually
+    - reset_period_month: 1 (number) - Reset period month
+    - base_previous_period: 0 (number) - Reset period
+    - enabled: false (boolean) - Active or Inactive
+    - tier_levels (array) - Tier Levels
+        (Tier Levels Base)
+
+## Tier Levels Base (array)
+
++ (object)
+    - id: 11 (number)
+    - name: Gold (string)
+    - reach_spend: 3 (number)
+    - reach_visits: 3 (number)
+    - reach_points: 3 (number)
++ (object)
+    - id: 12 (number)
+    - name: VIP (string)
+    - reach_spend: 2 (number)
+    - reach_visits: 2 (number)
+    - reach_points: 2 (number)    
+
+## Error Tiers 404 (object)
+
++ code: `404` (number)
++ error: `Not found` (string)
++ message: `Catalog Item not found` (string)
