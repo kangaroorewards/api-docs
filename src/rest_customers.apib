@@ -228,7 +228,7 @@ Returns a single customer.
 
 > **NOTE:** You could also request more information using include parameter. All possible values:
 > - **balance** - includes customer's balance for business in the response
-> - **current_tier** - includes customer's current tier status in the response
+> - **tier_level** - includes customer's current tier status in the response
 
 > **NOTE:** You could also request related resources using include relationships. All possible values:
 > - **address** - includes customer's address in the response
@@ -237,7 +237,7 @@ Returns a single customer.
 
 Example
 ```
-GET /customers/11e69610400894b2bb02089e01cf89b5?include=balance,current_tier HTTP/1.1
+GET /customers/11e69610400894b2bb02089e01cf89b5?include=balance,tier_level HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFmODNk
 X-Application-Key: eyXai0XD7SLLzaOeJW
@@ -260,7 +260,7 @@ Response Body
             "points": 1000,
             "giftcard": 10.00
         },
-        "current_tier": {
+        "tier_level": {
             "id": 1,
             "name": "Platinum",
             "reach_spend": 2,

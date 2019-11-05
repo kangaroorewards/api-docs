@@ -186,7 +186,7 @@ The `employee.pin_code` is required only when redeeming on behalf of the custome
 *Body parameters*
 |Name|Type|Description|
 |-----|----|-----------|
-|intent|string|Set the `intent` to: `reward`, `redeem`, `return`, `get_coupon`, `claim_coupon`|
+|intent|string|Set the `intent` to: `reward`, `redeem`, `return`, `get_coupon`, `claim_coupon`, `purchase_giftcard_prepaid`|
 |amount|number|Required if none of `points`, *visits* are present|
 |points|number|Required if none of `amount`, *visits* are present|
 |visits|number|Required if none of `amount`, *points* are present|
@@ -215,7 +215,7 @@ The `employee.pin_code` is required only when redeeming on behalf of the custome
  <!-- `purchase_giftcard`, `send_giftcard` or `adjust_balance` -->
 
 >**Note:**
->Transaction intent is required and must be: `reward`, `redeem`, `return`, `get_coupon`, `claim_coupon`
+>Transaction intent is required and must be: `reward`, `redeem`, `return`, `get_coupon`, `claim_coupon`, `purchase_giftcard_prepaid`
 
 >**Note:**
 >One of the following attributes is required `amount`, `points` or `visits` when intent is on of the following: `reward`, `redeem`, `return`
@@ -550,6 +550,43 @@ Content-Type: application/json
     "coupon": {
         "id": 512572
     }
+}
+```
+
+
+Example purchase gift card prepaid (In store)
+```
+POST /transactions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+    "intent": "purchase_giftcard_prepaid",
+    "customer": {
+        "id": "11e696103f8ff5eabb02089e01cf89b5"
+    },
+    "amount": 10
+}
+```
+
+Example purchase gift card prepaid (In store)
+```
+POST /transactions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+    "intent": "purchase_giftcard_prepaid",
+    "customer": {
+        "email": "john@example.com"
+    },
+    "amount": 10
 }
 ```
 
