@@ -186,7 +186,7 @@ The `employee.pin_code` is required only when redeeming on behalf of the custome
 *Body parameters*
 |Name|Type|Description|
 |-----|----|-----------|
-|intent|string|Set the `intent` to: `reward`, `redeem`, `return`, `get_coupon`, `claim_coupon`, `purchase_giftcard_prepaid`|
+|intent|string|Set the `intent` to: `reward`, `redeem`, `return`, `get_coupon`, `claim_coupon`, `purchase_giftcard_prepaid`, `giftcard_payment`|
 |amount|number|Required if none of `points`, *visits* are present|
 |points|number|Required if none of `amount`, *visits* are present|
 |visits|number|Required if none of `amount`, *points* are present|
@@ -215,10 +215,17 @@ The `employee.pin_code` is required only when redeeming on behalf of the custome
  <!-- `purchase_giftcard`, `send_giftcard` or `adjust_balance` -->
 
 >**Note:**
->Transaction intent is required and must be: `reward`, `redeem`, `return`, `get_coupon`, `claim_coupon`, `purchase_giftcard_prepaid`
+>Transaction intent is required and must be one of the following: 
+>- `reward` - Reward points or amount. When using amount, it will be converted to points based on the reward rules
+>- `redeem` - Redeem points, amount or catalog item
+>- `return` - Return points
+>- `get_coupon` - When the customers wants to get a coupon
+>- `claim_coupon` - When the customer wants to claim (redeem) a coupon
+>- `purchase_giftcard_prepaid` - Purchase a gift card in store. It will create a "Giftcard Purchase - At Store" transaction and gift card balance will be increased
+>- `giftcard_payment`- Pay with gift card balance. It will create a "Giftcard Payment" transaction and the gift card balance will be depleted
 
 >**Note:**
->One of the following attributes is required `amount`, `points` or `visits` when intent is on of the following: `reward`, `redeem`, `return`
+>One of the following attributes is required `amount`, `points` or `visits` when intent is one of the following: `reward`, `redeem`, `return`
 
 >**Note:**
 >To apply visits aggregation set `visits` value greater than 1. The Employee PIN code is also required.
@@ -585,6 +592,24 @@ Content-Type: application/json
     "intent": "purchase_giftcard_prepaid",
     "customer": {
         "email": "john@example.com"
+    },
+    "amount": 10
+}
+```
+
+Example Pay with gift card balance
+```
+POST /transactions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+    "intent": "giftcard_payment",
+    "customer": {
+        "id": "11e696103f8ff5eabb02089e01cf89b5"
     },
     "amount": 10
 }

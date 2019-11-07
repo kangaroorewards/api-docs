@@ -16,6 +16,21 @@ List Tiers.
 |relationships|enum|`Optional.` You can optionally request that the response include related resources. To do so, specify relationships=tier_levels in your request.|
 
 
+**Tiers sequence**
+
+The `tiers_sequence` value is an array with numbers: 1,2,3
+
+- 1 - Spend
+- 2 - Points
+- 3 - Visits
+
+**Tiers criterion**
+
+When `tiers_relation` is 0 -  At least one selected criterion
+When `tiers_relation` is 1 -  Tiers combine all selected criterion
+
+
+
 Example
 
 ```
@@ -33,8 +48,8 @@ Response Body
         {
             "id": 32,
             "tiers_sequence": [
-                "1",
                 "2",
+                "1",
                 "3"
             ],
             "tiers_relation": 0,
