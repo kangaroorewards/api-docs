@@ -64,6 +64,8 @@ Response Body
 
 > **NOTE:** You could also request more information using relationship parameter. All possible values:
 > - **customer** - includes customer object in the response
+> - **purchase.receipt** - includes receipt related to transaction
+> - **transaction_sequences** - includes related transactions
 
 The value of the relationships parameter MUST be a comma-separated (",") list of relationship names.
 
@@ -109,6 +111,42 @@ Response Body
         "total": 30
     }
 }
+```
+
+Example with transaction_sequences
+```
+GET /transactions?relationships=transaction_sequences HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+Accept: application/vnd.kangaroorewards.api.v1+json;
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Content-Type: application/json
+```
+
+```
+{
+    "id": 1892256,
+    "amount": 0.1,
+    "points": 0,
+    "name": "Store Credit",
+    "created_at": "2020-01-16T21:53:01+00:00",
+    "updated_at": "2020-01-16T21:53:01+00:00",
+    "transaction_sequences": [
+        {
+            "id": 26112,
+            "initial_transaction_id": 1892256,
+            "next_transaction_id": 1892257,
+            "next_transaction": {
+                "id": 1892257,
+                "amount": 10,
+                "points": 10,
+                "name": "Reward",
+                "created_at": "2020-01-16T21:53:01+00:00",
+                "updated_at": "2020-01-16T21:53:01+00:00"
+            }
+        }
+    ]
+},
 ```
 
 <a name="filtering"></a>
