@@ -13,7 +13,19 @@ Query Parameters
 |-----|----|-----------|
 |relationships|enum|`Optional.` You can optionally request that the response include the branch object. To do so, specify relationships=branch in your request.|
 
-Provides the details for all of a business's offers.
+**Offer Types**
+
+- type_id: 1 - Points Multiplier
+- type_id: 2 - Free product
+- type_id: 4 - Bonus points
+- type_id: 8 - Basic offer (coupon). Type free product (can be used as a coupon)
+- type_id: 9 - Basic offer (coupon). Type discount in % (can be used as a coupon)
+- type_id: 10 - Basic offer (coupon). Type discount in $ (can be used as a coupon)
+- type_id: 14 - Gift card
+
+> **NOTE:** Only offers type ID 8,9,10  can be used as coupons
+> A coupon MUST be assigned to customer before it will be available for redemption
+> In order to assign a coupon to a customer create a transaction with intent: `get_coupon`, customer and offer object
 
 Example
 
@@ -209,6 +221,7 @@ Response Body
 + discount_value: 0 (number)
 + multip_factor: 2 (number)
 + real_value: 0 (number)
++ type_id: 8 (number) - The offer type ID
 + type: `points_multiplier` (string)
 + title: `Multiply your points` (string)
 + description: `Come on Monday and Multiply your points` (string)
@@ -222,6 +235,7 @@ Response Body
     * id: 111
     * title: `Offer Title` (string)
     * points: 3000
+    * type_id: 1 (number) - The offer type ID
     * type: `free_product` (string)
     * description: `Some Offer Description` (string)
     * expires_at: `2027-06-27T02:59:59+00:00` (string)
@@ -230,6 +244,7 @@ Response Body
     * id: 112
     * title: `Offer Title 2` (string)
     * points: 50000
+    * type_id: 2 (number) - The offer type ID
     * type: `free_product` (string)
     * description: `Some Offer Description` (string)
     * expires_at: `2027-04-27T02:59:59+00:00` (string)

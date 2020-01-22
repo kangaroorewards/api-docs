@@ -533,7 +533,10 @@ Content-Type: application/json
 }
 ```
 
-Example assign a coupon to customer
+Example assign a coupon to customer (Get coupon)
+
+>Note: Only offers with type_id 8, 9, 10 are coupons and can be assigned to a customer 
+
 ```
 POST /transactions HTTP/1.1
 Host: api.kangaroorewards.com
