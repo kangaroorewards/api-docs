@@ -18,6 +18,12 @@ Returns a list of your customers
 |updated_at|string|`Optional.` Filter by updated date. [See Filtering](#filtering-customers)|
 |email|string|`Optional.` Filter by email address. [See Filtering](#filtering-customers)|
 |phone|string|`Optional.` Filter by phone number. [See Filtering](#filtering-customers)|
+|include|string|Optional. You can optionally request that the response includes other related resources. To do so, specify relationships=balance in your request.|
+
+> **Related resources**
+> - **balance** - includes customer's balance for business in the response
+
+> **NOTE:** The value of the include or relationships parameter MUST be a comma-separated (",") list of relationship names.
 
 Examples
 ```
@@ -30,7 +36,7 @@ Content-Type: application/json
 ```
 
 Response Body
-```
+```json
 {
     "data": [
         {
@@ -57,6 +63,36 @@ Response Body
     "meta": {
         "total": 145
     }
+}
+```
+
+Example with balance
+```
+GET /customers?include=balance HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFmODNk
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+
+Response Body
+```json
+{
+    "data": [
+        {
+            "id": "11E696103F8FF5EABB02089E01CF89B5",
+            "email": "john1@example.com",
+            "phone": "5140000001",
+            "first_name": "Adam",
+            "last_name": "Pappas",
+            "balance": {
+                "points": 100,
+                "giftcard": 0
+            }
+        }
+        . . .
+    ]
 }
 ```
 
