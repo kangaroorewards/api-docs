@@ -10,6 +10,17 @@ through the API, allowing you to script the complex actions that your situation 
 
 >**Note:** The X-Application-Key header is required for all requests
 
+> **NOTE:** All POST, PUT and PATCH requests MUST have the content type header set to `application/json`
+
+```
+PUT /users/me/settings/notifications HTTP/1.1
+Host: api.kangaroorewards.com
+Accept: application/vnd.kangaroorewards.api.v1+json;
+X-Application-Key: eyJ0eXAi...
+Authorization: Bearer eyJ0eXAiOiJKV1QiL...
+Content-Type: application/json; charset=UTF-8
+```
+
 ## Requests
 
 <table class="table">
