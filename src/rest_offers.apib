@@ -125,6 +125,48 @@ Response Body
         - data (Offers Base)
 
 
+
+### Create an offer [POST]
+
+*Body parameters*
+|Name|Type|Description|
+|-----|----|-----------|
+|type_id|integer|`Required` Offer Type 8,9,10|
+|offer_frequency_id|integer|`Required` Default 1 - Daily|
+|targeted_offer_flag|integer|`Required` Default 1 - targeted|
+|never_expires_flag|integer|`Optional` Default 0|
+|publish_at|string|`Optional` |
+|expires_at|string|`Required` if expiry date|
+|discount_value|numeric|`Required` if |
+
+
+Example
+```
+POST /offers HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC...
+Accept: application/vnd.kangaroorewards.api.v1+json;
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Content-Type: application/json
+```
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Application-Key: <your_application_key>
+
+    + Attributes (CreateBasicOfferData)
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Offer)
+
++ Response 422 (application/json)
+    + Attributes (Offer Error 422)
+
+
 ## Offer [/offers/{offer_id}]
 
 + Parameters
@@ -171,7 +213,7 @@ Response Body
     "images": [
       {
         "default": true,
-        "path": "1498064009_594aa4895e8c7.jpg"
+        "large": "1498064009_594aa4895e8c7.jpg"
       }
     ],
     "branch": {
@@ -226,8 +268,13 @@ Response Body
 + title: `Multiply your points` (string)
 + description: `Come on Monday and Multiply your points` (string)
 + images (array)
-    + default: true (boolean)
-    + path: `https://www.kangaroorewards.com/photos/image1.png` (string)
+    + (object)
+        + original: `https://www.kangaroorewards.com/photos/image.png` (string)
+        + large: `https://www.kangaroorewards.com/photos/image1.png` (string)
+        + medium: `https://www.kangaroorewards.com/photos/image2.png` (string)
+        + thumbnail: `https://www.kangaroorewards.com/photos/image3.png` (string)
+        + `default`: true (boolean)
+
 
 ## Offers Base (array)
 
@@ -250,6 +297,32 @@ Response Body
     * expires_at: `2027-04-27T02:59:59+00:00` (string)
     * multip_factor: 0 (number)
 
+## CreateBasicOfferData
+
++ type_id: 8 (number) - The offer type ID 8,8,10
++ offer_frequency_id: 1 (number) - Daily, weekly, specific day and time
++ targeted_offer_flag: 1 (number) - 0 Available for everyone, 1 Targeted
++ publish_at: `2020-04-01T03:59:59+0000` (string) - When the offer will be published
++ expires_at: `2020-04-01T03:59:59+0000` (string)
++ never_expires_flag: 1 (number) - 1 the offer will never expire, 0 it will expire
++ discount_value: 10 (number)
++ offer_languages (array)
+    + (object)
+        + language_id: 1 (number) - Language ID. 1 - English is required
+        + title: `Free coffee` (string) - max: 255
+        + description: `Come on Monday and get a free coffee` (string) - max: 500
+        + offer_terms_conditions: `Offer terms and conditions here` (string) - max: 1000
+        + offer_link: `https://example.com/some-offer-link` (string) - max: 500
++ images (array)
+    + (object)
+        + original: `https://www.kangaroorewards.com/photos/image.png` (string)
+        + large: `https://www.kangaroorewards.com/photos/image1.png` (string)
+        + medium: `https://www.kangaroorewards.com/photos/image2.png` (string)
+        + thumbnail: `https://www.kangaroorewards.com/photos/image3.png` (string)
++ available_at_branches (array)
+    + (object)
+        + id: 1es8uwrs8sd9fsf9 (string) - Branch ID
+
 ## Offer Error 404 (object)
 
 + error (object)
@@ -257,3 +330,11 @@ Response Body
     - message: `Offer 112 Not Found` (string)
     - description: `The requested resource doesn't exist.` (string)
 
+## Offer Error 422 (object)
+
++ type_id (array)
+    + 0: `Type id is required.` (string)
++ images (array)
+    + 0: `The images may not have more than 4 items.` (string)
++ offer_languages (array)
+    + 0: `Offer languages is required.` (string)

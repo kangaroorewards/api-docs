@@ -16,6 +16,7 @@ List Product Rewards.
 |page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
 |per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15; Maximum value 100|
 |relationships|enum|`Optional.` You can optionally request that the response include the product object. To do so, specify relationships=product in your request.|
+|products.product_sku|string|`Optional.` Filter products by SKU|
 
 Example
 
@@ -66,6 +67,23 @@ Response Body
   ]
 }
 ```
+
+Example filter by product SKU
+
+To filter on a field, simply add that field and its value to the query.:
+products.product_sku=eq|EBCS345
+
+The operator `eq` translates to `=`
+
+```
+GET /product-rewards?relationships=product&products.product_sku=eq|EBCS345 HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+
+
 
 + Request
     + Headers
