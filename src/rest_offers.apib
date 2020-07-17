@@ -126,19 +126,51 @@ Response Body
 
 
 
-### Create an offer [POST]
+### Create offer [POST]
 
-*Body parameters*
+An offer contains information about a free product, percent-off or amount-off discount you might want to apply to a customer. 
+Currently 4 main types of offers can be created:
+- Basic Offer (coupon) type_id: 8,9,10
+- Points Multiplier type_id: 1
+- Free Product  type_id: 2
+- Bonus Points type_id: 4
+Basic Offers can be claimed as coupoons and after that, the coupon can be redeemed.
+See #Offer Types
+
+> **NOTE:** Offer images MUST be uploaded first using POST /offers/images endpoint, before creating an offer
+> Images must be uploaded to Kangaroo Rewards. External images are not allowed
+
+*Body parameters* common for all types of offers
 |Name|Type|Description|
 |-----|----|-----------|
-|type_id|integer|`Required` Offer Type 8,9,10|
-|offer_frequency_id|integer|`Required` Default 1 - Daily|
-|targeted_offer_flag|integer|`Required` Default 1 - targeted|
-|never_expires_flag|integer|`Optional` Default 0|
-|publish_at|string|`Optional` |
-|expires_at|string|`Required` if expiry date|
-|discount_value|numeric|`Required` if |
+|type_id|integer|`Required` Offer Type. Possible options: `8` - Basic Offer (Free product), `9` - Basic Offer (percent-off), `10` - Basic Offer (amount-off)|
+|offer_frequency_id|integer|`Required` Default 1. Possible options: 1 - Daily, 2 - Weekly, 3 - Specific day and time, 4 - Once|
+|targeted_offer_flag|integer|`Required` (0,1) Default 1 - targeted customers, 0 - available for everyone|
+|never_expires_flag|integer|`Optional` Default 0 - expires_at is required, 1 - the offer will never expire|
+|publish_at|string|`Optional` Default current date and time. ISO 8601 date. Example: `2000-07-01T00:00:00+00:00`|
+|expires_at|string|`Required` if never_expires_flag = 0. ISO 8601 date. Example: `2000-07-01T00:00:00+00:00`|
+|images|array|`Required` Up to 4 items|
+|images.*.original|string,url|`Required` The uploaded image path, max: 255|
+|images.*.large|string,url|`Required` The uploaded image path, max: 255|
+|images.*.*medium|string,url|`Required` The uploaded image path, max: 255|
+|images.*.thumbnail|string,url|`Required` The uploaded image path, max: 255|
+|available_at_branches|array|`Required` - A list of branches where the offer is available at. At least one branch is required|
+|available_at_branches.*.id|string|`Required` Branch ID|
+|offer_languages|array|`Required` - At least English is required, language_id = 1|
+|offer_languages.*.language_id|integer|`Required` - 1 - English, 2 - French, 3 - Spanish|
+|offer_languages.*.offer_title|string|`Required` - Offer title in that language. max: 255|
+|offer_languages.*.offer_description|string|`Optional` - Offer description in that language. max 500|
+|offer_languages.*.offer_terms_conditions|string|`Optional` - Terms and conditions. max: 1000|
+|offer_languages.*.offer_link|string,url|`Optional` - An external link for offer. max: 100|
 
+
+*Body parameters* specific for Basic Offer only
+|Name|Type|Description|
+|-----|----|-----------|
+|coupon_auto_get|integer|`Optional` (0,1) Default 0 - Must click "Get Coupon" on the App, 1 - The coupon will be auto-claimed|
+|coupon_perm_available|integer|`Optional` (0,1) Default 0 - Not permanently available, 1 - Permanently available|
+|coupon_expires_in|integer|`Optional`- The number of days the coupon must be claimed before it will expire. Default 0 - never expires, > 0 Coupon must be claimed within x days |
+|discount_value|numeric|`Required` if type_id is 9 or 10 - amount off > 0 or percent off > 0 and <=100 |
 
 Example
 ```
@@ -165,6 +197,12 @@ Content-Type: application/json
 
 + Response 422 (application/json)
     + Attributes (Offer Error 422)
+
++ Response 403 (application/json)
+    + Attributes (Create Offer Error 403)
+
++ Response 400 (application/json)
+    + Attributes (Create Offer Error 400)
 
 
 ## Offer [/offers/{offer_id}]
@@ -330,11 +368,22 @@ Response Body
     - message: `Offer 112 Not Found` (string)
     - description: `The requested resource doesn't exist.` (string)
 
+## Create Offer Error 403 (object)
+
++ message: `This action is unauthorized.` (string)
+
+## Create Offer Error 400 (object)
+
++ error (object)
+    - status_code: 400 (number)
+    - message: `Bad Request` (string)
+    - description: `Expiration date cannot be prior to publish date.` (string)
+
 ## Offer Error 422 (object)
 
 + type_id (array)
-    + 0: `Type id is required.` (string)
+    + `Type id is required.` (string)
 + images (array)
-    + 0: `The images may not have more than 4 items.` (string)
+    + `The images may not have more than 4 items.` (string)
 + offer_languages (array)
-    + 0: `Offer languages is required.` (string)
+    + `Offer languages is required.` (string)
