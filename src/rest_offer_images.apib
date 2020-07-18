@@ -1,0 +1,108 @@
+
+# Offer Images
+
+# Group Offer Images
+
+### POST /offers/images
+
+Uploading new images. Supported image format: jpeg, jpg, png, gif
+
+> **NOTE:** Images must be uploaded to Kangaroo Rewards. Only binary format is supported. 
+>  External images are NOT allowed: a remote HTTP or HTTPS URL, a private storage URL, a base-64 data URI, an FTP URL, or a Cloud Storage URL.
+
+Example
+
+```
+POST /offers/images HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC...
+X-Application-Key: eyXai0XD7SLLzaOeJW...
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: multipart/form-data; boundary=AaB03x
+
+--AaB03x
+Content-Disposition: form-data; name="image_original" filename="image.png"
+
+content of image.png ...
+
+--AaB03x
+Content-Disposition: form-data; name="image_large" filename="image1.png"
+
+content of image1.png ...
+--AaB03x
+Content-Disposition: form-data; name="image_medium" filename="image2.png"
+
+content of image2.png ...
+--AaB03x
+Content-Disposition: form-data; name="image_thumbnail" filename="image3.png"
+
+content of image3.png ...
+```
+
+Response Body
+```
+{
+  "data": {
+        "original": "https://www.kangaroorewards.com/photos/image.png",
+        "large": "https://www.kangaroorewards.com/photos/image1.png",
+        "medium": "https://www.kangaroorewards.com/photos/image2.png",
+        "thumbnail": "https://www.kangaroorewards.com/photos/image3.png"
+    }
+}
+```
+
++ Request
+    + Headers
+
+            Authorization: Bearer <access_token>
+            X-Application-Key: eyXai0XD7SLLzaOeJW
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            Content-Type: multipart/form-data;boundary=----WebKitFormBoundary8M3sSU13ul5lXSJm
+
+    + Body
+
+            ------WebKitFormBoundary8M3sSU13ul5lXSJm
+
+            Content-Disposition: form-data; name="image_original"; filename="image.jpg"
+            Content-Type: image/jpeg
+
+            content of image...
+            ------WebKitFormBoundary8M3sSU13ul5lXSJm
+
+            Content-Disposition: form-data; name="image_large"; filename="image1.jpg"
+            Content-Type: image/jpeg
+
+            content of image...
+            ------WebKitFormBoundary8M3sSU13ul5lXSJm
+
+            Content-Disposition: form-data; name="image_medium"; filename="image2.jpg"
+            Content-Type: image/jpeg
+
+            content of image...
+            ------WebKitFormBoundary8M3sSU13ul5lXSJm
+
+            Content-Disposition: form-data; name="image_thumbnail"; filename="image3.jpg"
+            Content-Type: image/jpeg
+
+            content of image...
+            ------WebKitFormBoundary8M3sSU13ul5lXSJm--
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Offer Image Base)
+
+# Data Structures
+
+## Offer Image Base (object)
+
++ original: `https://www.kangaroorewards.com/photos/image.png` (string)
++ large: `https://www.kangaroorewards.com/photos/image1.png` (string)
++ medium: `https://www.kangaroorewards.com/photos/image1.png` (string)
++ thumbnail: `https://www.kangaroorewards.com/photos/image1.png` (string)
+
+## UploadOfferImageData (object)
+
++ image_original: `https://www.kangaroorewards.com/photos/image.png` (string) - A binary file. (up to 10MB)
++ image_large: `https://www.kangaroorewards.com/photos/image1.png` (string) - A binary file. (up to 1MB)
++ image_medium: `https://www.kangaroorewards.com/photos/image1.png` (string) - A binary file. (up to 512KB)
++ image_thumbnail: `https://www.kangaroorewards.com/photos/image1.png` (string) - A binary file. (up to 256KB)
