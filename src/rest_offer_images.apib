@@ -8,7 +8,25 @@
 Uploading new images. Supported image format: jpeg, jpg, png, gif
 
 > **NOTE:** Images must be uploaded to Kangaroo Rewards. Only binary format is supported. 
->  External images are NOT allowed: a remote HTTP or HTTPS URL, a private storage URL, a base-64 data URI, an FTP URL, or a Cloud Storage URL.
+> External images are NOT allowed: a remote HTTP or HTTPS URL, a private storage URL, a base-64 data URI, an FTP URL, or a Cloud Storage URL.
+> 
+> Large, medium and thubnail images MUST be cropped before uploading with Aspect ratio: 1.7:1
+> 
+> Large - Minimum dimensions: 800 x 470 px
+> 
+> Medium - Minimum dimensions: 606 x 356 px  
+> 
+> Thumbnail - Minimum dimensions: 450 x 264 px  
+
+
+*Body parameters* common for all offer types
+|Name|Type|Description|
+|-----|----|-----------|
+|image_original|binary|`Required` original image. max: 10MB|
+|image_large|binary|`Required` large size image. max: 1MB. Minimum dimensions: 450 x 264 px|
+|image_medium|binary|`Required` medium size image. max: 512KB. Minimum dimensions: 450 x 264 px|
+|image_thumbnail|binary|`Required` thumbnail size image. max: 256KB. Minimum dimensions: 450 x 264 px|
+
 
 Example
 

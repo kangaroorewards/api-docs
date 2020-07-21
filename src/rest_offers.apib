@@ -53,6 +53,7 @@ All common +
 |coupon_expires_in|integer|`Optional`- The number of days the coupon must be claimed before it will expire. Default 0 - never expires, > 0 Coupon must be claimed within x days |
 |discount_value|numeric|`Required` if type_id is 9 or 10 - amount off > 0 or percent off > 0 and <=100 |
 
+
 *Body parameters* specific for Points Multiplier Offer
 
 All common +
@@ -74,6 +75,7 @@ All common +
 > Example: ["1","2"] - available only on Monday and Tuesday
 > Example: ["5"] - available only on Friday
 
+
 *Body parameters* specific for Free Product Offer
 
 All common + Points Multiplier Offer (exept multip_factor) +
@@ -81,6 +83,7 @@ All common + Points Multiplier Offer (exept multip_factor) +
 |Name|Type|Description|
 |-----|----|-----------|
 |offer_languages.*.offer_product|string|`Required` - Product description. max: 255|
+
 
 *Body parameters* specific for Bonus Points Offer
 
