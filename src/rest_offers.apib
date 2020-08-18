@@ -410,6 +410,146 @@ Response Body
     + Attributes (Offer Error 404)
 
 
+### Update an offer [PUT]
+
+Update an offer.
+
+Path Parameters
+|Name|Type|Description|
+|-----|----|-----------|
+|offer_id|number|`Required.` The ID of the offer|
+
+> **NOTE:** `type_id` cannot be changed.\
+> All fields can be updated similar to creating except `type_id` and `offer_id`\
+> On update all fields are optional.
+
+Example updating an offer
+```
+PUT /offers/123 HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC...
+Accept: application/vnd.kangaroorewards.api.v1+json;
+X-Application-Key: eyXai0XD7SLLzaOeJW...
+Content-Type: application/json
+
+{
+  "targeted_offer_flag": 0,
+  "expires_at": "2020-07-17T18:10:05-00:00",
+  "never_expires_flag": 0,
+  "discount_value": 10,
+  "offer_languages": [
+    {
+      "language_id": 1,
+      "offer_title": "10% OFF today",
+      "offer_description": "Available only for today",
+      "offer_terms_conditions": "",
+      "offer_link": "https://example.com/some-offer"
+    }
+  ],
+  "available_at_branches": [
+    {
+      "id": "11eaa5c938ec36cc9df9b42e99312ac8"
+    },
+    {
+      "id": "12eac6c914dfbc4e8478b42e99312ac5"
+    }
+  ],
+  "images": [
+        {
+        "original": "https://www.kangaroorewards.com/photos/image.png",
+        "large": "https://www.kangaroorewards.com/photos/image1.png",
+        "medium": "https://www.kangaroorewards.com/photos/image2.png",
+        "thumbnail": "https://www.kangaroorewards.com/photos/image3.png"
+        }
+    ]
+}
+```
+
+Example updating only title
+```
+PUT /offers/123 HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC...
+Accept: application/vnd.kangaroorewards.api.v1+json;
+X-Application-Key: eyXai0XD7SLLzaOeJW...
+Content-Type: application/json
+
+{
+  "offer_languages": [
+    {
+      "language_id": 1,
+      "offer_title": "10% OFF today"
+    }
+}
+```
+
++ Parameters
+    + offer_id: `123` - The unique ID of the offer.
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Application-Key: <your_application_key>
+
+    + Attributes (UpdateBasicOfferData)
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Offer)
+
++ Response 422 (application/json)
+    + Attributes (Offer Error 422)
+
++ Response 403 (application/json)
+    + Attributes (Create Offer Error 403)
+
++ Response 400 (application/json)
+    + Attributes (Create Offer Error 400)
+
++ Response 404 (application/json)
+    + Attributes (Offer Error 404)
+
+### Delete an offer [DELETE]
+
+Delete an offer
+
+Path Parameters
+|Name|Type|Description|
+|-----|----|-----------|
+|offer_id|number|`Required.` The ID of the offer|
+
+Example
+```
+DELETE /offers/123 HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC...
+Accept: application/vnd.kangaroorewards.api.v1+json;
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Content-Type: application/json
+```
+
++ Parameters
+    + offer_id: `123` - The unique ID of the offer.
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Application-Key: <your_application_key>
+
++ Response 204 (application/json)
+    + Attributes
+
++ Response 403 (application/json)
+    + Attributes (Create Offer Error 403)
+
++ Response 404 (application/json)
+    + Attributes (Offer Error 404)
+
+
 # Data Structures
 
 ## Offer (object)
@@ -457,6 +597,31 @@ Response Body
 ## CreateBasicOfferData
 
 + type_id: 8 (number) - The offer type ID 8,8,10
++ offer_frequency_id: 1 (number) - Daily, weekly, specific day and time
++ targeted_offer_flag: 1 (number) - 0 Available for everyone, 1 Targeted
++ publish_at: `2020-04-01T03:59:59+0000` (string) - When the offer will be published
++ expires_at: `2020-04-01T03:59:59+0000` (string)
++ never_expires_flag: 1 (number) - 1 the offer will never expire, 0 it will expire
++ discount_value: 10 (number)
++ offer_languages (array)
+    + (object)
+        + language_id: 1 (number) - Language ID. 1 - English is required
+        + title: `Free coffee` (string) - max: 255
+        + description: `Come on Monday and get a free coffee` (string) - max: 500
+        + offer_terms_conditions: `Offer terms and conditions here` (string) - max: 1000
+        + offer_link: `https://example.com/some-offer-link` (string) - max: 500
++ images (array)
+    + (object)
+        + original: `https://www.kangaroorewards.com/photos/image.png` (string)
+        + large: `https://www.kangaroorewards.com/photos/image1.png` (string)
+        + medium: `https://www.kangaroorewards.com/photos/image2.png` (string)
+        + thumbnail: `https://www.kangaroorewards.com/photos/image3.png` (string)
++ available_at_branches (array)
+    + (object)
+        + id: 1es8uwrs8sd9fsf9 (string) - Branch ID
+
+## UpdateBasicOfferData
+
 + offer_frequency_id: 1 (number) - Daily, weekly, specific day and time
 + targeted_offer_flag: 1 (number) - 0 Available for everyone, 1 Targeted
 + publish_at: `2020-04-01T03:59:59+0000` (string) - When the offer will be published
