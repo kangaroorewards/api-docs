@@ -262,14 +262,18 @@ Returns a single customer.
 |include|string|Optional. You can optionally request that the response includes other resources. To do so, specify include=balance in your request.|
 |relationships|string|Optional. You can optionally request that the response includes other related resources. To do so, specify relationships=address in your request.|
 
-> **NOTE:** You could also request more information using include parameter. All possible values:
+> **NOTE:** You could also request more information using include or relationships parameter.
+>
+> Include:
 > - **balance** - includes customer's balance for business in the response
 > - **tier_level** - includes customer's current tier level in the response
 > - **tier_progress** - includes customer's tier progress
 > - **tiers** - includes tiers
 > - **referral_programs** - includes referral programs and referral link for customer
-
-> **NOTE:** You could also request related resources using include relationships. All possible values:
+>
+> Relationships:
+> - **tier_levels** - includes tier levels in tier resource. Only with include=tiers
+> - **user_type** - includes user type resource
 > - **address** - includes customer's address in the response
 
 > **NOTE:** The value of the include or relationships parameter MUST be a comma-separated (",") list of relationship names.
