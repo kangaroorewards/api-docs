@@ -211,6 +211,11 @@ Query Parameters
 |Name|Type|Description|
 |-----|----|-----------|
 |relationships|enum|`Optional.` You can optionally request that the response include the branch object. To do so, specify relationships=branch in your request.|
+|page|int|`Optional.` The page number|
+|per_page|int|`Optional.` Items per page|
+|products.product_sku|string|`Optional.` Filter by product SKU|
+|pos_items_group.tag_name|string|`Optional.` Filter by product tag name|
+
 
 **Offer Types**
 
@@ -275,7 +280,7 @@ Content-Type: application/json
 ```
 
 Response Body
-```
+```json
 {
   "data": [
     "id": 123,
@@ -311,6 +316,15 @@ Response Body
   ]
 }
 ```
+
+Filter offers by product SKU
+
+```GET /offers?products.product_sku=eq|SKERR23423SF9SD934I```
+
+Filter offers by product tag name
+
+```GET /offers?pos_items_group.tag_name=eq|promo```
+
 
 + Request
     + Headers
