@@ -324,6 +324,87 @@ Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
 ```
 
+Example: include tier progress and tier level
+
+```
+GET /customers/11e69610400894b2bb02089e01cf89b5?include=tier_level,tier_progress,tiers&relationships=tier_levels
+```
+
+Where:
+
+`included.tier_level` - the current tier for customer
+
+`included.tiers` - the list of tiers
+
+`included.tier_progress` - the tier progress for customer at the moment
+
+Response Body
+```json
+{
+    "data": {
+        "id": "11e69610400894b2bb02089e01cf89b5",
+        "email": "johndoe@example.com",
+        "phone": "5140000001",
+        "first_name": "John",
+        "last_name": "Doe"
+        ...
+    },
+    "included": {
+        "tier_level": {
+        "id": 1,
+        "name": "VIP",
+        "reach_spend": 0,
+        "reach_visits": 0,
+        "reach_points": 10
+        },
+        "tiers": [
+            {
+                "id": 1,
+                "tiers_sequence": [
+                    "2"
+                ],
+                "tiers_relation": 0,
+                "reset_type": 2,
+                "reset_period_month": 8,
+                "base_previous_period": 0,
+                "enabled": true,
+                "tier_levels": [
+                    {
+                        "id": 1,
+                        "name": "VIP",
+                        "reach_spend": 0,
+                        "reach_visits": 0,
+                        "reach_points": 10
+                    },
+                    {
+                        "id": 2,
+                        "name": "Platinum",
+                        "reach_spend": 0,
+                        "reach_visits": 0,
+                        "reach_points": 20
+                    }
+                ]
+            }
+        ],
+        "tier_progress": {
+            "total_amount": null,
+            "total_points": 10,
+            "total_visits": null,
+            "left_amount": null,
+            "left_points": 10,
+            "left_visits": null,
+            "tiers_relation": 0,
+            "start_date": "2020-08-01T00:00:00+00:00",
+            "end_date": "2022-07-31T23:59:59+00:00",
+            "tier_level": "VIP",
+            "next_tier_level": "Platinum",
+            "tier_progress": 0
+        }
+    }
+}
+```
+
+
 + Parameters
     + id: `11e696103f8ff5eabb02089e01cf89b5` - The unique ID of the customer.
     + include: balance,tier (optional, enum) - related resources to include in the response
@@ -389,6 +470,11 @@ Body parameters
         <td>string</td>
         <td><strong>Optional.</strong> Possible values <code>male</code>, <code>female</code> </td>
     </tr>
+    <tr>
+        <td>enabled</td>
+        <td>boolean</td>
+        <td><strong>Optional.</strong> Possible values <code>true</code>, <code>false</code> </td>
+    </tr>
 </table>
 
 Example
@@ -416,6 +502,23 @@ Respone Body
 }
 
 ```
+
+Activate or deactivate a customer
+
+```
+PUT /customers/12e69610400894b2b02089e01cf89b5
+{
+  "enabled": true
+}
+```
+
+```
+PUT /customers/12e69610400894b2b02089e01cf89b5
+{
+  "enabled": false
+}
+```
+
 + Parameters
     + id: `11e696103f8ff5eabb02089e01cf89b5` - The unique ID of the customer.
 

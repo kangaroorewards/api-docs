@@ -37,6 +37,20 @@ Your app can do these things and more.
 - List Custom Rewards and Catalog Items
 - Redeem based on amount, points or Catalog Item
 
+The following steps show how your application interacts with Kangaroo's OAuth 2.0 server 
+to obtain a user's consent to perform an API request on the user's behalf. Your application 
+must have that consent before it can execute a Kangaroo API request that requires user 
+authorization.
+
+The list below quickly summarizes these steps:
+
+- Your application identifies the permissions it needs.
+- Your application redirects the user to Kangaroo Rewards along with the list of requested permissions.
+- The user decides whether to grant the permissions to your application.
+- Your application finds out what the user decided.
+- If the user granted the requested permissions, your application retrieves tokens needed to make API requests on the user's behalf.
+
+
 ### Register an app with Kangaroo Rewards
 
 Go to [Developer Portal](https://api.kangaroorewards.com/developers/applications "Developer Portal").
