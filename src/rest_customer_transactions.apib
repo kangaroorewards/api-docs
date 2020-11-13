@@ -1,0 +1,186 @@
+# Customer Transactions
+
+# Group Customer Transactions
+
+## Transaction [/customers/{customer_id}/transactions{?page}]
+
+### List all transactions [GET]
+
+Returns a list of transactions
+
+**Path Parameters**
+|Name|Type|Description|
+|-----|----|-----------|
+|customer_id|string|Required. The ID of the customer|
+
+
+**Query Parameters**
+
+|Name|Type|Description|
+|-----|----|-----------|
+|page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
+|per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15; Maximum value 100|
+|relationships|enum|`Optional.` You can optionally request the response to include related resources|
+|created_at|string|`Optional.` Filter by created date. [See Filtering](#filtering)|
+|updated_at|string|`Optional.` Filter by updated date. [See Filtering](#filtering)|
+
+
+Examples
+```
+GET /customers/12e6a34f8e89eb1e9708089e01cf89b5/transactions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFmODNk...
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+
+
+Response Body
+```
+{
+    "data": [
+        {
+            "id": 1991625373,
+            "amount": 0,
+            "points": 100,
+            "name": "Redemption",
+            "created_at": "2017-10-06T15:55:06+00:00",
+            "utc_updated": "2017-10-06T15:55:06+00:00"
+        },
+        {
+            "id": 599112524,
+            "amount": 5,
+            "points": 50,
+            "name": "Reward",
+            "created_at": "2017-03-24T22:13:15+00:00",
+            "utc_updated": "2017-03-24T22:13:15+00:00"
+        }
+        ...
+    ],
+    "links": {
+        ...
+    },
+    "meta": {
+        ...
+    }
+}
+```
+
+**Relationships**
+
+> **NOTE:** You could also request more information using relationship parameter. All possible values:
+> - **branch** - includes branch object for each transaction
+
+The value of the relationships parameter MUST be a comma-separated (",") list of relationship names.
+
+Example
+```
+GET /customers/12e6a34f8e89eb1e9708089e01cf89b5/transactions?relationships=branch HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+Accept: application/vnd.kangaroorewards.api.v1+json;
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+  "data": [
+    {
+        "id": 1991625373,
+        "amount": 0,
+        "points": 100,
+        "name": "Redemption",
+        "created_at": "2017-10-06T15:55:06+00:00",
+        "utc_updated": "2017-10-06T15:55:06+00:00",
+        "branch": {
+            "id": "11e6a34f8e89eb0e9708089e01cf89b5",
+            "name": "Retrorant",
+            ...
+        }
+    }
+  ]
+}
+```
+
+**Filtering**
+
+Supported Fields:
+- `created_at` - Filter by created date
+- `updated_at` - Filter by updated date
+- `transaction_type` - Filter by transaction type
+
+Example:
+
+Filter by date
+
+`GET /customers/12e6a34f8e89eb1e9708089e01cf89b5/transactions?created_at=between|2020-10-01T23:15:25+00:00,2020-10-31T23:15:25+00:00`
+
+`GET /customers/12e6a34f8e89eb1e9708089e01cf89b5/transactions?created_at=gte|2020-10-01T23:15:25+00:00`
+
+Filter by type
+
+`GET /customers/12e6a34f8e89eb1e9708089e01cf89b5/transactions?transaction_type=eq|4` - reward
+
+`GET /customers/12e6a34f8e89eb1e9708089e01cf89b5/transactions?transaction_type=eq|5` - redeem
+
+Filter by branch
+
+`GET /customers/12e6a34f8e89eb1e9708089e01cf89b5/transactions?branch.id=eq|11eaa5c938ec36cc9df9b42e99312ac8`
+
+[See Filtering](#filtering)
+
++ Parameters
+    + customer_id: `12e6a34f8e89eb1e9708089e01cf89b5` (required, string) - ID of the customer
+
++ Request
+    + Headers
+
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Application-Key: <your_application_key>
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Customer Transactions Base)
+
++ Response 403 (application/json)
+    + Attributes (Customer Transactions Error 403)
+
++ Response 404 (application/json)
+    + Attributes (Customer Transactions Error 404)
+
+
+# Data Structures
+
+## Customer Transactions Base (array)
+
++ (object)
+    + id: `256559` (number)
+    + amount: `5.25` (number)
+    + points: `5` (number)
+    + name: `Reward` (string)
+    + created_at: `2017-03-06T19:45:47+0000` (string)
+    + updated_at: `2017-03-06T19:45:47+0000` (string)
++ (object)
+    + id: `256571` (number)
+    + amount: `0` (number)
+    + points: `50` (number)
+    + name: `Redeem` (string)
+    + created_at: `2017-03-06T19:45:47+0000` (string)
+    + updated_at: `2017-03-06T19:45:47+0000` (string)
+
+## Customer Transactions Error 403 (object)
+
++ error (object)
+    + status_code: 403 (number)
+    + message: This action is unauthorized (string)
+
+## Customer Transactions Error 404 (object)
+
++ error (object)
+    + status_code: 404 (number)
+    + message: Customer Not Found (string)
+    + description: The requested resource doesn't exist (string)
