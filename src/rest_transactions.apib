@@ -710,11 +710,35 @@ Content-Type: application/json
     + Attributes
         - data (Reward Response With Customer)
 
+## Transaction Resource [/transactions/{id}{?}]
+
+### Cancel a transaction [DELETE]
+
+You can cancel a transaction any time.
+When canceling a transaction, the points will be depleted from the customer's balance
+When cancelling a points multiplier transaction, the parent transaction will also be cancelled
+
+> **NOTE:** Only transaction type_id: 2, 4 can be cancelled
+> 
+> The customer must have enough points balance
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer <access_token>
+            X-Application-Key: eyXai0XD7SLLzaOeJW
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+
++ Parameters
+    + id: 123 (required, number) - The unique ID of the transaction.
+
++ Response 204 (application/json)
+
 + Response 400 (application/json)
     + Attributes (Transactions Error 400)
 
-+ Response 422 (application/json)
-    + Attributes (Transactions Error 422)
++ Response 403 (application/json)
+    + Attributes (Transactions Error 403)
 
 # Data Structures
 
@@ -776,3 +800,6 @@ Content-Type: application/json
     + link: https://api.kangaroorewards.local/docs (string)
 
 
+## Transactions Error 403 (object)
+
++ message: `This action is unauthorized.` (string)
