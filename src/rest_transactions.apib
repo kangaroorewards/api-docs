@@ -224,7 +224,7 @@ The `employee.pin_code` is required only when redeeming on behalf of the custome
 *Body parameters*
 |Name|Type|Description|
 |-----|----|-----------|
-|intent|string|Set the `intent` to: `reward`, `redeem`, `return`, `get_coupon`, `claim_coupon`, `purchase_giftcard_prepaid`, `giftcard_payment`|
+|intent|string|Set the `intent` to: `reward`, `redeem`, `return`, `get_coupon`, `claim_coupon`, `purchase_giftcard_prepaid`, `giftcard_payment`, `adjust_points_balance`|
 |amount|number|Required if none of `points`, *visits* are present|
 |points|number|Required if none of `amount`, *visits* are present|
 |visits|number|Required if none of `amount`, *points* are present|
@@ -262,6 +262,7 @@ The `employee.pin_code` is required only when redeeming on behalf of the custome
 >- `purchase_giftcard_prepaid` - Purchase a gift card in store. It will create a "Giftcard Purchase - At Store" transaction and gift card balance will be increased
 >- `giftcard_payment`- Pay with gift card balance. It will create a "Giftcard Payment" transaction and the gift card balance will be depleted
 >- `reward_store_credit` - Award Store Credit to customers. It will increase gift card balance
+>- `adjust_points_balance` - Adjust points balance. Points value can be positive (increase balance) or negative (decrease balance)
 
 >**Note:**
 >One of the following attributes is required `amount`, `points` or `visits` when intent is one of the following: `reward`, `redeem`, `return`
@@ -674,6 +675,45 @@ Content-Type: application/json
     "amount": 100
 }
 
+```
+
+Example: Adjust(increase) points balance and a customer with ID
+
+```
+POST /transactions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+    "intent": "adjust_points_balance",
+    "points": 100,
+    "comments": "Add optional comments",
+    "customer": {
+        "id": "11e696103f8ff5eabb02089e01cf89b5"
+    }
+}
+```
+
+Example: Adjust(decrease) points balance and a customer with ID
+
+```
+POST /transactions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+    "intent": "adjust_points_balance",
+    "points": -50,
+    "customer": {
+        "id": "11e696103f8ff5eabb02089e01cf89b5"
+    }
+}
 ```
 
 + Request
