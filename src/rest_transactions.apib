@@ -263,6 +263,7 @@ The `employee.pin_code` is required only when redeeming on behalf of the custome
 >- `giftcard_payment`- Pay with gift card balance. It will create a "Giftcard Payment" transaction and the gift card balance will be depleted
 >- `reward_store_credit` - Award Store Credit to customers. It will increase gift card balance
 >- `adjust_points_balance` - Adjust points balance. Points value can be positive (increase balance) or negative (decrease balance)
+>- `reward_referral` - Reward referee and referrer based referral program conditions
 
 >**Note:**
 >One of the following attributes is required `amount`, `points` or `visits` when intent is one of the following: `reward`, `redeem`, `return`
@@ -716,6 +717,33 @@ Content-Type: application/json
 }
 ```
 
+Example: Reward referral request
+
+```
+POST /transactions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC...
+X-Application-Key: eyXai0XD7SLLzaOeJW...
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+    "intent": "reward_referral",
+    "amount": 40.99,
+    "customer": {
+      "id": "11eaa697ae8f46bd9df9b42e99312ac8"
+    }
+}
+```
+
+> Note: The response might return status 202 without a created transaction resource
+> When reponse status code is 202 there won't be a data object with a transaction resource because 
+> the referral condition not met
+>
+> It might also return a 404 error if the referral record not found for customer or no active 
+> referral program exists
+
+
 + Request
     + Headers
 
@@ -732,6 +760,9 @@ Content-Type: application/json
 
 + Response 400 (application/json)
     + Attributes (Transactions Error 400)
+
++ Response 404 (application/json)
+    + Attributes (Transactions Error 404)
 
 + Response 422 (application/json)
     + Attributes (Transactions Error 422)
@@ -843,3 +874,11 @@ When cancelling a points multiplier transaction, the parent transaction will als
 ## Transactions Error 403 (object)
 
 + message: `This action is unauthorized.` (string)
+
+## Transactions Error 404 (object)
+
++ error (object)
+    + status_code: 404 (number)
+    + message: Not found (string)
+    + description: Referral not found for customer (string)
+

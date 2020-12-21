@@ -1,0 +1,87 @@
+# Referral Programs
+
+
+# Group Referral Programs
+
+### GET /referral-programs
+
+List Referral Programs.
+
+**Query Parameters**
+
+|Name|Type|Description|
+|-----|----|-----------|
+|page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
+|per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15; Maximum value 100|
+
+
+Example
+
+```
+GET /referral-programs HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+  "data": [
+        {
+            "id": 1056,
+            "rule_name": "REFERRAL_RULES_PURCHASE",
+            "cond_min_amount": 5,
+            "referee_earns": 10,
+            "referer_earns": 50,
+            "expires_in": 60,
+            "enabled": true,
+            "link_referral_enabled": true,
+            "referral_link": ""
+        }
+    ]
+}
+```
+
+
++ Request
+    + Headers
+
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Referral Programs Base)
+
+
+# Data Structures
+
+## Referral Program Base (object)
+
+- id: 123 (number)
+- cond_min_amount: 3.99 (number)
+- referee_earns: 100 (number) - How many points the referee earns
+- referer_earns: 10 (number) - How many points the referrer earns
+- expires_in: 0 (number) - Expires in number of days
+- enabled: false (boolean) - Active or Inactive
+- link_referral_enabled: true (boolean) - Is referral link enabled
+
+## Referral Programs Base (array)
+
++ (object)
+    - id: 123 (number)
+    - cond_min_amount: 3.99 (number)
+    - referee_earns: 100 (number) - How many points the referee earns
+    - referer_earns: 10 (number) - How many points the referrer earns
+    - expires_in: 0 (number) - Expires in number of days
+    - enabled: false (boolean) - Active or Inactive
+    - link_referral_enabled: true (boolean) - Is referral link enabled
+
+
+## Error Referral Programs 404 (object)
+
++ code: `404` (number)
++ error: `Not found` (string)
++ message: `Referral Program not found` (string)

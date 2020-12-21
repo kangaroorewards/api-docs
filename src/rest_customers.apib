@@ -155,7 +155,7 @@ Retrieve all customers that have phone number equal to 5141234567
 
 ### Create a customer [POST]
 
-Create a new customer.
+Create a customer.
 
 Body parameters
 <table class="table">
@@ -197,6 +197,21 @@ Body parameters
         <td>string</td>
         <td><strong>Optional.</strong> Possible values <code>male</code>, <code>female</code> </td>
     </tr>
+    <tr>
+        <td>referral</td>
+        <td>object</td>
+        <td><strong>Optional.</strong> Referral object </td>
+    </tr>
+    <tr>
+        <td>referral.referral_program_id</td>
+        <td>integer</td>
+        <td><strong>Required with `referral`.</strong> Referral Program ID </td>
+    </tr>
+    <tr>
+        <td>referral.referrer_id</td>
+        <td>string</td>
+        <td><strong>Required with `referral`. </strong> Referrer ID (Customer ID) </td>
+    </tr>
 </table>
 
 Example
@@ -222,6 +237,23 @@ Respone Body
         "first_name": "John",
         "last_name": "Doe"
     }
+}
+```
+
+Example. Create a customer from referral. 
+
+>Note: Referral program is required and must be active. <br>
+> Referrer id (customer id who referred) is required <br>
+> Referral record must not exist <br>
+
+```
+POST /customers
+{
+  "email": "john@example.com",
+  "referral": {
+    "referral_program_id": 1056,
+    "referrer_id": "11eaa697ae8f46bd9df9b42e99312ac8"
+  }
 }
 ```
 
