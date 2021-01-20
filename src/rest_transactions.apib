@@ -744,6 +744,29 @@ Content-Type: application/json
 > referral program exists
 
 
+Example: Refund redeemed points
+
+```
+POST /transactions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC...
+X-Application-Key: eyXai0XD7SLLzaOeJW...
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+    "intent": "refund_redeemed_points",
+    "points": 100,
+    "customer": {
+        "id": "11eab58b792394f48b7fb42e99312ac8"
+    }
+}
+```
+
+> Note: This transaction will increase the points balance
+> Also, it will not affect the tier level
+
+
 + Request
     + Headers
 

@@ -1,0 +1,84 @@
+
+# Customer Actions
+
+# Group Customer Actions
+
+### POST /customers/{id}/actions
+
+Trigger an action for a customer
+
+*Body parameters*
+|Name|Type|Description|
+|-----|----|-----------|
+|resource|string|`Required` One of the following: `tier_level`|
+|type|string|`Required` One of the following: `recalculate`|
+
+
+Example
+
+```
+POST /customers/11eb5b4433edf7bfaaffb42e99312ac8/actions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC...
+X-Application-Key: eyXai0XD7SLLzaOeJW...
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+  "type": "recalculate",
+  "resource": "tier_level"
+}
+```
+
+Response Body
+```
+{
+  "data": {
+    "tier_progress": {
+      "total_amount": null,
+      "total_points": null,
+      "total_visits": 10,
+      "left_amount": null,
+      "left_points": null,
+      "left_visits": 5,
+      "tiers_relation": 0,
+      "start_date": "2021-01-01T00:00:00+00:00",
+      "end_date": "2022-12-31T23:59:59+00:00",
+      "tier_level": "VIP",
+      "next_tier_level": "Platinum",
+      "tier_progress": 1
+    }
+  }
+}
+```
+
++ Parameters
+    + id: `11e696103f8ff5eabb02089e01cf89b5` - The unique ID of the customer.
+
++ Request
+    + Headers
+
+            Authorization: Bearer <access_token>
+            X-Application-Key: eyXai0XD7SLLzaOeJW
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+
+    + Body
+
+            {
+                "type": "recalculate",
+                "resource": "tier_level"
+            }
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Customer Action Base)
+
+# Data Structures
+
+## Customer Action Base (object)
+
++ tier_progress (object)
+    + total_amount: `0` (number)
+    + total_points: `100` (number)
+    + tier_level: `VIP` (string)
+
