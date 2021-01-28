@@ -1,0 +1,98 @@
+# Claimable Offers
+
+# Group Claimable Offers
+
+## Claimable Offer [/customers/{customer_id}/claimable-offers{?page}{&per_page}{&amount}{&branch_id}]
+
+### List all claimable offers [GET]
+
+List all claimable offers for a customer. The list is ordered by priority. The first offer will apply to the transaction.
+
+**Path Parameters**
+|Name|Type|Description|
+|-----|----|-----------|
+|customer_id|string|Required. The ID of the customer|
+
+**Query Parameters**
+|Name|Type|Description|
+|-----|----|-----------|
+|per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15; Maximum value 100|
+|page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
+|amount|numeric|`Required.` The purchase amount|
+|branch_id|string|`Required.` The branch ID where the offers are available|
+
+Example
+
+```
+GET /customers/12e6a34f8e89eb1e9708089e01cf89b5/claimable-offers HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+  "data": [
+    {
+        "id": 552,
+        "points": 0,
+        "expires_at": "2017-04-01T03:59:59+0000",
+        "discount_value": 0,
+        "priority": 1,
+        "multip_factor": 2,
+        "real_value": 0,
+        "type": "points_multiplier",
+        "title": "Multiply your points",
+        "description": "Come on Monday and Multiply your points",
+        "images": [...]
+    }
+  ]
+}
+```
+
++ Parameters
+    + customer_id: `12e6a34f8e89eb1e9708089e01cf89b5` (string, required) - ID of the customer
+    + page: 1 (number, optional) - The current page.
+        + Default: `1`
+    + per_page: 15 (number, optional) - The maximum number of results to return.
+        + Default: `15`
+    + amount: 3.99 (number, required) - The purchase amount
+    + branch_id: e89eb1e9708 (string, required) - The branch ID where the offers are available
+
++ Request
+    + Headers
+
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Application-Key: <your_application_key>
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Customer Claimable Offers Base)
+
+
+# Data Structures
+
+## Customer Claimable Offers Base (array)
+
++ (object)
+    * id: 111
+    * title: `Offer Title` (string)
+    * points: 3000
+    * priority: 1 (number)
+    * type: `free_product` (string)
+    * description: `Some Offer Description` (string)
+    * expires_at: `2027-06-27T02:59:59+00:00` (string)
+    * multip_factor: 2 (number)
++ (object)
+    * id: 112
+    * title: `Offer Title 2` (string)
+    * points: 50000
+    * priority: 1 (number)
+    * type: `free_product` (string)
+    * description: `Some Offer Description` (string)
+    * expires_at: `2027-04-27T02:59:59+00:00` (string)
+    * multip_factor: 0 (number)
