@@ -6,7 +6,16 @@
 
 ### List all claimable offers [GET]
 
-List all claimable offers for a customer. The list is ordered by priority. The first offer will apply to the transaction.
+List all claimable offers for a customer. The list is ordered by priority.
+
+An offer can be claimable if the following conditions are met:
+- amount - purchase amount, will be compared against values entered in the Min purchase and Max purchase fields for the offer.
+- branch_id - the branch where the offer is available at the moment.
+- frequency - how frequent the offer can be claimed. There are different frequency conditions: once, specific day and time etc.
+- customer hasn't claimed the same offer before
+
+The first offer will apply to the next purchase if the purchase will meet all conditions above.
+
 
 **Path Parameters**
 |Name|Type|Description|
