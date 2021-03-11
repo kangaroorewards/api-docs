@@ -372,7 +372,9 @@ and refresh_token in the JSON response from the server.
 |**username**|john@example.com|The email address|
 |**password**|YourPass$ord|The password|
 |**scope**|`admin`|Scopes allow the clients to request a specific set of permissions when requesting authorization to access an account|
-|**application_key**|The Application Key|The business owner has to provide The Application Key. He can get it from his business portal.|
+|**application_key**|The Application Key|The business owner has to provide The Application Key. They can get it from the business portal.|
+
+> Note: For oauth/token endpoint the `Content-Type` header must be: `application/x-www-form-urlencoded`
 
 Example Token Request
 
@@ -385,7 +387,7 @@ $response = $http->post('https://api.kangaroorewards.com/oauth/token', [
         'client_id' => '{YOUR_CLIENT_ID}',
         'client_secret' => '{YOUR_CLIENT_SECRET}',
         'username' => 'john@example.com',
-        'password' => 'my-super-password',
+        'password' => 'your-super-password',
         'application_key' => '{YOUR_APPLICATION_KEY}',
         'scope' => 'admin',
     ],
@@ -394,6 +396,20 @@ $response = $http->post('https://api.kangaroorewards.com/oauth/token', [
 $token = json_decode((string) $response->getBody(), true);
 
 print_r($token);
+```
+
+Curl Example:
+```curl
+curl --request POST \
+  --url https://api.kangaroorewards.com/oauth/token \
+  --header 'Content-Type: application/x-www-form-urlencoded' \
+  --data grant_type=password \
+  --data client_id={YOUR_CLIENT_ID} \
+  --data client_secret={YOUR_CLIENT_SECRET} \
+  --data username=john@example.com \
+  --data password=your-super-password \
+  --data scope=admin \
+  --data application_key={YOUR_APPLICATION_KEY}
 ```
 
 A successful response is returned as a JSON array, similar to the following:
