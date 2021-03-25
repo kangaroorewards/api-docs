@@ -241,8 +241,8 @@ The `employee.pin_code` is required only when redeeming on behalf of the custome
 |catalog_items|object|Optional. The Catalog Item to be redeemed|
 |catalog_items.id|number|Required with Catalog Item. The Catalog Item ID|
 |product_rewards|object|Optional. The Product Rewards|
-|product_rewards.id|number|Required. The Product Reward ID|
-|product_rewards.quantity|number|Required. Quantity|
+|product_rewards.id|number|Required with product_reward. The Product Reward ID|
+|product_rewards.quantity|number|Required with product_reward. Quantity|
 |receipt|object|Optional. The receipt object that will be attached to the transaction|
 |receipt.number|string|Optional. If provided, the receipt number will be attached to the transaction|
 |offer|object|Optional. Required when intent is `get_coupon` or `claim_coupon`. The Offer to assign a coupon or when redeeming a coupon|

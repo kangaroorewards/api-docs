@@ -10,11 +10,34 @@ Trigger an action for a customer
 *Body parameters*
 |Name|Type|Description|
 |-----|----|-----------|
-|resource|string|`Required` One of the following: `tier_level`|
-|type|string|`Required` One of the following: `recalculate`|
+|resource|string|`Required` One of the following: `tier_level`, `reward`|
+|type|string|`Required` One of the following: `recalculate`, `calculate`|
+|intent|string|`Required with resource=reward` One of the following: `reward`, `reward_store_credit`|
+|amount|number|`Optional` Used only with resource=reward.|
+|points|integer|`Optional` Used only with resource=reward.|
+|visits|integer|`Optional` Used only with resource=reward.|
+|branch.id|string|`Optional` Used only with resource=reward.|
+|product_rewards|array|`Optional` Used only with resource=reward.|
+|product_rewards.id|integer|`Optional` Used only with resource=reward.|
+|product_rewards.quantity|integer|`Optional` Used only with resource=reward.|
 
+>**Note:**
+>One of the following attributes is required `amount`, `points` or `visits` when intent is: `reward`
 
-Example
+>**Note:**
+>If an offer type points multiplier is available and all the conditions are met:
+> - Must be available at the specified branch
+> - The amount spent is between minimum and maximum purchase amount configured for the offer
+> - Offer frequency
+>
+> the points will be calculated and returned in the response for offer_reward.points attribute
+
+>**Note:**
+> The branch.id is optional and will be used only to calculate the points if an offer is available at the specific branch.
+> 
+> Default: main branch if no branch ID is passed
+
+Example: recalculate tier level
 
 ```
 POST /customers/11eb5b4433edf7bfaaffb42e99312ac8/actions HTTP/1.1
@@ -49,6 +72,92 @@ Response Body
       "tier_progress": 1
     }
   }
+}
+```
+
+Example: Calculate points the customer will earn based on amount spent. An offer might be applied if available at the main branch
+
+```
+POST /customers/11eb5b4433edf7bfaaffb42e99312ac8/actions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC...
+X-Application-Key: eyXai0XD7SLLzaOeJW...
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+  "type": "calculate",
+  "resource": "reward",
+  "intent": "reward",
+  "amount": 20
+}
+```
+
+Example: Calculate points the customer will earn based on amount spent and product rewards
+
+Response Body
+```
+POST /customers/11eb5b4433edf7bfaaffb42e99312ac8/actions
+{
+  "type": "calculate",
+  "resource": "reward",
+  "intent": "reward",
+  "amount": 20,
+  "product_rewards": [
+    {
+      "id": 123,
+      "quantity": 1
+    }
+  ]
+}
+```
+
+Example: Calculate points the customer will earn based on amount spent and offer applied if available at the specific branch
+
+Response Body
+```
+POST /customers/11eb5b4433edf7bfaaffb42e99312ac8/actions
+{
+  "type": "calculate",
+  "resource": "reward",
+  "intent": "reward",
+  "amount": 20,
+  "branch": {
+    "id":"11eac6c914dfbc4e8478b42e99312ac8"
+  }
+}
+```
+
+Response:
+```
+{
+  "data": {
+    "basic_reward": {
+      "points": 30,
+      "amount_spent": 30,
+      "amount_original": 30
+    },
+    "product_reward": {
+      "points": 0
+    },
+    "offer_reward": {
+      "points": 10
+    },
+    "total_points": 40
+  }
+}
+```
+
+Example: Calculate store credit the customer would earn
+
+Response Body
+```
+POST /customers/11eb5b4433edf7bfaaffb42e99312ac8/actions
+{
+  "type": "calculate",
+  "resource": "reward",
+  "intent": "reward_store_credit",
+  "amount": 20
 }
 ```
 
