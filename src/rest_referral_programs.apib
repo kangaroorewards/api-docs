@@ -3,7 +3,10 @@
 
 # Group Referral Programs
 
-### GET /referral-programs
+## Referral program [/referral-programs]
+
+
+### List referral programs [GET]
 
 List Referral Programs.
 
@@ -55,6 +58,58 @@ Response Body
     + Attributes
         - data (Referral Programs Base)
 
+### Create a new referral program [POST]
+
+Create a referral program.
+Currently the business can only have one referral program enabled.
+So this request will disable the current referral program.
+
+|Name|Type|Description|
+|-----|----|-----------|
+|cond_min_amount|numeric|`Required` The minimum purchase amount condition.|
+|expires_in|integer|`Required` Expires in number of days. |
+|referee_earns|integer|`Required` How many points the referee earns.|
+|referer_earns|integer|`Required` How many points the referer earns.|
+|link_referral_enabled|boolean|`Optional` Default true. Is referral link enabled.|
+|enabled|boolean|`Optional` Default true|
+
+Example creating a referral program
+```
+POST /referral-programs HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC...
+Accept: application/vnd.kangaroorewards.api.v1+json
+X-Application-Key: eyXai0XD7SLLzaOeJW...
+Content-Type: application/json
+
+{
+  "cond_min_amount": 30.00,
+  "referee_earns": 50,
+  "referer_earns": 10,
+  "expires_in": 35,
+  "enabled": true,
+  "link_referral_enabled": true
+}
+```
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Application-Key: <your_application_key>
+
+    + Attributes (CreateReferralProgramData)
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Referral Program Base)
+
++ Response 422 (application/json)
+    + Attributes (Referral Error 422)
+
++ Response 403 (application/json)
+    + Attributes (Create Referral Error 403)
 
 # Data Structures
 
@@ -79,9 +134,32 @@ Response Body
     - enabled: false (boolean) - Active or Inactive
     - link_referral_enabled: true (boolean) - Is referral link enabled
 
+## CreateReferralProgramData
++ cond_min_amount: 10.00 (number) - The minimum purchase amount condition.
++ referee_earns: 150 (number) - How many points the referee earns
++ referer_earns: 50 (number) - How many points the referer earns
++ expires_in: 30 (number) - Expires in number of days
++ enabled: true (boolean)
++ link_referral_enabled: true (boolean) - Is referral link enabled
 
 ## Error Referral Programs 404 (object)
 
 + code: `404` (number)
 + error: `Not found` (string)
 + message: `Referral Program not found` (string)
+
+
+## Create Referral Error 403 (object)
+
++ message: `This action is unauthorized.` (string)
+
+## Referral Error 422 (object)
+
++ cond_min_amount (array)
+    + `The cond min amount field is required.` (string)
++ expires_in (array)
+    + `The expires in field is required.` (string)
++ referee_earns (array)
+    + `The referee earns field is required.` (string)
++ referer_earns (array)
+    + `The referer earns field is required.` (string)

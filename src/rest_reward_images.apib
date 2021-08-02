@@ -1,0 +1,126 @@
+
+# Reward Images
+
+# Group Reward Images
+
+### POST /rewards/images
+
+Uploading new images. Supported image format: jpeg, jpg, png, gif
+
+> **NOTE:** Images must be uploaded to Kangaroo Rewards. Only binary format is supported. 
+> External images are NOT allowed: a remote HTTP or HTTPS URL, a private storage URL, a base-64 data URI, an FTP URL, or a Cloud Storage URL.
+> 
+> Large, medium and thubnail images MUST be cropped before uploading with Aspect ratio: 1.7:1
+> 
+> Large - Minimum dimensions: 800 x 470 px
+> 
+> Medium - Minimum dimensions: 606 x 356 px  
+> 
+> Thumbnail - Minimum dimensions: 450 x 264 px  
+
+
+*Body parameters* common for all reward types
+|Name|Type|Description|
+|-----|----|-----------|
+|image_original|binary|`Required` original image. max: 10MB|
+|image_large|binary|`Required` large size image. max: 1MB. Minimum dimensions: 450 x 264 px|
+|image_medium|binary|`Required` medium size image. max: 512KB. Minimum dimensions: 450 x 264 px|
+|image_thumbnail|binary|`Required` thumbnail size image. max: 256KB. Minimum dimensions: 450 x 264 px|
+
+
+Example
+
+```
+POST /rewards/images HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC...
+X-Application-Key: eyXai0XD7SLLzaOeJW...
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: multipart/form-data; boundary=AaB03x
+
+--AaB03x
+Content-Disposition: form-data; name="image_original" filename="image.png"
+
+content of image.png ...
+
+--AaB03x
+Content-Disposition: form-data; name="image_large" filename="image1.png"
+
+content of image1.png ...
+--AaB03x
+Content-Disposition: form-data; name="image_medium" filename="image2.png"
+
+content of image2.png ...
+--AaB03x
+Content-Disposition: form-data; name="image_thumbnail" filename="image3.png"
+
+content of image3.png ...
+```
+
+Response Body
+```
+{
+  "data": {
+        "original": "https://www.kangaroorewards.com/photos/image.png",
+        "large": "https://www.kangaroorewards.com/photos/image1.png",
+        "medium": "https://www.kangaroorewards.com/photos/image2.png",
+        "thumbnail": "https://www.kangaroorewards.com/photos/image3.png"
+    }
+}
+```
+
++ Request
+    + Headers
+
+            Authorization: Bearer <access_token>
+            X-Application-Key: eyXai0XD7SLLzaOeJW
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            Content-Type: multipart/form-data;boundary=----WebKitFormBoundary8M3sSU13ul5lXSJm
+
+    + Body
+
+            ------WebKitFormBoundary8M3sSU13ul5lXSJm
+
+            Content-Disposition: form-data; name="image_original"; filename="image.jpg"
+            Content-Type: image/jpeg
+
+            content of image...
+            ------WebKitFormBoundary8M3sSU13ul5lXSJm
+
+            Content-Disposition: form-data; name="image_large"; filename="image1.jpg"
+            Content-Type: image/jpeg
+
+            content of image...
+            ------WebKitFormBoundary8M3sSU13ul5lXSJm
+
+            Content-Disposition: form-data; name="image_medium"; filename="image2.jpg"
+            Content-Type: image/jpeg
+
+            content of image...
+            ------WebKitFormBoundary8M3sSU13ul5lXSJm
+
+            Content-Disposition: form-data; name="image_thumbnail"; filename="image3.jpg"
+            Content-Type: image/jpeg
+
+            content of image...
+            ------WebKitFormBoundary8M3sSU13ul5lXSJm--
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Reward Image Base)
+
+# Data Structures
+
+## Reward Image Base (object)
+
++ original: `https://www.kangaroorewards.com/photos/image.png` (string)
++ large: `https://www.kangaroorewards.com/photos/image1.png` (string)
++ medium: `https://www.kangaroorewards.com/photos/image1.png` (string)
++ thumbnail: `https://www.kangaroorewards.com/photos/image1.png` (string)
+
+## UploadRewardImageData (object)
+
++ image_original: `https://www.kangaroorewards.com/photos/image.png` (string) - A binary file. (up to 10MB)
++ image_large: `https://www.kangaroorewards.com/photos/image1.png` (string) - A binary file. (up to 1MB)
++ image_medium: `https://www.kangaroorewards.com/photos/image1.png` (string) - A binary file. (up to 512KB)
++ image_thumbnail: `https://www.kangaroorewards.com/photos/image1.png` (string) - A binary file. (up to 256KB)

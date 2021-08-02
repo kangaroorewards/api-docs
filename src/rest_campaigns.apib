@@ -1,0 +1,244 @@
+# Campaigns
+Marketing campaigns
+
+# Group Campaigns
+
+## Campaigns [/campaigns]
+
+### Create campaign [POST]
+
+Only support 2 type of auto campaigns
+- Birthday campaign
+- First visit campaign
+
+All common
+|Name|Type|Description|
+|-----|----|-----------|
+|name|string|`Required` Campaign name, max:100|
+|send_by|integer|`integer` (1,2,3,4) 1 - send by email and SMS, 2 - send by push, 3 - send by email, 4 - send by SMS|
+|send_by_priority|string|Required if send by email and SMS (`email,sms,push`, `email,push,sms`,`sms,email,push`, `sms,push,email`, `push,email,sms`, `push,sms,email`)|
+|targeted_customer_criteria|array|`Required`|
+|auto|boolean|`required` (1)|
+|exclude_dormants|boolean|`Optional` Default true if exclude Dormant Customers|
+|exclude_customer_in_previous_campaign_past_days|integer|`Optional` Exclude customers reached in previous campaigns in the last X days|
+|exclude_customer_in_previous_campaign_past_hours|integer|`Optional` Exclude customers reached in previous campaigns in the last X hours|
+|exclude_customer_in_previous_automated_campaign_past_days|integer|`Optional` Exclude customers reached in automated campaigns in the last X days|
+|exclude_customer_in_previous_automated_campaign_past_hours|integer|`Optional` Exclude customers reached in automated campaigns in the last X hours|
+|exclude_customer_in_previous_campaign|boolean|`Optional` Default false. Exclude customers reached in previous campaigns|
+|email_subject|string|Required if send_by is 1 or 3, max:255|
+|email_body|string|Required if send_by is 1 or 3 and no offer attached|
+|sms_body|string|Required if send_by is 1 or 4, max:123|
+|push_title|string|Required if send_by is 2, max:250|
+|push_text|string|Required if send_by is 2, max:250|
+|push_link|string|`Optional` max:250|
+|delivery_date|string|`Optional` ISO 8601 date. Example: `2000-07-01T00:00:00+00:00`|
+|expiry_date|string|`Optional` ISO 8601 date. Example: `2000-07-01T00:00:00+00:00`|
+|send_to_invalid_phone_number|boolean|Required if send_by is 1 or 4|
+|include_offer_link_in_sms|boolean|Required if send_by is 1 or 4|
+|include_referral_link_in_sms|boolean|Required if send_by is 1 or 4|
+|offers|array|`Optional`|
+|offers.*.id|integer|Required with offer|
+|offers.*.type|string|Required with offer (`points_multiplier`, `bonus_product`, `bonus_points`, `visits_multiplier`, `redeem_free_product`, `redeem_discount_amount`, `redeem_discount_percentage`, `free_product`, `discount_percentage`, `discount_amount`)|
+
+
+*Body parameters* specific for Birthday campaign
+
+All common +
+
+|Name|Type|Description|
+|-----|----|-----------|
+|targeted_customer_criteria.*.id|integer|`Required` 9 - birthday campaign|
+|targeted_customer_criteria.*.days|integer|`Required` Customers with upcoming birthdays. Notify X day(s) before their birthday.|
+
+
+*Body parameters* specific for First visit campaign
+
+All common +
+
+|Name|Type|Description|
+|-----|----|-----------|
+|targeted_customer_criteria.*.id|integer|`Required` 13 - First visit campaign|
+|targeted_customer_criteria.*.days|integer|`Required` New clients, X days after the First visit|
+|targeted_customer_criteria.*.branch_id|string|`Optional` Branch id. First visit at a specific branch|
+
+Example creating a birthday campaign
+```
+POST /campaign HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC...
+Accept: application/vnd.kangaroorewards.api.v1+json;
+X-Application-Key: eyXai0XD7SLLzaOeJW...
+Content-Type: application/json
+
+{
+ "name": "Happy  birthday",
+ "send_by": 1,
+ "sms_body": "Happy birthday! 1000 points for you",
+ "send_by_priority": "email,sms,push",
+ "targeted_customer_criteria":[
+ {
+  "id": 9,
+  "days": 1
+  }
+ ],
+ "auto": true,
+ "email_subject": "Happy  birthday",
+ "offers":[
+    {
+     "id": 1485,
+     "type":
+     "bonus_points"
+    }
+ ],
+ "include_offer_link_in_sms": false,
+ "include_referral_link_in_sms": false,
+ "send_to_invalid_phone_number": false
+}
+```
+
+Example creating a first visit campaign
+```
+POST /campaigns HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC...
+Accept: application/vnd.kangaroorewards.api.v1+json;
+X-Application-Key: eyXai0XD7SLLzaOeJW...
+Content-Type: application/json
+{
+ "name": "First visit",
+ "send_by": 1,
+ "sms_body": "First visit! 1000 points for you",
+ "send_by_priority": "email,sms,push",
+ "targeted_customer_criteria": [
+  {
+   "id": 13,
+   "days": 1
+   "branch_id": "11eaa5c938ec36cc9df9b42e99312ac8"
+   }
+  ],
+  "auto": true,
+  "email_subject": "First visit bonus",
+  "offers":[
+   {
+    "id": 1485,
+    "type":
+    "bonus_points"
+   }
+  ],
+  "include_offer_link_in_sms": false,
+  "include_referral_link_in_sms": false,
+  "send_to_invalid_phone_number": false
+}
+```
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Application-Key: <your_application_key>
+
+    + Attributes (CreateCampaignData)
+
++ Response 200 (application/json)
+    + Attributes
+        - data (CampaignData)
+
++ Response 422 (application/json)
+    + Attributes (Error 422)
+
++ Response 403 (application/json)
+    + Attributes (Error 403)
+
++ Response 400 (application/json)
+    + Attributes (Error 400)
+
+# Data Structures
+
+## CampaignData (object)
+
++ id: 11 (number)
++ subject: `campagin subject` (string)
++ html_content: `email html content` (string)
++ push_title: `push title`(string)
++ push_text: `push text` (string)
++ push_link: `push link` (string)
++ push_image `http://www.kangaroorewards.com/photo/...` (string)
++ offers (array)
+   + (object)
+        + id: 552 (number)
+        + points: 0 (number)
+        + expires_at: `2017-04-01T03:59:59+0000` (string)
+        + discount_value: 0 (number)
+        + multip_factor: 2 (number)
+        + real_value: 0 (number)
+        + type_id: 8 (number) - The offer type ID
+        + type: `points_multiplier` (string)
+        + title: `Multiply your points` (string)
+        + description: `Come on Monday and Multiply your points` (string)
+        + images (array)
+            + (object)
+            + original: `https://www.kangaroorewards.com/photos/image.png` (string)
+            + large: `https://www.kangaroorewards.com/photos/image1.png` (string)
+            + medium: `https://www.kangaroorewards.com/photos/image2.png` (string)
+            + thumbnail: `https://www.kangaroorewards.com/photos/image3.png` (string)
+            + default: true (boolean)
++ business (array)
+   + (object)
+        + id: 11ebeeido3d94k (string)
+        + name: `XX` (string)
+        + loyalty_type: `per_spend` (string)
+        + conglomerate: false (boolean)
+        + white_label: false (boolean)
+
+## CreateCampaignData (object)
+
++ name: "Birthday Campaign" (string)
++ send_by: 1 (number) 1 - send by email and SMS, 2 - send by push, 3 - send by email, 4 - send by SMS
++ send_by_priority: (string) - Required if send by email and SMS - (`email,sms,push`, `email,push,sms`,`sms,email,push`, `sms,push,email`, `push,email,sms`, `push,sms,email`)
++ targeted_customer_criteria: (array) `Required`
++ auto: true (boolean)
++ exclude_dormants: true (boolean) `Optional` Default true if exclude Dormant Customers
++ exclude_customer_in_previous_campaign_past_days: 7 (number) `Optional` Exclude customers reached in previous campaigns in the last X days
++ exclude_customer_in_previous_campaign_past_hours: 10 (number) `Optional` Exclude customers reached in previous campaigns in the last X hours
++ exclude_customer_in_previous_automated_campaign_past_days: 7 (number) `Optional` Exclude customers reached in automated campaigns in the last X days
++ exclude_customer_in_previous_automated_campaign_past_hours: 10 (number) `Optional` Exclude customers reached in automated campaigns in the last X hours
++ exclude_customer_in_previous_campaign: false (boolean) `Optional` Default false. Exclude customers reached in previous campaigns
++ email_subject:  `email subject` (string)
++ email_body:  `email html content` (string)
++ sms_body: `sms content` (string)
++ push_title: `push title`(string)
++ push_text: `push text` (string)
++ push_link: `push link` (string)
++ delivery_date: `2000-07-01T00:00:00+00:00` (string) `Optional` ISO 8601 date.
++ expiry_date: `2000-08-01T00:00:00+00:00` (string) `Optional` ISO 8601 date.
++ send_to_invalid_phone_number: false (boolean) Required if send_by is 1 or 4
++ include_offer_link_in_sms: false (boolean) Required if send_by is 1 or 4
++ include_referral_link_in_sms: false (boolean) Required if send_by is 1 or 4
++ offers (array)
+    + (object)
+        + id: 123 (number) - Offer ID
+        + type: (string)
++ targeted_customer_criteria (array)
+    + (object)
+        + id: 9 (number) 9 - birthday campaign, 13 - first visit
+        + days: 10 (number)
+
+
+## Error 403 (object)
+
++ message: `This action is unauthorized.` (string)
+
+## Error 400 (object)
+
++ error (object)
+    - status_code: 400 (number)
+    - message: `Bad Request` (string)
+    - description: `Birthday campaign can not combine with other criteria.` (string)
+
+## Error 422 (object)
+
++ name (array)
+    + `The name is required.` (string)
++ send_by (array)
+    + `The send by is required.` (string)

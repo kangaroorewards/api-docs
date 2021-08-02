@@ -85,6 +85,235 @@ Returns a single catalog item.
 + Response 404 (application/json)
     + Attributes (Error Rewards 404)
 
+### Create a reward [POST]
+
+A reward also called redemption catalog can have 3 main types:
+- Free Product type_id: 15
+- Cashback type_id: 16
+- Percentage  type_id: 18
+
+A reward can be for all customers, only for targeted customers, or only for specific tier customers.
+A reward can only avaliable for the specific branches or all branches.
+
+> **NOTE:** Reward images MUST be uploaded first using POST /rewards/images endpoint, before creating a reward
+> Images must be uploaded to Kangaroo Rewards. External images are not allowed
+
+*Body parameters* common for all reward types
+|Name|Type|Description|
+|-----|----|-----------|
+|type_id|integer|`Required` Reward Type. Possible options: `15` - Free Product, `16` - Cashback, `18` - Percentage|
+|shipping_option|integer|Shipping option, only applicable in the ecom branch. Possible options: null, 1 Free shipping, 2 The discount will be applied to shipping, 3 The discount won't be applied to shipping|
+|targeted_flag|integer|`Required` (0,1,2) Default 1 - targeted customers, 0 - available for everyone, 2 - available for tier customers|
+|never_expires_flag|integer|`Optional` Default 0 - expires_at is required, 1 - the reward will never expire|
+|publish_at|string|`Optional` Default current date and time. ISO 8601 date. Example: `2000-07-01T00:00:00+00:00`|
+|expires_at|string|`Required` if never_expires_flag = 0. ISO 8601 date. Example: `2000-07-01T00:00:00+00:00`|
+|redemption_user_tiers|array|`Required` if targeted_flag = 2.|
+|redemption_user_tiers.*.id|integer|`Required` The tier ID.|
+|points|integer|`Required` The points for redeeming this reward.|
+|partner_reward|boolean|This is a Partner Reward or not, only work for the business who enable the partner reward feature.|
+|images|array|`Required` Up to 4 items|
+|images.*.original|string,url|`Required` The uploaded image path, max: 255|
+|images.*.large|string,url|`Required` The uploaded image path, max: 255|
+|images.*.*medium|string,url|`Required` The uploaded image path, max: 255|
+|images.*.thumbnail|string,url|`Required` The uploaded image path, max: 255|
+|available_at_branches|array|`Required` - A list of branches where the reward is available at. At least one branch is required|
+|available_at_branches.*.id|string|`Required` Branch ID|
+|reward_languages|array|`Required` - At least English is required, language_id = 1|
+|reward_languages.*.language_id|integer|`Required` - 1 - English, 2 - French, 3 - Spanish|
+|reward_languages.*.title|string|`Required` - Reward title in that language. max: 255|
+|reward_languages.*.description|string|`Optional` - Reward description in that language. max 500|
+|reward_languages.*.terms_conditions|string|`Optional` - Terms and conditions. max: 1000|
+|reward_languages.*.link|string,url|`Optional` - An external link for reward. max: 100|
+
+
+*Body parameters* specific for reward type is free product only
+
+All common +
+
+|Name|Type|Description|
+|-----|----|-----------|
+|real_value|numeric|`Required.` The free item's amount, it's used as redeeming amount.|
+
+
+*Body parameters* specific for reward type is cashback only
+
+All common +
+
+|Name|Type|Description|
+|-----|----|-----------|
+|amount|numeric|`Required.` The cashback amount, it's used as redeeming amount.|
+|redeem_for_gift_card|boolean|`Required.` Convert this reward to Gift Card.|
+
+
+*Body parameters* specific for reward type is pecentage only
+
+All common +
+
+|Name|Type|Description|
+|-----|----|-----------|
+|discount_value|integer|`Required.` The discount percentage.|
+
+
+Example creating a free product reward
+```
+POST /rewards HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC...
+Accept: application/vnd.kangaroorewards.api.v1+json;
+X-Application-Key: eyXai0XD7SLLzaOeJW...
+Content-Type: application/json
+
+{
+  "type_id": 15,
+  "points": 50,
+  "targeted_flag": 2,
+  "redemption_user_tiers": [
+    {
+      "id": 51
+    },
+    {
+      "id": 52
+    }
+  ],
+  "expires_at": "2020-07-17T18:10:05-00:00",
+  "never_expires_flag": 0,
+  "real_value": 13.99,
+  "reward_languages": [
+    {
+      "language_id": 1,
+      "title": "Free XXX",
+      "description": "Available only for Platinum and Gold customer",
+      "terms_conditions": "",
+      "link": "https://example.com/some-reward"
+    }
+  ],
+  "available_at_branches": [
+    {
+      "id": "11eaa5c938ec36cc9df9b42e99312ac8"
+    },
+    {
+      "id": "12eac6c914dfbc4e8478b42e99312ac5"
+    }
+  ],
+  "images": [
+      {
+        "original": "https://www.kangaroorewards.com/photos/image.png",
+        "large": "https://www.kangaroorewards.com/photos/image1.png",
+        "medium": "https://www.kangaroorewards.com/photos/image2.png",
+        "thumbnail": "https://www.kangaroorewards.com/photos/image3.png"
+      }
+    ]
+}
+```
+
+Example creating a percentage reward
+```
+POST /rewards HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC...
+Accept: application/vnd.kangaroorewards.api.v1+json;
+X-Application-Key: eyXai0XD7SLLzaOeJW...
+Content-Type: application/json
+
+{
+  "type_id": 18,
+  "points": 50,
+  "targeted_flag": 0,
+  "never_expires_flag": 1,
+  "discount_value": 10,
+  "reward_languages": [
+    {
+      "language_id": 1,
+      "title": "10% OFF",
+      "description": "",
+      "terms_conditions": "",
+      "link": "https://example.com/some-reward"
+    }
+  ],
+  "available_at_branches": [
+    {
+      "id": "11eaa5c938ec36cc9df9b42e99312ac8"
+    },
+    {
+      "id": "12eac6c914dfbc4e8478b42e99312ac5"
+    }
+  ],
+  "images": [
+      {
+        "original": "https://www.kangaroorewards.com/photos/image.png",
+        "large": "https://www.kangaroorewards.com/photos/image1.png",
+        "medium": "https://www.kangaroorewards.com/photos/image2.png",
+        "thumbnail": "https://www.kangaroorewards.com/photos/image3.png"
+      }
+    ]
+}
+```
+
+Example creating a cashback reward
+```
+POST /rewards HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC...
+Accept: application/vnd.kangaroorewards.api.v1+json;
+X-Application-Key: eyXai0XD7SLLzaOeJW...
+Content-Type: application/json
+
+{
+  "type_id": 16,
+  "points": 50,
+  "targeted_flag": 1,
+  "never_expires_flag": 1,
+  "amount": 25.00,
+  "redeem_for_gift_card": false,
+  "reward_languages": [
+    {
+      "language_id": 1,
+      "title": "$25 OFF",
+      "description": "",
+      "terms_conditions": "",
+      "link": "https://example.com/some-reward"
+    }
+  ],
+  "available_at_branches": [
+    {
+      "id": "11eaa5c938ec36cc9df9b42e99312ac8"
+    },
+    {
+      "id": "12eac6c914dfbc4e8478b42e99312ac5"
+    }
+  ],
+  "images": [
+      {
+        "original": "https://www.kangaroorewards.com/photos/image.png",
+        "large": "https://www.kangaroorewards.com/photos/image1.png",
+        "medium": "https://www.kangaroorewards.com/photos/image2.png",
+        "thumbnail": "https://www.kangaroorewards.com/photos/image3.png"
+      }
+    ]
+}
+```
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Application-Key: <your_application_key>
+
+    + Attributes (CreateRewardData)
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Reward Base)
+
++ Response 422 (application/json)
+    + Attributes (Reward Error 422)
+
++ Response 403 (application/json)
+    + Attributes (Create Reward Error 403)
+
++ Response 400 (application/json)
+    + Attributes (Create Reward Error 400)
 
 # Data Structures
 
@@ -108,8 +337,62 @@ Returns a single catalog item.
     * title: `$20 Discount` (string)
     * points: 3000 (number)
 
+## CreateRewardData (object)
+
++ type_id: 18 (number) - The reward type ID 15,16,18
++ points: 100 (number) - The points for redeeming this reward
++ shipping_option: 1 (number) - 1 Free shipping, 2 The discount will be applied to shipping, 3 The discount won't be applied to shipping,
++ targeted_flag: 2 (number) - 0 Available for everyone, 1 Targeted, 2 Specific tier
++ redemption_user_tiers (array)
+  + (object)
+      + id: 1238 (number) - Tier id
++ publish_at: `2020-04-01T03:59:59+0000` (string) - When the reward will be published
++ expires_at: `2020-04-01T03:59:59+0000` (string) - When the reward will be expired
++ never_expires_flag: 0 (number) - 1 the reward will never expire, 0 it will expire
++ amount: 0 (number) - Required if type_id is 16, the discount amount for cashback
++ discount_value: 10 (number) - Required if type_id is 18, the discount percentage %
++ real_value: 0 (number) - Required if type_id is 15, the free product's price
++ partner_reward: false (boolean) - When the item is a partner reward
++ redeem_for_gift_card: false (boolean) - Required if type_id is 16, if it's converted to Gift Card
++ reward_languages (array)
+    + (object)
+        + language_id: 1 (number) - Language ID. 1 - English is required
+        + title: `10% off` (string) - max: 255
+        + description: `Enjoy the 10% off` (string) - max: 500
+        + terms_conditions: `Offer terms and conditions here` (string) - max: 1000
+        + link: `https://example.com/some-offer-link` (string) - max: 500
++ images (array)
+    + (object)
+        + original: `https://www.kangaroorewards.com/photos/image.png` (string)
+        + large: `https://www.kangaroorewards.com/photos/image1.png` (string)
+        + medium: `https://www.kangaroorewards.com/photos/image2.png` (string)
+        + thumbnail: `https://www.kangaroorewards.com/photos/image3.png` (string)
++ available_at_branches (array)
+    + (object)
+        + id: 1es8uwrs8sd9fsf9 (string) - Branch ID
+
 ## Error Rewards 404 (object)
 
 + code: `404` (number)
 + error: `Not found` (string)
 + message: `Catalog Item not found` (string)
+
+## Create Reward Error 403 (object)
+
++ message: `This action is unauthorized.` (string)
+
+## Create Reward Error 400 (object)
+
++ error (object)
+    - status_code: 400 (number)
+    - message: `Bad Request` (string)
+    - description: `Expiration date cannot be prior to publish date.` (string)
+
+## Reward Error 422 (object)
+
++ type_id (array)
+    + `Type id is required.` (string)
++ images (array)
+    + `The images may not have more than 4 items.` (string)
++ reward_languages (array)
+    + `Reward languages is required.` (string)
