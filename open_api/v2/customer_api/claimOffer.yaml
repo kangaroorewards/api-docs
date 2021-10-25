@@ -1,0 +1,41 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/offers/{offerId}?intent=get_coupon:
+    patch:
+      summary: |
+        Claim an offer. Once it has been claimed it will
+        be available to be used towards a purchase.
+      operationId: claimOffer
+      tags:
+        - claimOffer
+      consumes:
+        - application/json
+      parameters:
+        - name: offerId
+          in: path
+          type: integer
+          description: The ID of the offer to claim.
+          required: true
+        - name: customerId
+          in: path
+          type: string
+          description: The ID of the offer to claim.
+          required: true
+      responses:
+        "200":
+          description: The users' updated balance.
+          schema:
+            $ref: "schemas/offers/offers.yaml#/definitions/ClaimOfferResponse"

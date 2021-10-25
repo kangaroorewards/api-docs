@@ -1,0 +1,73 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me?include=social_media:
+    get:
+      summary: Get Social Media List
+      operationId: getSocialMedia
+      tags:
+        - socialMedia
+      responses:
+        "200":
+          description: Social media list
+          schema:
+            $ref: '#/definitions/SocialMedia'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  SocialMedia:
+    type: "object"
+    x-model: SocialMediaModel
+    description: Social Media Model containing list of all social media links
+    required:
+    properties:
+      included:
+        description: "Contains all Social media links"
+        $ref: '#/definitions/SocialMediaIncluded'
+  SocialMediaIncluded:
+    type: "object"
+    required:
+      - social_media
+    properties:
+      social_media:
+        description:
+        x-model:
+        $ref: '#/definitions/SocialMediaList'
+  SocialMediaList:
+    type: array
+    items:
+      $ref: '#/definitions/SocialMediaItem'
+  SocialMediaItem:
+    type: "object"
+    x-model: SocialMediaItemModel
+    properties:
+      icon:
+        type: string
+      url:
+        type: string
+  Error:
+    type: "object"
+    x-error: true
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string

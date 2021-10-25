@@ -1,0 +1,70 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me:
+    patch:
+      summary: Update a users' profile
+      operationId: updateUserProfile
+      consumes:
+        - application/x-www-form-urlencoded
+      tags:
+        - userProfileUpdate
+      parameters:
+        - in: formData
+          name: first_name
+          description: The users' updated first name
+          required: false
+          type: string
+        - in: formData
+          name: last_name
+          description: The users' updated last name
+          required: false
+          type: string
+        - in: formData
+          name: birth_date
+          description: |
+            The users' updated date of birth. The date must be
+            formated as "1990-11-25"
+          required: false
+          type: string
+        - in: formData
+          name: language
+          description: |
+            The users' update language.
+            Must follow ISO 639-1 format (eg. en, fr, es)
+          required: false
+          type: string
+        - in: formData
+          name: gender
+          description: |
+            The users' updated gender. Current accepted values are
+            "male" and "female"
+          required: false
+          type: string
+        - in: formData
+          name: profile_photo
+          description: |
+            A url to the users' updated profile photo. If you'd like
+            to upload the photo to Kangaroo's server beforehand, use
+            the userProfilePhotoUpload api - it will return a url that can
+            be used in this api.
+          required: false
+          type: string
+          default: "facebook_share"
+      responses:
+        "200":
+          description: Updated user profile data
+          schema:
+            $ref: "schemas/users/userProfile.yaml#/definitions/UserProfile"

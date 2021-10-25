@@ -1,0 +1,145 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me?include=product_rewards&relationships=product_rewards.product:
+    get:
+      summary: Get user A la carte list
+      operationId: getAlaCarteProducts
+      tags:
+        - alaCarteProducts
+      responses:
+        "200":
+          description: User A la Carte Products
+          schema:
+            $ref: '#/definitions/AlaCarteProducts'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  AlaCarteProducts:
+    type: "object"
+    x-model: AlaCarteProductsModel
+    description: User A la carte products model class containing user A la carte list
+    required:
+      - data
+      - included
+    properties:
+      data:
+        description: "Contains all user data"
+        $ref: "schemas/users/userProfile.yaml#/definitions/UserProfileData"
+      included:
+        description: "Contains all A la carte items"
+        $ref: '#/definitions/UserAlaCarteIncluded'
+  UserAlaCarteIncluded:
+    type: "object"
+    required:
+      - product_rewards
+    properties:
+      product_rewards:
+        description:
+        x-model:
+        $ref: '#/definitions/AlaCarteList'
+  AlaCarteList:
+    type: array
+    items:
+      $ref: '#/definitions/AlaCarteItem'
+  AlaCarteItem:
+    type: "object"
+    x-model: AlaCarteItemModel
+    properties:
+      id:
+        type: integer
+      points:
+        type: integer
+      product:
+        description:
+        $ref: '#/definitions/Product'
+  Product:
+    type: "object"
+    x-model: ProductItemModel
+    properties:
+      id:
+        type: integer
+      title:
+        type: string
+      description:
+        type: string
+      images:
+        type: array
+        items:
+          $ref: '#/definitions/Images'
+      product_sku:
+        type: string
+      actual_price:
+        type: float
+      real_price:
+        type: float
+      terms_conditions:
+        type: string
+      link:
+        type: string
+      product_languages:
+        type: array
+        items:
+          $ref: '#/definitions/Languages'
+  Images:
+    type: object
+    properties:
+      path:
+        type: string
+      large:
+        type: string
+      medium:
+        type: string
+      thumbnail:
+        type: string
+      default:
+        type: boolean
+  Languages:
+    type: object
+    properties:
+      language_id:
+        type: integer
+      title:
+        type: string
+      description:
+        type: string
+      language:
+        type: object
+        x-model:
+        $ref: '#/definitions/Language'
+  Language:
+    type: object
+    properties:
+      id:
+        type: integer
+      abbreviation:
+        type: string
+      name:
+        type: string
+
+  Error:
+    type: "object"
+    x-error: true
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string

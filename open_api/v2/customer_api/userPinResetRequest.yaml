@@ -1,0 +1,71 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/pincode/reset-request:
+    post:
+      summary: |
+        Request a PIN reset. Either a phone number or email address is required
+        If successful, a verification code will be sent by either email or SMS message.
+      operationId: requestPinReset
+      consumes:
+        - application/x-www-form-urlencoded
+      tags:
+        - userPinResetRequest
+      parameters:
+        - in: formData
+          name: email
+          required: false
+          type: string
+        - in: formData
+          name: phone
+          required: false
+          type: string
+        - in: formData
+          name: country_code
+          required: false
+          type: string
+        - in: formData
+          name: mode
+          required: true
+          default: "verification_code"
+          type: string
+      responses:
+        "200":
+          description: |
+            User PIN reset request.
+            If successful, a verification code will be sent by either email or SMS message
+          schema:
+            $ref: '#/definitions/UserPinResetRequest'
+definitions:
+  UserPinResetRequest:
+    type: "object"
+    x-model: UserPinResetRequest
+    description: User PIN reset request status
+    required:
+      - status_code
+      - message
+      - description
+    properties:
+      status_code:
+        description: |
+          The response code for the pin reset request.
+          Anything within the 200 range indicates a success
+        type: integer
+      message:
+        description: The message and status returned by the pin reset request
+        type: string
+      description:
+        description: A description of the pin reset request
+        type: string

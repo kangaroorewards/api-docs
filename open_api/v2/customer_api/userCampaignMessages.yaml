@@ -1,0 +1,35 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/businesses/{businessId}/campaign-messages?relationships=campaign,message:
+    get:
+      summary: |
+        Get this users campaign messages. Campaign messages are
+        messages sent to this user from the business using the
+        marketing engine. These might also be delivered by sms,
+        email, or push notifications.
+      operationId: getCampaignMessages
+      tags:
+        - campaignMessages
+      parameters:
+        - in: path
+          name: businessId
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Campaign messages data
+          schema:
+            $ref: "schemas/messages/campaignMessages.yaml#/definitions/CampaignMessagesModel"

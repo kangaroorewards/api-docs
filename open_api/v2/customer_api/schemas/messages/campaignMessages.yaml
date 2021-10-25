@@ -1,0 +1,72 @@
+definitions:
+  CampaignMessagesModel:
+    type: "object"
+    x-model: CampaignMessagesModel
+    description: Contains a list of campaign messages sent to this user
+    required:
+      - data
+    properties:
+      data:
+        description: List of campaign messages.
+        type: array
+        items:
+          $ref: '#/definitions/CampaignMessage'
+  CampaignMessage:
+    type: "object"
+    description: |
+      Campaign Message. These are sent to the user by
+      the business through Kangaroo's Marketing module.
+    required:
+      - id
+    properties:
+      id:
+        type: string
+        description: Unique campaign ID.
+      cell_email:
+        type: integer
+        description: The original delivery method for this campaign
+      subject:
+        type: string
+        description: The title for this campaign.
+      sent_at:
+        type: string
+        description: The original send date of this campaign.
+      message:
+        type: string
+        description: A short / simple message for this campaign.
+      campaign:
+        type: object
+        $ref: '#/definitions/Campaign'
+  Campaign:
+    type: object
+    description: |
+      The core campaign object for this campaign. This might
+      include data such as the original html content of the campaign,
+      sms or push data, or offers and rewards attached to this campaign.
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        format: int64
+      subject:
+        type: string
+      html_content:
+        type: string
+      plain_content:
+        type: string
+      push_title:
+        type: string
+      push_body:
+        type: string
+      push_link:
+        type: string
+      push_image:
+        type: string
+      offers:
+        type: array
+        items:
+          $ref: "../../schemas/offers/offers.yaml#/definitions/Offer"
+      business:
+        type: object
+        $ref: "../../schemas/business/business.yaml#/definitions/BusinessData"

@@ -1,0 +1,52 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/offers/{offerId}/actions:
+    post:
+      summary: Notify Kangaroo that an offer has been shared to facebook
+      operationId: postOfferFacebookShare
+      consumes:
+        - application/x-www-form-urlencoded
+      tags:
+        - offerFacebookShare
+      parameters:
+        - in: path
+          name: offerId
+          required: true
+          type: string
+        - in: query
+          name: include
+          required: true
+          default: balance
+          type: string
+        - in: formData
+          name: facebook_user_id
+          required: true
+          type: string
+        - in: formData
+          name: type
+          type: string
+          required: true
+          default: "facebook_share"
+        - in: formData
+          name: friends_count
+          type: string
+          required: true
+          default: "1"
+      responses:
+        "200":
+          description: Updated user profile data
+          schema:
+            $ref: "schemas/users/userProfile.yaml#/definitions/UserProfile"

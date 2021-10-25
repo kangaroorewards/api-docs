@@ -1,0 +1,15 @@
+type: object
+required:
+  - id
+properties:
+  id:
+    type: integer
+    description: The Kangaroo ID of this language.
+  abbreviation:
+    description: |
+      A two letter abbreviation of this language.
+      Follows ISO standards (en, fr, es)
+    type: string
+  name:
+    description: The full name of this language (English, French, Spanish)
+    type: string

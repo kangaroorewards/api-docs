@@ -1,0 +1,41 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me:
+    patch:
+      summary: Update a users' PIN
+      operationId: updatePin
+      tags:
+        - userPinUpdate
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: updatePinRequest
+          description: The new PIN request
+          required: true
+          schema:
+            type: object
+            required:
+              - pin_code
+            properties:
+              pin_code:
+                type: string
+                description: The new PIN
+      responses:
+        "200":
+          description: The users' updated balance.
+          schema:
+            $ref: "schemas/users/userProfile.yaml#/definitions/UserProfile"

@@ -1,0 +1,34 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/messages/{recallId}/?intent=recall_giftcard?relationships=sender,receiver,gift_card_queue,offer:
+    patch:
+      summary: |
+        Recall a transfer. This could be a points transfer,
+        e-wallet transfer, or a gift card
+      operationId: recallTransfer
+      tags:
+        - transferRecall
+      parameters:
+        - in: path
+          name: recallId
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Transfer recall data
+          schema:
+            $ref: "schemas/messages/transferMessages.yaml#/definitions/TransferRecallResultModel"
+

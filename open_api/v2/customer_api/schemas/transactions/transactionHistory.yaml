@@ -1,0 +1,43 @@
+definitions:
+  UserTransactionHistory:
+    type: "object"
+    x-model: UserTransactionHistoryModel
+    description: User Profile model class containing user data
+    required:
+      - data
+    properties:
+      data:
+        description: "Contains user transaction history."
+        type: array
+        items:
+          $ref: '#/definitions/Transaction'
+  Transaction:
+    type: "object"
+    description: Transaction model containting transaction details
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Unique transaction ID.
+      amount:
+        type: number
+        format: double
+        description: The amount in $ for this transaction.
+      points:
+        type: number
+        format: double
+        description: The amount in points for this transaction.
+      name:
+        type: string
+        description: The transaction label.
+      transaction_type:
+        type: integer
+        description: The transaction type ID.
+      created_at:
+        type: string
+        description: Date the transaction was created.
+      updated_at:
+        type: string
+        description: Date the transaction was last updated.

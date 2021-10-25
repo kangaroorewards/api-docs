@@ -1,0 +1,26 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /countries:
+    get:
+      summary: Get the list of countries supported by Kangaroo
+      operationId: getCountries
+      tags:
+        - countries
+      responses:
+        "200":
+          description: Country list
+          schema:
+            $ref: "schemas/countries/countries.yaml#/definitions/Countries"

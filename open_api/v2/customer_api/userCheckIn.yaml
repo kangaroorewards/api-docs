@@ -1,0 +1,45 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/transactions:
+    post:
+      summary: |
+        Check in with a business. The user may be rewarded for this action
+        according to rules set in the business portal on Kangaroo.
+      operationId: userCheckIn
+      tags:
+        - userCheckIn
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: checkInRequest
+          description: The check in request.
+          required: true
+          schema:
+            type: object
+            required:
+              - intent
+              - branch_id
+            properties:
+              branch_id:
+                type: string
+              intent:
+                type: string
+                default: "check_in"
+      responses:
+        "200":
+          description: |
+            The check in request response. Doesn't contain any data.

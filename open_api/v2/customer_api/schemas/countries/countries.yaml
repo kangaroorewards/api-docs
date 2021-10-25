@@ -1,0 +1,39 @@
+definitions:
+  Countries:
+    type: "object"
+    x-model: Countries
+    description: A list of countries supported by Kangaroo
+    required:
+      - data
+    properties:
+      data:
+        description: A list of countries supported by Kangaroo
+        type: array
+        items:
+          $ref: '#/definitions/Country'
+  Country:
+    type: "object"
+    description: A country model
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        description: Unique country ID.
+      name:
+        type: string
+        description: The name of this country
+      code:
+        type: string
+        description: |
+          The two character country code for this country.
+          Follows ISO standards.
+      code_iso3:
+        type: string
+        description: |
+          The three character country code for this country.
+          Follows ISO standards.
+      phone_code:
+        type: integer
+        description: |
+          The international phoen code for this country.

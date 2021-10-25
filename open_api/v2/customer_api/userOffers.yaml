@@ -1,0 +1,26 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/offers:
+    get:
+      summary: Get a list of offers available to this user.
+      operationId: getUserOffers
+      tags:
+        - userOffers
+      responses:
+        "200":
+          description: User offer list
+          schema:
+            $ref: 'schemas/offers/offers.yaml#/definitions/OffersResponse'

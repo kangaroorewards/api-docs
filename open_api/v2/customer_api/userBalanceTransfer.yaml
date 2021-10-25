@@ -1,0 +1,87 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/transactions:
+    post:
+      summary: |
+        Transfer points or e-wallet balance to another users
+        account.
+      operationId: transfer
+      tags:
+        - balanceTransfer
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: transferRequest
+          description: The transfer request.
+          required: true
+          schema:
+            type: object
+            $ref: '#/definitions/Transfer'
+      responses:
+        "200":
+          description: The users' updated balance.
+definitions:
+  Transfer:
+    type: "object"
+    x-model: TransferModel
+    required:
+      - intent
+      - recipientData
+      - senderData
+      - businessId
+      - language
+    properties:
+      intent:
+        type: string
+        description: |
+          The transfer intent for this transfer. This can be transfer_amount
+          or transfer_points
+      points:
+        type: integer
+        format: int64
+      amount:
+        type: number
+        format: double
+      language:
+        type: string
+        description: |
+          The two character language code of the language that this
+          transfer should be sent in.
+      to:
+        type: object
+        required:
+          - name
+        properties:
+          name:
+            type: string
+      from:
+        type: object
+        description: |
+          The recipient data for this transfer. Either a phone number
+          or an email address is required. If a phone number is used,
+          the two character ISO country code must be supplied as well.
+        required:
+          - name
+        properties:
+          name:
+            type: string
+          phone:
+            type: string
+          country_code:
+            type: string
+          email:
+            type: string

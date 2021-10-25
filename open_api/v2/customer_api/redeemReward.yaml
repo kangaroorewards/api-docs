@@ -1,0 +1,98 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/transactions:
+    post:
+      summary: |
+        Redeem a set of rewards. This action costs points which will be
+        deducted from the users' balance. Only Partner Rewards can be redeemed
+        from the customer api.
+      operationId: redeemReward
+      tags:
+        - redeemRewards
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: redeemRequest
+          description: The rewards to redeem.
+          required: true
+          schema:
+            type: object
+            required:
+              - intent
+              - branch_id
+              - catalog_items
+            properties:
+              branch_id:
+                type: string
+              catalog_items:
+                type: array
+                description: A list of rewards to redeem.
+                items:
+                  $ref: '#/definitions/Redemption'
+              intent:
+                type: string
+                default: "redeem"
+      responses:
+        "200":
+          description: The users' updated balance.
+          schema:
+            $ref: '#/definitions/RedeemResponse'
+definitions:
+  Redemption:
+    type: "object"
+    x-model: RedemptionModel
+    required:
+      - id
+      - quantity
+    properties:
+      id:
+        type: integer
+        description: A unique ID identifying this reward.
+      quantity:
+        type: integer
+        default: 0
+        description: The amount of times to redeem this reward
+  RedeemResponse:
+    type: object
+    x-model: RedeemResponseModel
+    required:
+      - data
+    properties:
+      data:
+        $ref: '#/definitions/RedeemResponseData'
+  RedeemResponseData:
+    type: "object"
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+      amount:
+        type: number
+        format: double
+      points:
+        type: integer
+        format: int64
+      name:
+        type: string
+      created_at:
+        type: string
+      updated_at:
+        type: string
+      customer:
+        type: object
+        $ref: "schemas/users/userProfile.yaml#/definitions/UserProfile"

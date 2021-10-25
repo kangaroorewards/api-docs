@@ -1,0 +1,26 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/transactions:
+    get:
+      summary: Get transaction history this user.
+      operationId: getUserTransactionHistory
+      tags:
+        - userTransactionHistory
+      responses:
+        "200":
+          description: User transaction history data
+          schema:
+            $ref: "schemas/transactions/transactionHistory.yaml#/definitions/UserTransactionHistory"

@@ -1,0 +1,33 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/businesses/{businessId}/messages?relationships=gift_card_queue,offer:
+    get:
+      summary: |
+        Get this users transfer messages. Transfer messages are
+        points or e-wallet transfers from other users.
+      operationId: getTransferMessages
+      tags:
+        - transferMessages
+      parameters:
+        - in: path
+          name: businessId
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Transfer messages data
+          schema:
+            $ref: "schemas/messages/transferMessages.yaml#/definitions/TransferMessagesModel"

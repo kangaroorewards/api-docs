@@ -1,0 +1,26 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me:
+    get:
+      summary: Get user profile data for this user.
+      operationId: getUserProfile
+      tags:
+        - userProfile
+      responses:
+        "200":
+          description: User profile data
+          schema:
+            $ref: "schemas/users/userProfile.yaml#/definitions/UserProfile"

@@ -1,0 +1,167 @@
+definitions:
+  Business:
+    type: "object"
+    x-model: Business
+    description: |
+      Details about a business. Basic information is in
+      main data field, while information on the business'
+      branches are in the 'include' parameter
+    required:
+      - data
+      - include
+    properties:
+      data:
+        description: Details about a business
+        $ref: '#/definitions/BusinessData'
+      include:
+        description: Details about a business' branches
+        $ref: '#/definitions/BusinessBranchesData'
+  BusinessData:
+    type: "object"
+    description: User Profile model class containing user data
+    required:
+      - id
+    properties:
+      id:
+        type: string
+        description: Unique business ID.
+      name:
+        type: string
+        description: The name of this business
+      loyalty_type:
+        type: string
+        description: |
+          The manner in which this business rewards its
+          customers. This can be by purchase amount of by visit
+          to the store
+      conglomerate:
+        type: string
+        description: |
+          Whether this is a conglomerate business. Conglomerate
+          businesses are umbrellas for multiple business' in Kangaroo
+      white_label:
+        type: string
+        description: |
+          Whether this is a white label business. White label
+          business' don't appear in the Kangaroo Mobile Customer app,
+          as they usually have their own app.
+      about:
+        type: string
+        description: General about text for the business
+      logo:
+        type: object
+        $ref: './../images/image.yaml'
+      logo_transparent_background:
+        type: object
+        $ref: './../images/image.yaml'
+      cover_photo:
+        type: object
+        $ref: './../images/image.yaml'
+      category:
+        type: object
+        $ref: "#/definitions/BusinessCategory"
+  BusinessCategory:
+    type: "object"
+    description: |
+      Details about this business' category. This can
+      be something like cafe, boutique, etc...
+    required:
+      - id
+    properties:
+      id:
+        type: stirng
+        description: Unique category ID
+      name:
+        type: string
+        description: Name of this category
+      icon:
+        type: string
+        description: Url to this category's icon
+      code:
+        type: string
+        description: Unique ategory code for this category
+  BusinessSettings:
+    type: "object"
+    description: |
+      Details about this business' settings and rules
+    properties:
+      currency:
+        type: object
+        description: |
+          Details about the currency which this business uses.
+        properties:
+          name:
+            type: string
+            description: |
+              The name of this currency, for example Canadian Dollars
+          symbol:
+            type: string
+            description: The currency symbol for this currency
+          iso_code:
+            type: string
+            description: The ISO code for this currency
+          denominator:
+            type: integer
+            description: The denomination used for this currency
+      time_zone:
+        type: string
+        description: The timezone used by this business
+  BusinessBranchesData:
+    type: "object"
+    required:
+      - branches
+    properties:
+      branches:
+        type: array
+        items:
+          $ref: "#/definitions/Branch"
+  Branch:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Unique ID for this branch
+      name:
+        type: string
+        description: The name of this branch
+      web_site:
+        type: string
+        description: The website for this branch
+      phone:
+        type: object
+        properties:
+          number:
+            type: string
+          country_code:
+            type: string
+          national_format:
+            type: string
+          intl_format:
+            type: string
+      logo:
+        type: object
+        $ref: './../images/image.yaml'
+      cover_photo:
+        type: object
+        $ref: './../images/image.yaml'
+      address:
+        type: object
+        properties:
+          formatted:
+            type: string
+          street:
+            type: string
+          city:
+            type: string
+          region:
+            type: string
+          country:
+            type: string
+          lat:
+            type: number
+            format: float
+          long:
+            type: number
+            format: float
+        virtual_branch_flag:
+          type: boolean
