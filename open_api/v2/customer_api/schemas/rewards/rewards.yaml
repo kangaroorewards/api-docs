@@ -1,7 +1,7 @@
 definitions:
   RewardsResponse:
     type: "object"
-    x-model: generated.models.UserRewardsModel
+    x-model: UserRewardsModel
     required:
       - data
     properties:
