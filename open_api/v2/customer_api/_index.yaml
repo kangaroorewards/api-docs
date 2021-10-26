@@ -1,0 +1,162 @@
+# This is a dictionary of all endpoints used by the code generator
+# All api spec files must be represented here as follows:
+#
+# "path" value is replaced "tags" value in the original spec
+# "tags" parameter must have a single value of "core"
+# This file will be used to generate code whenever all apis must be
+# processed at once
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api Dictionary
+  license:
+    name: MIT
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  business:
+    get:
+      x-file: business.yaml
+      operationId: getBusiness
+      tags:
+        - core
+  claimOffer:
+    patch:
+      x-file: claimOffer.yaml
+      operationId: claimOffer
+      tags:
+        - core
+  countries:
+    get:
+      x-file: countries.yaml
+      operationId: getCountries
+      tags:
+        - core
+  frequentBuyer:
+    get:
+      x-file: frequentBuyer.yaml
+      operationId: getFrequentBuyer
+      tags:
+        - core
+  offerFacebookShare:
+    post:
+      x-file: postOfferFacebookShare.yaml
+      operationId: postOfferFacebookShare
+      tags:
+        - core
+  redeemRewards:
+    post:
+      x-file: redeemReward.yaml
+      operationId: redeemReward
+      tags:
+        - core
+  socialMedia:
+    get:
+      x-file: socialMedia.yaml
+      operationId: getSocialMedia
+      tags:
+        - core
+  alaCarteProducts:
+    get:
+      x-file: userAlaCarte.yaml
+      operationId: getAlaCarteProducts
+      tags:
+        - core
+  balanceTransfer:
+    post:
+      x-file: userBalanceTransfer.yaml
+      operationId: transfer
+      tags:
+        - core
+  campaignMessages:
+    get:
+      x-file: userCampaignMessages.yaml
+      operationId: getCampaignMessages
+      tags:
+        - core
+  userCheckIn:
+    post:
+      x-file: userCheckIn.yaml
+      operationId: userCheckIn
+      tags:
+        - core
+  updateNotificationPreferences:
+    put:
+      x-file: userNotificationPreferencesUpdate.yaml
+      operationId: updateNotificationPreferences
+      tags:
+        - core
+  userOffers:
+    get:
+      x-file: userOffers.yaml
+      operationId: getUserOffers
+      tags:
+        - core
+  userPinResetRequest:
+    post:
+      x-file: userPinResetRequest.yaml
+      operationId: requestPinReset
+      tags:
+        - core
+  userPinReset:
+    post:
+      x-file: userPinResetWithVerificationCode.yaml
+      operationId: requestPinReset
+      tags:
+        - core
+  userPinUpdate:
+    patch:
+      x-file: userPinUpdate.yaml
+      operationId: updatePin
+      tags:
+        - core
+  userProducts:
+    get:
+      x-file: userProducts.yaml
+      operationId: getUserProducts
+      tags:
+        - core
+  userProfile:
+    get:
+      x-file: userProfile.yaml
+      operationId: getUserProfile
+      tags:
+        - core
+  userProfileUpdate:
+    patch:
+      x-file: userProfileUpdate.yaml
+      operationId: updateUserProfile
+      tags:
+        - core
+  userRegistration:
+    post:
+      x-file: userRegistration.yaml
+      operationId: createAccount
+      tags:
+        - core
+  userRewards:
+    get:
+      x-file: userRewards.yaml
+      operationId: getUserRewards
+      tags:
+        - core
+  userTransactionHistory:
+    get:
+      x-file: userTransactionHistory.yaml
+      operationId: getUserTransactionHistory
+      tags:
+        - core
+  transferMessages:
+    get:
+      x-file: userTransferMessages.yaml
+      operationId: getTransferMessages
+      tags:
+        - core
+  transferRecall:
+    patch:
+      x-file: userTransferRecall.yaml
+      operationId: recallTransfer
+      tags:
+        - core
