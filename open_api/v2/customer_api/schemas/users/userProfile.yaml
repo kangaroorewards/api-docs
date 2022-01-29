@@ -9,6 +9,9 @@ definitions:
       data:
         description: "Contains all user profile data"
         $ref: '#/definitions/UserProfileData'
+      included:
+        description: "Contains user balance data"
+        $ref: '#/definitions/UserProfileInclude'
   UserProfileData:
     type: "object"
     description: User Profile model class containing user data
@@ -63,3 +66,24 @@ definitions:
       phone_verified:
         type: boolean
         description: Denotes whether the phone number for this user has been verified
+  UserProfileInclude:
+    type: "object"
+    description: Extra user profile data
+    required:
+      - balance
+    properties:
+      balance:
+        description:
+        x-model:
+        $ref: '#/definitions/UserProfileBalanceData'
+  UserProfileBalanceData:
+    type: "object"
+    description: User Profile balance data
+    properties:
+      points:
+        type: integer
+        format: int64
+        description: The number of points this user currently has.
+      giftcard:
+        type: double
+        description: The amount of store credit in the users' e-wallet.
