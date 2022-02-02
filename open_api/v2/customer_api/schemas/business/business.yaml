@@ -6,9 +6,6 @@ definitions:
       Details about a business. Basic information is in
       main data field, while information on the business'
       branches are in the 'include' parameter
-    required:
-      - data
-      - include
     properties:
       data:
         description: Details about a business
@@ -19,8 +16,6 @@ definitions:
   BusinessData:
     type: "object"
     description: User Profile model class containing user data
-    required:
-      - id
     properties:
       id:
         type: string
@@ -65,8 +60,6 @@ definitions:
     description: |
       Details about this business' category. This can
       be something like cafe, boutique, etc...
-    required:
-      - id
     properties:
       id:
         type: stirng
@@ -108,8 +101,6 @@ definitions:
         description: The timezone used by this business
   BusinessBranchesData:
     type: "object"
-    required:
-      - branches
     properties:
       branches:
         type: array

@@ -3,8 +3,6 @@ definitions:
     type: object
     x-model: BannersModel
     description: Business banners. Used to display promotional material.
-    required:
-      - data
     properties:
       data:
         type: array

@@ -3,8 +3,6 @@ definitions:
     type: "object"
     x-model: CampaignMessagesModel
     description: Contains a list of campaign messages sent to this user
-    required:
-      - data
     properties:
       data:
         description: List of campaign messages.
@@ -16,8 +14,6 @@ definitions:
     description: |
       Campaign Message. These are sent to the user by
       the business through Kangaroo's Marketing module.
-    required:
-      - id
     properties:
       id:
         type: string
@@ -43,8 +39,6 @@ definitions:
       The core campaign object for this campaign. This might
       include data such as the original html content of the campaign,
       sms or push data, or offers and rewards attached to this campaign.
-    required:
-      - id
     properties:
       id:
         type: integer

@@ -3,8 +3,6 @@ definitions:
     type: "object"
     x-model: TransferMessagesModel
     description: Contains a list of transfer messages sent to this user
-    required:
-      - data
     properties:
       data:
         description: List of transfer messages.
@@ -15,8 +13,6 @@ definitions:
     type: object
     x-model: TransferRecallResultModel
     description: Contains the result of a recalled transfer.
-    required:
-      - data
     properties:
       data:
         type: object
@@ -27,8 +23,6 @@ definitions:
       Transfer Message. These are sent to the user by
       other users. They can be points or e-wallet transfers or
       gift cards (which is deposited into the users' e-wallet)
-    required:
-      - id
     properties:
       id:
         type: integer

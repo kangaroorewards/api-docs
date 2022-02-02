@@ -3,8 +3,6 @@ definitions:
     type: "object"
     x-model: UserProfileModel
     description: User Profile model class containing user data
-    required:
-      - data
     properties:
       data:
         description: "Contains all user profile data"

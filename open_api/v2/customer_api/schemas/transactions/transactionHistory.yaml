@@ -3,8 +3,6 @@ definitions:
     type: "object"
     x-model: UserTransactionHistoryModel
     description: User Profile model class containing user data
-    required:
-      - data
     properties:
       data:
         description: "Contains user transaction history."
@@ -14,8 +12,6 @@ definitions:
   Transaction:
     type: "object"
     description: Transaction model containting transaction details
-    required:
-      - id
     properties:
       id:
         type: integer

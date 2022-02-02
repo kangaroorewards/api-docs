@@ -3,8 +3,6 @@ definitions:
     type: "object"
     x-model: Countries
     description: A list of countries supported by Kangaroo
-    required:
-      - data
     properties:
       data:
         description: A list of countries supported by Kangaroo
@@ -14,8 +12,6 @@ definitions:
   Country:
     type: "object"
     description: A country model
-    required:
-      - id
     properties:
       id:
         type: integer

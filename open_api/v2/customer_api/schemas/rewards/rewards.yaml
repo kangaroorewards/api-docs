@@ -2,8 +2,6 @@ definitions:
   RewardsResponse:
     type: "object"
     x-model: UserRewardsModel
-    required:
-      - data
     properties:
       data:
         description: "Contains a list of all rewards available to this user"
@@ -11,8 +9,6 @@ definitions:
         $ref: '#/definitions/UserRewardsData'
   UserRewardsData:
     type: "object"
-    required:
-      - catalog_items
     properties:
       catalog_items:
         description: "Contains a list of all rewards available to this user"
@@ -25,8 +21,6 @@ definitions:
   Reward:
     type: "object"
     x-model: RewardModel
-    required:
-      - id
     properties:
       id:
         type: integer
@@ -77,8 +71,6 @@ definitions:
           $ref: '#/definitions/RewardTranslation'
   RewardTranslation:
     type: object
-    required:
-      - id
     properties:
       id:
         type: integer

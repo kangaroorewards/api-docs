@@ -3,9 +3,6 @@ definitions:
     type: "object"
     x-model: UserProductsModel
     description: User Product model class containing user product list
-    required:
-      - data
-      - included
     properties:
       data:
         description: "Contains all user data"
@@ -15,8 +12,6 @@ definitions:
         $ref: '#/definitions/UserProductsIncluded'
   UserProductsIncluded:
     type: "object"
-    required:
-      - products
     properties:
       products:
         description:
@@ -85,9 +80,6 @@ definitions:
   Error:
     type: "object"
     x-error: true
-    required:
-      - code
-      - message
     properties:
       code:
         type: integer
@@ -98,9 +90,6 @@ definitions:
     type: "object"
     x-model: AlaCarteProductsModel
     description: User A la carte products model class containing user A la carte list
-    required:
-      - data
-      - included
     properties:
       data:
         description: "Contains all user data"
@@ -110,8 +99,6 @@ definitions:
         $ref: '#/definitions/UserAlaCarteIncluded'
   UserAlaCarteIncluded:
     type: "object"
-    required:
-      - product_rewards
     properties:
       product_rewards:
         description:

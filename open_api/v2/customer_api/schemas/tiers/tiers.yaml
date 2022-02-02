@@ -4,8 +4,6 @@ definitions:
     x-model: UserProfileWithTierProgram
     description: |
       User Profile model class containing user data and tier program data
-    required:
-      - data
     properties:
       data:
         description: "Contains all user profile data"
@@ -21,8 +19,6 @@ definitions:
       activated their tier program. By acquire points, making purchases,
       and visiting the business, the user can be rewarded with
       different tier levels.
-    required:
-      - tiers
     properties:
       tiers:
         description: |
