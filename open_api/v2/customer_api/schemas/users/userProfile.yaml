@@ -14,6 +14,7 @@ definitions:
         $ref: '#/definitions/UserProfileInclude'
   UserProfileData:
     type: "object"
+    x-model: UserProfileDataModel
     description: User Profile model class containing user data
     required:
       - id
