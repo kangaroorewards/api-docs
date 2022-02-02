@@ -1,0 +1,40 @@
+definitions:
+  Banners:
+    type: object
+    x-model: BannersModel
+    description: Business banners. Used to display promotional material.
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/Banner'
+  Banner:
+    type: object
+    description: A business banner.
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Unique banner id.
+      type:
+        type: integer
+        description: The banner type.
+      image_path:
+        type: string
+        description: Phone number associated with this user.
+      link:
+        type: string
+        description: First name associated with this user.
+      created_at:
+        type: string
+        description: Last name associated with this user.
+      published_at:
+        type: string
+        description: Unique QR code identifying this user.
+      expires_at:
+        type: string
+        description: Gender associated with this user.
+      language:
+        $ref: './../languages/language.yaml'

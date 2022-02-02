@@ -124,6 +124,18 @@ paths:
       operationId: getUserProfile
       tags:
         - core
+  tiers:
+    get:
+      x-file: tiers.yaml
+      operationId: getTiers
+      tags:
+        - core
+  banners:
+    get:
+      x-file: banners.yaml
+      operationId: getBanners
+      tags:
+        - core
   userProfileUpdate:
     patch:
       x-file: userProfileUpdate.yaml

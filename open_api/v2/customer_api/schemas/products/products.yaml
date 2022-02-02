@@ -81,16 +81,7 @@ definitions:
       language:
         type: object
         x-model:
-        $ref: '#/definitions/Language'
-  Language:
-    type: object
-    properties:
-      id:
-        type: integer
-      abbreviation:
-        type: string
-      name:
-        type: string
+        $ref: './../languages/language.yaml'
   Error:
     type: "object"
     x-error: true

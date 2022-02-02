@@ -1,0 +1,36 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me?include=tiers&relationships=tier_levels:
+    get:
+      summary: |
+        Acquires information about the tier program.
+        Users can move through different tiers if a business has
+        activated their tier program. By acquire points, making purchases,
+        and visiting the business, the user can be rewarded with
+        different tier levels.
+      operationId: getTiers
+      tags:
+        - tiers
+      responses:
+        "200":
+          description: |
+            Information about the tier program.
+            Users can move through different tiers if a business has
+            activated their tier program. By acquire points, making purchases,
+            and visiting the business, the user can be rewarded with
+            different tier levels.
+          schema:
+            $ref: "schemas/tiers/tiers.yaml#/definitions/UserProfileWithTierProgram"

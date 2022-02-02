@@ -1,0 +1,136 @@
+definitions:
+  UserProfileWithTierProgram:
+    type: "object"
+    x-model: UserProfileWithTierProgram
+    description: |
+      User Profile model class containing user data and tier program data
+    required:
+      - data
+    properties:
+      data:
+        description: "Contains all user profile data"
+        $ref: "../users/userProfile.yaml#/definitions/UserProfileData"
+      included:
+        description: "Contains user balance data"
+        $ref: '#/definitions/TierProgramInclude'
+  TierProgramInclude:
+    type: "object"
+    description: |
+      Information about the tier program.
+      Users can move through different tiers if a business has
+      activated their tier program. By acquire points, making purchases,
+      and visiting the business, the user can be rewarded with
+      different tier levels.
+    required:
+      - tiers
+    properties:
+      tiers:
+        description: |
+      Information about the tier program.
+      Users can move through different tiers if a business has
+      activated their tier program. By acquire points, making purchases,
+      and visiting the business, the user can be rewarded with
+      different tier levels.
+        x-model:
+        $ref: '#/definitions/Tiers'
+  Tiers:
+    type: "object"
+    description: |
+      Information about the tier program.
+      Users can move through different tiers if a business has
+      activated their tier program. By acquire points, making purchases,
+      and visiting the business, the user can be rewarded with
+      different tier levels.
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: The ID for this tier program.
+      tier_sequence:
+        type: array
+        items:
+          type: integer
+        description: The sequence for this tier program.
+      tier_relations:
+        type: integer
+      reset_type:
+        type: integer
+      resset_period_month:
+        type: integer
+        description: The month in which this tier program will reset.
+      base_previous_period:
+        type: integer
+      enabled:
+        type: boolean
+        description: Whether this tier program is currently enabled or disabled.
+      tier_levels:
+        type: array
+        items:
+          $ref: '#/definitions/TierLevel'
+        description: The various tier levels within this tier program.
+  TierLevel:
+    type: "object"
+    description: Represents a single tier level.
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: The ID for this tier.
+      name:
+        type: string
+        description: The name of this tier level.
+      reach_spend:
+        type: integer
+        format: int64
+        description: The amount of money spent required to reach this tier.
+      reach_visits:
+        type: integer
+        format: int64
+        description: The amount of visits made to reach this tier.
+      reach_points:
+        type: integer
+        format: int64
+        description: The amount of points acquired that is required to reach this tier.
+  TierProgress:
+    type: "object"
+    description: |
+      Represents a users' tier progress within their current tier.
+      This also includes other useful information about the tier such as start
+      and end dates, as well as the next tier the user will reach.
+    properties:
+      start_date:
+        type: string
+        description: The start date for this tier session.
+      end_date:
+        type: string
+        description: |
+          The end date for this tier session.
+          The tier will be reset once this date is reached.
+      tier_level:
+        type: string
+        description: |
+          The name of the user's current tier level
+      tier_level_live:
+        type: string
+        description: |
+          The name of the user's current tier level.
+          Tiers are recalculated once per day, as such "tier_level" may
+          not be completely up to date.
+      next_tier_level:
+        type: string
+        description: |
+          The name of the user's next tier level.
+      tier_progress:
+        type: number
+        format: float
+        description: |
+          The users current tier progress in their "tier_level".
+          This will be a number between 0 and 1. A tier progress of 0.5
+          means that the user has made 50% progress in their current tier.
+      left_points:
+        type: integer
+        format: int64
+        description: |
+          The amount of points left in the user's current tier progress.
+          Once they have acquired this many more amount of points, they
+          will be moved into the next tier.

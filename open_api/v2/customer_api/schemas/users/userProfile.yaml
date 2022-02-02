@@ -62,23 +62,28 @@ definitions:
         description: Denotes whether this account has been enabled.
       email_verified:
         type: boolean
-        description: Denotes whether the email address for this user has been verified
+        description: Denotes whether the email address for this user has been verified.
       phone_verified:
         type: boolean
-        description: Denotes whether the phone number for this user has been verified
+        description: Denotes whether the phone number for this user has been verified.
   UserProfileInclude:
     type: "object"
     description: Extra user profile data
     required:
       - balance
+      - tier_progress
     properties:
       balance:
-        description:
+        description: User Profile balance data.
         x-model:
-        $ref: '#/definitions/UserProfileBalanceData'
-  UserProfileBalanceData:
+        $ref: '#/definitions/UserBalance'
+      tier_progress:
+        description: User Profile balance data.
+        x-model:
+        $ref: "../tiers/tiers.yaml#/definitions/TierProgress"
+  UserBalance:
     type: "object"
-    description: User Profile balance data
+    description: User Profile balance data.
     properties:
       points:
         type: integer

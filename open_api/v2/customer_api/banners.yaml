@@ -13,14 +13,14 @@ consumes:
 produces:
   - application/json
 paths:
-  /users/me?include=balance,tier_level,tier_progress:
+  /users/me/banners:
     get:
-      summary: Get user profile data for this user.
-      operationId: getUserProfile
+      summary: Acquires business banners.
+      operationId: getBanners
       tags:
-        - userProfile
+        - banners
       responses:
         "200":
-          description: User profile data
+          description: Acquires business banners.
           schema:
-            $ref: "schemas/users/userProfile.yaml#/definitions/UserProfile"
+            $ref: "schemas/banners/banners.yaml#/definitions/Banners"
