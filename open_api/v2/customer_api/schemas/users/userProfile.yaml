@@ -69,17 +69,12 @@ definitions:
   UserProfileInclude:
     type: "object"
     description: Extra user profile data
-    required:
-      - balance
-      - tier_progress
     properties:
       balance:
         description: User Profile balance data.
-        x-model:
         $ref: '#/definitions/UserBalance'
       tier_progress:
         description: User's tier progress and status.
-        x-model:
         $ref: "../tiers/tiers.yaml#/definitions/TierProgress"
   UserBalance:
     type: "object"
