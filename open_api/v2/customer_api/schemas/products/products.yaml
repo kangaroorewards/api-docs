@@ -11,7 +11,7 @@ definitions:
         description: "Contains all user data"
         $ref: "../users/userProfile.yaml#/definitions/UserProfileData"
       included:
-        description: 'Containrs products available to this user'
+        description: 'Contains products available to this user'
         $ref: '#/definitions/UserProductsIncluded'
   UserProductsIncluded:
     type: "object"
