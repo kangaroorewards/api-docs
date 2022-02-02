@@ -62,7 +62,6 @@ paths:
             be used in this api.
           required: false
           type: string
-          default: "facebook_share"
       responses:
         "200":
           description: Updated user profile data
