@@ -23,4 +23,4 @@ paths:
         "200":
           description: Business data
           schema:
-            $ref: "schemas/business/business.yaml#/definitions/Business"
+            $ref: "schemas/business/business.yaml#/definitions/Businesses"
