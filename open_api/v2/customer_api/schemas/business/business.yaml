@@ -1,4 +1,16 @@
 definitions:
+  Businesses:
+    type: "object"
+    x-model: Businesses
+    description: |
+      A list of businesses associated with this user and this app.
+      Usually there will only be one business.
+    properties:
+      data:
+        type: array
+        description: A list of businesses for this user and this app.
+        items:
+          $ref: '#/definitions/BusinessData'
   Business:
     type: "object"
     x-model: Business
@@ -15,7 +27,7 @@ definitions:
         $ref: '#/definitions/BusinessBranchesData'
   BusinessData:
     type: "object"
-    description: User Profile model class containing user data
+    description: Business profile data
     properties:
       id:
         type: string
