@@ -75,6 +75,9 @@ definitions:
       tier_progress:
         description: User's tier progress and status.
         $ref: "../tiers/tiers.yaml#/definitions/TierProgress"
+      referral_programs:
+        description: A list of referral programs the user has access to.
+        $ref: '#/definitions/ReferralProgramInclude'
   UserBalance:
     type: "object"
     description: User Profile balance data.
@@ -87,3 +90,53 @@ definitions:
         type: number
         format: double
         description: The amount of store credit in the users' e-wallet.
+  ReferralProgramInclude:
+    type: "object"
+    description: Contains data about the referral program for this business.
+    properties:
+      referral_programs:
+        type: array
+        description: A List of referral programs.
+        items:
+          $ref: '#/definitions/ReferralProgram'
+  ReferralProgram:
+    type: "object"
+    description: A referral program
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: The unique id of this referral program.
+      rule_name:
+        type: string
+      cond_min_amount:
+        type: number
+        format: double
+        description: The minimum purchawe amount required for a succesful referral.
+      referee_earns:
+        type: integer
+        format: int64
+        description: The number of points the new customer will earn.
+      referer_earns:
+        type: integer
+        format: int64
+        description: The number of points the new customer who made the referral will earn.
+      expires_in:
+        type: integer
+        format: int64
+        description: |
+          The number of days the new customer has to sign up in
+          order for a referral to be sucessful.
+      enabled:
+        type: boolean
+        description: Denotes whether this referral program is currently active.
+      link_referral_enabled:
+        type: boolean
+        description: |
+          Denotes whether this referral program has enabled share links.
+          Referral share links are links that the customer can send to prospective
+          referrals. A User can sign up to the business through this link in order to
+          complete the referral.
+      referral_link:
+        type: string
+        description: A link that can be shared to prospective referrals.
