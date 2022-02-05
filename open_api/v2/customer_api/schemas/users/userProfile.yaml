@@ -76,8 +76,10 @@ definitions:
         description: User's tier progress and status.
         $ref: "../tiers/tiers.yaml#/definitions/TierProgress"
       referral_programs:
+        type: array
         description: A list of referral programs the user has access to.
-        $ref: '#/definitions/ReferralProgramInclude'
+        items:
+          $ref: '#/definitions/ReferralProgram'
   UserBalance:
     type: "object"
     description: User Profile balance data.
