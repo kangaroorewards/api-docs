@@ -76,6 +76,7 @@ definitions:
         type: string
   GiftCardPayPalPaymentResponse:
     type: "object"
+    x-model: GiftCardPayPalPaymentResponseModel
     properties:
       data:
         type: object
