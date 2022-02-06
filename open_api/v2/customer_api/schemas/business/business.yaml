@@ -22,7 +22,7 @@ definitions:
       data:
         description: Details about a business
         $ref: '#/definitions/BusinessData'
-      include:
+      included:
         description: Details about a business' branches
         $ref: '#/definitions/BusinessBranchesData'
   BusinessData:
