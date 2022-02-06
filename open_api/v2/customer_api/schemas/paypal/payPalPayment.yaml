@@ -62,7 +62,7 @@ definitions:
         type: integer
       paypal_payment:
         type: object
-        $ref: "#definitions/GiftCardPayPalPayment"
+        $ref: '#/definitions/GiftCardPayPalPayment'
   GiftCardPayPalPayment:
     type: "object"
     properties:
