@@ -32,7 +32,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: "schemas/notificationSettings/notificationSettings.yaml#definitions/NotificationSettingsData"
+              $ref: "schemas/notificationSettings/notificationSettings.yaml#/definitions/NotificationSettingsData"
       responses:
         "200":
           description: The users' updated balance.

@@ -45,7 +45,7 @@ paths:
           name: paypal_cancel_url
           required: true
           type: string
-     responses:
+      responses:
         "200":
           description: |
             The result of a PayPal payment

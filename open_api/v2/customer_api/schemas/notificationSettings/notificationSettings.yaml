@@ -20,7 +20,7 @@ definitions:
         description: |
           The business who these settings this affect. This is not required
           when updating notification settings.
-        $ref: '../business/business.yaml#definitions/BusinessData'
+        $ref: '../business/business.yaml#/definitions/BusinessData'
       allow_email:
         type: boolean
       allow_sms:
