@@ -62,13 +62,9 @@ definitions:
         type: integer
       paypal_payment:
         type: object
+        $ref: "#definitions/GiftCardPayPalPayment"
   GiftCardPayPalPayment:
     type: "object"
-    required:
-      - success
-      - payment_id
-      - payer_id
-      - token
     properties:
       intent:
         type: boolean
@@ -93,9 +89,10 @@ definitions:
         type: string
       giftcard:
         type: object
+        $ref: '#/definitions/GiftCardPurchaseResponseGiftCardData'
       balance:
         type: object
-        $ref: '#/definitions/GiftCardPurchaseResponseGiftCardData'
+        $ref: '../users/userProfile.yaml#/definitions/UserBalance'
   GiftCardPurchaseResponseGiftCardData:
     type: "object"
     properties:
