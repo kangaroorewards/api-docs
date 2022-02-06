@@ -1,0 +1,29 @@
+definitions:
+  NotificationSettingsModel:
+    type: object
+    x-model: NotificationSettingsModel
+    properties:
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/NotificationSettingsData'
+  NotificationSettingsData:
+    type: object
+    properties:
+      id:
+        type: string
+        description: |
+          The notification settings id. This is not required
+          when updating notification settings.
+      business:
+        type: object
+        description: |
+          The business who these settings this affect. This is not required
+          when updating notification settings.
+        $ref: '../business/business.yaml#definitions/BusinessData'
+      allow_email:
+        type: boolean
+      allow_sms:
+        type: boolean
+      allow_push:
+        type: boolean

@@ -1,0 +1,149 @@
+definitions:
+  GiftCardsResponse:
+    type: "object"
+    x-model: GiftCardsModel
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        description: A list of all gift cards available to this user
+        items:
+          $ref: '#/definitions/GiftCard'
+  GiftCard:
+    type: "object"
+    x-model: GiftCardModel
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        description: A unique ID identifying this reward
+      points:
+        type: integer
+        format: int64
+      publish_at:
+        type: string
+        description: The publication date of this offer.
+      expires_at:
+        type: string
+        description: The expiration date of this offer.
+      is_published:
+        type: boolean
+        description: Whether this offer is currently published or not.
+      coupon_convertible:
+        type: boolean
+        description: |
+          Whether this is a convertible coupon. Convertible coupons are
+          automatically added to the customers account when the point threshold
+          is met. The points are automatically deducted from the users' account.
+      real_value:
+        type: number
+        format: double
+        description: The real value  (in $) of this gift card
+      discount_value:
+        type: number
+        format: double
+        description: The discount value (in $) of this gift card
+      multip_factor:
+        type: number
+        format: double
+      min_purchase:
+        type: number
+        format: double
+      max_purchase:
+        type: number
+        format: double
+      apps_only:
+        type: boolean
+      offer_frequency_id:
+        type: integer
+      freq_details:
+        type: array
+        items:
+          type: string
+      peak_from:
+        type: string
+      peak_to:
+        type: string
+      type:
+        type: string
+        description: |
+          The offer type. This is a gift card.
+      title:
+        type: string
+        description: The gift card title.
+      description:
+        type: string
+        description: The gift card description.
+      slug:
+        type: string
+        description: The unique slug for this gift card
+      images:
+        type: array
+        description: |
+          The images attached to this gift ard. There are 3 available
+          sizes: thumbnail, medium, and large.
+        items:
+          $ref: './../images/image.yaml'
+      never_expires_flag:
+        type: boolean
+        description: |
+          Whether this gift card ever expires or not.
+          If false, this gift card is available indefinitely (provided any other
+          requirements are met)
+      terms_conditions:
+        type: string
+        description: The terms and conditions attached to this gift card.
+      link:
+        type: string
+        description: The external link attached to this gift card.
+      offer_languages:
+        type: array
+        description: A list of translations of this gift card into different languages.
+        items:
+          $ref: '#/definitions/GiftCardTranslation'
+      actions:
+        type: array
+        description: A list of possible actions to perform on this gift card.
+        default: []
+        items:
+          $ref: "#/definitions/GiftCardAction"
+  GiftCardTranslation:
+    type: object
+    description: A language translation of this gift card.
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+      language_id:
+        description: The ID of this specific translation
+        type: integer
+      offer_title:
+        description: The translated gift card title.
+        type: string
+      offer_description:
+        description: The translated gift card description.
+        type: string
+      offer_terms_conditions:
+        description: The translated gift card terms and conditions.
+        type: string
+      offer_link:
+        description: The language appropriate link of this gift card.
+        type: string
+      language:
+        description: The language for which this translation applies.
+        type: object
+        $ref: './../languages/language.yaml'
+  ClaimGiftCardResponse:
+    type: object
+    x-model: ClaimGiftCardModel
+    properties:
+      data:
+        $ref: '#/definitions/GiftCard'
+  GiftCardAction:
+    type: object
+    properties:
+      type:
+        type: string

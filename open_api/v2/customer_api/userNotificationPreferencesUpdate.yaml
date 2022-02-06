@@ -30,69 +30,11 @@ paths:
           description: The notification preferences update request.
           required: true
           schema:
-            type: object
-            required:
-              - id
-              - business
-            properties:
-              id:
-                type: string
-              business:
-                type: object
-                description: |
-                  The business who's notification
-                  settings this request applies to.
-                $ref: '#/definitions/Business'
-              allow_email:
-                type: boolean
-              allow_sms:
-                type: boolean
-              allow_push:
-                type: boolean
+            type: array
+            items:
+              $ref: "schemas/notificationSettings/notificationSettings.yaml#definitions/NotificationSettingsData"
       responses:
         "200":
           description: The users' updated balance.
           schema:
-            $ref: '#/definitions/NotificationUpdateResponse'
-definitions:
-  Business:
-    type: "object"
-    required:
-      - id
-      - name
-    properties:
-      id:
-        type: string
-        description: A unique ID identifying this business.
-      name:
-        type: string
-        description: The name of this business
-  NotificationUpdateResponse:
-    type: object
-    x-model: NotificationUpdateModel
-    required:
-      - data
-    properties:
-      data:
-        type: array
-        items:
-          $ref: '#/definitions/NotificationUpdateResponseData'
-  NotificationUpdateResponseData:
-    type: object
-    required:
-      - id
-      - business
-    properties:
-      id:
-        type: string
-      business:
-        $ref: '#/definitions/Business'
-      allow_email:
-        type: boolean
-        default: false
-      allow_sms:
-        type: boolean
-        default: false
-      allow_push:
-        type: boolean
-        default: false
+            $ref: 'schemas/notificationSettings/notificationSettings.yaml#/definitions/NotificationSettingsModel'

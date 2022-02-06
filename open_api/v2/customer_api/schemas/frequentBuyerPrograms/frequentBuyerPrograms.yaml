@@ -1,0 +1,44 @@
+definitions:
+  FrequentBuyerPrograms:
+    type: "object"
+    x-model: FrequentBuyerProgramsModel
+    description: Frequent buyer programs for this business
+    properties:
+      data:
+        description: "Contains all user data"
+        $ref: "../users/userProfile.yaml#/definitions/UserProfileData"
+      included:
+        description: "Contains frequent buyer programs"
+        $ref: '#/definitions/FrequentBuyerProgramsIncluded'
+  FrequentBuyerProgramsIncluded:
+    type: "object"
+    properties:
+      frequent_buyer_programs:
+        description:
+        $ref: '#/definitions/FrequentBuyerProgramList'
+  FrequentBuyerProgramList:
+    type: array
+    items:
+      $ref: '#/definitions/FrequentBuyerProgram'
+  FrequentBuyerProgram:
+    type: "object"
+    x-model: FrequentBuyerProgramModel
+    properties:
+      id:
+        type: integer
+        format: int64
+      enabled:
+        type: boolean
+      title:
+        type: string
+      buy_units:
+        type: integer
+        format: int64
+      get_units:
+        type: integer
+        format: int64
+      reset_interval:
+        type: integer
+        format: int64
+      created_at:
+        type: string

@@ -58,12 +58,6 @@ paths:
       operationId: redeemReward
       tags:
         - core
-  socialMedia:
-    get:
-      x-file: socialMedia.yaml
-      operationId: getSocialMedia
-      tags:
-        - core
   alaCarteProducts:
     get:
       x-file: userAlaCarte.yaml
@@ -94,10 +88,52 @@ paths:
       operationId: updateNotificationPreferences
       tags:
         - core
+  getNotificationPreferences:
+    put:
+      x-file: userNotificationPreferences.yaml
+      operationId: getNotificationPreferences
+      tags:
+        - core
   userOffers:
     get:
       x-file: userOffers.yaml
       operationId: getUserOffers
+      tags:
+        - core
+  giftCards:
+    get:
+      x-file: giftCards.yaml
+      operationId: getGiftCards
+      tags:
+        - core
+  socialMediaLinks:
+    get:
+      x-file: socialMediaLinks.yaml
+      operationId: getSocialMediaLinks
+      tags:
+        - core
+  frequentBuyerPrograms:
+    get:
+      x-file: frequentBuyerPrograms.yaml
+      operationId: getFrequentBuyerPrograms
+      tags:
+        - core
+  giftCardDeposit:
+    patch:
+      x-file: depositGiftCard.yaml
+      operationId: depositGiftCard
+      tags:
+        - core
+  giftCardPurchase:
+    post:
+      x-file: makeGiftCardPurchase.yaml
+      operationId: purchaseGiftCard
+      tags:
+        - core
+  payPalPayment:
+    post:
+      x-file: makePayPalPayment.yaml
+      operationId: makePayPalPayment
       tags:
         - core
   userPinResetRequest:

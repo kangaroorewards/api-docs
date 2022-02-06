@@ -1,0 +1,30 @@
+definitions:
+  SocialMediaLinks:
+    type: "object"
+    x-model: SocialMediaLinksModel
+    description: Social media links for this business
+    properties:
+      data:
+        description: "Contains all user data"
+        $ref: "../users/userProfile.yaml#/definitions/UserProfileData"
+      included:
+        description: "Contains social media links"
+        $ref: '#/definitions/SocialMediaLinksIncluded'
+  SocialMediaLinksIncluded:
+    type: "object"
+    properties:
+      social_media:
+        description:
+        $ref: '#/definitions/SocialMediaLinkList'
+  SocialMediaLinkList:
+    type: array
+    items:
+      $ref: '#/definitions/SocialMedia'
+  SocialMedia:
+    type: "object"
+    x-model: SocialMediaModel
+    properties:
+      icon:
+        type: string
+      url:
+        type: string

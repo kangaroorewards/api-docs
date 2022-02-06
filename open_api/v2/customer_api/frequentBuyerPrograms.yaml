@@ -1,0 +1,26 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me?include=frequent_buyer_programs:
+    get:
+      summary: Get a list of frequent buyer programs for this business
+      operationId: getFrequentBuyerPrograms
+      tags:
+        - frequentBuyerPrograms
+      responses:
+        "200":
+          description: A List of frequent buyer programs for this business
+          schema:
+            $ref: "schemas/frequentBuyerPrograms/frequentBuyerPrograms.yaml#/definitions/FrequentBuyerPrograms"

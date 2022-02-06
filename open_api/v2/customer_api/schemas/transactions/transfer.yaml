@@ -1,0 +1,47 @@
+definitions:
+  Transfer:
+    type: "object"
+    x-model: TransferModel
+    required:
+      - intent
+      - recipientData
+      - senderData
+      - businessId
+      - language
+    properties:
+      intent:
+        type: string
+        description: |
+          The transfer intent for this transfer. This can be transfer_amount
+          or transfer_points
+      points:
+        type: integer
+        format: int64
+      amount:
+        type: number
+        format: double
+      language:
+        type: string
+        description: |
+          The two character language code of the language that this
+          transfer should be sent in.
+      to:
+        type: object
+        properties:
+          name:
+            type: string
+      from:
+        type: object
+        description: |
+          The recipient data for this transfer. Either a phone number
+          or an email address is required. If a phone number is used,
+          the two character ISO country code must be supplied as well.
+        properties:
+          name:
+            type: string
+          phone:
+            type: string
+          country_code:
+            type: string
+          email:
+            type: string

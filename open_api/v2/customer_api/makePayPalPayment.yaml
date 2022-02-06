@@ -1,0 +1,53 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/payments:
+    post:
+      summary: |
+        Create a paypal payment
+      operationId: makePayPalPayment
+      consumes:
+        - application/x-www-form-urlencoded
+      tags:
+        - payPalPayment
+      parameters:
+        - in: formData
+          name: intent
+          required: true
+          type: string
+          default: "buy_giftcard"
+        - in: formData
+          name: provider
+          required: true
+          type: string
+          default: "paypal"
+        - in: formData
+          name: giftcard_id
+          required: true
+          type: integer
+        - in: formData
+          name: paypal_return_url
+          required: true
+          type: string
+        - in: formData
+          name: paypal_cancel_url
+          required: true
+          type: string
+     responses:
+        "200":
+          description: |
+            The result of a PayPal payment
+          schema:
+            $ref: 'schemas/paypal/payPalPayment.yaml#/definitions/PayPalPaymentModel'

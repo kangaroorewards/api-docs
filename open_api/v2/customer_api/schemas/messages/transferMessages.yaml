@@ -9,10 +9,10 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/TransferMessage'
-  TransferRecallResultModel:
+  TransferActionResultModel:
     type: object
-    x-model: TransferRecallResultModel
-    description: Contains the result of a recalled transfer.
+    x-model: TransferActionResultModel
+    description: Contains the result of a transfer action.
     properties:
       data:
         type: object

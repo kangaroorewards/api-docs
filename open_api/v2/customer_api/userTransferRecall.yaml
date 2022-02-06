@@ -30,5 +30,5 @@ paths:
         "200":
           description: Transfer recall data
           schema:
-            $ref: "schemas/messages/transferMessages.yaml#/definitions/TransferRecallResultModel"
+            $ref: "schemas/messages/transferMessages.yaml#/definitions/TransferActionResultModel"
 

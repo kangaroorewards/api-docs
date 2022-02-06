@@ -1,0 +1,112 @@
+definitions:
+  PayPalPaymentModel:
+    type: "object"
+    x-model: PayPalPaymentModel
+    description: A paypal payment response
+    properties:
+      data:
+        description: A paypal payment response data
+        type: object
+        $ref: '#/definitions/PayPalPayment'
+  PayPalPayment:
+    type: "object"
+    description: |
+      A paypal payment response data
+    properties:
+      id:
+        type: string
+        description: Unique payment ID.
+      provider:
+        type: string
+      status:
+        type: string
+      approval_url:
+        type: string
+      giftcard:
+        type: object
+        description: |
+          A giftcard received from a paypal payment
+        $ref: '#/definitions/PayPalPaymentGiftCard'
+  PayPalPaymentGiftCard:
+    type: "object"
+    description: |
+      A giftcard received from a paypal payment
+    properties:
+      id:
+        type: integer
+        description: Unique gift card ID.
+      title:
+        type: string
+      price:
+        type: number
+        format: float
+      currency:
+        type: string
+      quantity:
+        type: integer
+  GiftCardPurchaseRequest:
+    type: "object"
+    required:
+      - intent
+      - provider
+      - giftcard_id
+      - paypal_payment
+    properties:
+      intent:
+        type: string
+        default: "buy_giftcard"
+      provider:
+        type: string
+        default: "paypal"
+      giftcard_id:
+        type: integer
+      paypal_payment:
+        type: object
+  GiftCardPayPalPayment:
+    type: "object"
+    required:
+      - success
+      - payment_id
+      - payer_id
+      - token
+    properties:
+      intent:
+        type: boolean
+      provider:
+        type: string
+      giftcard_id:
+        type: string
+      paypal_payment:
+        type: string
+  GiftCardPayPalPaymentResponse:
+    type: "object"
+    properties:
+      data:
+        type: object
+        $ref: '#/definitions/GiftCardPayPalPaymentResponseData'
+  GiftCardPayPalPaymentResponseData:
+    type: "object"
+    properties:
+      id:
+        type: string
+      provider:
+        type: string
+      giftcard:
+        type: object
+      balance:
+        type: object
+        $ref: '#/definitions/GiftCardPurchaseResponseGiftCardData'
+  GiftCardPurchaseResponseGiftCardData:
+    type: "object"
+    properties:
+      id:
+        type: integer
+      title:
+        type: string
+      price:
+        type: number
+        format: double
+      currency:
+        type: string
+      quantity:
+        type: string

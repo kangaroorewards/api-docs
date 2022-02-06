@@ -1,0 +1,36 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/purchases:
+    post:
+      summary: Purchase a gift card
+      operationId: purchaseGiftCard
+      tags:
+        - giftCardPurchase
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: purchaseGiftCardRequest
+          description: A request for purchasing gift cards.
+          required: true
+          schema:
+            type: object
+            $ref: 'schemas/paypal/payPalPayment.yaml#/definitions/GiftCardPurchaseRequest'
+      responses:
+        "200":
+          description: The users' updated balance.
+          schema:
+            $ref: "schemas/paypal/payPalPayment.yaml#/definitions/GiftCardPayPalPaymentResponse"

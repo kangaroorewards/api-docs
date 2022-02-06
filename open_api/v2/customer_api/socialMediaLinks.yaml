@@ -1,0 +1,26 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me?include=social_media:
+    get:
+      summary: Get a list of social media links for this business
+      operationId: getSocialMediaLinks
+      tags:
+        - socialMediaLinks
+      responses:
+        "200":
+          description: A List of social media links for this business
+          schema:
+            $ref: "schemas/socialMediaLinks/socialMediaLinks.yaml#/definitions/SocialMediaLinks"
