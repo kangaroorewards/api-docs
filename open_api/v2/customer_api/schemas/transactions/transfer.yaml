@@ -4,9 +4,9 @@ definitions:
     x-model: TransferModel
     required:
       - intent
-      - recipientData
-      - senderData
-      - businessId
+      - from
+      - to
+      - business_id
       - language
     properties:
       intent:
