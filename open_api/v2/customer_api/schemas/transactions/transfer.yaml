@@ -25,12 +25,12 @@ definitions:
         description: |
           The two character language code of the language that this
           transfer should be sent in.
-      to:
+      from:
         type: object
         properties:
           name:
             type: string
-      from:
+      to:
         type: object
         description: |
           The recipient data for this transfer. Either a phone number
