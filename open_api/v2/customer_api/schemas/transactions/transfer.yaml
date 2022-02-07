@@ -20,6 +20,8 @@ definitions:
       amount:
         type: number
         format: double
+      business_id:
+        type: string
       language:
         type: string
         description: |
