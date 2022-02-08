@@ -84,8 +84,8 @@ paths:
         - core
   userAccountVerification:
     post:
-      x-file: userUnsubscribe.yaml
-      operationId: unsubscribe
+      x-file: userVerification.yaml
+      operationId: verifyAccount
       tags:
         - core
   userUnsubscribe:
