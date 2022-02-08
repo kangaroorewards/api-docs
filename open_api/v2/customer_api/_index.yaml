@@ -82,6 +82,18 @@ paths:
       operationId: userCheckIn
       tags:
         - core
+  userAccountVerification:
+    post:
+      x-file: userUnsubscribe.yaml
+      operationId: unsubscribe
+      tags:
+        - core
+  userUnsubscribe:
+    post:
+      x-file: userUnsubscribe.yaml
+      operationId: unsubscribe
+      tags:
+        - core
   updateNotificationPreferences:
     put:
       x-file: userNotificationPreferencesUpdate.yaml

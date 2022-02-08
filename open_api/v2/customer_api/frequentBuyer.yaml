@@ -33,9 +33,6 @@ definitions:
     type: "object"
     x-model: FrequentBuyerModel
     description: Frequent Buyer Model containing list of Frequent Buyer program
-    required:
-      - data
-      - included
     properties:
       data:
         description: "Contains all user data"

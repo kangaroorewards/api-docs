@@ -1,0 +1,37 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /campaigns/{campaignId}/subscriptions/{token}:
+    delete:
+      summary: |
+        Unsubscribe from marketing material
+      operationId: unsubscribe
+      consumes:
+        - application/x-www-form-urlencoded
+      tags:
+        - userUnsubscribe
+      parameters:
+        - in: path
+          name: campaignId
+          required: true
+          type: string
+        - in: path
+          name: token
+          required: true
+          type: string
+      responses:
+        "200":
+          description: |
+            Unsubscription request

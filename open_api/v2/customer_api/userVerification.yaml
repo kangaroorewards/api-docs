@@ -1,0 +1,51 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/credentials/verification:
+    post:
+      summary: |
+        Verify a user's account
+      operationId: verifyAccount
+      consumes:
+        - application/x-www-form-urlencoded
+      tags:
+        - userAccountVerification
+      parameters:
+        - in: formData
+          name: email
+          required: false
+          type: string
+        - in: formData
+          name: phone
+          required: false
+          type: string
+        - in: formData
+          name: country_code
+          required: false
+          type: string
+        - in: formData
+          name: intent
+          required: true
+          type: string
+        - in: formData
+          name: token
+          required: true
+          type: string
+      responses:
+        "200":
+          description: |
+            User verification request.
+          schema:
+            $ref: "schemas/users/userProfile.yaml#/definitions/UserProfile"

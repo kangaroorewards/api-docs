@@ -14,8 +14,6 @@ definitions:
     type: "object"
     x-model: UserProfileDataModel
     description: User Profile model class containing user data
-    required:
-      - id
     properties:
       id:
         type: string
