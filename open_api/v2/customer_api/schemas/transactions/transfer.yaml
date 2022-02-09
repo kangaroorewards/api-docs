@@ -1,49 +1,26 @@
 definitions:
-  Transfer:
+  TransferResponse:
     type: "object"
-    x-model: TransferModel
-    required:
-      - intent
-      - from
-      - to
-      - business_id
-      - language
+    x-model: TransferResponseModel
     properties:
-      intent:
-        type: string
-        description: |
-          The transfer intent for this transfer. This can be transfer_amount
-          or transfer_points
-      points:
+      data:
+        description: "Contains all user profile data"
+        $ref: '#/definitions/TransferData'
+  TransferData:
+    type: object
+    x-model: TransferDataModel
+    properties:
+      id:
         type: integer
-        format: int64
       amount:
         type: number
         format: double
-      business_id:
+      name:
         type: string
-      language:
+      created_at:
         type: string
-        description: |
-          The two character language code of the language that this
-          transfer should be sent in.
-      from:
+      updated_at:
+        type: string
+      customer:
         type: object
-        properties:
-          name:
-            type: string
-      to:
-        type: object
-        description: |
-          The recipient data for this transfer. Either a phone number
-          or an email address is required. If a phone number is used,
-          the two character ISO country code must be supplied as well.
-        properties:
-          name:
-            type: string
-          phone:
-            type: string
-          country_code:
-            type: string
-          email:
-            type: string
+        $ref: '../users/userProfile.yaml#/definitions/UserProfileData'
