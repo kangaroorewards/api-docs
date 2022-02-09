@@ -25,6 +25,14 @@ paths:
         - userPinReset
       parameters:
         - in: formData
+          name: verification_code
+          required: true
+          type: integer
+        - in: formData
+          name: pin_code
+          required: true
+          type: integer
+        - in: formData
           name: email
           required: false
           type: string
@@ -36,10 +44,6 @@ paths:
           name: country_code
           required: false
           type: string
-        - in: formData
-          name: verification_code
-          required: true
-          type: integer
       responses:
         "200":
           description: |
