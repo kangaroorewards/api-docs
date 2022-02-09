@@ -30,7 +30,9 @@ paths:
           required: true
           schema:
             type: object
-            $ref: 'schemas/transactions/transfer.yaml#/definitions/TransferResponse'
+            $ref: 'schemas/transactions/transfer.yaml#/definitions/TransferRequest'
       responses:
         "200":
           description: The users' updated balance.
+          schema:
+            $ref: 'schemas/transactions/transfer.yaml#/definitions/TransferResponse'

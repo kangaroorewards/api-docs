@@ -1,4 +1,52 @@
 definitions:
+  TransferRequest:
+    type: "object"
+    x-model: TransferRequestModel
+    required:
+      - intent
+      - from
+      - to
+      - business_id
+      - language
+    properties:
+      intent:
+        type: string
+        description: |
+          The transfer intent for this transfer. This can be transfer_amount
+          or transfer_points
+      points:
+        type: integer
+        format: int64
+      amount:
+        type: number
+        format: double
+      business_id:
+        type: string
+      language:
+        type: string
+        description: |
+          The two character language code of the language that this
+          transfer should be sent in.
+      from:
+        type: object
+        properties:
+          name:
+            type: string
+      to:
+        type: object
+        description: |
+          The recipient data for this transfer. Either a phone number
+          or an email address is required. If a phone number is used,
+          the two character ISO country code must be supplied as well.
+        properties:
+          name:
+            type: string
+          phone:
+            type: string
+          country_code:
+            type: string
+          email:
+            type: string
   TransferResponse:
     type: "object"
     x-model: TransferResponseModel
