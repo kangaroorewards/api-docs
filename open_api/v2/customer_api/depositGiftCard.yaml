@@ -24,6 +24,11 @@ paths:
           name: depositId
           required: true
           type: string
+        - in: path
+          name: intent
+          required: true
+          type: string
+          default: "accept_giftcard"
       responses:
         "200":
           description: Gift card deposit response
