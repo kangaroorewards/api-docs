@@ -1,7 +1,7 @@
 definitions:
-  Strings:
+  ApplicationStrings:
     type: "object"
-    x-model: StringsModel
+    x-model: ApplicationStringsModel
     required:
       - data
     properties:
@@ -9,8 +9,8 @@ definitions:
         type: array
         description: A list of application strings.
         items:
-          $ref: '#/definitions/String'
-  String:
+          $ref: '#/definitions/ApplicationString'
+  ApplicationString:
     type: "object"
     parameters:
       id:

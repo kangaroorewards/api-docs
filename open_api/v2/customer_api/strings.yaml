@@ -23,4 +23,4 @@ paths:
         "200":
           description: Containts a list of application strings.
           schema:
-            $ref: "schemas/strings/strings.yaml#/definitions/Strings"
+            $ref: "schemas/strings/strings.yaml#/definitions/ApplicationStrings"
