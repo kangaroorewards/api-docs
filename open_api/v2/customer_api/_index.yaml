@@ -226,3 +226,9 @@ paths:
       operationId: recallTransfer
       tags:
         - core
+  strings:
+    get:
+      x-file: strings.yaml
+      operationId: getStrings
+      tags:
+        - core

@@ -1,0 +1,22 @@
+definitions:
+  Strings:
+    type: object
+    x-model: StringsModel
+    parameters:
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/String'
+  String:
+    type: object
+    parameters:
+      id:
+        type: integer
+        format: int64
+      key:
+        type: string
+      string:
+        type: string
+      created_at:
+        type: string
+
