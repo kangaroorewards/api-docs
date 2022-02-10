@@ -20,6 +20,8 @@ definitions:
       amount:
         type: number
         format: double
+      giftcard_id:
+        type: integer
       business_id:
         type: string
       language:
