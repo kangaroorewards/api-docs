@@ -1,14 +1,17 @@
 definitions:
   Strings:
-    type: object
+    type: "object"
     x-model: StringsModel
-    parameters:
+    required:
+      - data
+    properties:
       data:
         type: array
+        description: A list of application strings.
         items:
           $ref: '#/definitions/String'
   String:
-    type: object
+    type: "object"
     parameters:
       id:
         type: integer
