@@ -21,14 +21,14 @@ definitions:
           The notification settings id. This is not required
           when updating notification settings.
       business:
-        $ref: '#/definitions/Business'
+        $ref: '#/definitions/NotificationBusinessPayload'
       allow_email:
         type: boolean
       allow_sms:
         type: boolean
       allow_push:
         type: boolean
-  Business:
+  NotificationBusinessPayload:
     type: object
     description: |
       The business who these settings this affect. This is not required
