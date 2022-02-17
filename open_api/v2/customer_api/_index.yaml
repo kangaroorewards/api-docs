@@ -40,12 +40,6 @@ paths:
       operationId: getCountries
       tags:
         - core
-  frequentBuyer:
-    get:
-      x-file: frequentBuyer.yaml
-      operationId: getFrequentBuyer
-      tags:
-        - core
   offerFacebookShare:
     post:
       x-file: postOfferFacebookShare.yaml
@@ -101,7 +95,7 @@ paths:
       tags:
         - core
   getNotificationPreferences:
-    put:
+    get:
       x-file: userNotificationPreferences.yaml
       operationId: getNotificationPreferences
       tags:
