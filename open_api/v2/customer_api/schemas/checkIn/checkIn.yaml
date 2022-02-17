@@ -8,7 +8,7 @@ definitions:
         $ref: '#/definitions/CheckInData'
   CheckInData:
     type: "object"
-    x-model: CheckInResponseDataModel
+    x-model: CheckInDataModel
     properties:
       id:
         type: integer
