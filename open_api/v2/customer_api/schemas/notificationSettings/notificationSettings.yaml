@@ -1,7 +1,7 @@
 definitions:
   NotificationSettingsUpdateRequest:
     type: array
-    x-model: NotificationRequest
+    x-model: NotificationUpdateRequest
     items:
       $ref: '#/definitions/NotificationSettingsData'
   NotificationSettingsModel:
