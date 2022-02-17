@@ -30,8 +30,7 @@ paths:
           description: The notification preferences update request.
           required: true
           schema:
-            type: object
-            $ref: "schemas/notificationSettings/notificationSettings.yaml#/definitions/NotificationSettingsData"
+            $ref: "schemas/notificationSettings/notificationSettings.yaml#/definitions/NotificationSettingsUpdateRequest"
       responses:
         "200":
           description: The users' updated balance.
