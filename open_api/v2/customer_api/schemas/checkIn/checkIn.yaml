@@ -1,0 +1,26 @@
+definitions:
+  CheckInResponse:
+    type: "object"
+    x-model: CheckInResponseModel
+    properties:
+      data:
+        description: "Contains all user profile data"
+        $ref: '#/definitions/CheckInData'
+  CheckInData:
+    type: "object"
+    x-model: CheckInResponseModel
+    properties:
+      id:
+        type: integer
+      amount:
+        type: number
+        format: double
+      points:
+        type: integer
+      name:
+        type: string
+      created_at:
+        type: string
+      updated_at:
+        type: string
+

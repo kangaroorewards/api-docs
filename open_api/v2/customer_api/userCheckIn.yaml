@@ -43,3 +43,5 @@ paths:
         "200":
           description: |
             The check in request response. Doesn't contain any data.
+          schema:
+            $ref: 'schemas/checkIn/checkIn.yaml#/definitions/CheckInResponse'
