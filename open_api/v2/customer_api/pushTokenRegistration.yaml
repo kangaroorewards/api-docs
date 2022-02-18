@@ -1,0 +1,37 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me:
+    patch:
+      summary: Send user Push notification token
+      operationId: registerPushToken
+      consumes:
+        - application/x-www-form-urlencoded
+      tags:
+        - pushTokenRegistration
+      parameters:
+        - in: formData
+          name: android_device_token
+          description: Firebase token for Push notification in android
+          type: string
+        - in: formData
+          name: ios_device_token
+          description: Firebase token for Push notification in iOS
+          type: string
+      responses:
+        "200":
+          description: Updated user profile data
+          schema:
+            $ref: "schemas/users/userProfile.yaml#/definitions/UserProfile"

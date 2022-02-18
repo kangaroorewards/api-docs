@@ -226,3 +226,9 @@ paths:
       operationId: getStrings
       tags:
         - core
+  pushTokenRegistration:
+    patch:
+      x-file: pushTokenRegistration.yaml
+      operationId: registerPushToken
+      tags:
+        - core
