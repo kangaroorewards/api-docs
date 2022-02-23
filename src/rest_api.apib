@@ -88,7 +88,7 @@ The **meta** object MIGHT contain a **total** key that is set to the total numbe
 The **meta** object MIGHT not be presend or it will only be displayed when it has a value. Currently, the meta object will have a value when a request is made on a collection (like customers).
 
 ## Pagination
-The **cursor** object is returned as part of the response body when pagination is enabled. By default, 100 objects are returned per page.
+The **meta** object is returned as part of the response body when pagination is enabled. By default, 100 objects are returned per page.
 You can request a different page by appending ?page= to the request. For instance, to navigate to page 2, you could add ?page=2 to the end of your query
 
 Example:
@@ -96,11 +96,6 @@ Example:
 {
     "data": {
         . . .
-    },
-    "cursor": {
-        "count": 100,
-        "next": 2,
-        "next_uri": "/customers?page=2"
     },
     "meta": {
         "total": 509
