@@ -70,8 +70,15 @@ definitions:
       balance:
         description: User Profile balance data.
         $ref: '#/definitions/UserBalance'
+      tier_level:
+        description: |
+          User's tier status.
+        $ref: "../tiers/tiers.yaml#/definitions/TierLevel"
       tier_progress:
-        description: User's tier progress and status.
+        description: |
+          User's tier progress and status. If a user's tier status is
+          statically fixed, this will be null as they do not progress from
+          tier to tier.
         $ref: "../tiers/tiers.yaml#/definitions/TierProgress"
       referral_programs:
         type: array
