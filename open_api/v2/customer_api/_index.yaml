@@ -151,7 +151,7 @@ paths:
   userPinReset:
     post:
       x-file: userPinResetWithVerificationCode.yaml
-      operationId: requestPinReset
+      operationId: resetPin
       tags:
         - core
   userPinUpdate:
