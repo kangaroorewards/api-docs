@@ -1,0 +1,229 @@
+
+# Customer CRM fields
+
+# Group Customer CRM fields
+
+## Customer CRM fields Collection [/customers/{customer_id}/crm-fields{?page}]
+
+### Retrieve CRM fields [GET]
+
+List all CRM fields for a customer
+
+**Path Parameters**
+|Name|Type|Description|
+|-----|----|-----------|
+|customer_id|string|Required. The ID of the customer|
+
+Example:
+
+```
+GET /customers/11eb5b4433edf7bfaaffb42e99312ac8/crm-fields
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC...
+X-Application-Key: eyXai0XD7SLLzaOeJW...
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+```
+
+Response Body
+```
+{
+  "data": [
+    {
+      "name": "custom_field_1",
+      "label": "Custom Field 1",
+      "value": "Custom field value 1",
+      "is_hidden": false,
+      "is_required": true,
+      "field_type": "text",
+      "is_custom_field": true,
+      "display_order": 1
+    },
+    {
+      "name": "custom_field_2",
+      "label": "Custom Field 2",
+      "value": "Custom field value 2",
+      "is_hidden": false,
+      "is_required": false,
+      "field_type": "text",
+      "is_custom_field": true,
+      "display_order": 2
+    }
+  ]
+}
+```
+
++ Parameters
+    + customer_id: `12e6a34f8e89eb1e9708089e01cf89b5` (required, string) - ID of the customer
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer <access_token>
+            X-Application-Key: eyXai0XD7SLLzaOeJW
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+
++ Response 200 (application/json)
+    + Attributes
+        - data (array[Customer CRM fields Base List])
+
+## Customer CRM fields Collection [/customers/{customer_id}/crm-fields-values]
+
+### Update Customer CRM fields values [PATCH]
+
+Update CRM fields values for a customer
+
+**Path Parameters**
+|Name|Type|Description|
+|-----|----|-----------|
+|customer_id|string|Required. The ID of the customer|
+
+
+*Body parameters*
+|Name|Type|Description|
+|-----|----|-----------|
+|first_name|string|`Required` or `Optional`|
+|last_name|string|`Required` or `Optional`|
+|email|string|`Required` or `Optional`|
+|phone|string|`Required` or `Optional`|
+|country_code|string|`Required` or `Optional`|
+|gender|string|`Required` or `Optional` - male, female, nonbinary|
+|birth_date|string|`Required` or `Optional`|
+|postal_code|string|`Required` or `Optional`|
+|promotions_mail|string|`Required` or `Optional`|
+|notes|string|`Required` or `Optional`|
+|custom_field_1|string|`Required` or `Optional`|
+|custom_field_2|string|`Required` or `Optional`|
+|custom_field_3|string|`Required` or `Optional`|
+|custom_field_4|string|`Required` or `Optional`|
+|custom_field_5|string|`Required` or `Optional`|
+
+
+Example:
+
+```
+PATCH /customers/11eb5b4433edf7bfaaffb42e99312ac8/crm-fields-values
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC...
+X-Application-Key: eyXai0XD7SLLzaOeJW...
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+  "first_name": "John",
+  "last_name": "Doe",
+  "email": "john@example.com",
+  "phone": "",
+  "country_code": "CA",
+  "gender": "male",
+  "birth_date": "1999-01-26",
+  "postal_code" : "123456",
+  "promotions_mail" : false,
+  "notes": "Some notes",
+  "custom_field_1": "Custom field value 1",
+  "custom_field_2": "Custom field value 2",
+  "custom_field_3": "Custom field value 3",
+  "custom_field_4": "Custom field value 4",
+  "custom_field_5": "Custom field value 5"
+}
+```
+
+Response Body
+```
+{
+  "data": [
+    {
+      "name": "custom_field_1",
+      "label": "Custom Field 1",
+      "value": "Custom field value 1",
+      "is_hidden": false,
+      "is_required": true,
+      "field_type": "text",
+      "is_custom_field": true,
+      "display_order": 1
+    },
+    {
+      "name": "custom_field_2",
+      "label": "Custom Field 2",
+      "value": "Custom field value 2",
+      "is_hidden": false,
+      "is_required": false,
+      "field_type": "text",
+      "is_custom_field": true,
+      "display_order": 2
+    }
+  ]
+}
+```
+
++ Parameters
+    + customer_id: `11e696103f8ff5eabb02089e01cf89b5` - The unique ID of the customer.
+
++ Request
+    + Headers
+
+            Authorization: Bearer <access_token>
+            X-Application-Key: eyXai0XD7SLLzaOeJW
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+
+    + Body
+
+            {
+                "first_name": "John",
+                "last_name": "Doe",
+                "email": "john@example.com",
+                "gender": "male",
+                "birth_date": "1999-01-26",
+                "promotions_mail" : false,
+                "notes": "Some notes",
+                "custom_field_1": "Custom field value 1",
+                "custom_field_2": "Custom field value 2"
+            }
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Customer CRM fields Base List)
+
+# Data Structures
+
+## Customer CRM fields Base (object)
+
++ first_name: `John` (string)
++ last_name: `Doe` (string)
++ email: `john@example.com` (string)
++ phone: `1234567890` (string)
++ country_code: `US` (string)
++ gender: `male` (string)
++ birth_date: `1999-01-26` (string)
++ postal_code: `123456` (string)
++ promotions_mail: false (boolean)
++ notes: `Some notes` (string)
++ custom_field_1: `Custom field value 1` (string)
++ custom_field_2: `Custom field value 2` (string)
++ custom_field_3: `Custom field value 3` (string)
++ custom_field_4: `Custom field value 4` (string)
++ custom_field_5: `Custom field value 5` (string)
+
+## Customer CRM fields Base List (array)
+
+
++ (object)
+    + name: `first_name` (string)
+    + label: `First Name` (string)
+    + value: `John` (string)
+    + is_hidden: false (boolean)
+    + is_required: true (boolean)
+    + field_type: `text` (string)
+    + is_custom_field: false (boolean)
+    + display_order: 1 (number)
++ (object)
+    + `name`: `custom_field_1` (string)
+    + `label`: `Custom Field 1` (string)
+    + `value`: `test` (string)
+    + `is_hidden`: false (boolean)
+    + `is_required`: true (boolean)
+    + `field_type`: `text` (string)
+    + `is_custom_field`: true (boolean)
+    + `display_order`: 2 (number)
