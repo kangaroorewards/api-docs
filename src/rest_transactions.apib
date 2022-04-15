@@ -16,6 +16,7 @@ Returns a list of transactions
 |relationships|enum|`Optional.` You can optionally request that the response include the customer object. To do so, specify relationships=customer in your request.|
 |created_at|string|`Optional.` Filter by created date. [See Filtering](#filtering)|
 |updated_at|string|`Optional.` Filter by updated date. [See Filtering](#filtering)|
+|transaction_details.external_order_id|string|`Optional.` Filter by external order ID. [See Filtering](#filtering)|
 
 Examples
 ```
@@ -66,6 +67,7 @@ Response Body
 > - **customer** - includes customer object in the response
 > - **purchase.receipt** - includes receipt related to transaction
 > - **transaction_sequences** - includes related transactions
+> - **transaction_details** - includes transaction details related to transaction
 
 The value of the relationships parameter MUST be a comma-separated (",") list of relationship names.
 
@@ -160,12 +162,15 @@ and the values for the following:
 Fields:
 - `created_at` - Filter by created date
 - `updated_at` - Filter by updated date
+- `transaction_details.external_order_id` - Filter by external order ID
 
 Operators:
 - `gt` - Greater Than
 - `gte` - Greater Than or Equal
 - `lt` - Less Than
 - `lte` - Less Than or Equal
+- `in` - Match any value in the list. Separated by comma.
+- `between` - Match any value in a range. Separated by comma.
 
 Filter Syntax
 
@@ -176,7 +181,7 @@ Each URL query parameter **must be URL encoded**.
 Example:
 Retrieve all transactions that have created date greather than 2017-01-27T14:37:16+0000
 
-`GET /transactions?created_at=gt%7C2017-01-27T14%3A37%3A16%2B0000`
+`GET /transactions?created_at=gt%7C2017-01-27T14%3A37%3A16%2B0000&transaction_details.external_order_id=in%7CORD0001,ORD0012`
 
 
 **Transaction Types**
@@ -255,11 +260,13 @@ The `employee.pin_code` is required only when redeeming on behalf of the custome
 |offer.id|number|Required with Offer. The Offer ID|
 |coupon|object|Optional. Required when intent is `claim_coupon`. The coupon to be redeemed (claimed)|
 |coupon.id|number|Required with coupon. The Coupon ID|
+|transaction_details|object|Optional. The transaction detail object that will be attached to the transaction|
+|transaction_details.external_order_id|string|Optional. The external order ID|
 
  <!-- `purchase_giftcard`, `send_giftcard` or `adjust_balance` -->
 
 >**Note:**
->Transaction intent is required and must be one of the following: 
+>Transaction intent is required and must be one of the following:
 >- `reward` - Reward points or amount. When using amount, it will be converted to points based on the reward rules
 >- `redeem` - Redeem points, amount or catalog item
 >- `return` - Return points
@@ -543,7 +550,7 @@ Content-Type: application/json
 
 Example assign a coupon to customer (Get coupon)
 
->Note: Only offers with type_id 8, 9, 10 are coupons and can be assigned to a customer 
+>Note: Only offers with type_id 8, 9, 10 are coupons and can be assigned to a customer
 
 ```
 POST /transactions HTTP/1.1
@@ -583,7 +590,7 @@ Response Body
             "expires_at": "2019-10-14T16:07:33+00:00",
             "offer": {...}
         }
-    }       
+    }
 }
 ```
 
@@ -743,10 +750,10 @@ Content-Type: application/json
 ```
 
 > Note: The response might return status 202 without a created transaction resource
-> When reponse status code is 202 there won't be a data object with a transaction resource because 
+> When reponse status code is 202 there won't be a data object with a transaction resource because
 > the referral condition not met
 >
-> It might also return a 404 error if the referral record not found for customer or no active 
+> It might also return a 404 error if the referral record not found for customer or no active
 > referral program exists
 
 
@@ -772,6 +779,26 @@ Content-Type: application/json
 > Note: This transaction will increase the points balance
 > Also, it will not affect the tier level
 
+Example with External order ID
+```
+POST /transactions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+    "intent": "reward",
+    "points": 100,
+    "customer": {
+        "id": "11e8bb6776ea7699b48e089e01cf89b5"
+    },
+    "transaction_details": {
+        "external_order_id": "ORD0001"
+    }
+}
+```
 
 + Request
     + Headers
