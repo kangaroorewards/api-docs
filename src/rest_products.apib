@@ -3,7 +3,9 @@
 
 # Group Products
 
-### POST /products
+## Product [/products]
+
+### Create product [POST]
 
 Create product
 
@@ -17,7 +19,7 @@ Create product
 |images|array|`Required` Up to 4 items|
 |images.*.original|string,url|`Required` The uploaded image path, max: 255|
 |images.*.large|string,url|`Required` The uploaded image path, max: 255|
-|images.*.*medium|string,url|`Required` The uploaded image path, max: 255|
+|images.*.medium|string,url|`Required` The uploaded image path, max: 255|
 |images.*.thumbnail|string,url|`Required` The uploaded image path, max: 255|
 |available_at_branches|array|`Required` - A list of branches where the product is available at. At least one branch is required|
 |available_at_branches.*.id|string|`Required` Branch ID|
@@ -31,7 +33,7 @@ Create product
 
 Example: Create product
 
-```
+```json
 POST /products HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLC...
@@ -40,18 +42,18 @@ Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
 
 {
-  "promote_flag": 1,
-  "product_sku": "AB1234",
-  "product_actual_price": 10.50,
-  "product_real_price": 10.50,
-  "product_languages": [
-      {
-        "language_id": 1,
-        "product_title": "Product A",
-        "product_description": "Product A description.",
-        "product_terms_conditions": "Product A terms and conditions.",
-        "product_link": "https://example.com/some-product-link"
-      }
+    "promote_flag": 1,
+    "product_sku": "AB1234",
+    "product_actual_price": 10.50,
+    "product_real_price": 10.50,
+    "product_languages": [
+        {
+            "language_id": 1,
+            "product_title": "Product A",
+            "product_description": "Product A description.",
+            "product_terms_conditions": "Product A terms and conditions.",
+            "product_link": "https://example.com/some-product-link"
+        }
     ],
     "available_at_branches": [
       {
@@ -73,7 +75,7 @@ Content-Type: application/json
 ```
 
 Response Body
-```
+```json
 {
   "data": {
     "id": 1,
@@ -111,7 +113,7 @@ Response Body
 }
 ```
 
-+ Request
++ Request  (application/json)
     + Headers
 
             Authorization: Bearer <access_token>
@@ -173,7 +175,7 @@ Content-Type: application/json
 ```
 
 Response Body
-```
+```json
 {
   "data": [
     {
@@ -213,16 +215,16 @@ Response Body
 }
 ```
 
-+ Request
++ Request  (application/json)
     + Headers
 
             Authorization: Bearer <access_token>
             X-Application-Key: eyXai0XD7SLLzaOeJW
             Accept: application/vnd.kangaroorewards.api.v1+json;
 
-    + Response 200 (application/json)
-        + Attributes
-            - data (ProductsList Base)
++ Response 200 (application/json)
+    + Attributes
+        - data (ProductsList Base)
 
 
 # Data Structures
