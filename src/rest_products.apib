@@ -1,0 +1,288 @@
+
+# Products
+
+# Group Products
+
+### POST /products
+
+Create product
+
+*Body parameters*
+|Name|Type|Description|
+|-----|----|-----------|
+|promote_flag|integer|`Optional` (0,1) Default 0|
+|product_sku|string|`Optional` Product stock-keeping unit. Min: 3 characters, max: 100 characters|
+|product_actual_price|numeric|`Optional` Product actual price. Default 0|
+|product_real_price|numeric|`Optional` Product real price. Default 0|
+|images|array|`Required` Up to 4 items|
+|images.*.original|string,url|`Required` The uploaded image path, max: 255|
+|images.*.large|string,url|`Required` The uploaded image path, max: 255|
+|images.*.*medium|string,url|`Required` The uploaded image path, max: 255|
+|images.*.thumbnail|string,url|`Required` The uploaded image path, max: 255|
+|available_at_branches|array|`Required` - A list of branches where the product is available at. At least one branch is required|
+|available_at_branches.*.id|string|`Required` Branch ID|
+|product_languages|array|`Required` - At least English is required, language_id = 1|
+|product_languages.*.language_id|integer|`Required` - 1 - English, 2 - French, 3 - Spanish|
+|product_languages.*.product_title|string|`Required` - Product title in that language. max: 255|
+|product_languages.*.product_description|string|`Optional` - Product description in that language. max 500|
+|product_languages.*.product_terms_conditions|string|`Optional` - Product terms and conditions. max: 1000|
+|product_languages.*.product_link|string,url|`Optional` - An external link for product. max: 100|
+
+
+Example: Create product
+
+```
+POST /products HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC...
+X-Application-Key: eyXai0XD7SLLzaOeJW...
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+  "promote_flag": 1,
+  "product_sku": "AB1234",
+  "product_actual_price": 10.50,
+  "product_real_price": 10.50,
+  "product_languages": [
+      {
+        "language_id": 1,
+        "product_title": "Product A",
+        "product_description": "Product A description.",
+        "product_terms_conditions": "Product A terms and conditions.",
+        "product_link": "https://example.com/some-product-link"
+      }
+    ],
+    "available_at_branches": [
+      {
+        "id": "11eaa5c938ec36cc9df9b42e99312ac8"
+      },
+      {
+        "id": "12eac6c914dfbc4e8478b42e99312ac5"
+      }
+    ],
+    "images": [
+        {
+          "original": "https://www.kangaroorewards.com/photos/image.png",
+          "large": "https://www.kangaroorewards.com/photos/image1.png",
+          "medium": "https://www.kangaroorewards.com/photos/image2.png",
+          "thumbnail": "https://www.kangaroorewards.com/photos/image3.png"
+        }
+    ]
+}
+```
+
+Response Body
+```
+{
+  "data": {
+    "id": 1,
+    "title": "Product A",
+    "description": "Product A description.",
+    "images": [
+        {
+            "large": "https://www.kangaroorewards.com/photos/image1.png",
+            "medium": "https://www.kangaroorewards.com/photos/image2.png",
+            "thumbnail": "https://www.kangaroorewards.com/photos/image3.png"
+            "path": "https://www.kangaroorewards.com/photos/image.png",
+            "default": true,
+        }
+    ],
+    "product_sku": "AB1234",
+    "actual_price": 10.50,
+    "real_price": 10.50,
+    "terms_conditions": "",
+    "link": "https://example.com/some-product-link",
+    "product_languages": [
+        {
+          "language_id": 1,
+          "title": "Product A",
+          "description": "Product A description.",
+          "terms_conditions": "Product A terms and conditions.",
+          "link": "https://example.com/some-product-link",
+          "language": {
+            "id":1,
+            "abbreviation": "en",
+            "name": "English"
+          }
+        }
+    ]
+  }
+}
+```
+
++ Request
+    + Headers
+
+            Authorization: Bearer <access_token>
+            X-Application-Key: eyXai0XD7SLLzaOeJW
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+
+    + Body
+
+            {
+                  "promote_flag": 1,
+                  "product_sku": "AB1234",
+                  "product_actual_price": 10.50,
+                  "product_real_price": 10.50,
+                  "product_languages": [
+                      {
+                        "language_id": 1,
+                        "product_title": "Product A",
+                        "product_description": "Product A description.",
+                        "product_terms_conditions": "Product A terms and conditions.",
+                        "product_link": "https://example.com/some-product-link"
+                      }
+                    ],
+                    "available_at_branches": [
+                      {
+                        "id": "11eaa5c938ec36cc9df9b42e99312ac8"
+                      },
+                      {
+                        "id": "12eac6c914dfbc4e8478b42e99312ac5"
+                      }
+                    ],
+                    "images": [
+                        {
+                          "original": "https://www.kangaroorewards.com/photos/image.png",
+                          "large": "https://www.kangaroorewards.com/photos/image1.png",
+                          "medium": "https://www.kangaroorewards.com/photos/image2.png",
+                          "thumbnail": "https://www.kangaroorewards.com/photos/image3.png"
+                        }
+                    ]
+            }
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Product Base)
+
+
+### List all products [GET]
+
+List all products
+
+Example
+
+```
+GET /products HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+  "data": [
+    {
+      "id": 1,
+      "title": "Product A",
+      "description": "Product A description",
+      "images": [
+        {
+            "large": "https://www.kangaroorewards.com/photos/image1.png",
+            "medium": "https://www.kangaroorewards.com/photos/image2.png",
+            "thumbnail": "https://www.kangaroorewards.com/photos/image3.png"
+            "path": "https://www.kangaroorewards.com/photos/image.png",
+            "default": true,
+        }
+      ],
+      "product_sku": "AB123",
+      "actual_price": 10.50,
+      "real_price": 10.50,
+      "terms_conditions": "Product A terms and conditions.",
+      "link": "https://example.com/some-product-link",
+      "product_languages": [
+          {
+            "language_id": 1,
+            "title": "Product A",
+            "description": "Product A description.",
+            "terms_conditions": "Product A terms and conditions.",
+            "link": "https://example.com/some-product-link",
+            "language": {
+              "id":1,
+              "abbreviation": "en",
+              "name": "English"
+            }
+          }
+      ]
+    }
+  ]
+}
+```
+
++ Request
+    + Headers
+
+            Authorization: Bearer <access_token>
+            X-Application-Key: eyXai0XD7SLLzaOeJW
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+
+    + Response 200 (application/json)
+        + Attributes
+            - data (ProductsList Base)
+
+
+# Data Structures
+
+## Product Base (object)
+
++ id: 1 (number) - The product ID 1,2,3
++ title: `Product A` (string) - Product title
++ description: `Product A description` (string) - Product description
++ images (array)
+    + (object)
+        + original: `https://www.kangaroorewards.com/photos/image.png` (string)
+        + large: `https://www.kangaroorewards.com/photos/image1.png` (string)
+        + medium: `https://www.kangaroorewards.com/photos/image2.png` (string)
+        + thumbnail: `https://www.kangaroorewards.com/photos/image3.png` (string)
++ product_sku: `AB123` (string)
++ actual_price: 10.50 (number)
++ real_price: 10.50 (number)
++ terms_conditions: `Product A terms and conditions.` (string)
++ link: `https://example.com/some-product-link` (string)
++ product_languages (array)
+    + (object)
+        + language_id: 1 (number) - Language ID. 1 - English is required
+        + title: `Product A` (string) - max: 255
+        + description: `Product A description.` (string) - max: 500
+        + terms_conditions: `Product A terms and conditions.` (string) - max: 1000
+        + link: `https://example.com/some-product-link` (string) - max: 500
+        + language (array)
+            + (object)
+                + id: 1 (number) - Language ID
+                + abbreviation: `en` - Language abbreviation
+                + name: `English` - Language name
+
+
+## ProductsList Base (array)
+
++ (object)
+    * id: 1 (number) - The product ID 1,2,3
+    * title: `Product A` (string) - Product title
+    * description: `Product A description` (string) - Product description
+    * images (array)
+         * (object)
+             * original: `https://www.kangaroorewards.com/photos/image.png` (string)
+             * large: `https://www.kangaroorewards.com/photos/image1.png` (string)
+             * medium: `https://www.kangaroorewards.com/photos/image2.png` (string)
+             * thumbnail: `https://www.kangaroorewards.com/photos/image3.png` (string)
+   * product_sku: `AB123` (string)
+   * actual_price: 10.50 (number)
+   * real_price: 10.50 (number)
+   * terms_conditions: `Product A terms and conditions.` (string)
+   * link: `https://example.com/some-product-link` (string)
+   * product_languages (array)
+       * (object)
+           * language_id: 1 (number) - Language ID. 1 - English is required
+           * title: `Product A` (string) - max: 255
+           * description: `Product A description.` (string) - max: 500
+           * terms_conditions: `Product A terms and conditions.` (string) - max: 1000
+           * link: `https://example.com/some-product-link` (string) - max: 500
+           * language (array)
+               * (object)
+                   * id: 1 (number) - Language ID
+                   * abbreviation: `en` - Language abbreviation
+                   * name: `English` - Language name
