@@ -1,0 +1,32 @@
+definitions:
+  CouponsResponse:
+    type: "object"
+    x-model: UserCouponsModel
+    properties:
+      data:
+        description: "Contains a list of all coupons available to this user"
+        x-model:
+        $ref: '#/definitions/UserCouponsData'
+  UserCouponsData:
+    type: array
+    items:
+        $ref: '#/definitions/Coupon'
+  Coupon:
+    type: "object"
+    x-model: CouponModel
+    properties:
+      id:
+        type: integer
+        description: A unique ID identifying this coupon
+      qrcode:
+        type: string
+      coupon_locked:
+        type: boolean
+      coupon_redeemed:
+        type: boolean
+      coupon_type:
+        type: string
+      expires_at:
+        type: string
+      offer:
+        $ref: "../offers/offers.yaml#/definitions/Offer"

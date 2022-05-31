@@ -1,0 +1,111 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/transactions:
+    post:
+      summary: |
+        Redeem a coupon. Coupons are created after an offer has been redeemed.
+      operationId: redeemCoupon
+      tags:
+        - redeemCoupons
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: redeemRequest
+          description: The coupon to redeem.
+          required: true
+          schema:
+            type: object
+            required:
+              - intent
+              - pin_code
+              - coupon
+              - offer
+            properties:
+              intent:
+                type: string
+                default: "claim_coupon"
+              pin_code:
+                type: string
+              int:
+                type: string
+              coupon:
+                type: object
+                description: The coupon being redeemed
+                $ref: '#/definitions/CouponRedemption'
+              offer:
+                type: object
+                description: The offer that created this coupon
+                $ref: '#/definitions/OfferRedemption'
+      responses:
+        "200":
+          description: The users' updated balance.
+          schema:
+            $ref: '#/definitions/CouponRedemptionResponse'
+definitions:
+  CouponRedemption:
+    type: object
+    x-model: CouponRedemptionModel
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: A unique ID identifying this coupon.
+  OfferRedemption:
+    type: object
+    x-model: OfferRedemptionModel
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: A unique ID identifying this offer.
+  CouponRedemptionResponse:
+    type: object
+    x-model: CouponRedemptionResponseModel
+    required:
+      - data
+    properties:
+      data:
+        $ref: '#/definitions/CouponRedemptionResponseData'
+  CouponRedemptionResponseData:
+    type: "object"
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+      amount:
+        type: number
+        format: double
+      points:
+        type: integer
+        format: int64
+      name:
+        type: string
+      transaction_type:
+        type: integer
+        format: int64
+      created_at:
+        type: string
+      updated_at:
+        type: string
+      customer:
+        type: object
+        $ref: "schemas/users/userProfile.yaml#/definitions/UserProfile"

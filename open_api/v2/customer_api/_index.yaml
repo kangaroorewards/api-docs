@@ -106,6 +106,24 @@ paths:
       operationId: getUserOffers
       tags:
         - core
+  redeemCoupons:
+    post:
+      x-file: redeemCoupon.yaml
+      operationId: redeemCoupon
+      tags:
+        - core
+  userCoupons:
+    get:
+      x-file: userCoupons.yaml
+      operationId: getUserCoupons
+      tags:
+        - core
+  userUsedCoupons:
+    get:
+      x-file: userUsedCoupons.yaml
+      operationId: getUserUsedCoupons
+      tags:
+        - core
   giftCards:
     get:
       x-file: giftCards.yaml

@@ -1,0 +1,26 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/coupons?coupon_type_id=eq|75&per_page=50:
+    get:
+      summary: Get a list of used coupons for this user.
+      operationId: getUserUsedCoupons
+      tags:
+        - userUsedCoupons
+      responses:
+        "200":
+          description: User used coupon list
+          schema:
+            $ref: 'schemas/coupons/coupons.yaml#/definitions/CouponsResponse'
