@@ -24,7 +24,7 @@ paths:
         - application/json
       parameters:
         - in: body
-          name: redeemRequest
+          name: redeemCouponRequest
           description: The coupon to redeem.
           required: true
           schema:
