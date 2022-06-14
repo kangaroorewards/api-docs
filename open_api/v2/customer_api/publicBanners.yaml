@@ -1,0 +1,26 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /public/banners:
+    get:
+      summary: Acquires public business banners.
+      operationId: getPublicBanners
+      tags:
+        - publicBanners
+      responses:
+        "200":
+          description: Acquires public business banners.
+          schema:
+            $ref: "schemas/banners/banners.yaml#/definitions/Banners"

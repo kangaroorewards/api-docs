@@ -250,6 +250,12 @@ paths:
       operationId: getPublicAlaCarteProducts
       tags:
         - core
+  publicBanners:
+    get:
+      x-file: publicBanners.yaml
+      operationId: getPublicBanners
+      tags:
+        - core
   userTransactionHistory:
     get:
       x-file: userTransactionHistory.yaml
