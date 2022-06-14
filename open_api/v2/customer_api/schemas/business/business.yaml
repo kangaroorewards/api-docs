@@ -118,6 +118,14 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/Branch"
+  PublicBranches:
+    type: "object"
+    x-model: PublicBranchesModel
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/Branch"
   Branch:
     type: object
     properties:

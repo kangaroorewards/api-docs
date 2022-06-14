@@ -1,0 +1,26 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /public/product-rewards?relationships=product:
+    get:
+      summary: Get public A la carte products list
+      operationId: getPublicAlaCarteProducts
+      tags:
+        - publicAlaCarteProducts
+      responses:
+        "200":
+          description: Public A la Carte products list
+          schema:
+            $ref: "schemas/products/products.yaml#/definitions/PublicALaCarteProducts"

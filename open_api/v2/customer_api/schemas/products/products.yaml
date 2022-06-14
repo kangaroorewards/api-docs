@@ -17,6 +17,14 @@ definitions:
         description:
         x-model:
         $ref: '#/definitions/ProductsList'
+  PublicProductsResponse:
+    type: "object"
+    x-model: PublicProductsModel
+    description: A list of products available to all users.
+    properties:
+      data:
+        description: A list of products available to all users.
+        $ref: '#/definitions/ProductsList'
   ProductsList:
     type: array
     items:
@@ -103,6 +111,14 @@ definitions:
       product_rewards:
         description:
         x-model:
+        $ref: '#/definitions/AlaCarteList'
+  PublicALaCarteProducts:
+    type: "object"
+    x-model: PublicALaCarteProductsModel
+    description: A list of a la carte products available to all users.
+    properties:
+      data:
+        description: A list of a la carte products available to all users.
         $ref: '#/definitions/AlaCarteList'
   AlaCarteList:
     type: array

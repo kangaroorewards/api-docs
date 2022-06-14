@@ -220,6 +220,36 @@ paths:
       operationId: getUserRewards
       tags:
         - core
+  publicRewards:
+    get:
+      x-file: publicRewards.yaml
+      operationId: getPublicRewards
+      tags:
+        - core
+  publicOffers:
+    get:
+      x-file: publicOffers.yaml
+      operationId: getPublicOffers
+      tags:
+        - core
+  publicBranches:
+    get:
+      x-file: publicBranches.yaml
+      operationId: getPublicBranches
+      tags:
+        - core
+  publicProducts:
+    get:
+      x-file: publicProducts.yaml
+      operationId: getPublicProducts
+      tags:
+        - core
+  publicAlaCarteProducts:
+    get:
+      x-file: publicALaCarteProducts.yaml
+      operationId: getPublicAlaCarteProducts
+      tags:
+        - core
   userTransactionHistory:
     get:
       x-file: userTransactionHistory.yaml

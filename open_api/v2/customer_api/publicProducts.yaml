@@ -1,0 +1,26 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /public/offers:
+    get:
+      summary: Get a list of products available to all users.
+      operationId: getPublicProducts
+      tags:
+        - publicProducts
+      responses:
+        "200":
+          description: Public products list
+          schema:
+            $ref: 'schemas/products/products.yaml#/definitions/PublicProductsResponse'

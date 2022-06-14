@@ -14,6 +14,13 @@ definitions:
         description: "Contains a list of all rewards available to this user"
         x-model:
         $ref: '#/definitions/Rewards'
+  PublicRewardsResponse:
+    type: "object"
+    x-model: PublicRewardsModel
+    properties:
+      description: "Contains a list of rewards available to all users"
+      data:
+        $ref: '#/definitions/Rewards'
   Rewards:
     type: array
     items:
