@@ -1,0 +1,22 @@
+definitions:
+  DefaultBusiness:
+    type: "object"
+    x-model: DefaultBusiness
+    description: Default business chosen by the user
+    properties:
+      data:
+        description: Details about the default business
+        $ref: '#/definitions/DefaultBusinessData'
+  DefaultBusinessData:
+    type: "object"
+    description: Default Business id data
+    properties:
+      id:
+        type: int
+        description: Unique conglomerate business id
+      default_branch_id:
+        type: string
+        description: Unique branch Id
+      default_business_id:
+        type: string
+        description: Unique business Id
