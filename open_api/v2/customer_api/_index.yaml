@@ -286,3 +286,10 @@ paths:
       operationId: registerPushToken
       tags:
         - core
+
+  getDefaultBusinessId:
+    patch:
+      x-file: getDefaultBusinessId.yaml
+      operationId: getDefaultBusinessId
+      tags:
+        - core
