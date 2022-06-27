@@ -184,19 +184,19 @@ definitions:
       data:
         description: Details about the business public settings
         $ref: '#/definitions/PublicBusinessSettingsData'
-    PublicBusinessSettingsData:
-      type: "object"
-      description: business public settings data
-      properties:
-        id:
-          type: string
-          description: Unique business ID.
-        name:
-          type: string
-          description: The name of this business
-        loyalty_type:
-          type: string
-          description: |
+  PublicBusinessSettingsData:
+     type: "object"
+     description: business public settings data
+     properties:
+       id:
+        type: string
+        description: Unique business ID.
+       name:
+        type: string
+        description: The name of this business
+      loyalty_type:
+        type: string
+        description: |
               The manner in which this business rewards its
               customers. This can be by purchase amount of by visit
               to the store
