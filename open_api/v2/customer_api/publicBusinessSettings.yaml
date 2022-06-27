@@ -1,0 +1,26 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /public/business-settings:
+    get:
+      summary: Get the public settings of a business.
+      operationId: getPublicBusinessSettings
+      tags:
+        - publicBusinessSettings
+      responses:
+        "200":
+          description: Public business settings
+          schema:
+            $ref: 'schemas/business/business.yaml#/definitions/PublicBusinessSettings'
