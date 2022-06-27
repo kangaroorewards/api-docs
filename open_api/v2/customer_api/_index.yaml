@@ -300,3 +300,10 @@ paths:
       operationId: getPublicBusinessSettings
       tags:
         - core
+
+  branches:
+    patch:
+      x-file: branches.yaml
+      operationId: getBusinessBranches
+      tags:
+        - core
