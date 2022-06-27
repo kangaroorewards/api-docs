@@ -181,7 +181,7 @@ definitions:
     x-model: PublicBusinessSettings
     description: public settings related to the business
     properties:
-      data:
+      business:
         description: Details about the business public settings
         $ref: '#/definitions/PublicBusinessSettingsData'
   PublicBusinessSettingsData:
