@@ -194,7 +194,7 @@ definitions:
        name:
         type: string
         description: The name of this business
-      loyalty_type:
+       loyalty_type:
         type: string
         description: |
               The manner in which this business rewards its
