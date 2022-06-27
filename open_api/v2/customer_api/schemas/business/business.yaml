@@ -183,4 +183,11 @@ definitions:
     properties:
       data:
         description: Details about the business public settings
-        $ref: '#/definitions/BusinessData'
+        $ref: '#/definitions/PublicBusinessSettingsData'
+  PublicBusinessSettingsData:
+     type: "object"
+     description: business public settings data
+     properties:
+       business:
+         description: business
+         $ref: '#/definitions/BusinessData'
