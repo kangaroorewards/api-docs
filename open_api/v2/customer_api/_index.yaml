@@ -293,3 +293,10 @@ paths:
       operationId: getDefaultBusinessId
       tags:
         - core
+
+  publicBusinessSettings:
+    patch:
+      x-file: publicBusinessSettings.yaml
+      operationId: getPublicBusinessSettings
+      tags:
+        - core
