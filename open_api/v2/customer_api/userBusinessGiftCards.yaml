@@ -28,4 +28,4 @@ paths:
         "200":
           description: User gift cards list
           schema:
-            $ref: 'schemas/giftcards/giftCards.yaml#/definitions/GiftCardsResponse'
+            $ref: 'schemas/giftcards/giftCards.yaml#/definitions/UserBusinessGiftCardsResponse'
