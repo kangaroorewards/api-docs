@@ -7,6 +7,16 @@ definitions:
         description: "Contains a list of all rewards available to this user"
         x-model:
         $ref: '#/definitions/UserRewardsData'
+  UserBusinessRewardsResponse:
+    type: "object"
+    x-model: UserBusinessRewardsModel
+    properties:
+      data:
+        description: "Contains business data"
+        $ref: "../business/business.yaml#/definitions/BusinessData"
+      included:
+        description: "Contains all rewards items"
+        $ref: '#/definitions/UserRewardsData'
   UserRewardsData:
     type: "object"
     properties:
