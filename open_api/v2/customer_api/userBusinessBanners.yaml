@@ -28,4 +28,4 @@ paths:
         "200":
           description: Acquires business banners.
           schema:
-            $ref: "schemas/banners/banners.yaml#/definitions/Banners"
+            $ref: "schemas/banners/banners.yaml#/definitions/UserBusinessBanners"
