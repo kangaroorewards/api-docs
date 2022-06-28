@@ -1,0 +1,31 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/businesses/{businessId}?include=giftcards:
+    get:
+      summary: Get a list of gift cards available for purchase by specific business
+      operationId: getUserBusinessGiftCards
+      tags:
+        - userBusinessGiftCards
+      parameters:
+        - in: path
+          name: businessId
+          required: true
+          type: string
+      responses:
+        "200":
+          description: User gift cards list
+          schema:
+            $ref: 'schemas/giftcards/giftCards.yaml#/definitions/GiftCardsResponse'
