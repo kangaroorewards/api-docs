@@ -10,6 +10,29 @@ definitions:
         description: A list of all gift cards available to this user
         items:
           $ref: '#/definitions/GiftCard'
+  UserBusinessGiftCardsResponse:
+    type: "object"
+    x-model: UserBusinessGiftCardsModel
+    required:
+      - data
+    properties:
+      data:
+        description: "Contains business data"
+        $ref: "../business/business.yaml#/definitions/BusinessData"
+      included:
+        description: "Contains all gift cards items"
+        $ref: '#/definitions/UserBusinessGiftCardsIncluded'
+  UserBusinessGiftCardsIncluded:
+    type: "object"
+    properties:
+      offers:
+        description:
+        x-model:
+        $ref: '#/definitions/UserBusinessGiftCardsList'
+  UserBusinessGiftCardsList:
+    type: array
+    items:
+      $ref: '#/definitions/GiftCard'
   GiftCard:
     type: "object"
     x-model: GiftCardModel
