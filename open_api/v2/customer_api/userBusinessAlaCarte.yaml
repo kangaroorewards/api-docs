@@ -19,6 +19,11 @@ paths:
       operationId: getUserBusinessAlaCarteProducts
       tags:
         - userBusinessAlaCarteProducts
+      parameters:
+        - in: path
+          name: businessId
+          required: true
+          type: string
       responses:
         "200":
           description: User A la Carte Products
