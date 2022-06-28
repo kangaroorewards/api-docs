@@ -307,3 +307,66 @@ paths:
       operationId: getBusinessBranches
       tags:
         - core
+
+  updateDefaultBusinessId:
+    patch:
+      x-file: updateDefaultBusinessId.yaml
+      operationId: updateDefaultBusinessId
+      tags:
+        - core
+
+  userBusinessAlaCarteProducts:
+    patch:
+      x-file: userBusinessAlaCarteProducts.yaml
+      operationId: getUserBusinessAlaCarteProducts
+      tags:
+        - core
+        -
+  userBusinessBanners:
+    patch:
+      x-file: userBusinessBanners.yaml
+      operationId: getUserBusinessBanners
+      tags:
+        - core
+
+  userBusinessFrequentBuyerPrograms:
+    patch:
+      x-file: userBusinessFrequentBuyerPrograms.yaml
+      operationId: getUserBusinessFrequentBuyerPrograms
+      tags:
+        - core
+
+  userBusinessGiftCards:
+    patch:
+      x-file: userBusinessGiftCards.yaml
+      operationId: getUserBusinessGiftCards
+      tags:
+        - core
+        -
+  userBusinessOffers:
+    patch:
+      x-file: userBusinessOffers.yaml
+      operationId: getUserBusinessOffers
+      tags:
+        - core
+
+  userBusinessProducts:
+    patch:
+      x-file: userBusinessProducts.yaml
+      operationId: getUserBusinessProducts
+      tags:
+        - core
+
+  userBusinessRewards:
+    patch:
+      x-file: userBusinessRewards.yaml
+      operationId: getUserBusinessRewards
+      tags:
+        - core
+
+  userBusinessSocialMediaLinks:
+    patch:
+      x-file: userBusinessSocialMediaLinks.yaml
+      operationId: getUserBusinessSocialMediaLinks
+      tags:
+        - core
