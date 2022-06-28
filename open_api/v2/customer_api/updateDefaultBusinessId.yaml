@@ -24,6 +24,10 @@ paths:
           name: businessId
           required: true
           type: string
+        - in: query
+            name: default_business_id
+            required: true
+            type: string
       responses:
         "200":
           description: Business id
