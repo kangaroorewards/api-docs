@@ -8,6 +8,28 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Banner'
+  UserBusinessBanners:
+    type: object
+    x-model: UserBusinessBannersModel
+    description: Business banners. Used to display promotional material.
+    properties:
+      data:
+        description: "Contains business data"
+        $ref: "../business/business.yaml#/definitions/BusinessData"
+      included:
+        description: "Contains all A la carte items"
+        $ref: '#/definitions/UserBusinessBannersIncluded'
+  UserBusinessBannersIncluded:
+    type: "object"
+    properties:
+      banners:
+        description:
+        x-model:
+        $ref: '#/definitions/UserBusinessBannersList'
+  UserBusinessBannersList:
+    type: array
+    items:
+      $ref: '#/definitions/Banner'
   Banner:
     type: object
     description: A business banner.
