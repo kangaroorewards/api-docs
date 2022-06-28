@@ -25,7 +25,7 @@ definitions:
   UserBusinessGiftCardsIncluded:
     type: "object"
     properties:
-      offers:
+      giftcards:
         description:
         x-model:
         $ref: '#/definitions/UserBusinessGiftCardsList'
