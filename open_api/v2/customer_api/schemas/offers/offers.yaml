@@ -10,6 +10,29 @@ definitions:
         description: A list of all offers available to this user
         items:
           $ref: '#/definitions/Offer'
+  UserBusinessOffersResponse:
+    type: "object"
+    x-model: UserBusinessOffersModel
+    required:
+      - data
+    properties:
+      data:
+        description: "Contains business data"
+        $ref: "../business/business.yaml#/definitions/BusinessData"
+      included:
+        description: "Contains all offers items"
+        $ref: '#/definitions/UserBusinessOffersIncluded'
+  UserBusinessOffersIncluded:
+    type: "object"
+    properties:
+      offers:
+        description:
+        x-model:
+        $ref: '#/definitions/UserBusinessOffersList'
+  UserBusinessOffersList:
+    type: array
+    items:
+      $ref: '#/definitions/Offer'
   Offer:
     type: "object"
     x-model: OfferModel
