@@ -28,4 +28,4 @@ paths:
         "200":
           description: User rewards list
           schema:
-            $ref: 'schemas/rewards/rewards.yaml#/definitions/RewardsResponse'
+            $ref: 'schemas/rewards/rewards.yaml#/definitions/UserBusinessRewardsResponse'
