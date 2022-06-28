@@ -28,4 +28,4 @@ paths:
         "200":
           description: User offer list
           schema:
-            $ref: 'schemas/offers/offers.yaml#/definitions/OffersResponse'
+            $ref: 'schemas/offers/offers.yaml#/definitions/UserBusinessOffersResponse'
