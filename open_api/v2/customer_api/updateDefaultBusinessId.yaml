@@ -26,9 +26,8 @@ paths:
           type: string
         - in: query
             name: default_business_id
+            type: string
             required: true
-            schema:
-              type: string
             description: id of the previous default business
       responses:
         "200":
