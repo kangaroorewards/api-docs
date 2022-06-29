@@ -24,7 +24,7 @@ paths:
           name: businessId
           required: true
           type: string
-        - in: query
+        - in: formData
             name: default_business_id
             type: string
             required: true
