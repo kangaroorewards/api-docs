@@ -13,10 +13,12 @@ consumes:
 produces:
   - application/json
 paths:
-  /users/me/businesses/{businessId}/profile:
+  /users/me/businesses/{businessId}/profile?:
     patch:
       summary: update the last business chosen by the user in the conglomerate feature
       operationId: updateDefaultBusinessId
+      consumes:
+        - application/x-www-form-urlencoded
       tags:
         - updateDefaultBusinessId
       parameters:
@@ -24,10 +26,11 @@ paths:
           name: businessId
           required: true
           type: string
-        - in: query
+          description: id of the conglomerate business
+        - in: formData
           name: default_business_id
-          type: string
           required: true
+          type: string
           description: id of the previous default business
       responses:
         "200":
