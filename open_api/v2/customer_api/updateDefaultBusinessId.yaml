@@ -24,11 +24,11 @@ paths:
           name: businessId
           required: true
           type: string
-        - in: formData
-            name: default_business_id
-            type: string
-            required: true
-            description: id of the previous default business
+        - in: query
+          name: default_business_id
+          type: string
+          required: true
+          description: id of the previous default business
       responses:
         "200":
           description: Business id
