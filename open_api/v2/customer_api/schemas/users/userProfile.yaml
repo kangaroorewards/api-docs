@@ -10,6 +10,25 @@ definitions:
       included:
         description: "Contains user balance data"
         $ref: '#/definitions/UserProfileInclude'
+  UserDetails:
+    type: "object"
+    x-model: UserDetailsModel
+    description: User Details model class containing user details
+    properties:
+      data:
+        description: "Contains all user details"
+        $ref: '#/definitions/UserProfileData'
+  UserBusinessProfile:
+    type: "object"
+    x-model: UserBusinessProfileModel
+    description: User Profile model class containing user data for specific business
+    properties:
+      data:
+        description: "Contains business data"
+        $ref: "../business/business.yaml#/definitions/BusinessData"
+      included:
+        description: "Contains user balance data"
+        $ref: '#/definitions/UserProfileInclude'
   UserProfileData:
     type: "object"
     x-model: UserProfileDataModel
