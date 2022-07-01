@@ -370,3 +370,17 @@ paths:
       operationId: getUserBusinessSocialMediaLinks
       tags:
         - core
+        -
+  userBusinessProfile:
+    patch:
+      x-file: userBusinessProfile.yaml
+      operationId: getUserBusinessProfile
+      tags:
+        - core
+        -
+  userDetails:
+    patch:
+      x-file: userDetails.yaml
+      operationId: getUserDetails
+      tags:
+        - core
