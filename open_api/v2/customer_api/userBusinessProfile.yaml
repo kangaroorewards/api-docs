@@ -19,6 +19,11 @@ paths:
       operationId: getUserBusinessProfile
       tags:
         - userBusinessProfile
+      parameters:
+        - in: path
+          name: businessId
+          required: true
+          type: string
       responses:
         "200":
           description: User profile data
