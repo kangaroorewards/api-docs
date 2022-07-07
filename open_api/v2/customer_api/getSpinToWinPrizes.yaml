@@ -1,0 +1,31 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/businesses/{businessId}/spin-to-win:
+    get:
+      summary: Get the spin to win prizes of a business
+      operationId: getSpinToWinPrizes
+      tags:
+        - getSpinToWinPrizes
+      parameters:
+        - in: path
+          name: businessId
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Spin to win prizes
+          schema:
+            $ref: "schemas\spinToWin\spinToWin.yaml#/definitions/SpinToWinPrizes"
