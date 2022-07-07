@@ -12,7 +12,7 @@ definitions:
     properties:
       spin_win_id:
         type: integer
-        description: spin to win id
+        description: "spin to win id"
       spin_prizes:
         type: array
         description: "List of prizes"
@@ -24,13 +24,13 @@ definitions:
     properties:
       fill_style:
         type: string
-        description: fill style color
+        description: "fill style color"
       text:
         type: string
-        description: prize name
+        description: "prize name"
       desc:
         type: string
-        description: description
+        description: "prize description"
       prize_id:
         type: integer
-        description: prize id
+        description: "prize id"
