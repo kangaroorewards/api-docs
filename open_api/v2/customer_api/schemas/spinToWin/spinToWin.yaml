@@ -1,0 +1,36 @@
+definitions:
+  SpinToWinPrizes:
+    type: "object"
+    x-model: SpinToWinPrizesModel
+    properties:
+      data:
+        description: "Contains a list of all coupons available to this user"
+        x-model:
+        $ref: '#/definitions/SpinToWinPrizesData'
+  SpinToWinPrizesData:
+    type: "object"
+    properties:
+      spin_win_id:
+        type: integer
+        description: spin to win id
+      spin_prizes:
+        type: array
+        description: "List of prizes"
+        items:
+          $ref: '#/definitions/Prize'
+  Prize:
+    type: "object"
+    x-model: PrizeModel
+    properties:
+      fill_style:
+        type: string
+        description: fill style color
+      text:
+        type: string
+        description: prize name
+      desc:
+        type: string
+        description: description
+      prize_id:
+        type: integer
+        description: prize id
