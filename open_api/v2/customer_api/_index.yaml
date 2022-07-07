@@ -384,3 +384,10 @@ paths:
       operationId: getUserDetails
       tags:
         - core
+
+  getSpinToWinPrizes:
+    patch:
+      x-file: getSpinToWinPrizes.yaml
+      operationId: getSpinToWinPrizes
+      tags:
+        - core
