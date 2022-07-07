@@ -28,4 +28,4 @@ paths:
         "200":
           description: Spin to win prizes
           schema:
-            $ref: "schemas\spinToWin\spinToWin.yaml#/definitions/SpinToWinPrizes"
+            $ref: "schemas/spinToWin/spinToWin.yaml#/definitions/SpinToWinPrizes"
