@@ -220,6 +220,12 @@ paths:
       operationId: getUserRewards
       tags:
         - core
+  userDelete:
+    delete:
+      x-file: userDelete.yaml
+      operationId: deleteUserAccount
+      tags:
+        - core
   publicRewards:
     get:
       x-file: publicRewards.yaml
