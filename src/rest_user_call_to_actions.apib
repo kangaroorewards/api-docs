@@ -1,0 +1,46 @@
+# Customer call to actions
+
+## Customer call to actions [/users/me/businesses/{business_id}/call-to-actions]
+
+### Reward customer after complete an action [POST]
+
+*Body parameters*
+|Name|Type|Description|
+|-----|----|-----------|
+|action_id|number|Required. 3: Check-in, 4: Follow Facebook, 5: Complete user profile|
+|branch_id|number|Required.|
+|duration|object|Optional|
+|duration.value|number|Required with duration|
+|duration.unit|string|Required with duration. In: second,minute,hour|
+
+
+Example reward follow facebook action
+
+```
+POST /users/me/businesses/{business_id}/call-to-actions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+  "action_id": 4,
+  "branch_id" : "11ea6d322b6dd08daf33b42e99312acc"
+}
+```
+Example reward complete profile action
+
+```
+POST /users/me/businesses/{business_id}/call-to-actions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+  "action_id": 5,
+  "branch_id" : "11ea6d322b6dd08daf33b42e99312acc"
+}
+```
