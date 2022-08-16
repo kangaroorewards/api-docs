@@ -76,6 +76,12 @@ paths:
       operationId: userCheckIn
       tags:
         - core
+  userScanReceipt:
+    post:
+      x-file: userScanReceipt.yaml
+      operationId: scanReceipt
+      tags:
+        - core
   userAccountVerification:
     post:
       x-file: userVerification.yaml

@@ -1,0 +1,10 @@
+definitions:
+  ScanReceiptResponse:
+    type: "object"
+    x-model: ScanReceiptResponseModel
+    properties:
+      images:
+        type: array
+        items:
+          qr_code_info:
+            type: string

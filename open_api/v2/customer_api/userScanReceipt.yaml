@@ -1,0 +1,46 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/transactions:
+    post:
+      summary: |
+        Scan a purchase receipt with a business
+      operationId: scanReceipt
+      tags:
+        - userScanReceipt
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: scanReceiptRequest
+          description: The scan receipt request.
+          required: true
+          schema:
+            type: object
+            required:
+              - intent
+              - qr_code_info
+            properties:
+              qr_code_info:
+                type: string
+              intent:
+                type: string
+                default: "qr_code"
+      responses:
+        "200":
+          description: |
+            The scan receipt request response.
+          schema:
+            $ref: 'schemas/scanReceipt/scanReceipt.yaml#/definitions/ScanReceiptResponse'
