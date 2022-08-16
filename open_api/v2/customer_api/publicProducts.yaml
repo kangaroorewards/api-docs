@@ -13,7 +13,7 @@ consumes:
 produces:
   - application/json
 paths:
-  /public/offers:
+  /public/products:
     get:
       summary: Get a list of products available to all users.
       operationId: getPublicProducts
