@@ -3,8 +3,7 @@ definitions:
     type: "object"
     x-model: ScanReceiptResponseModel
     properties:
-      images:
+      qr_code_info:
         type: array
         items:
-          qr_code_info:
-            type: string
+          type: string
