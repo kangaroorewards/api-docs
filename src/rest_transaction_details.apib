@@ -1,0 +1,69 @@
+# Transaction Details
+
+# Group Transaction Details
+
+### PATCH /transactions/{id}/details
+
+Update transaction details
+
+**Body parameters**
+
+|Name|Type|Description|
+|-----|----|-----------|
+|transaction_details.external_order_id|string|Optional. The external order ID|
+|transaction_details.custom_field_1|string|Optional. max:255, min:1|
+|transaction_details.custom_field_2|string|Optional. max:255, min:1|
+|transaction_details.custom_field_3|string|Optional. max:255, min:1|
+|transaction_details.custom_field_4|string|Optional. max:255, min:1|
+|transaction_details.custom_field_5|string|Optional. max:255, min:1|
+
+Examples
+```
+PATCH /transactions/1901934/details
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFmODNk
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+{
+  "external_order_id": "ORD374938098",
+  "custom_field_1": "83648-3836"
+}
+
+Response Body
+```
+{
+	"data": {
+		"external_order_id": "ORD374938098",
+		"custom_field_1": "83648-3836",
+		"custom_field_2": null,
+		"custom_field_3": null,
+		"custom_field_4": null,
+		"custom_field_5": null
+	}
+}
+```
+
++ Request
+    + Headers
+
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Transaction details)
+
+
+# Data Structures
+
+## Transaction details (object)
+
++ external_order_id (string)
++ custom_field_1 (string)
++ custom_field_2 (string)
++ custom_field_3 (string)
++ custom_field_4 (string)
++ custom_field_5 (string)
+

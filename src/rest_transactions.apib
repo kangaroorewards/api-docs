@@ -262,6 +262,11 @@ The `employee.pin_code` is required only when redeeming on behalf of the custome
 |coupon.id|number|Required with coupon. The Coupon ID|
 |transaction_details|object|Optional. The transaction detail object that will be attached to the transaction|
 |transaction_details.external_order_id|string|Optional. The external order ID|
+|transaction_details.custom_field_1|string|Optional. max:255, min:1|
+|transaction_details.custom_field_2|string|Optional. max:255, min:1|
+|transaction_details.custom_field_3|string|Optional. max:255, min:1|
+|transaction_details.custom_field_4|string|Optional. max:255, min:1|
+|transaction_details.custom_field_5|string|Optional. max:255, min:1|
 
  <!-- `purchase_giftcard`, `send_giftcard` or `adjust_balance` -->
 
@@ -795,7 +800,12 @@ Content-Type: application/json
         "id": "11e8bb6776ea7699b48e089e01cf89b5"
     },
     "transaction_details": {
-        "external_order_id": "ORD0001"
+        "external_order_id": "ORD0001",
+        "custom_field_1": "34-28599475251",
+        "custom_field_2": null,
+        "custom_field_3": null,
+        "custom_field_4": null,
+        "custom_field_5": null
     }
 }
 ```
