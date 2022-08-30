@@ -2,7 +2,9 @@
 
 # Group Transaction Details
 
-### PATCH /transactions/{id}/details
+## Transaction Details Resource [/transactions/{id}/details]
+
+### Update [PATCH]
 
 Update transaction details
 
@@ -34,16 +36,19 @@ Content-Type: application/json
 Response Body
 ```
 {
-	"data": {
-		"external_order_id": "ORD374938098",
-		"custom_field_1": "83648-3836",
-		"custom_field_2": null,
-		"custom_field_3": null,
-		"custom_field_4": null,
-		"custom_field_5": null
-	}
+    "data": {
+        "external_order_id": "ORD374938098",
+        "custom_field_1": "83648-3836",
+        "custom_field_2": null,
+        "custom_field_3": null,
+        "custom_field_4": null,
+        "custom_field_5": null
+    }
 }
 ```
+
++ Parameters
+    + id: `1234` (required, number) - The Transaction ID.
 
 + Request
     + Headers
