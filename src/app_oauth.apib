@@ -295,10 +295,16 @@ Example Access Token Use
 curl -H "Authorization: Bearer 12345678900987654321-abc34135acde13f13530" https://api.kangaroorewards.com/customers
 ```
 
-#### Refresh Token Flow
-If you would like to request a new access token (and new refresh token), you may do so by sending the authorization server a token refresh request. A typical reason for refreshing a token is that the original access token has expired. A refresh token may only be used once, and using it invalidates the access token that it was issued with.
+#### OAuth - Refresh The Access Token Flow
 
-**1. Use Refresh Token**
+Access tokens have limited lifetimes. If your application needs access to the Kangaroo API beyond the lifetime of a single access token, it can 
+obtain a refresh token. A refresh token allows your application to obtain new access tokens.
+
+If you would like to request a new access token (and new refresh token), you may do so by sending the authorization server a token refresh request. 
+A typical reason for refreshing a token is that the original access token has expired. A refresh token may only be used once, 
+and using it invalidates the access token that it was issued with.
+
+**Use Refresh Token grant type**
 
 Use the refresh_token in your token refresh request, which is a POST request to the token endpoint with the appropriate parameters.
 
@@ -342,6 +348,24 @@ curl --request POST \
   --data 'grant_type=refresh_token&refresh_token=def50200ceef1ff4664d517&client_id=1111&client_secret=cJ57RFk2CibH4o2INJb3L6&scope=admin'
 
 ```
+
+**Store the Refresh Token**
+
+The application should store the refresh token for future use and use the access token to access the Kangaroo API. Once the access token expires, 
+the application uses the refresh token to obtain a new one.
+
+
+>**Note:** Save refresh tokens in secure long-term storage and continue to use them as long as they remain valid. 
+
+**Refresh token expiration**
+
+You must write your code to anticipate the possibility that a granted refresh token might no longer work. A refresh token might stop working for one of these reasons:
+
+- The user has revoked your app's access.
+- The refresh token has not been used for 30 days.
+
+>**Note:** A Refresh Token will expie in 30 days. After 30 days the Refresh Token MUST be refreshed or a new Refresh Token can be obtained by requesting a new Access Token
+
 
 #### OAuth - Password Credentials Grant
 
