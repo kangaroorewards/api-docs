@@ -1,0 +1,28 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/settings/notifications?page=1&per_page=100:
+    get:
+      summary: |
+        Get a users notification settings for a conglomerate business.
+      operationId: getConglomerateNotificationPreferences
+      tags:
+        - getConglomerateNotificationPreferences
+      consumes:
+        - application/json
+      responses:
+        "200":
+          schema:
+            $ref: 'schemas/notificationSettings/notificationSettings.yaml#/definitions/NotificationSettingsModel'

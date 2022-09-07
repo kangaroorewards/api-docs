@@ -106,6 +106,12 @@ paths:
       operationId: getNotificationPreferences
       tags:
         - core
+  getConglomerateNotificationPreferences:
+    get:
+      x-file: userConglomerateNotificationPreferences.yaml
+      operationId: getConglomerateNotificationPreferences
+      tags:
+        - core
   userOffers:
     get:
       x-file: userOffers.yaml
