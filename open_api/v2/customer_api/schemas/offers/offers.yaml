@@ -90,6 +90,8 @@ definitions:
         description: |
           Whether this offer must be claimed on a mobile app
           before being used in store.
+      is_coupon_redeemed:
+        type: boolean
       offer_frequency_id:
         type: integer
       freq_details:
