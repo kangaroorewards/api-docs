@@ -35,6 +35,7 @@ Response Body
         "type": "redeem_discount_amount",
         "title": "Cash back 25$",
         "description": "Cash back 25$",
+        "external_id": "123456789",
         "images": []
       }
     ]
@@ -111,6 +112,7 @@ A reward can only avaliable for the specific branches or all branches.
 |redemption_user_tiers.*.id|integer|`Required` The tier ID.|
 |points|integer|`Required` The points for redeeming this reward.|
 |partner_reward|boolean|This is a Partner Reward or not, only work for the business who enable the partner reward feature.|
+|external_id|`string`|`Optional` External Id|
 |images|array|`Required` Up to 4 items|
 |images.*.original|string,url|`Required` The uploaded image path, max: 255|
 |images.*.large|string,url|`Required` The uploaded image path, max: 255|
@@ -325,6 +327,7 @@ Content-Type: application/json
 - amount: 25 (number)
 - partner_reward: false (boolean) - When the item is a partner reward
 - redeem_for_gift_card: false (boolean) - When redeeming this item it will convert points to giftcard balance
+- external_id: `123456789` (string)
 
 ## Rewards Base (array)
 
@@ -353,6 +356,7 @@ Content-Type: application/json
 + discount_value: 10 (number) - Required if type_id is 18, the discount percentage %
 + real_value: 0 (number) - Required if type_id is 15, the free product's price
 + partner_reward: false (boolean) - When the item is a partner reward
++ external_id: `123456789` (string)
 + redeem_for_gift_card: false (boolean) - Required if type_id is 16, if it's converted to Gift Card
 + reward_languages (array)
     + (object)
