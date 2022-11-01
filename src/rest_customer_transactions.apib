@@ -71,12 +71,13 @@ Response Body
 
 > **NOTE:** You could also request more information using relationship parameter. All possible values:
 > - **branch** - includes branch object for each transaction
+> - **transaction_details** - includes transaction details for each transaction, the transaction is not always having transaction_details.
 
 The value of the relationships parameter MUST be a comma-separated (",") list of relationship names.
 
 Example
 ```
-GET /customers/12e6a34f8e89eb1e9708089e01cf89b5/transactions?relationships=branch HTTP/1.1
+GET /customers/12e6a34f8e89eb1e9708089e01cf89b5/transactions?relationships=branch,transaction_details HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLC
 Accept: application/vnd.kangaroorewards.api.v1+json;
@@ -99,7 +100,8 @@ Response Body
             "id": "11e6a34f8e89eb0e9708089e01cf89b5",
             "name": "Retrorant",
             ...
-        }
+        },
+        "transaction_details": null
     }
   ]
 }
