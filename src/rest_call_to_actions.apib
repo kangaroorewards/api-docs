@@ -11,6 +11,7 @@ Returns a list of call to actions
 |Name|Type|Description|
 |-----|----|-----------|
 |page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
+|include|string|`Optional.` You can optionally include=action in your request.|
 
 Examples
 ```
@@ -27,21 +28,30 @@ Response Body
 {
 	"data": [
 		{
-			"id": 481,
-			"points": 100,
-			"conditions": null,
-			"action_id": 1,
-			"created_at": "2020-03-23T22:00:18+00:00"
-		},
-		{
-			"id": 493,
-			"points": 12,
-			"conditions": {
-				"freq": "once"
-			},
-			"action_id": 4,
-			"created_at": "2022-07-27T17:35:53+00:00"
-		}
+                "id": 26,
+                "points": 0,
+                "result_limit": 0,
+                "freq": null,
+                "count": 1,
+                "duration_min": 0,
+                "duration_unit": null,
+                "conditions": null,
+                "action_id": 1,
+                "created_at": "2020-11-26T21:54:45+00:00"
+            },
+            {
+                "id": 109,
+                "points": 15,
+                "result_limit": 1,
+                "freq": null,
+                "count": 1,
+                "duration_min": 0,
+                "duration_unit": null,
+                "conditions": null,
+                "action_id": 4,
+                "created_at": "2023-01-25T15:10:23+00:00"
+            }
+        }
 	],
 	"links": {
 		"first": "http://api.kangaroorewards.com/call-to-actions?page=1",
@@ -54,10 +64,66 @@ Response Body
 		"from": 1,
 		"path": "http://api.kangaroorewards.com/call-to-actions",
 		"per_page": 15,
-		"to": 3
+		"to": 2
 	}
 }
 ```
+**Filtering**
+
+Supported Fields:
+- `action_id` - Filter by action id
+- `action_required` - Filter by action required
+
+Operators:
+- `gt` - Greater Than
+- `gte` - Greater Than or Equal
+- `lt` - Less Than
+- `lte` - Less Than or Equal
+- `eq` - Equal
+
+Example
+```
+GET /call-to-actions?action_id=eq%7C1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+Accept: application/vnd.kangaroorewards.api.v1+json;
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+	"data": [
+		{
+			"id": 26,
+			"points": 0,
+			"result_limit": 0,
+			"freq": null,
+			"count": 1,
+			"duration_min": 0,
+			"duration_unit": null,
+			"conditions": null,
+			"action_id": 1,
+			"created_at": "2015-12-07T23:21:37+00:00"
+		}
+	],
+	"links": {
+		"first": "https://api.kangaroorewards.com/call-to-actions?page=1",
+		"last": null,
+		"prev": null,
+		"next": null
+	},
+	"meta": {
+		"current_page": 1,
+		"from": 1,
+		"path": "https://api.kangaroorewards.com/call-to-actions",
+		"per_page": 15,
+		"to": 1
+	}
+}
+```
+
 
 ## Call to actions [/call-to-actions]
 
@@ -68,14 +134,12 @@ A call to action is a single action where a customer earns points.
 *Body parameters* common for all actions
 |Name|Type|Description|
 |-----|----|-----------|
-|action_id|number|Required. 3: Check-in, 4: Follow Facebook, 5: Complete user profile|
-|points|number|Required. Reward points once the customer complete this action|
-|conditions|object||
-|conditions.count|number|Required. How many times the action should be rewarded|
-|conditions.freq|string|The frequency with which the event should be repeated. In: hourly,daily,weekly,monthly,yearly,once,unlimited. When action_id is 4, 5, the freq must be "once"|
-|conditions.duration|object||
-|conditions.duration.min|number||
-|conditions.duration.unit|string|In:minute,hour,day,week,month,year|
+|action_id|number|Required. 3: Check-in, 4: Follow Facebook, 5: Complete user profile. 6: Follow Twitter, 7: Follow Instagram, 8: Follow Tiktok|
+|result_limit|number|Optional. The maximum times to trigger the results. Default is 0, means unlimited.|
+|freq|string|Optional. The frequency with which the event should be repeated. In: hourly,daily,weekly,monthly,yearly.|
+|count|number|Optional. How many times the action should be taken for triggering the result. Default: 1|
+|duration_min|number|Optional. |
+|duration_unit|string|Optional. In:minute,hour,day,week,month,year|
 
 *Body parameters* specific for complete profile action
 All common +
@@ -99,10 +163,7 @@ Content-Type: application/json
 {
   "action_id": 4,
   "points" : 15,
-  "conditions":
-      {
-		"freq": "once",
-      }
+  "result_limit": 1
 }
 ```
 Example create complete profile action
@@ -118,9 +179,9 @@ Content-Type: application/json
 {
   "action_id": 5,
   "points" : 15,
+  "result_limit": 1
   "conditions":
       {
-        "freq": "once",
         "requires": [
             "first",
             "last",
@@ -134,3 +195,54 @@ Content-Type: application/json
       }
 }
 ```
+### Update a call to action [PATCH]
+
+*Body parameters* common for all actions
+|Name|Type|Description|
+|-----|----|-----------|
+|result_limit|number|Optional. The maximum times to trigger the results. Default is 0, means unlimited.|
+|freq|string|Optional. The frequency with which the event should be repeated. In: hourly,daily,weekly,monthly,yearly.|
+|count|number|Optional. How many times the action should be taken for triggering the result.|
+|duration_min|number|Optional. |
+|duration_unit|string|Optional. In:minute,hour,day,week,month,year|
+
+*Body parameters* specific for complete profile action
+All common +
+
+|Name|Type|Description|
+|-----|----|-----------|
+|conditions.requires|array|Optional. when action_id is 5. Customer profiles need to be filled to reward the action.|
+|conditions.requires.*|string|Optional. when action_id is 5, In: first,last,birth_date,address,postal_code,consent,custom_field_1,custom_field_2,custom_field_3,custom_field_4,custom_field_5. |
+
+
+Example update follow facebook action
+
+```
+PATCH /call-to-actions/108 HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+  "points" : 200,
+  "result_limit": 1
+}
+```
+
+### Delete a call to action [DELETE]
+
+Example Delete follow facebook action
+
+```
+DELETE /call-to-actions/108 HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+
+
+
