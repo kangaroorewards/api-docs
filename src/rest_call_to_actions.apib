@@ -28,29 +28,32 @@ Response Body
 {
 	"data": [
 		{
-                "id": 26,
-                "points": 0,
-                "result_limit": 0,
-                "freq": null,
-                "count": 1,
-                "duration_min": 0,
-                "duration_unit": null,
-                "conditions": null,
-                "action_id": 1,
-                "created_at": "2020-11-26T21:54:45+00:00"
-            },
-            {
-                "id": 109,
-                "points": 15,
-                "result_limit": 1,
-                "freq": null,
-                "count": 1,
-                "duration_min": 0,
-                "duration_unit": null,
-                "conditions": null,
-                "action_id": 4,
-                "created_at": "2023-01-25T15:10:23+00:00"
-            }
+            "id": 498,
+            "enabled": 1,
+            "points": 10,
+            "result_freq": null,
+            "result_count": 1,
+            "action_freq": null,
+            "action_count": 1,
+            "action_duration_min": 0,
+            "action_duration_unit": null,
+            "conditions": null,
+            "action_id": 6,
+            "created_at": "2023-01-28T18:33:37+00:00"
+        },
+        {
+            "id": 499,
+            "enabled": 1,
+            "points": 10,
+            "result_freq": null,
+            "result_count": 1,
+            "action_freq": null,
+            "action_count": 1,
+            "action_duration_min": 0,
+            "action_duration_unit": null,
+            "conditions": null,
+            "action_id": 7,
+            "created_at": "2023-01-29T01:37:06+00:00"
         }
 	],
 	"links": {
@@ -73,6 +76,7 @@ Response Body
 Supported Fields:
 - `action_id` - Filter by action id
 - `action_required` - Filter by action required
+- `action_enabled` - Filter by enabled
 
 Operators:
 - `gt` - Greater Than
@@ -98,17 +102,19 @@ Response Body
 {
 	"data": [
 		{
-			"id": 26,
-			"points": 0,
-			"result_limit": 0,
-			"freq": null,
-			"count": 1,
-			"duration_min": 0,
-			"duration_unit": null,
-			"conditions": null,
-			"action_id": 1,
-			"created_at": "2015-12-07T23:21:37+00:00"
-		}
+            "id": 481,
+            "enabled": 1,
+            "points": 100,
+            "result_freq": null,
+            "result_count": 0,
+            "action_freq": null,
+            "action_count": 1,
+            "action_duration_min": 0,
+            "action_duration_unit": null,
+            "conditions": null,
+            "action_id": 1,
+            "created_at": "2015-12-07T23:21:37+00:00"
+        }
 	],
 	"links": {
 		"first": "https://api.kangaroorewards.com/call-to-actions?page=1",
@@ -137,11 +143,12 @@ A call to action is a single action where a customer earns points.
 |Name|Type|Description|
 |-----|----|-----------|
 |action_id|number|Required. 3: Check-in, 4: Follow Facebook, 5: Complete user profile. 6: Follow Twitter, 7: Follow Instagram, 8: Follow Tiktok|
-|result_limit|number|Optional. The maximum times to trigger the results. Default is 0, means unlimited.|
-|freq|string|Optional. The frequency with which the event should be repeated. In: hourly,daily,weekly,monthly,yearly.|
-|count|number|Optional. How many times the action should be taken for triggering the result. Default: 1|
-|duration_min|number|Optional. |
-|duration_unit|string|Optional. In:minute,hour,day,week,month,year|
+|result_count|number|Optional. The maximum times to trigger the results. Default is 0, means unlimited.|
+|result_freq|string|Optional. The frequency with which the result should be repeated. In: hourly,daily,weekly,monthly,yearly.|
+|action_count|number|Optional. How many times the action should be taken for triggering the result. Default: 1|
+|action_freq|string|Optional. The frequency with which the event should be repeated. In: hourly,daily,weekly,monthly,yearly.|
+|action_duration_min|number|Optional. |
+|action_duration_unit|string|Optional. In:minute,hour,day,week,month,year|
 
 *Body parameters* specific for complete profile action
 All common +
@@ -165,7 +172,7 @@ Content-Type: application/json
 {
   "action_id": 4,
   "points" : 15,
-  "result_limit": 1
+  "result_count": 1
 }
 ```
 Example create complete profile action
@@ -181,7 +188,7 @@ Content-Type: application/json
 {
   "action_id": 5,
   "points" : 15,
-  "result_limit": 1
+  "result_count": 1
   "conditions":
       {
         "requires": [
@@ -202,11 +209,12 @@ Content-Type: application/json
 *Body parameters* common for all actions
 |Name|Type|Description|
 |-----|----|-----------|
-|result_limit|number|Optional. The maximum times to trigger the results. Default is 0, means unlimited.|
-|freq|string|Optional. The frequency with which the event should be repeated. In: hourly,daily,weekly,monthly,yearly.|
-|count|number|Optional. How many times the action should be taken for triggering the result.|
-|duration_min|number|Optional. |
-|duration_unit|string|Optional. In:minute,hour,day,week,month,year|
+|result_count|number|Optional. The maximum times to trigger the results. Default is 0, means unlimited.|
+|result_freq|string|Optional. The frequency with which the result should be repeated. In: hourly,daily,weekly,monthly,yearly.|
+|action_count|number|Optional. How many times the action should be taken for triggering the result. Default: 1|
+|action_freq|string|Optional. The frequency with which the event should be repeated. In: hourly,daily,weekly,monthly,yearly.|
+|action_duration_min|number|Optional. |
+|action_duration_unit|string|Optional. In:minute,hour,day,week,month,year|
 
 *Body parameters* specific for complete profile action
 All common +
@@ -229,7 +237,7 @@ Content-Type: application/json
 
 {
   "points" : 200,
-  "result_limit": 1
+  "result_count": 1
 }
 ```
 
