@@ -59,3 +59,13 @@ definitions:
         type: integer
       status:
         type: string
+  PerformSocialMediaActionRequest:
+    type: "object"
+    required:
+      - action_id
+      - branch_id
+    properties:
+      action_id:
+        type: integer
+      branch_id:
+        type: string

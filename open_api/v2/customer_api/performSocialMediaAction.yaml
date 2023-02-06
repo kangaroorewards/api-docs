@@ -34,14 +34,7 @@ paths:
           required: true
           schema:
             type: object
-            required:
-              - action_id
-              - branch_id
-            properties:
-              action_id:
-                type: integer
-              branch_id:
-                type: string
+            $ref: 'schemas/socialMediaLinks/socialMediaLinks.yaml#/definitions/PerformSocialMediaActionRequest'
       responses:
         "200":
           description: The user had performed a social media action.
