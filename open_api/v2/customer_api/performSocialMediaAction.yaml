@@ -42,4 +42,4 @@ paths:
         "200":
           description: The user had performed a social media action.
           schema:
-            $ref: "schemas/socialMediaLinks/socialMediaLinks.yaml#/definitions/SocialMediaLinks"
+            $ref: "schemas/socialMediaLinks/socialMediaLinks.yaml#/definitions/PerformActionResponse"
