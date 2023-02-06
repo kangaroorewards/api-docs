@@ -28,18 +28,13 @@ paths:
           type: integer
           description: The ID of the business.
           required: true
-        - name: action_id
+        - name: performSocialMediaActionRequest
           in: body
           schema:
-            type: integer
-          description: The ID of the action.
+            type: object
+          description: A request for performing a social media action.
           required: true
-        - name: branch_id
-          in: body
-          schema:
-            type: string
-          description: The ID of the branch the action is being performed at.
-          required: true
+          $ref: 'schemas/socialMediaLinks/socialMediaLinks.yaml#/definitions/PerformSocialMediaActionRequest'
       responses:
         "200":
           description: The user had performed a social media action.
