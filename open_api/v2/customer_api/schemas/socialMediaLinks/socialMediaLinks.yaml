@@ -43,18 +43,18 @@ definitions:
         format: int64
       action_id:
         type: integer
-  PerformSocialMediaActionResponse:
-    type: "object"
-    x-model: PerformSocialMediaActionResponseModel
-    properties:
-      data:
-        description: "Contains social media action data"
-        $ref: '#/definitions/PerformActionResponse'
-  PerformActionResponse:
-    type: "object"
-    x-model: PerformActionResponseModel
-    properties:
-      id:
-        type: integer
-      status:
-        type: string
+#  PerformSocialMediaActionResponse:
+#    type: "object"
+#    x-model: PerformSocialMediaActionResponseModel
+#    properties:
+#      data:
+#        description: "Contains social media action data"
+#        $ref: '#/definitions/PerformActionResponse'
+#  PerformActionResponse:
+#    type: "object"
+#    x-model: PerformActionResponseModel
+#    properties:
+#      id:
+#        type: integer
+#      status:
+#        type: string
