@@ -1,0 +1,45 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/businesses/{business_id}/actions:
+    post:
+      summary: |
+        To perform a social media action and get rewarded after.
+      operationId: performSocialMediaAction
+      tags:
+        - performSocialMediaAction
+      consumes:
+        - application/json
+      parameters:
+        - name: business_id
+          in: path
+          type: integer
+          description: The ID of the business.
+          required: true
+        - name: action_id
+          in: body
+          type: integer
+          description: The ID of the action.
+          required: true
+        - name: branch_id
+          in: body
+          type: string
+          description: The ID of the branch the action is being performed at.
+          required: true
+      responses:
+        "200":
+          description: The user had performed a social media action.
+          schema:
+            $ref: "schemas/socialMediaLinks/socialMediaLinks.yaml#/definitions/PerformSocialMediaActionResponse"
