@@ -409,3 +409,10 @@ paths:
       operationId: getSpinToWinPrizes
       tags:
         - core
+
+  performSocialMediaAction:
+    patch:
+      x-file: performSocialMediaAction.yaml
+      operationId: performSocialMediaAction
+      tags:
+        - core
