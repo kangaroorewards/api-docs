@@ -61,6 +61,7 @@ definitions:
         type: string
   PerformSocialMediaActionRequest:
     type: "object"
+    x-model: PerformSocialMediaActionRequestModel
     required:
       - action_id
       - branch_id
