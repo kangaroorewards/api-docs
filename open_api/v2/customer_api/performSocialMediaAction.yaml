@@ -28,16 +28,16 @@ paths:
           type: integer
           description: The ID of the business.
           required: true
-        - name: action_id
-          in: body
-          type: integer
-          description: The ID of the action.
-          required: true
-        - name: branch_id
-          in: body
-          type: string
-          description: The ID of the branch the action is being performed at.
-          required: true
+#        - name: action_id
+#          in: body
+#          type: integer
+#          description: The ID of the action.
+#          required: true
+#        - name: branch_id
+#          in: body
+#          type: string
+#          description: The ID of the branch the action is being performed at.
+#          required: true
       responses:
         "200":
           description: The user had performed a social media action.
