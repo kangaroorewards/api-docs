@@ -410,9 +410,9 @@ paths:
       tags:
         - core
 
-  performSocialMediaAction:
-    post:
-      x-file: performSocialMediaAction.yaml
-      operationId: performSocialMediaAction
-      tags:
-        - core
+#  performSocialMediaAction:
+#    post:
+#      x-file: performSocialMediaAction.yaml
+#      operationId: performSocialMediaAction
+#      tags:
+#        - core
