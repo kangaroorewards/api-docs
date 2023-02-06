@@ -43,13 +43,13 @@ definitions:
       action_id:
         type: integer
   PerformSocialMediaActionResponse:
-    type: object
+    type: "object"
     x-model: PerformSocialMediaActionResponseModel
     properties:
       data:
         $ref: '#/definitions/PerformActionResponse'
   PerformActionResponse:
-    type: object
+    type: "object"
     properties:
       id:
         type: integer
