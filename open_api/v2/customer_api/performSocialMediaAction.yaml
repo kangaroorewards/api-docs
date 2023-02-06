@@ -29,6 +29,7 @@ paths:
           description: The ID of the business.
         - name: performSocialMediaActionRequest
           in: body
+          required: true
           description: A request for performing a social media action.
           schema:
             type: object
