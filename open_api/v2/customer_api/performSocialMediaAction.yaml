@@ -19,7 +19,7 @@ paths:
         To perform a social media action and get rewarded after.
       operationId: performSocialMediaAction
       tags:
-        - performSocialMediaAction
+        - socialMediaActionPerform
       consumes:
         - application/json
       parameters:
