@@ -28,3 +28,30 @@ definitions:
         type: string
       url:
         type: string
+      business_action:
+        $ref: '#/definitions/BusinessAction'
+      user_action_completed:
+        type: boolean
+  BusinessAction:
+    type: "object"
+    properties:
+      id:
+        type: integer
+      points:
+        type: integer
+        format: int64
+      action_id:
+        type: integer
+  PerformSocialMediaActionResponse:
+    type: object
+    x-model: PerformSocialMediaActionResponseModel
+    properties:
+      data:
+        $ref: '#/definitions/PerformActionResponse'
+  PerformActionResponse:
+    type: object
+    properties:
+      id:
+        type: integer
+      status:
+        type: string
