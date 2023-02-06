@@ -25,14 +25,11 @@ paths:
       parameters:
         - in: path
           name: businessId
-          schema:
-            type: integer
-          required: true
+          type: integer
           description: The ID of the business.
         - name: performSocialMediaActionRequest
           in: body
           description: A request for performing a social media action.
-          required: true
           schema:
             type: object
             $ref: 'schemas/socialMediaLinks/socialMediaLinks.yaml#/definitions/PerformSocialMediaActionRequest'
