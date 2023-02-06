@@ -25,9 +25,10 @@ paths:
       parameters:
         - name: businessId
           in: path
-          type: string
           description: The ID of the business.
           required: true
+          schema:
+            type: string
         - name: performSocialMediaActionRequest
           in: body
           description: A request for performing a social media action.
