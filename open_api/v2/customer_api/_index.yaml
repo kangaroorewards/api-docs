@@ -411,7 +411,7 @@ paths:
         - core
 
   performSocialMediaAction:
-    patch:
+    post:
       x-file: performSocialMediaAction.yaml
       operationId: performSocialMediaAction
       tags:
