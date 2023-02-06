@@ -36,12 +36,12 @@ paths:
             type: object
             required:
               - action_id
-              - status
+              - branch_id
             properties:
               action_id:
                 type: integer
-              status:
-                branch_id: string
+              branch_id:
+                type: string
       responses:
         "200":
           description: The user had performed a social media action.
