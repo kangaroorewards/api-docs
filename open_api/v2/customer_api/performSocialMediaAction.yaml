@@ -23,10 +23,10 @@ paths:
       consumes:
         - application/json
       parameters:
-        - name: business_id
-          in: path
-          schema:
-            type: integer
+        - in: path
+          name: business_id
+          type: integer
+          format: int64
           description: The ID of the business.
           required: true
         - name: performSocialMediaActionRequest
