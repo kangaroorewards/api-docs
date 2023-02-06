@@ -30,6 +30,7 @@ definitions:
         type: string
       business_action:
         $ref: '#/definitions/BusinessAction'
+        type: object
       user_action_completed:
         type: boolean
   BusinessAction:
