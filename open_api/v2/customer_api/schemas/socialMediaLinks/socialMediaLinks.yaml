@@ -50,11 +50,11 @@ definitions:
       data:
         description: "Contains social media action data"
         $ref: '#/definitions/PerformActionResponse'
-#  PerformActionResponse:
-#    type: "object"
-#    x-model: PerformActionResponseModel
-#    properties:
-#      id:
-#        type: integer
-#      status:
-#        type: string
+  PerformActionResponse:
+    type: "object"
+    x-model: PerformActionResponseModel
+    properties:
+      id:
+        type: integer
+      status:
+        type: string
