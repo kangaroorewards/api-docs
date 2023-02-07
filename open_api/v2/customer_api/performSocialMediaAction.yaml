@@ -27,7 +27,7 @@ paths:
           name: businessId
           required: true
           description: The ID of the business.
-          type: integer
+          type: string
         - in: body
           name: performSocialMediaActionRequest
           required: true
