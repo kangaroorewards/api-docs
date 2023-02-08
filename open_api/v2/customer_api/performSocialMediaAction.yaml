@@ -23,11 +23,6 @@ paths:
       consumes:
         - application/json
       parameters:
-        - in: path
-          name: businessId
-          required: true
-          description: The ID of the business.
-          type: string
         - in: body
           name: performSocialMediaActionRequest
           required: true
@@ -35,6 +30,11 @@ paths:
           schema:
             type: object
             $ref: 'schemas/socialMediaLinks/socialMediaLinks.yaml#/definitions/PerformSocialMediaActionRequest'
+        - in: path
+          name: businessId
+          required: true
+          description: The ID of the business.
+          type: string
       responses:
         "200":
           description: The user had performed a social media action.
