@@ -540,16 +540,34 @@ Activate or deactivate a customer
 ```
 PUT /customers/12e69610400894b2b02089e01cf89b5
 {
-  "enabled": true
+  "enabled": true
 }
 ```
 
 ```
 PUT /customers/12e69610400894b2b02089e01cf89b5
 {
-  "enabled": false
+ "enabled": false
 }
 ```
+
+Update address
+```
+PUT /customers/12e69610400894b2b02089e01cf89b5
+{
+  "address": {
+    "street": "9500 Madisson Avenue",
+    "city": "Austin",
+    "region": "Texas",
+    "country": "United States",
+    "country_code": "US",
+    "lat": 47.22,
+    "long": 33.33,
+    "zip_code": "78757"
+  }
+}
+```
+
 
 + Parameters
     + id: `11e696103f8ff5eabb02089e01cf89b5` - The unique ID of the customer.
