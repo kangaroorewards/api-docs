@@ -27,11 +27,11 @@ paths:
         - in: formData
           name: verification_code
           required: true
-          type: integer
+          type: string
         - in: formData
           name: pin_code
           required: true
-          type: integer
+          type: string
         - in: formData
           name: email
           required: false
