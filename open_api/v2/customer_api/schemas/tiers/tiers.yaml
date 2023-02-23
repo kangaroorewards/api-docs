@@ -20,6 +20,10 @@ definitions:
       and visiting the business, the user can be rewarded with
       different tier levels.
     properties:
+      tier_level:
+        description: |
+          User's tier status.
+        $ref: "#/definitions/UserTierLevel"
       tiers:
         description: |
           Information about the tier program.
@@ -29,14 +33,24 @@ definitions:
           different tier levels.
         x-model:
         $ref: '#/definitions/Tiers'
+      tier_progress:
+        description: |
+          User's tier progress and status. If a user's tier status is
+          statically fixed, this will be null as they do not progress from
+          tier to tier.
+        $ref: "#/definitions/TierProgress"
   Tiers:
-    type: "object"
+    type: "array"
     description: |
       Information about the tier program.
       Users can move through different tiers if a business has
       activated their tier program. By acquire points, making purchases,
       and visiting the business, the user can be rewarded with
       different tier levels.
+    items:
+      $ref: '#/definitions/Tier'
+  Tier:
+    type: "object"
     properties:
       id:
         type: integer
@@ -51,7 +65,7 @@ definitions:
         type: integer
       reset_type:
         type: integer
-      resset_period_month:
+      reset_period_month:
         type: integer
         description: The month in which this tier program will reset.
       base_previous_period:
@@ -64,9 +78,51 @@ definitions:
         items:
           $ref: '#/definitions/TierLevel'
         description: The various tier levels within this tier program.
+      reset_by_customer_registration_month:
+        type: boolean
+        description: To control whether to use customer registration month for reset..
+      grace_period:
+        type: string
+        description: How many months after the reset month.
   TierLevel:
     type: "object"
     description: Represents a single tier level.
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: The ID for this tier.
+      name:
+        type: string
+        description: The name of this tier level.
+      reach_spend:
+        type: integer
+        format: int64
+        description: The amount of money spent required to reach this tier.
+      reach_visits:
+        type: integer
+        format: int64
+        description: The amount of visits made to reach this tier.
+      reach_points:
+        type: integer
+        format: int64
+        description: The amount of points acquired that is required to reach this tier.
+      icon:
+        type: string
+        description: The icon of this tier level.
+      tier_perks:
+        type: array
+        items:
+          $ref: '#/definitions/TierPerk'
+        description: The perks related to this tier level.
+      languages:
+        type: array
+        items:
+          $ref: '#/definitions/TierLevelTranslation'
+        description: translation for each tier level.
+  UserTierLevel:
+    type: "object"
+    description: Represents the user's current tier level.
     properties:
       id:
         type: integer
@@ -130,3 +186,92 @@ definitions:
           The amount of points left in the user's current tier progress.
           Once they have acquired this many more amount of points, they
           will be moved into the next tier.
+      left_amount:
+        type: integer
+        format: int64
+        description: |
+          The amount of spend left in the user's current tier progress.
+          Once they have acquired this many more amount of spend, they
+          will be moved into the next tier.
+      left_visits:
+        type: integer
+        format: int64
+        description: |
+          The amount of visits left in the user's current tier progress.
+          Once they have acquired this many more amount of visits, they
+          will be moved into the next tier.
+      total_points:
+        type: integer
+        format: int64
+        description: |
+          Purchase points between start_date and end_date.
+      total_amount:
+        type: integer
+        format: int64
+        description: |
+          Purchase amount between start_date and end_date.
+      total_visits:
+        type: integer
+        format: int64
+        description: |
+          Purchase visits between start_date and end_date.
+  TierPerk:
+    type: "object"
+    description: Represents a single tier perk for a tier level.
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: The ID for this tier perk.
+      title:
+        type: string
+        description: The title of this tier perk.
+      tier_id:
+        type: integer
+        format: int64
+        description: The ID for the tier level this tier perk is related to.
+      offer_id:
+        type: integer
+        format: int64
+      punch_item_id:
+        type: integer
+        format: int64
+      enabled:
+        type: boolean
+        description: The icon of this tier level.
+      languages:
+        type: array
+        items:
+          $ref: '#/definitions/TierPerkTranslation'
+        description: The perks related to this tier level.
+  TierLevelTranslation:
+    type: "object"
+    properties:
+      language_id:
+        type: integer
+        format: int64
+        description: The ID of teh language.
+      name:
+        type: string
+        description: The name of this tier level as translated.
+      description:
+        type: string
+        description: The description of this tier level as translated.
+      language:
+        description: The language for which this translation applies.
+        type: object
+        $ref: './../languages/language.yaml'
+  TierPerkTranslation:
+    type: "object"
+    properties:
+      language_id:
+        type: integer
+        format: int64
+        description: The ID of teh language.
+      title:
+        type: string
+        description: The name of this tier level as translated.
+      language:
+        description: The language for which this translation applies.
+        type: object
+        $ref: './../languages/language.yaml'
