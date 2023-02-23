@@ -13,7 +13,7 @@ consumes:
 produces:
   - application/json
 paths:
-  /users/me?include=tiers&relationships=tier_levels:
+  /users/me?include=tier_level,tiers,tier_levels,tier_perks,tier_progress:
     get:
       summary: |
         Acquires information about the tier program.
