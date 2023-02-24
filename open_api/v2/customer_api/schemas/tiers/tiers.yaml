@@ -236,7 +236,7 @@ definitions:
       punch_item_id:
         type: integer
         format: int64
-      enabled:
+      is_enabled:
         type: boolean
         description: The icon of this tier level.
       languages:
