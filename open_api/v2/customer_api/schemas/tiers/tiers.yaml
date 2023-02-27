@@ -56,7 +56,7 @@ definitions:
         type: integer
         format: int64
         description: The ID for this tier program.
-      tier_sequence:
+      tiers_sequence:
         type: array
         items:
           type: integer
