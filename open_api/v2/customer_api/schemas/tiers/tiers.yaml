@@ -61,8 +61,9 @@ definitions:
         items:
           type: integer
         description: The sequence for this tier program.
-      tier_relations:
-        type: integer
+      is_combined:
+        type: boolean
+        description: If the tier program is an 'and' or 'or'
       reset_type:
         type: integer
       reset_period_month:
