@@ -74,6 +74,9 @@ definitions:
       enabled:
         type: boolean
         description: Whether this tier program is currently enabled or disabled.
+      default_tier_icon:
+        type: string
+        description: Default icon to show in case the user has no current tier level.
       tier_levels:
         type: array
         items:
