@@ -100,8 +100,8 @@ definitions:
         type: string
         description: The name of this tier level.
       reach_spend:
-        type: integer
-        format: int64
+        type: number
+        format: float
         description: The amount of money spent required to reach this tier.
       reach_visits:
         type: integer
@@ -191,8 +191,8 @@ definitions:
           Once they have acquired this many more amount of points, they
           will be moved into the next tier.
       left_amount:
-        type: integer
-        format: int64
+        type: number
+        format: float
         description: |
           The amount of spend left in the user's current tier progress.
           Once they have acquired this many more amount of spend, they
@@ -210,8 +210,8 @@ definitions:
         description: |
           Purchase points between start_date and end_date.
       total_amount:
-        type: integer
-        format: int64
+        type: number
+        format: float
         description: |
           Purchase amount between start_date and end_date.
       total_visits:
