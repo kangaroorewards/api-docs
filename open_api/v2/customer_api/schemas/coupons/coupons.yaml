@@ -18,6 +18,15 @@ definitions:
       id:
         type: integer
         description: A unique ID identifying this coupon
+      title:
+        type: string
+        description: The coupon title.
+      description:
+        type: string
+        description: The coupon description.
+      terms_conditions:
+        type: string
+        description: The terms and conditions attached to this coupon.
       qrcode:
         type: string
       coupon_locked:
