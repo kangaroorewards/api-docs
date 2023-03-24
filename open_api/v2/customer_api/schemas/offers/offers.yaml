@@ -169,6 +169,21 @@ definitions:
       offer_link:
         description: The language appropriate link of this offer.
         type: string
+      coupon_title:
+        description: The translated coupon title.
+        type: string
+      coupon_description:
+        description: The translated coupon description.
+        type: string
+      coupon_terms_conditions:
+        description: The translated coupon terms and conditions.
+        type: string
+      coupon_link:
+        description: The language appropriate link of this coupon.
+        type: string
+      coupon_available_at:
+        description: where is this coupon available at.
+        type: string
       language:
         description: The language for which this translation applies.
         type: object
