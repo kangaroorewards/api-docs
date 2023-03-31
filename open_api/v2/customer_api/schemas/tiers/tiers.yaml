@@ -240,9 +240,12 @@ definitions:
       punch_item_id:
         type: integer
         format: int64
-      is_enabled:
+      enabled:
         type: boolean
-        description: The icon of this tier level.
+        description: Whether this tier perk is currently enabled or disabled.
+      is_expired:
+        type: boolean
+        description: Whether the offer this tier perk is currently attached to is expired or not.
       languages:
         type: array
         items:
