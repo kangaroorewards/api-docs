@@ -18,7 +18,7 @@ List all rewards for a customer.
 |-----|----|-----------|
 |per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15; Maximum value 100|
 |page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
-
+|branch.id|string|`Optional.` The branch ID where the rewards are available. [See Filtering](#filtering)|
 
 Example
 
@@ -68,6 +68,33 @@ Response Body
 + Response 200 (application/json)
     + Attributes
         - data (Customer Rewards Base)
+
+
+<a name="filtering"></a>
+
+**Filtering**
+
+When submitting a GET request, you can ask it to return only rewards that meet specific criteria.
+To filter rewards, in the query string, specify the field with an operator, followed by a separator (`|`)
+and the values for the following:
+
+Fields:
+- `branch.id` - Filter by branch id, the operator is "eq" or "in"
+
+Operators:
+- `in` - Match any value in the list. Separated by comma.
+- `eq` - Equal
+
+Filter Syntax
+
+A single filter uses the form: `field=operator|VALUE`
+
+Each URL query parameter **must be URL encoded**.
+
+Example:
+Retrieve all rewards that are available in a specific branch
+
+`GET /customers/12e6a34f8e89eb1e9708089e01cf89b5/rewards?branch.id=eq%7C11ec423d0046912d9800e2865c66d9cc`
 
 
 # Data Structures
