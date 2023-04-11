@@ -54,22 +54,6 @@ Response Body
 }
 ```
 
-+ Parameters
-    + customer_id: `12e6a34f8e89eb1e9708089e01cf89b5` (required, string) - ID of the customer
-
-+ Request
-    + Headers
-
-            Authorization: Bearer <access_token>
-            Accept: application/vnd.kangaroorewards.api.v1+json;
-            X-Application-Key: <your_application_key>
-            Content-Type: application/json
-
-+ Response 200 (application/json)
-    + Attributes
-        - data (Customer Rewards Base)
-
-
 <a name="filtering"></a>
 
 **Filtering**
@@ -95,6 +79,22 @@ Example:
 Retrieve all rewards that are available in a specific branch
 
 `GET /customers/12e6a34f8e89eb1e9708089e01cf89b5/rewards?branch.id=eq%7C11ec423d0046912d9800e2865c66d9cc`
+
+
++ Parameters
+    + customer_id: `12e6a34f8e89eb1e9708089e01cf89b5` (required, string) - ID of the customer
+
++ Request
+    + Headers
+
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Application-Key: <your_application_key>
+            Content-Type: application/json
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Customer Rewards Base)
 
 
 # Data Structures
