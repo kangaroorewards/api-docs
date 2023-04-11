@@ -138,78 +138,87 @@ Content-Type: application/json
 ```
 
 Response Body
-```
+```json
 {
-	"data": [
-		{
-			"id": 583,
-			"points": 0,
-			"expires_at": "2038-01-18T19:00:00-05:00",
-			"publish_at": "2021-08-12T00:00:00-04:00",
-			"is_published": true,
-			"offer_languages": [
-				{
-					"id": 624,
-					"language_id": 1,
-					"offer_title": "*2",
-					"offer_link": "",
-					"offer_description": "",
-					"offer_terms_conditions": "",
-					"language": {
-						"id": 1,
-						"abbreviation": "en",
-						"name": "English"
-					}
-				}
-			],
-			"coupon": []
-		},
-		{
-			"id": 1614,
-			"points": 0,
-			"expires_at": "2038-01-18T19:00:00-05:00",
-			"publish_at": "2022-10-05T00:00:00-04:00",
-			"is_published": true,
-			"coupon_convertible": false,
-			"offer_languages": [
-				{
-					"id": 1722,
-					"language_id": 1,
-					"offer_title": "20% OFF",
-					"offer_link": "",
-					"offer_description": "",
-					"offer_terms_conditions": "",
-					"language": {
-						"id": 1,
-						"abbreviation": "en",
-						"name": "English"
-					}
-				}
-			],
-			"coupon": {
-				"id": 12176,
-				"qrcode": "48390008",
-				"coupon_locked": false,
-				"coupon_redeemed": false,
-				"coupon_type_id": 74,
-				"expires_at": "2038-01-19T00:00:00+00:00",
-				"coupon_claimed_at": "2023-03-31T17:30:56+00:00"
-			}
-		}
-	],
-	"links": {
-		"first": "http://api.kangaroorewards.com/customers/11edb21c343c19d692bfe2865c66d9cc/targeted-offers?page=1",
-		"last": null,
-		"prev": null,
-		"next": null
-	},
-	"meta": {
-		"current_page": 1,
-		"from": 1,
-		"path": "http://api.kangaroorewards.com/customers/11edb21c343c19d692bfe2865c66d9cc/targeted-offers",
-		"per_page": 15,
-		"to": 2
-	}
+    "data":
+    [
+        {
+            "id": 583,
+            "points": 0,
+            "expires_at": "2038-01-18T19:00:00-05:00",
+            "publish_at": "2021-08-12T00:00:00-04:00",
+            "is_published": true,
+            "offer_languages":
+            [
+                {
+                    "id": 624,
+                    "language_id": 1,
+                    "offer_title": "*2",
+                    "offer_link": "",
+                    "offer_description": "",
+                    "offer_terms_conditions": "",
+                    "language":
+                    {
+                        "id": 1,
+                        "abbreviation": "en",
+                        "name": "English"
+                    }
+                }
+            ],
+            "coupon":
+            []
+        },
+        {
+            "id": 1614,
+            "points": 0,
+            "expires_at": "2038-01-18T19:00:00-05:00",
+            "publish_at": "2022-10-05T00:00:00-04:00",
+            "is_published": true,
+            "coupon_convertible": false,
+            "offer_languages":
+            [
+                {
+                    "id": 1722,
+                    "language_id": 1,
+                    "offer_title": "20% OFF",
+                    "offer_link": "",
+                    "offer_description": "",
+                    "offer_terms_conditions": "",
+                    "language":
+                    {
+                        "id": 1,
+                        "abbreviation": "en",
+                        "name": "English"
+                    }
+                }
+            ],
+            "coupon":
+            {
+                "id": 12176,
+                "qrcode": "48390008",
+                "coupon_locked": false,
+                "coupon_redeemed": false,
+                "coupon_type_id": 74,
+                "expires_at": "2038-01-19T00:00:00+00:00",
+                "coupon_claimed_at": "2023-03-31T17:30:56+00:00"
+            }
+        }
+    ],
+    "links":
+    {
+        "first": "http://api.kangaroorewards.com/customers/11edb21c343c19d692bfe2865c66d9cc/targeted-offers?page=1",
+        "last": null,
+        "prev": null,
+        "next": null
+    },
+    "meta":
+    {
+        "current_page": 1,
+        "from": 1,
+        "path": "http://api.kangaroorewards.com/customers/11edb21c343c19d692bfe2865c66d9cc/targeted-offers",
+        "per_page": 15,
+        "to": 2
+    }
 }
 ```
 
@@ -225,12 +234,12 @@ Response Body
 
 + Response 200 (application/json)
     + Attributes
-        - data (Customer Offers Base)
+        - data (Customer Target Offers Base)
 
 
 # Data Structures
 
-## Customer Offers Base (array)
+## Customer Target Offers Base (array)
 
 + (object)
     * id: 111
