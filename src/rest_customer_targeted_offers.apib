@@ -1,0 +1,259 @@
+# Customer Targeted Offers
+
+# Group Customer Targeted Offers
+
+## Customer Offer [/customers/{customer_id}/targeted-offers]
+
+### List all Targeted offers [GET]
+
+List all available offers for a customer.
+
+**Path Parameters**
+|Name|Type|Description|
+|-----|----|-----------|
+|customer_id|string|Required. The ID of the customer|
+
+**Query Parameters**
+|Name|Type|Description|
+|-----|----|-----------|
+|relationships|enum|`Optional.` You can optionally request that the response include the branch object. To do so, specify relationships=branch in your request.|
+|per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15; Maximum value 100|
+|page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
+|branch.id|string|`Optional.` The branch ID where the rewards are available. [See Filtering](#filtering)|
+|type_id|integer|`Optional.` Offer Type. Possible options: `1` - Points Multiplier, `2` - Free Product, `3` - Bonus Points, `8` - Basic Offer (Free product), `9` - Basic Offer (percent-off), `10` - Basic Offer (amount-off). [See Filtering](#filtering)|
+|include|string|`Optional.` You can optionally request that the response includes other resources. Specify include=coupon in your request.|
+
+Example
+
+```
+GET /customers/12e6a34f8e89eb1e9708089e01cf89b5/targeted-offers HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+  "data": [
+    {
+        "id": 552,
+        "points": 0,
+        "expires_at": "2017-04-01T03:59:59+0000",
+        "discount_value": 0,
+        "multip_factor": 2,
+        "real_value": 0,
+        "type": "points_multiplier",
+        "title": "Multiply your points",
+        "description": "Come on Monday and Multiply your points",
+        "images": [...],
+    }
+  ]
+}
+```
+
+**Relationships**
+
+> **NOTE:** You could also request more information using relationship parameter. All possible values:
+> - **branch** - includes branch object in the response
+
+The value of the include or relationships parameter MUST be a comma-separated (",") list of relationship names.
+
+Example
+```
+GET /customers/12e6a34f8e89eb1e9708089e01cf89b5/offers?relationships=branch HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+Accept: application/vnd.kangaroorewards.api.v1+json;
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+  "data": [
+    "id": 123,
+    "points": 0,
+    "expires_at": "2017-07-01T03:59:59+0000",
+    "discount_value": 0,
+    "multip_factor": 0,
+    "real_value": 0,
+    "type": "free_product",
+    "title": "Offer Title",
+    "description": "",
+    "images": [...],
+    "branch": {
+      "id": "11e6a34f8e89eb0e9708089e01cf89b5",
+      "name": "Pizza Nova",
+      "web_site": null,
+      "logo": {
+        "large": null,
+        "medium": null,
+        "thumbnail": null
+      },
+      "cover_photo": {
+        "large": null,
+        "medium": null,
+        "thumbnail": null
+      }
+    }
+  ]
+}
+```
+
+<a name="filtering"></a>
+
+**Filtering**
+
+When submitting a GET request, you can ask it to return only offers that meet specific criteria.
+To filter offers, in the query string, specify the field with an operator, followed by a separator (`|`)
+and the values for the following:
+
+Fields:
+- `branch.id` - Filter by branch id, the operator is "eq" or "in"
+- `type_id` - Filter by offer type, the operator is "eq" or "in"
+
+Operators:
+- `in` - Match any value in the list. Separated by comma.
+- `eq` - Equal
+
+Filter Syntax
+
+A single filter uses the form: `field=operator|VALUE`
+
+Each URL query parameter **must be URL encoded**.
+
+Example Retrieve all targeted offers that are available for the ecom branch
+
+```
+GET /customers/12e6a34f8e89eb1e9708089e01cf89b5/targeted-offers?include=coupon&branch.id=eq%7C11ec423d0046912d9800e2865c66d9cc&type_id=in%7C8,9,10,1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+
+Response Body
+```json
+{
+    "data":
+    [
+        {
+            "id": 583,
+            "points": 0,
+            "expires_at": "2038-01-18T19:00:00-05:00",
+            "publish_at": "2021-08-12T00:00:00-04:00",
+            "is_published": true,
+            "offer_languages":
+            [
+                {
+                    "id": 624,
+                    "language_id": 1,
+                    "offer_title": "*2",
+                    "offer_link": "",
+                    "offer_description": "",
+                    "offer_terms_conditions": "",
+                    "language":
+                    {
+                        "id": 1,
+                        "abbreviation": "en",
+                        "name": "English"
+                    }
+                }
+            ],
+            "coupon":
+            []
+        },
+        {
+            "id": 1614,
+            "points": 0,
+            "expires_at": "2038-01-18T19:00:00-05:00",
+            "publish_at": "2022-10-05T00:00:00-04:00",
+            "is_published": true,
+            "coupon_convertible": false,
+            "offer_languages":
+            [
+                {
+                    "id": 1722,
+                    "language_id": 1,
+                    "offer_title": "20% OFF",
+                    "offer_link": "",
+                    "offer_description": "",
+                    "offer_terms_conditions": "",
+                    "language":
+                    {
+                        "id": 1,
+                        "abbreviation": "en",
+                        "name": "English"
+                    }
+                }
+            ],
+            "coupon":
+            {
+                "id": 12176,
+                "qrcode": "48390008",
+                "coupon_locked": false,
+                "coupon_redeemed": false,
+                "coupon_type_id": 74,
+                "expires_at": "2038-01-19T00:00:00+00:00",
+                "coupon_claimed_at": "2023-03-31T17:30:56+00:00"
+            }
+        }
+    ],
+    "links":
+    {
+        "first": "http://api.kangaroorewards.com/customers/11edb21c343c19d692bfe2865c66d9cc/targeted-offers?page=1",
+        "last": null,
+        "prev": null,
+        "next": null
+    },
+    "meta":
+    {
+        "current_page": 1,
+        "from": 1,
+        "path": "http://api.kangaroorewards.com/customers/11edb21c343c19d692bfe2865c66d9cc/targeted-offers",
+        "per_page": 15,
+        "to": 2
+    }
+}
+```
+
++ Parameters
+    + customer_id: `12e6a34f8e89eb1e9708089e01cf89b5` (required, string) - ID of the customer
+
++ Request
+    + Headers
+
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Application-Key: <your_application_key>
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Customer Target Offers Base)
+
+
+# Data Structures
+
+## Customer Target Offers Base (array)
+
++ (object)
+    * id: 111
+    * title: `Offer Title` (string)
+    * points: 3000
+    * type: `free_product` (string)
+    * description: `Some Offer Description` (string)
+    * expires_at: `2027-06-27T02:59:59+00:00` (string)
+    * multip_factor: 2 (number)
++ (object)
+    * id: 112
+    * title: `Offer Title 2` (string)
+    * points: 50000
+    * type: `free_product` (string)
+    * description: `Some Offer Description` (string)
+    * expires_at: `2027-04-27T02:59:59+00:00` (string)
+    * multip_factor: 0 (number)

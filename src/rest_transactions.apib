@@ -237,10 +237,13 @@ The `employee.pin_code` is required only when redeeming on behalf of the custome
 *Body parameters*
 |Name|Type|Description|
 |-----|----|-----------|
-|intent|string|Set the `intent` to: `reward`, `redeem`, `return`, `get_coupon`, `claim_coupon`, `purchase_giftcard_prepaid`, `giftcard_payment`, `adjust_points_balance`|
+|intent|string|Set the `intent` to: `reward`, `redeem`, `return`, `get_coupon`, `claim_coupon`, `purchase_giftcard_prepaid`, `giftcard_payment`, `adjust_points_balance`, `redeem_ecom_coupon`, `claim_ecom_coupon`, `cancel_ecom_coupon`|
 |amount|number|Required if none of `points`, *visits* are present|
 |points|number|Required if none of `amount`, *visits* are present|
 |visits|number|Required if none of `amount`, *points* are present|
+|subtotal|number|Required if intent is redeem_ecom_coupon and catalog_item is not present.|
+|catalog_item|object|Required if intent is redeem_ecom_coupon and amount is not present.|
+|catalog_item.id|string|Required if catalog_item is present|
 |customer|object|Required. The customer object and at least `id`, `email` or `phone` must be provided|
 |customer.id|string|Required if none of `customer.email`, `customer.phone` are present|
 |customer.email|string|Required if none of `customer.id`, `customer.phone` are present|
@@ -284,6 +287,10 @@ The `employee.pin_code` is required only when redeeming on behalf of the custome
 >- `reward_store_credit` - Award Store Credit to customers. It will increase gift card balance
 >- `adjust_points_balance` - Adjust points balance. Points value can be positive (increase balance) or negative (decrease balance)
 >- `reward_referral` - Reward referee and referrer based referral program conditions
+>- `redeem_ecom_coupon` - Redeem points, amount or catalog item and generate ecom coupon code (The business must have ecom integration connected to the Kangaroo Rewards, currently only available on Shopify integration)
+>- `claim_ecom_coupon` - When the customer wants to redeem an offer and generate ecom coupon code (The business must have ecom integration connected to the Kangaroo Rewards, currently only available on Shopify integration)
+>- `cancel_ecom_coupon` - When the customer wants to cancel the redeemed ecom coupon (The business must have ecom integration connected to the Kangaroo Rewards, currently only available on Shopify integration)
+
 
 >**Note:**
 >One of the following attributes is required `amount`, `points` or `visits` when intent is one of the following: `reward`, `redeem`, `return`
@@ -292,8 +299,12 @@ The `employee.pin_code` is required only when redeeming on behalf of the custome
 >To apply visits aggregation set `visits` value greater than 1. The Employee PIN code is also required.
 
 >**Note:**
->Customer object is required and at least `id`, `email` or `phone` is required
->country_code is required when phone number is used
+>Customer object is required and at least `id`, `email` or `phone` is required,
+>country_code is required when phone number is used.
+
+>**Note:**
+>Branch id is required and an ecom_coupon object will be returned in the response when intent is one of the following: `redeem_ecom_coupon`, `claim_ecom_coupon`, `cancel_ecom_coupon`. The branch must be connected to an ecom integration.
+
 
 Example reward amount and a customer with ID
 
@@ -808,6 +819,102 @@ Content-Type: application/json
         "custom_field_3": null,
         "custom_field_4": null,
         "custom_field_5": null
+    }
+}
+```
+
+Example redeem amount and generate an ecom coupon
+
+```
+POST /transactions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+    "intent": "redeem_ecom_coupon",
+    "amount": 5.25,
+    "subtotal": 25.69,
+    "customer": {
+        "id": "11e696103f8ff5eabb02089e01cf89b5"
+    },
+    "branch": {
+        "id": "11e6a34f8e89eb0e9708089e01cf89b5"
+    }
+}
+```
+
+Example redeem a catalog item and generate an ecom coupon
+
+```
+POST /transactions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+    "intent": "redeem_ecom_coupon",
+    "catalog_item": {
+    	"id": "490"
+    },
+    "customer": {
+        "id": "11e696103f8ff5eabb02089e01cf89b5"
+    },
+    "branch": {
+        "id": "11e6a34f8e89eb0e9708089e01cf89b5"
+    }
+}
+```
+
+Example claim an offer and generate an ecom coupon
+
+```
+POST /transactions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+    "intent": "claim_ecom_coupon",
+    "offer": {
+    	"id": 1614
+    },
+    "coupon": {
+    	"id": 11553
+    },
+    "customer": {
+        "id": "11e696103f8ff5eabb02089e01cf89b5"
+    },
+    "branch": {
+        "id": "11e6a34f8e89eb0e9708089e01cf89b5"
+    }
+}
+```
+
+Example cancel an ecom coupon
+
+```
+POST /transactions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+    "intent": "cancel_ecom_coupon",
+    "code": "dpeLsnS",
+    "customer": {
+        "id": "11e696103f8ff5eabb02089e01cf89b5"
+    },
+    "branch": {
+        "id": "11e6a34f8e89eb0e9708089e01cf89b5"
     }
 }
 ```

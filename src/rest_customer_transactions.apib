@@ -21,6 +21,7 @@ Returns a list of transactions
 |page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
 |per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15; Maximum value 100|
 |relationships|enum|`Optional.` You can optionally request the response to include related resources|
+|include|string|`Optional.` You can optionally request that the response includes other resources. Specify include=ecom_coupon in your request.|
 |created_at|string|`Optional.` Filter by created date. [See Filtering](#filtering)|
 |updated_at|string|`Optional.` Filter by updated date. [See Filtering](#filtering)|
 
@@ -73,7 +74,11 @@ Response Body
 > - **branch** - includes branch object for each transaction
 > - **transaction_details** - includes transaction details for each transaction, the transaction is not always having transaction_details.
 
-The value of the relationships parameter MUST be a comma-separated (",") list of relationship names.
+**Include**
+> **NOTE:** You could also request other resource using include parameter. All possible values:
+> - **ecom_coupon** - includes ecom coupon object for each transaction
+
+The value of the include or relationships parameter MUST be a comma-separated (",") list of relationship names.
 
 Example
 ```
