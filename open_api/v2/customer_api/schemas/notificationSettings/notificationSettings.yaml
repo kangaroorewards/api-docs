@@ -1,9 +1,4 @@
 definitions:
-  NotificationSettingsUpdateRequest:
-    type: array
-    x-model: NotificationSettingsUpdateRequest
-    items:
-      $ref: '#/definitions/NotificationSettingsData'
   NotificationSettingsModel:
     type: object
     x-model: NotificationSettingsModel
@@ -21,7 +16,7 @@ definitions:
           The notification settings id. This is not required
           when updating notification settings.
       business:
-        $ref: '#/definitions/NotificationBusinessPayload'
+        $ref: '#/definitions/NotificationBusiness'
       allow_email:
         type: boolean
       allow_sms:
@@ -30,7 +25,7 @@ definitions:
         type: boolean
       allow_sms_status:
         type: integer
-  NotificationBusinessPayload:
+  NotificationBusiness:
     type: object
     description: |
       The business who these settings this affect. This is not required
@@ -41,11 +36,42 @@ definitions:
       name:
         type: string
       settings:
-        $ref: '#/definitions/NotificationBusinessPayloadSettings'
-  NotificationBusinessPayloadSettings:
+        $ref: '#/definitions/NotificationBusinessSettings'
+  NotificationBusinessSettings:
     type: object
     description: |
         The settings of this business.
     properties:
       double_opt_in:
         type: boolean
+  NotificationSettingsUpdateRequest:
+    type: array
+    x-model: NotificationSettingsUpdateRequest
+    items:
+      $ref: '#/definitions/NotificationSettingsDataPayload'
+  NotificationSettingsDataPayload:
+    type: object
+    properties:
+      id:
+        type: string
+        description: |
+          The notification settings id. This is not required
+          when updating notification settings.
+      business:
+        $ref: '#/definitions/NotificationBusinessPayload'
+      allow_email:
+        type: boolean
+      allow_sms:
+        type: boolean
+      allow_push:
+        type: boolean
+  NotificationBusinessPayload:
+    type: object
+    description: |
+      The business who these settings this affect. This is not required
+      when updating notification settings.
+    properties:
+      id:
+        type: string
+      name:
+        type: string
