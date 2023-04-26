@@ -28,6 +28,8 @@ definitions:
         type: boolean
       allow_push:
         type: boolean
+      allow_sms_status:
+        type: integer
   NotificationBusinessPayload:
     type: object
     description: |
@@ -38,3 +40,12 @@ definitions:
         type: string
       name:
         type: string
+    settings:
+      $ref: '#/definitions/NotificationBusinessPayloadSettings'
+    NotificationBusinessPayloadSettings:
+      type: object
+      description: |
+        The settings of this business.
+      properties:
+        double_opt_in:
+          type: boolean
