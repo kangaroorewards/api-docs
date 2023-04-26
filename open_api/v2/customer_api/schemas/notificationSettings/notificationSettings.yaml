@@ -40,12 +40,12 @@ definitions:
         type: string
       name:
         type: string
-    settings:
-      $ref: '#/definitions/NotificationBusinessPayloadSettings'
-    NotificationBusinessPayloadSettings:
-      type: object
-      description: |
+      settings:
+        $ref: '#/definitions/NotificationBusinessPayloadSettings'
+  NotificationBusinessPayloadSettings:
+    type: object
+    description: |
         The settings of this business.
-      properties:
-        double_opt_in:
-          type: boolean
+    properties:
+      double_opt_in:
+        type: boolean
