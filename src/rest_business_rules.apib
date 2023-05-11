@@ -1,0 +1,143 @@
+
+# Business Rules
+
+# Group Business Rules
+
+## Business Rules [/rules]
+
+### Retrieve Business Rules [GET]
+
+Retrieving existing business rules.
+
+Example
+
+```
+GET /rules HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+  "data": {
+    "earning": {
+      "reward_ratio": 100,
+      "reward_amount": 1,
+      "reward_points": 100,
+      "reward_milestone_amount": 1,
+      "welcome_points": 100
+    },
+    "redeeming": {
+      "redemption_ratio": 2,
+      "redemption_amount": 1
+    },
+    "currency": null
+  }
+}
+```
+
++ Request
+    + Headers
+
+            Authorization: Bearer <access_token>
+            X-Application-Key: eyXai0XD7SLLzaOeJW
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Business Rules Base)
+
+
+### Update Business Rules [PUT]
+
+Update business rules.
+
+**Body Parameters**
+|Name|Type|Description|
+|-----|----|-----------|
+|reward_ratio|numeric|`Optional.` The number of points customer will earn for each $1. Positive number. Minimum: 0|
+|reward_milestone_amount|numeric|`Optional.` For each $x. Positive number. Minimum: 1|
+|redemption_ratio|numeric|`Optional.` Redemption ratio. Only for E-comm |
+|redemption_amount|numeric|`Optional.` Redemption amount. Only for E-comm|
+
+Example:
+```
+PUT /rules HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC...
+Accept: application/vnd.kangaroorewards.api.v1+json;
+X-Application-Key: eyXai0XD7SLLzaOeJW...
+Content-Type: application/json
+
+{
+  "reward_ratio": 100,
+  "reward_milestone_amount": 1,
+  "redemption_ratio": 20,
+  "redemption_amount": 1
+}
+```
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Application-Key: <your_application_key>
+
+    + Attributes (UpdateBusinessRulesData)
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Business Rules Base)
+
++ Response 422 (application/json)
+    + Attributes (UpdateBusinessRulesError 422)
+
++ Response 403 (application/json)
+    + Attributes (UpdateBusinessRulesError 403)
+
++ Response 400 (application/json)
+    + Attributes (UpdateBusinessRulesError 400)
+
+
+# Data Structures
+
+## Business Rules Base (object)
+
++ earning (object)
+    + reward_ratio: 10 (number) - The number of points customer will earn for each $1
+    + reward_milestone_amount: 1 (number) - For each $1
+    + reward_points: 100 (number) - ALIAS
+    + reward_amount: 1 (number) - ALIAS 
+    + welcome_pointss: 100 (number) - Number of welcome points
++ redeeming (object)    
+    + redemption_ratio: 2 (number) - Redemption ratio. Only for E-comm
+    + redemption_amount: 1 (number) - Redemption amount. Only for E-comm
+
+## UpdateBusinessRulesData (object)
+
++ reward_ratio: 10 (number) - The number of points customer will earn for each $1
++ reward_milestone_amount: 1 (number) - For each $1
++ redemption_ratio: 2 (number) - Redemption ratio. Only for E-comm
++ redemption_amount: 1 (number) - Redemption amount. Only for E-comm
+
+## UpdateBusinessRulesError 403 (object)
+
++ message: `This action is unauthorized.` (string)
+
+## UpdateBusinessRulesError 400 (object)
+
++ error (object)
+    - status_code: 400 (number)
+    - message: `Bad Request` (string)
+    - description: `Expiration date cannot be prior to publish date.` (string)
+
+## UpdateBusinessRulesError 422 (object)
+
++ reward_milestone_amount (array)
+    + `The reward milestone amount must be at least 1.` (string)
+
