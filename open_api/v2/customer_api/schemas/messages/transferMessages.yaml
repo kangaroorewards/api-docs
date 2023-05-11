@@ -100,3 +100,6 @@ definitions:
             type:
               type: string
               description: The action type.
+      archived:
+        type: boolean
+        description: If this transfer message is archived or not.
