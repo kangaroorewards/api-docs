@@ -58,3 +58,6 @@ definitions:
         description: Gender associated with this user.
       language:
         $ref: './../languages/language.yaml'
+      archived:
+        type: boolean
+        description: If this banners is archived or not.
