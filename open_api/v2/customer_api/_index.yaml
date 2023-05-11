@@ -416,3 +416,10 @@ paths:
       operationId: performSocialMediaAction
       tags:
         - core
+
+  archiveInboxItem:
+    post:
+      x-file: archiveInboxItem.yaml
+      operationId: archiveInboxItem
+      tags:
+        - core
