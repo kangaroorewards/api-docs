@@ -1,0 +1,69 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/archived-items:
+    post:
+      summary: |
+        Archive an inbox item.
+      operationId: archiveInboxItem
+      tags:
+        - archiveInboxItem
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: archiveRequest
+          description: The inbox item to archive.
+          required: true
+          schema:
+            type: object
+            required:
+              - business_id
+              - type
+              - key
+            properties:
+              business_id:
+                type: string
+              type:
+                type: string
+              key:
+                type: integer
+      responses:
+        "200":
+          description: The archived inbox item.
+          schema:
+            $ref: '#/definitions/ArchiveResponse'
+definitions:
+  ArchiveResponse:
+    type: object
+    x-model: ArchiveResponseModel
+    required:
+      - data
+    properties:
+      data:
+        $ref: '#/definitions/ArchiveResponseData'
+  ArchiveResponseData:
+    type: "object"
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+      type:
+        type: string
+      key:
+        type: integer
+      created_at:
+        type: string
