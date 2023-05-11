@@ -27,6 +27,9 @@ definitions:
       sent_at:
         type: string
         description: The original send date of this campaign.
+      archived:
+        type: boolean
+        description: If this campaign message is archived or not.
       message:
         type: string
         description: A short / simple message for this campaign.
