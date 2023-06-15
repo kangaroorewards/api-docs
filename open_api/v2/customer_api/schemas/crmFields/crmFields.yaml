@@ -1,0 +1,32 @@
+definitions:
+  CRMFields:
+    type: "object"
+    x-model: CRMFields
+    description: |
+      A list of the business crm fields.
+    properties:
+      data:
+        type: array
+        description: A list of the business crm fields.
+        items:
+          $ref: '#/definitions/CRMFieldData'
+  CRMFieldData:
+    type: "object"
+    description: CRM Field data
+    properties:
+      name:
+        type: string
+      label:
+        type: string
+      value:
+        type: string
+      is_hidden:
+        type: boolean
+      is_required:
+        type: boolean
+      field_type:
+        type: string
+      is_custom_field:
+        type: boolean
+      display_order:
+        type: int
