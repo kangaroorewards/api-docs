@@ -16,11 +16,11 @@ paths:
   /public/crm-fields:
     get:
       summary: Get a list of the business crm fields
-      operationId: getSignUpFormFields
+      operationId: getCrmFields
       tags:
-        - CRMFields
+        - CrmFields
       responses:
         "200":
-          description: CRM Fields
+          description: Crm Fields
           schema:
-            $ref: "schemas/signUpFormFields/signUpFormFields.yaml#/definitions/SignUpFormFields"
+            $ref: "schemas/crmFields/crmFields.yaml#/definitions/CrmFields"

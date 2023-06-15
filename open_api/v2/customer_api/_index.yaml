@@ -424,9 +424,9 @@ paths:
       tags:
         - core
 
-  crmFields:
+  getCrmFields:
     get:
-      x-file: getSignUpFormFields.yaml
-      operationId: getSignUpFormFields
+      x-file: getCrmFields.yaml
+      operationId: getCrmFields
       tags:
         - core

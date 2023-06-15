@@ -1,7 +1,7 @@
 definitions:
-  SignUpFormFields:
+  CrmFields:
     type: "object"
-    x-model: SignUpFormFields
+    x-model: CrmFields
     description: |
       A list of the business crm fields.
     properties:
@@ -9,8 +9,8 @@ definitions:
         type: array
         description: A list of the business crm fields.
         items:
-          $ref: '#/definitions/SignUpFormFieldData'
-  SignUpFormFieldData:
+          $ref: '#/definitions/CrmFieldData'
+  CrmFieldData:
     type: "object"
     description: CRM Field data
     properties:
