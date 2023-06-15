@@ -423,3 +423,10 @@ paths:
       operationId: archiveInboxItem
       tags:
         - core
+
+  crmFields:
+    get:
+      x-file: crmFields.yaml
+      operationId: getCRMFields
+      tags:
+        - core
