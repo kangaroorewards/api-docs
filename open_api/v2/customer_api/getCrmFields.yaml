@@ -16,7 +16,7 @@ paths:
   /public/crm-fields:
     get:
       summary: Get a list of the business crm fields
-      operationId: getCRMFields
+      operationId: getCrmFields
       tags:
         - CRMFields
       responses:
