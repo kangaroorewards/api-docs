@@ -18,7 +18,7 @@ paths:
       summary: Get a list of the business crm fields
       operationId: getCrmFields
       tags:
-        - CrmFields
+        - getCrmFields
       responses:
         "200":
           description: Crm Fields
