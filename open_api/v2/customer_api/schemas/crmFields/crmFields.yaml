@@ -29,4 +29,4 @@ definitions:
       is_custom_field:
         type: boolean
       display_order:
-        type: int
+        type: integer
