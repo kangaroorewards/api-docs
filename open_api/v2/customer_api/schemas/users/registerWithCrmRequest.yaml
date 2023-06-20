@@ -4,42 +4,60 @@ definitions:
     properties:
       first_name:
         type: string
+        required: false
       last_name:
         type: string
+        required: false
       email:
         type: string
+        required: false
       phone:
         type: string
+        required: false
       country_code:
         type: string
+        required: false
       gender:
         type: string
+        required: false
       birth_date:
         type: string
+        required: false
       postal_code:
         type: string
+        required: false
       country:
         type: string
+        required: false
       branch_id:
         type: string
+        required: false
       promotions_mail:
         type: boolean
+        required: false
       consent:
         type: "object"
         $ref: '#/definitions/UserConsent'
+        required: false
       custom_field_1:
         type: string
+        required: false
       custom_field_2:
         type: string
+        required: false
       custom_field_3:
         type: string
+        required: false
       custom_field_4:
         type: string
+        required: false
       custom_field_5:
         type: string
+        required: false
       address:
         type: "object"
         $ref: '#/definitions/UserAddress'
+        required: false
   UserConsent:
     type: "object"
     required:
@@ -58,13 +76,19 @@ definitions:
     properties:
       street:
         type: string
+        required: false
       city:
         type: string
+        required: false
       region:
         type: string
+        required: false
       country:
         type: string
+        required: false
       country_code:
         type: string
+        required: false
       zip_code:
         type: string
+        required: false
