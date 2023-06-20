@@ -1,0 +1,74 @@
+definitions:
+  CrmRegisterRequest:
+    type: "object"
+    properties:
+      first_name:
+        type: string
+      last_name:
+        type: string
+      email:
+        type: string
+      phone:
+        type: string
+      country_code:
+        type: string
+      gender:
+        type: string
+      birth_date:
+        type: string
+      postal_code:
+        type: string
+      country:
+        type: string
+      branch_id:
+        type: string
+      promotions_mail:
+        type: boolean
+      consent:
+        type: "object"
+        $ref: '#/definitions/UserConsent'
+      custom_field_1:
+        type: string
+      custom_field_2:
+        type: string
+      custom_field_3:
+        type: string
+      custom_field_4:
+        type: string
+      custom_field_5:
+        type: string
+      address:
+        type: "object"
+        $ref: '#/definitions/UserAddress'
+  UserConsent:
+    type: "object"
+    required:
+      - allow_sms
+      - allow_email
+      - allow_push
+    properties:
+      allow_sms:
+        type: boolean
+      allow_email:
+        type: boolean
+      allow_push:
+        type: boolean
+  UserAddress:
+    type: "object"
+    properties:
+      street:
+        type: string
+      city:
+        type: string
+      region:
+        type: string
+      country:
+        type: string
+      country_code:
+        type: string
+      lat:
+        type: number
+      long:
+        type: number
+      zip_code:
+        type: string
