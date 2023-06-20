@@ -430,3 +430,10 @@ paths:
       operationId: getCrmFields
       tags:
         - core
+
+  userRegistrationWithCrm:
+    post:
+      x-file: userRegistrationWithCrm.yaml
+      operationId: createAccountWithCrm
+      tags:
+        - core
