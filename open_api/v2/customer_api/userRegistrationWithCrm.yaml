@@ -18,7 +18,7 @@ paths:
       summary: Register a new user using the crm settings.
       operationId: createAccountWithCrm
       consumes:
-        - application/x-www-form-urlencoded
+        - application/json
       tags:
         - userRegistrationWithCrm
       parameters:
