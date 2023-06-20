@@ -66,9 +66,5 @@ definitions:
         type: string
       country_code:
         type: string
-      lat:
-        type: number
-      long:
-        type: number
       zip_code:
         type: string
