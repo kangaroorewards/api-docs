@@ -1,0 +1,35 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/crm-fields:
+    post:
+      summary: Register a new user using the crm settings.
+      operationId: createAccountWithCrm
+      consumes:
+        - application/x-www-form-urlencoded
+      tags:
+        - userRegistrationWithCrm
+      parameters:
+        - in: body
+          name: registerWithCrmRequest
+          required: true
+          schema:
+            type: object
+            $ref: 'schemas/users/registerWithCrmRequest.yaml#/definitions/CrmRegisterRequest'
+      responses:
+        "200":
+          description: New user account details
+          schema:
+            $ref: "schemas/users/userProfile.yaml#/definitions/UserProfileData"
