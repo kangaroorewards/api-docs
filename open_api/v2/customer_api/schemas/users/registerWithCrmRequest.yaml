@@ -20,6 +20,9 @@ definitions:
       gender:
         type: string
         required: false
+      referral_code:
+        type: string
+        required: false
       birth_date:
         type: string
         required: false
@@ -33,6 +36,9 @@ definitions:
         type: string
         required: false
       promotions_mail:
+        type: boolean
+        required: false
+      terms_and_conditions:
         type: boolean
         required: false
       consent:
