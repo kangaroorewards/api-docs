@@ -104,3 +104,5 @@ definitions:
       language:
         type: object
         $ref: './../languages/language.yaml'
+      note:
+        type: string
