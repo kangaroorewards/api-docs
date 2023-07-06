@@ -62,6 +62,8 @@ definitions:
         format: float
       partner_reward:
         type: boolean
+      partner_reward_type:
+        type: integer
       redeem_for_gift_card:
         type: boolean
       type:
