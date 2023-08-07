@@ -437,3 +437,9 @@ paths:
       operationId: createAccountWithCrm
       tags:
         - core
+  draws:
+    get:
+      x-file: draws.yaml
+      operationId: getDraws
+      tags:
+        - core
