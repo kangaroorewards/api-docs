@@ -48,7 +48,7 @@ definitions:
       languages:
         type: array
         items:
-          $ref: './../languages/language.yaml'
+          $ref: '#/definitions/Languages'
       draw_rules:
         type: array
         items:
@@ -83,7 +83,7 @@ definitions:
       languages:
         type: array
         items:
-          $ref: './../languages/language.yaml'
+          $ref: '#/definitions/Languages'
       text:
         type: string
         description: The draw rule title.
@@ -124,7 +124,7 @@ definitions:
       languages:
         type: array
         items:
-          $ref: './../languages/language.yaml'
+          $ref: '#/definitions/Languages'
   DrawRuleCondition:
     type: object
     description: A draw rule condition.
@@ -142,4 +142,17 @@ definitions:
       languages:
         type: array
         items:
-          $ref: './../languages/language.yaml'
+          $ref: '#/definitions/Languages'
+  Languages:
+    type: object
+    properties:
+      language_id:
+        type: integer
+      title:
+        type: string
+      description:
+        type: string
+      language:
+        type: object
+        x-model:
+        $ref: './../languages/language.yaml'
