@@ -46,7 +46,9 @@ definitions:
         items:
           $ref: '#/definitions/DrawBranches'
       languages:
-        $ref: './../languages/language.yaml'
+        type: array
+        items:
+          $ref: './../languages/language.yaml'
       draw_rules:
         type: array
         items:
@@ -79,7 +81,9 @@ definitions:
         type: boolean
         description: If this draw rule is completed or not.
       languages:
-        $ref: './../languages/language.yaml'
+        type: array
+        items:
+          $ref: './../languages/language.yaml'
       text:
         type: string
         description: The draw rule title.
@@ -118,7 +122,9 @@ definitions:
         type: boolean
         description: If this draw prize is expired or not.
       languages:
-        $ref: './../languages/language.yaml'
+        type: array
+        items:
+          $ref: './../languages/language.yaml'
   DrawRuleCondition:
     type: object
     description: A draw rule condition.
@@ -134,4 +140,6 @@ definitions:
         type: string
         description: The draw rule condition description.
       languages:
-        $ref: './../languages/language.yaml'
+        type: array
+        items:
+          $ref: './../languages/language.yaml'
