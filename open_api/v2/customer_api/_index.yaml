@@ -443,3 +443,10 @@ paths:
       operationId: getDraws
       tags:
         - core
+
+  userBusinessTiers:
+    patch:
+      x-file: userBusinessTiers.yaml
+      operationId: getUserBusinessTiers
+      tags:
+        - core
