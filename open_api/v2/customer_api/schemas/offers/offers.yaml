@@ -17,7 +17,7 @@ definitions:
       - data
     properties:
       data:
-        $ref: '#/definitions/Offer'
+        $ref: '#/definitions/PublicOffer'
   UserBusinessOffersResponse:
     type: "object"
     x-model: UserBusinessOffersModel
@@ -154,6 +154,122 @@ definitions:
         default: []
         items:
           $ref: "#/definitions/OfferAction"
+  PublicOffer:
+    type: "object"
+    x-model: PublicOfferModel
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        description: A unique ID identifying this reward
+      points:
+        type: integer
+        format: int64
+        description: |
+          The amount of points required for this offer to be
+          applied. Only used for Convertible Coupons
+      publish_at:
+        type: string
+        description: The publication date of this offer.
+      expires_at:
+        type: string
+        description: The expiration date of this offer.
+      is_published:
+        type: boolean
+        description: Whether this offer is currently published or not.
+      coupon_convertible:
+        type: boolean
+        description: |
+          Whether this is a convertible coupon. Convertible coupons are
+          automatically added to the customers account when the point threshold
+          is met. The points are automatically deducted from the users' account.
+      real_value:
+        type: number
+        format: double
+        description: The real value  (in $) of this offer
+      discount_value:
+        type: number
+        format: double
+        description: The discount value (in $) of this offer
+      multip_factor:
+        type: number
+        format: double
+        description: |
+          The multiplication factor of this offer. This only applies to
+          Point Multiplier offers.
+      min_purchase:
+        type: number
+        format: double
+        description: The minimum purchase amount for this offer to be applied
+      max_purchase:
+        type: number
+        format: double
+        description: The maximum purchase amount for this offer to be applied.
+      apps_only:
+        type: boolean
+        description: |
+          Whether this offer must be claimed on a mobile app
+          before being used in store.
+      is_coupon_redeemed:
+        type: boolean
+      offer_frequency_id:
+        type: integer
+      freq_details:
+        type: array
+        items:
+          type: string
+      peak_from:
+        type: string
+      peak_to:
+        type: string
+      type:
+        type: string
+        description: |
+          The offer type. This can be a free product, dollar based discount,
+          percentage based discount, point multiplier, bonus points, and free shipping.
+      title:
+        type: string
+        description: The offer title.
+      description:
+        type: string
+        description: The offer description.
+      slug:
+        type: string
+        description: The unique slug for this offer
+      images:
+        type: array
+        description: |
+          The images attached to this offer. There are 3 available
+          sizes: thumbnail, medium, and large.
+        items:
+          $ref: './../images/image.yaml'
+      never_expires_flag:
+        type: boolean
+        description: |
+          Whether this offer ever expires or not.
+          If false, this offer is available indefinitely (provided any other
+          requirements are met)
+      terms_conditions:
+        type: string
+        description: The terms and conditions attached to this offer.
+      link:
+        type: string
+        description: The external link attached to this offer.
+      offer_languages:
+        type: array
+        description: A list of translations of this offer into different languages.
+        items:
+          $ref: '#/definitions/OfferTranslation'
+      actions:
+        type: array
+        description: A list of possible actions to perform on this offer.
+        default: []
+        items:
+          $ref: "#/definitions/OfferAction"
+      branch:
+        type: object
+        $ref: './../business/business.yaml#/definitions/Branch'
   OfferTranslation:
     type: object
     description: A language translation of this offer.

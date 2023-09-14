@@ -14,7 +14,7 @@ definitions:
       - data
     properties:
       data:
-        $ref: '#/definitions/Reward'
+        $ref: '#/definitions/PublicReward'
   UserBusinessRewardsResponse:
     type: "object"
     x-model: UserBusinessRewardsModel
@@ -96,6 +96,62 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/RewardTranslation'
+  PublicReward:
+    type: "object"
+    x-model: PublicRewardModel
+    properties:
+      id:
+        type: integer
+        description: A unique ID identifying this reward
+      points:
+        type: integer
+        format: int64
+      publish_at:
+        type: string
+      expires_at:
+        type: string
+      is_published:
+        type: boolean
+      amount:
+        type: number
+        format: float
+      real_value:
+        type: number
+        format: float
+      discount_value:
+        type: number
+        format: float
+      partner_reward:
+        type: boolean
+      partner_reward_type:
+        type: integer
+      redeem_for_gift_card:
+        type: boolean
+      type:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      slug:
+        type: string
+      images:
+        type: array
+        items:
+          $ref: './../images/image.yaml'
+      never_expires_flag:
+        type: boolean
+      terms_conditions:
+        type: string
+      link:
+        type: string
+      reward_languages:
+        type: array
+        items:
+          $ref: '#/definitions/RewardTranslation'
+      branch:
+        type: object
+        $ref: './../business/business.yaml#/definitions/Branch'
   RewardTranslation:
     type: object
     properties:
