@@ -10,6 +10,14 @@ definitions:
         description: A list of all offers available to this user
         items:
           $ref: '#/definitions/Offer'
+  PublicOfferResponse:
+    type: "object"
+    x-model: PublicOfferModel
+    required:
+      - data
+    properties:
+      data:
+        $ref: '#/definitions/Offer'
   UserBusinessOffersResponse:
     type: "object"
     x-model: UserBusinessOffersModel

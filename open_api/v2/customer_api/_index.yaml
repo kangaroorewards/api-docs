@@ -244,10 +244,22 @@ paths:
       operationId: getPublicRewards
       tags:
         - core
+  publicReward:
+    get:
+      x-file: publicReward.yaml
+      operationId: getPublicReward
+      tags:
+        - core
   publicOffers:
     get:
       x-file: publicOffers.yaml
       operationId: getPublicOffers
+      tags:
+        - core
+  publicOffer:
+    get:
+      x-file: publicOffer.yaml
+      operationId: getPublicOffer
       tags:
         - core
   publicBranches:
