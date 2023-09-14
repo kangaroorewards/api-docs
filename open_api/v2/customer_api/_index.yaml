@@ -450,3 +450,10 @@ paths:
       operationId: getUserBusinessTiers
       tags:
         - core
+        -
+  getPublicPromotions:
+    patch:
+      x-file: getPublicPromotions.yaml
+      operationId: getPublicPromotions
+      tags:
+        - core

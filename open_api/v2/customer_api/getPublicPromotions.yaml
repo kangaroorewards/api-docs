@@ -1,0 +1,31 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /public/campaigns/{campaignId}/promotions:
+    get:
+      summary: Get the promotions.yaml ( offers / rewards ) for a related campaign
+      operationId: getPublicPromotions
+      tags:
+        - getPublicPromotions
+      parameters:
+        - in: path
+          name: campaignId
+          required: true
+          type: string
+      responses:
+        "200":
+          description: promotions
+          schema:
+            $ref: "schemas/promotions/promotions.yaml#/definitions/PromotionsResponse"

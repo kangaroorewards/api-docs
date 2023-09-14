@@ -1,0 +1,31 @@
+definitions:
+  PromotionsResponse:
+    type: "object"
+    x-model: PromotionsModel
+    required:
+      - data
+    properties:
+      data:
+        description: An object containing promotions for a campaign
+        items:
+          $ref: '#/definitions/PromotionsData'
+  PromotionsData:
+    type: "object"
+    x-model: PromotionsDataModel
+    properties:
+      id:
+        type: integer
+        description: id of the campaign.
+      name:
+        type: string
+        description: name of the campaign
+      offers:
+        type: array
+        description: A list of all offers available in this campaign
+        items:
+          $ref: '../offers/offers.yaml#/definitions/Offer'
+      rewards:
+        type: array
+        description: A list of all rewards available in this campaign
+        items:
+          $ref: '../rewards/rewards.yaml#/definitions/Rewards'
