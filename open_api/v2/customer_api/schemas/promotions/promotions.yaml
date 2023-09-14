@@ -26,4 +26,4 @@ definitions:
         type: array
         description: A list of all rewards available in this campaign
         items:
-          $ref: '../rewards/rewards.yaml#/definitions/Rewards'
+          $ref: '../rewards/rewards.yaml#/definitions/Reward'
