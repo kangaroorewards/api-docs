@@ -1,0 +1,31 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /public/offers/{offerSlug}?relationships=branch:
+    get:
+      summary: Get a public offer
+      operationId: getPublicOffer
+      tags:
+        - publicOffer
+      parameters:
+        - in: path
+          name: offerSlug
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Public offer
+          schema:
+            $ref: 'schemas/offers/offers.yaml#/definitions/PublicOfferResponse'
