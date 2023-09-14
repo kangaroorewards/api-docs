@@ -6,6 +6,7 @@ definitions:
       - data
     properties:
       data:
+        type: "object"
         description: An object containing promotions for a campaign
         items:
           $ref: '#/definitions/PromotionsData'
