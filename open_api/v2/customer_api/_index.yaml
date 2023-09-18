@@ -469,3 +469,17 @@ paths:
       operationId: getPublicPromotions
       tags:
         - core
+
+  userBusinessCoupons:
+    get:
+      x-file: userBusinessCoupons.yaml
+      operationId: getUserBusinessRewards
+      tags:
+        - core
+
+  userBusinessUsedCoupons:
+    get:
+      x-file: userBusinessUsedCoupons.yaml
+      operationId: getUserBusinessUsedCoupons
+      tags:
+        - core
