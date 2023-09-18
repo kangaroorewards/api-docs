@@ -7,6 +7,23 @@ definitions:
         description: "Contains a list of all coupons available to this user"
         x-model:
         $ref: '#/definitions/UserCouponsData'
+  UserBusinessCouponsResponse:
+    type: "object"
+    x-model: UserBusinessCouponsModel
+    properties:
+      data:
+        description: "Contains business data"
+        $ref: "../business/business.yaml#/definitions/BusinessData"
+      included:
+        description: "Contains all coupon items"
+        $ref: '#/definitions/UserBusinessCouponsData'
+  UserBusinessCouponsData:
+    type: "object"
+    properties:
+      coupons:
+        description: "Contains a list of all coupons available to this user"
+        x-model:
+        $ref: '#/definitions/UserCouponsData'
   UserCouponsData:
     type: array
     items:
