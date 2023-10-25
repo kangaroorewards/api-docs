@@ -1,0 +1,25 @@
+definitions:
+  ApplicationStrings:
+    type: "object"
+    x-model: ApplicationStringsModel
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        description: A list of application strings.
+        items:
+          $ref: '#/definitions/ApplicationString'
+  ApplicationString:
+    type: "object"
+    properties:
+      id:
+        type: integer
+        format: int64
+      key:
+        type: string
+      string:
+        type: string
+      created_at:
+        type: string
+

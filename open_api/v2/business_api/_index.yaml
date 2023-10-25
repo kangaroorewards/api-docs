@@ -1,0 +1,24 @@
+# This is a dictionary of all endpoints used by the code generator
+# All api spec files must be represented here as follows:
+#
+# "path" value is replaced "tags" value in the original spec
+# "tags" parameter must have a single value of "core"
+# This file will be used to generate code whenever all apis must be
+# processed at once
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api Dictionary
+  license:
+    name: MIT
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  strings:
+    get:
+      x-file: strings.yaml
+      operationId: getStrings
+      tags:
+        - core
