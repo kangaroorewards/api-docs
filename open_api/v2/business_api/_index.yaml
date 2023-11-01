@@ -22,3 +22,15 @@ paths:
       operationId: getStrings
       tags:
         - core
+  businessRules:
+    patch:
+      x-file: businessRules.yaml
+      operationId: getBusinessRules
+      tags:
+        - core
+  updateBusinessRules:
+    patch:
+      x-file: updateBusinessRules.yaml
+      operationId: updateBusinessRules
+      tags:
+        - core

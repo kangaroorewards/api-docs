@@ -1,0 +1,47 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /rules:
+    patch:
+      summary: update business's rules
+      operationId: updateBusinessRules
+      consumes:
+        - application/x-www-form-urlencoded
+      tags:
+        - updateBusinessRules
+      parameters:
+        - in: formData
+          name: reward_ratio
+          required: true
+          type: integer
+          format: int64
+          description: points earned by user after spending x amount
+        - in: formData
+          name: reward_milestone_amount
+          required: true
+          type: integer
+          format: int64
+          description: amount to be spent by user to earn x points
+        - in: formData
+          name: welcome_points
+          required: true
+          type: integer
+          format: int64
+          description: sign up bonus
+      responses:
+        "200":
+          description: Business rules
+          schema:
+            $ref: "schemas/business/businessRules.yaml#/definitions/BusinessesRules"

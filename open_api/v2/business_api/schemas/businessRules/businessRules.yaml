@@ -1,0 +1,84 @@
+definitions:
+  BusinessesRules:
+    type: "object"
+    x-model: BusinessesRules
+    description: |
+      Rules of the business
+    properties:
+      data:
+        $ref: '#/definitions/BusinessRulesData'
+  BusinessRulesData:
+    type: "object"
+    description: Business rules data
+    properties:
+      earning:
+        type: object
+        $ref: '#/definitions/EarningRules'
+      redeeming:
+        type: object
+        $ref: '#/definitions/RedeemingRules'
+      currency:
+        type: object
+        $ref: '#/definitions/CurrencyRules'
+  EarningRules:
+    type: "object"
+    properties:
+      reward_ratio:
+        type: integer
+        format: int64
+      reward_amount:
+        type: integer
+        format: int64
+      reward_points:
+        type: integer
+        format: int64
+      social_media:
+        type: object
+        $ref: '#/definitions/SocialMediaRules'
+      reward_milestone_amount:
+        type: integer
+        format: int64
+      welcome_points:
+        type: integer
+        format: int64
+  RedeemingRules:
+    type: "object"
+    properties:
+      redemption_ratio:
+        type: integer
+        format: int64
+        description: redemption ratio
+      redemption_amount:
+        type: integer
+        format: int64
+        description: redemption amount
+  CurrencyRules:
+    type: "object"
+    properties:
+      name:
+        type: string
+        description: currency name
+      symbol:
+        type: string
+        description: currency symbol
+      iso_code:
+        type: string
+        description: currency iso_code
+      denominator:
+        type: integer
+        format: int64
+        description: currency denominator
+  SocialMediaRules:
+    type: "object"
+    properties:
+      active:
+        type: boolean
+        description: if the social media rules are active for this business
+      reward_points:
+        type: array
+        items:
+          type: string
+        description: currency symbol
+      reward_points_max:
+        type: integer
+        format: int64
