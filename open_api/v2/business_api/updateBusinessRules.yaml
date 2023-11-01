@@ -44,4 +44,4 @@ paths:
         "200":
           description: Business rules
           schema:
-            $ref: "schemas/business/businessRules.yaml#/definitions/BusinessesRules"
+            $ref: "schemas/businessRules/businessRules.yaml#/definitions/BusinessesRules"
