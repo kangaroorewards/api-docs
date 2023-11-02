@@ -23,7 +23,7 @@ paths:
         - updateBusinessRules
       parameters:
         - in: body
-          name: updateBusinessRulesRequest
+          name: updateBusinessRulesBodyRequest
           required: true
           schema:
             type: object
