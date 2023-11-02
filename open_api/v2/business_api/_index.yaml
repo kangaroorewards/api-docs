@@ -34,3 +34,15 @@ paths:
       operationId: updateBusinessRules
       tags:
         - core
+  businessOffers:
+    patch:
+      x-file: businessOffers.yaml
+      operationId: getBusinessOffers
+      tags:
+        - core
+  businessOfferById:
+    patch:
+      x-file: businessOfferById.yaml
+      operationId: getBusinessOfferById
+      tags:
+        - core

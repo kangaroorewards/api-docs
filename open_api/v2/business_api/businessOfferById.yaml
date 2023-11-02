@@ -1,0 +1,31 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Business Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /offers/{offerId}:
+    get:
+      summary: Get a an offer by its id
+      operationId: getBusinessOfferById
+      tags:
+        - businessOfferById.yaml
+      parameters:
+        - in: path
+          name: offerId
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: Business offer by its id
+          schema:
+            $ref: 'schemas/businessOffers/businessOffers.yaml#/definitions/OfferByIdResponse'
