@@ -18,7 +18,7 @@ paths:
       summary: Get a list of business offers
       operationId: getBusinessOffers
       tags:
-        - businessOffers.yaml
+        - businessOffers
       responses:
         "200":
           description: Business offer list
