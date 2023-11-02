@@ -1,0 +1,10 @@
+type: object
+properties:
+  large:
+    type: string
+  medium:
+    type: string
+  thumbnail:
+    type: string
+  default:
+    type: boolean
