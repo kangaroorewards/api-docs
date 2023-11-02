@@ -18,28 +18,32 @@ paths:
       summary: update business's rules
       operationId: updateBusinessRules
       consumes:
-        - application/x-www-form-urlencoded
+        - application/json
       tags:
         - updateBusinessRules
       parameters:
-        - in: formData
-          name: reward_ratio
+        - in: body
+          name: updateBusinessRulesRequest
           required: true
-          type: integer
-          format: int64
-          description: points earned by user after spending x amount
-        - in: formData
-          name: reward_milestone_amount
-          required: true
-          type: integer
-          format: int64
-          description: amount to be spent by user to earn x points
-        - in: formData
-          name: welcome_points
-          required: true
-          type: integer
-          format: int64
-          description: sign up bonus
+          schema:
+            type: object
+            required:
+              - reward_ratio
+              - reward_milestone_amount
+              - welcome_points
+            properties:
+              reward_ratio:
+                type: integer
+                format: int64
+                description: points earned by user after spending x amount
+              reward_milestone_amount:
+                type: integer
+                format: int64
+                description: amount to be spent by user to earn x points
+              welcome_points:
+                type: integer
+                format: int64
+                description: sign up bonus
       responses:
         "200":
           description: Business rules
