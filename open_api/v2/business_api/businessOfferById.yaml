@@ -18,7 +18,7 @@ paths:
       summary: Get a an offer by its id
       operationId: getBusinessOfferById
       tags:
-        - businessOfferById.yaml
+        - businessOfferById
       parameters:
         - in: path
           name: offerId
