@@ -1,0 +1,31 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Business Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /rewards/{rewardId}:
+    get:
+      summary: Get a an reward by its id
+      operationId: getBusinessRewardById
+      tags:
+        - businessRewardById
+      parameters:
+        - in: path
+          name: rewardId
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: Business reward by its id
+          schema:
+            $ref: 'schemas/businessRewards/businessRewards.yaml#/definitions/RewardByIdResponse'

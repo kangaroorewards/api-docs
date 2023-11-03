@@ -1,0 +1,26 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Business Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /rewards:
+    get:
+      summary: Get a list of business rewards
+      operationId: getBusinessRewards
+      tags:
+        - businessRewards
+      responses:
+        "200":
+          description: Business reward list
+          schema:
+            $ref: 'schemas/businessRewards/businessRewards.yaml#/definitions/RewardsResponse'

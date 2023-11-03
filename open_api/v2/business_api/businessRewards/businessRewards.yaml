@@ -1,0 +1,93 @@
+definitions:
+  RewardsResponse:
+    type: "object"
+    x-model: BusinessRewardsModel
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        description: A list of all business rewards
+        items:
+          $ref: '#/definitions/Reward'
+  RewardByIdResponse:
+    type: "object"
+    x-model: BusinessRewardByIdModel
+    required:
+      - data
+    properties:
+      data:
+        type: object
+        description: A reward returned by its id only
+        $ref: '#/definitions/Reward'
+  Reward:
+    type: "object"
+    x-model: RewardModel
+    properties:
+      id:
+        type: integer
+        description: A unique ID identifying this reward
+      points:
+        type: integer
+        format: int64
+      publish_at:
+        type: string
+      expires_at:
+        type: string
+      is_published:
+        type: boolean
+      amount:
+        type: number
+        format: float
+      real_value:
+        type: number
+        format: float
+      discount_value:
+        type: number
+        format: float
+      partner_reward:
+        type: boolean
+      partner_reward_type:
+        type: integer
+      redeem_for_gift_card:
+        type: boolean
+      type:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      images:
+        type: array
+        items:
+          $ref: './../images/image.yaml'
+      never_expires_flag:
+        type: boolean
+      terms_conditions:
+        type: string
+      link:
+        type: string
+      reward_languages:
+        type: array
+        items:
+          $ref: '#/definitions/RewardTranslation'
+  RewardTranslation:
+    type: object
+    properties:
+      id:
+        type: integer
+      language_id:
+        type: integer
+      title:
+        type: string
+      description:
+        type: string
+      terms_conditions:
+        type: string
+      link:
+        type: string
+      language:
+        type: object
+        $ref: './../languages/language.yaml'
+      note:
+        type: string

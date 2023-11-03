@@ -46,3 +46,15 @@ paths:
       operationId: getBusinessOfferById
       tags:
         - core
+  businessRewards:
+    patch:
+      x-file: businessRewards.yaml
+      operationId: getBusinessRewards
+      tags:
+        - core
+  businessRewardById:
+    patch:
+      x-file: businessRewardById.yaml
+      operationId: getBusinessRewardById
+      tags:
+        - core
