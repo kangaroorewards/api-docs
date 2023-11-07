@@ -28,7 +28,7 @@ paths:
         "204":
           description: delete a reward by its id
           schema:
-            $ref: "#/definitions/Result"
+            $ref: "#/definitions/DeleteResult"
 definitions:
-  Result:
+  DeleteResult:
     type: "object"
