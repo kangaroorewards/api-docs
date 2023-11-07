@@ -11,7 +11,7 @@ Trigger an action for a customer
 |Name|Type|Description|
 |-----|----|-----------|
 |resource|string|`Required` One of the following: `tier_level`, `reward`|
-|type|string|`Required` One of the following: `recalculate`, `calculate`|
+|type|string|`Required` One of the following: `recalculate`, `calculate`, `batch_calculate`|
 |intent|string|`Required with resource=reward` One of the following: `reward`, `reward_store_credit`|
 |amount|number|`Optional` Used only with resource=reward.|
 |points|integer|`Optional` Used only with resource=reward.|
@@ -20,6 +20,14 @@ Trigger an action for a customer
 |product_rewards|array|`Optional` Used only with resource=reward.|
 |product_rewards.id|integer|`Optional` Used only with resource=reward.|
 |product_rewards.quantity|integer|`Optional` Used only with resource=reward.|
+|items|array|`Optional` Used only with resource=reward and type=batch_calculate|
+|items.amount|number|`Optional` Used only with resource=reward and type=batch_calculate.|
+|items.points|integer|`Optional` Used only with resource=reward and type=batch_calculate.|
+|items.visits|integer|`Optional` Used only with resource=reward and type=batch_calculate.|
+|items.branch.id|string|`Optional` Used only with resource=reward and type=batch_calculate.|
+|items.product_rewards|array|`Optional` Used only with resource=reward and type=batch_calculate.|
+|items.product_rewards.id|integer|`Optional` Used only with resource=reward and type=batch_calculate.|
+|items.product_rewards.quantity|integer|`Optional` Used only with resource=reward and type=batch_calculate.|
 
 >**Note:**
 >One of the following attributes is required `amount`, `points` or `visits` when intent is: `reward`
@@ -158,6 +166,54 @@ POST /customers/11eb5b4433edf7bfaaffb42e99312ac8/actions
   "resource": "reward",
   "intent": "reward_store_credit",
   "amount": 20
+}
+```
+
+Example: Batch calculate points the customer will earn based on amount spent at the specific branch
+
+Response Body
+```
+POST /customers/11eb5b4433edf7bfaaffb42e99312ac8/actions
+{
+	"resource": "reward",
+	"type": "batch_calculate",
+	"intent": "reward",
+	"items": [
+		{
+			"branch": {
+				"id": "11eac6c914dfbc4e8478b42e99312ac8"
+			},
+			"product_rewards": [
+				{
+					"id":296,
+					"quantity":2
+				}
+			],
+			"amount": 20
+		}
+	]
+}
+```
+
+Response:
+```
+{
+  "data": [
+      {
+        "basic_reward": {
+          "points": 20,
+          "amount_spent": 20,
+          "amount_original": 20
+        },
+        "product_reward": {
+          "points": 0
+        },
+        "offer_reward": {
+          "points": 0
+        },
+        "total_points": 20
+      }
+  ]
 }
 ```
 
