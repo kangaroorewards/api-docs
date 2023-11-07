@@ -27,5 +27,3 @@ paths:
       responses:
         "204":
           description: delete an offer by its id
-          schema:
-            $ref: 'schemas/deleteResult/deleteResult.yaml#/definitions/DeleteResult'
