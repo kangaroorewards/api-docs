@@ -11,6 +11,7 @@ definitions:
   DeleteResultData:
     type: object
     x-model: DeleteResultDataModel
-    is_deleted:
-      id:
-        type: boolean
+    properties:
+      is_deleted:
+        id:
+          type: boolean
