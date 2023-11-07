@@ -28,11 +28,4 @@ paths:
         "204":
           description: delete a reward by its id
           schema:
-            $ref: "#/definitions/DeleteResult"
-definitions:
-  DeleteResult:
-    type: "object"
-    x-model: DeleteResultModel
-    properties:
-      deleted:
-        type: String
+            $ref: 'schemas/deleteResult/deleteResult.yaml#/definitions/DeleteResult'
