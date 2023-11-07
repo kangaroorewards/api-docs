@@ -13,5 +13,4 @@ definitions:
     x-model: DeleteResultDataModel
     properties:
       is_deleted:
-        id:
-          type: boolean
+        type: boolean
