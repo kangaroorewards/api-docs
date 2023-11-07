@@ -2,11 +2,15 @@ definitions:
   DeleteResult:
     type: "object"
     x-model: DeleteResultModel
+    required:
+      - data
     properties:
       data:
+        type: object
         $ref: '#/definitions/DeleteResultData'
   DeleteResultData:
-    type: "object"
-    properties:
-      deleted:
-        type: String
+    type: object
+    x-model: DeleteResultDataModel
+    is_deleted:
+      id:
+        type: boolean
