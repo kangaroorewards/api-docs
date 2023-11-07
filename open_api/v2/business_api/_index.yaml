@@ -58,3 +58,15 @@ paths:
       operationId: getBusinessRewardById
       tags:
         - core
+  deleteOfferById:
+    patch:
+      x-file: deleteOfferById.yaml
+      operationId: deleteOfferById
+      tags:
+        - core
+  deleteRewardById:
+    patch:
+      x-file: deleteRewardById.yaml
+      operationId: deleteRewardById
+      tags:
+        - core
