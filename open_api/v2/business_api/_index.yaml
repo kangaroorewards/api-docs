@@ -70,3 +70,9 @@ paths:
       operationId: deleteRewardById
       tags:
         - core
+  getUserDetails:
+    patch:
+      x-file: getUserDetails.yaml
+      operationId: getUserDetails
+      tags:
+        - core

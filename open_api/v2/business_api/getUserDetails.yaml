@@ -1,0 +1,24 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Business Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /me?include=branches:
+    get:
+      summary: Retrieves user details and associated branches
+      operationId: getUserDetails
+      tags:
+        - getUserDetails
+      responses:
+        "200":
+          $ref: "schemas/userDetails/userDetails.yaml#/definitions/UseDetailsResponse"

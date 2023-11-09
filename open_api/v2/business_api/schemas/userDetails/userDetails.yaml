@@ -1,0 +1,122 @@
+definitions:
+  UseDetailsResponse:
+    type: "object"
+    x-model: UseDetailsModel
+    required:
+      - data
+    properties:
+      data:
+        description: "Contains user data"
+        $ref: "#/definitions/UseDetailsData"
+      included:
+        description: "Contains all branches associated to this user"
+        $ref: '#/definitions/UseDetailsIncluded'
+  UseDetailsData:
+    type: "object"
+    x-model: UseDetailsDataModel
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        description: user unique id
+      email:
+        type: String
+        description: user email
+      phone:
+        type: String
+        description: user phone
+      first_name:
+        type: string
+        description: user first name
+      last_name:
+        type: string
+        description: user last name
+      qrcode:
+        type: string
+        description: user qr code
+      gender:
+        type: string
+        description: user gender
+      birth_date:
+        type: string
+        description: user birth date
+      language:
+        type: string
+      country_code:
+        type: string
+      profile_photo:
+        type: string
+      created_at:
+        type: string
+      updated_at:
+        type: string
+      enabled:
+        type: boolean
+      email_verified:
+        type: boolean
+      phone_verified:
+        type: boolean
+  UseDetailsIncluded:
+    type: "object"
+    x-model: UseDetailsIncludedModel
+    properties:
+      branches:
+        $ref: '#/definitions/UseDetailsIncludedList'
+  UseDetailsIncludedList:
+    type: array
+    items:
+      $ref: '#/definitions/Branch'
+  Branch:
+    type: "object"
+    x-model: BranchModel
+    required:
+      - id
+    properties:
+      id:
+        type: string
+        description: Unique ID for this branch
+      name:
+        type: string
+        description: The name of this branch
+      web_site:
+        type: string
+        description: The website for this branch
+      phone:
+        type: object
+        properties:
+          number:
+            type: string
+          country_code:
+            type: string
+          national_format:
+            type: string
+          intl_format:
+            type: string
+      logo:
+        type: object
+        $ref: './../images/image.yaml'
+      cover_photo:
+        type: object
+        $ref: './../images/image.yaml'
+      address:
+        type: object
+        properties:
+          formatted:
+            type: string
+          street:
+            type: string
+          city:
+            type: string
+          region:
+            type: string
+          country:
+            type: string
+          lat:
+            type: number
+            format: float
+          long:
+            type: number
+            format: float
+      virtual_branch_flag:
+          type: boolean
