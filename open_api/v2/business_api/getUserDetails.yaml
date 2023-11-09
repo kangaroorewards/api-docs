@@ -21,4 +21,6 @@ paths:
         - getUserDetails
       responses:
         "200":
-          $ref: "schemas/userDetails/userDetails.yaml#/definitions/UseDetailsResponse"
+          description: ser details and associated branches
+          schema:
+            $ref: "schemas/userDetails/userDetails.yaml#/definitions/UseDetailsResponse"
