@@ -13,19 +13,19 @@ consumes:
 produces:
   - application/json
 paths:
-  /offers:
+  /offers?offer_expired_at=lt|{offerExpiredAt}&per_page={perPage}:
     get:
       summary: Get a list of business inactive offers
       operationId: getBusinessInActiveOffers
       tags:
         - businessInActiveOffers
       parameters:
-        - in: query
-          name: offer_expired_at
+        - in: path
+          name: offerExpiredAt
           required: true
           type: string
-        - in: query
-          name: per_page
+        - in: path
+          name: perPage
           required: true
           type: integer
           default: 50
