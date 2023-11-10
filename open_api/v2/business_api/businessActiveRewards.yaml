@@ -13,14 +13,14 @@ consumes:
 produces:
   - application/json
 paths:
-  /rewards:
+  /rewards?status=active&per_page=50:
     get:
-      summary: Get a list of business rewards
-      operationId: getBusinessRewards
+      summary: Get a list of business rewards that are active
+      operationId: getBusinessActiveRewards
       tags:
-        - businessRewards
+        - businessActiveRewards
       responses:
         "200":
-          description: Business reward list
+          description: Business active reward list
           schema:
             $ref: 'schemas/businessRewards/businessRewards.yaml#/definitions/RewardsResponse'

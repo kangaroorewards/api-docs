@@ -34,22 +34,34 @@ paths:
       operationId: updateBusinessRules
       tags:
         - core
-  businessOffers:
+  businessActiveOffers:
     patch:
-      x-file: businessOffers.yaml
-      operationId: getBusinessOffers
+      x-file: businessActiveOffers.yaml
+      operationId: getBusinessActiveOffers
+      tags:
+        - core
+  businessInActiveOffers:
+    patch:
+      x-file: businessInActiveOffers.yaml
+      operationId: getBusinessInActiveOffers
+      tags:
+        - core
+  businessActiveRewards:
+    patch:
+      x-file: businessActiveRewards.yaml
+      operationId: getBusinessActiveRewards
+      tags:
+        - core
+  businessInActiveRewards:
+    patch:
+      x-file: businessInActiveRewards.yaml
+      operationId: getBusinessInActiveRewards
       tags:
         - core
   businessOfferById:
     patch:
       x-file: businessOfferById.yaml
       operationId: getBusinessOfferById
-      tags:
-        - core
-  businessRewards:
-    patch:
-      x-file: businessRewards.yaml
-      operationId: getBusinessRewards
       tags:
         - core
   businessRewardById:

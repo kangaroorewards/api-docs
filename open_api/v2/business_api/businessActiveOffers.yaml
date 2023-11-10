@@ -1,0 +1,36 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Business Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /offers:
+    get:
+      summary: Get a list of business active offers
+      operationId: getBusinessActiveOffers
+      tags:
+        - businessActiveOffers
+      parameters:
+        - in: query
+          name: offer_expired_at
+          required: true
+          type: string
+        - in: query
+          name: per_page
+          required: true
+          type: integer
+          default: 50
+      responses:
+        "200":
+          description: Business active offer list
+          schema:
+            $ref: 'schemas/businessOffers/businessOffers.yaml#/definitions/OffersResponse'
