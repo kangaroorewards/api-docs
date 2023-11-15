@@ -26,7 +26,6 @@ paths:
           type: string
         - in: path
           name: perPage
-          required: true
           type: integer
           default: 50
       responses:
