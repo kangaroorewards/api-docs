@@ -88,3 +88,15 @@ paths:
       operationId: getUserDetails
       tags:
         - core
+  createBusinessOffer:
+    patch:
+      x-file: createBusinessOffer.yaml
+      operationId: createBusinessOffer
+      tags:
+        - core
+  updateBusinessOffer:
+    patch:
+      x-file: updateBusinessOffer.yaml
+      operationId: updateBusinessOffer
+      tags:
+        - core
