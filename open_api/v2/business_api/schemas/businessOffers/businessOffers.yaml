@@ -133,6 +133,18 @@ definitions:
         description: A list of translations of this offer into different languages.
         items:
           $ref: '#/definitions/OfferTranslation'
+      coupon_auto_get:
+        type: integer
+        format: int64
+      coupon_perm_available:
+        type: integer
+        format: int64
+      coupon_expires_in:
+        type: integer
+        format: int64
+      displays_in:
+        type: integer
+        format: int64
   OfferTranslation:
     type: object
     description: A language translation of this offer.
