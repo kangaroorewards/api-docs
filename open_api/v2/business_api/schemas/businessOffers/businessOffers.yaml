@@ -134,11 +134,9 @@ definitions:
         items:
           $ref: '#/definitions/OfferTranslation'
       coupon_auto_get:
-        type: integer
-        format: int64
+        type: boolean
       coupon_perm_available:
-        type: integer
-        format: int64
+        type: boolean
       coupon_expires_in:
         type: integer
         format: int64
