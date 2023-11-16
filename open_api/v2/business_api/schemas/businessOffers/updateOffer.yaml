@@ -10,9 +10,9 @@ definitions:
         type: integer
         format: int64
       publish_at:
-        type: String
+        type: string
       expires_at:
-        type: String
+        type: string
       never_expires_flag:
         type: integer
       discount_value:
@@ -59,9 +59,9 @@ definitions:
         items:
           type: integer
       peak_from:
-        type: String
+        type: string
       peak_to:
-        type: String
+        type: string
       points:
         type: integer
         format: int64
