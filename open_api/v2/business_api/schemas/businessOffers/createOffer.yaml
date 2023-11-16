@@ -88,9 +88,9 @@ definitions:
       language_id:
         type: integer
         format: int64
-      title:
+      offer_title:
         type: string
-      description:
+      offer_description:
         type: string
       offer_terms_conditions:
         type: string
