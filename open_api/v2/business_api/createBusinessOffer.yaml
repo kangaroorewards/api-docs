@@ -27,8 +27,8 @@ paths:
           required: true
           schema:
             type: object
-            $ref: 'schemas/businessOffers/createOffer.yaml#/definitions/CreateOfferRequest'
+            $ref: 'schemas/businessOffers/createUpdateOffer.yaml#/definitions/CreateUpdateOfferRequest'
       responses:
         "200":
           schema:
-            $ref: "schemas/businessOffers/createOffer.yaml#/definitions/CreateOfferResponse"
+            $ref: "schemas/businessOffers/createUpdateOffer.yaml#/definitions/CreateUpdateOfferResponse"

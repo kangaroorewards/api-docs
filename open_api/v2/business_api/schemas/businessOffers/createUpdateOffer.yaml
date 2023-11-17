@@ -1,7 +1,7 @@
 definitions:
-  CreateOfferRequest:
+  CreateUpdateOfferRequest:
     type: "object"
-    x-model: CreateOfferRequestModel
+    x-model: CreateUpdateOfferRequestModel
     properties:
       type_id:
         type: integer
@@ -73,9 +73,9 @@ definitions:
       displays_in:
         type: integer
         format: int64
-  CreateOfferResponse:
+  CreateUpdateOfferResponse:
     type: "object"
-    x-model: CreateOfferResponseModel
+    x-model: CreateUpdateOfferResponseModel
     required:
       - data
     properties:
