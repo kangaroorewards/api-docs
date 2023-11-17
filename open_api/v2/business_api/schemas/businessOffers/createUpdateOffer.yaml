@@ -21,6 +21,12 @@ definitions:
       discount_value:
         type: number
         format: double
+      discounted_price:
+        type: number
+        format: double
+      regular_price:
+        type: number
+        format: double
       real_value:
         type: number
         format: double

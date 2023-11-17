@@ -57,6 +57,12 @@ definitions:
       discount_value:
         type: number
         format: double
+      discounted_price:
+        type: number
+        format: double
+      regular_price:
+        type: number
+        format: double
         description: The discount value (in $) of this offer
       multip_factor:
         type: number
