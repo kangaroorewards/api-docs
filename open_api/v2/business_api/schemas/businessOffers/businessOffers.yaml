@@ -172,6 +172,9 @@ definitions:
       offer_link:
         description: The language appropriate link of this offer.
         type: string
+      offer_product:
+        description: The translated product description of a free product offer.
+        type: string
       coupon_title:
         description: The translated coupon title.
         type: string

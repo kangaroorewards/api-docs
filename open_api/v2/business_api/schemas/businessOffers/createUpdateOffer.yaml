@@ -102,6 +102,8 @@ definitions:
         type: string
       offer_link:
         type: string
+      offer_product:
+        type: string
   Images:
     type: object
     properties:
