@@ -100,3 +100,15 @@ paths:
       operationId: updateBusinessOffer
       tags:
         - core
+  createBusinessReward:
+    patch:
+      x-file: createBusinessReward.yaml
+      operationId: createRewardRequest
+      tags:
+        - core
+  updateBusinessReward:
+    patch:
+      x-file: updateBusinessReward.yaml
+      operationId: updateBusinessReward
+      tags:
+        - core

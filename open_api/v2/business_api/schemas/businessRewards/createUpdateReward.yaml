@@ -1,0 +1,89 @@
+definitions:
+  CreateUpdateRewardRequest:
+    type: "object"
+    x-model: CreateUpdateRewardRequestModel
+    properties:
+      type_id:
+        type: integer
+        format: int64
+      subtype_id:
+        type: integer
+        format: int64
+      targeted_flag:
+        type: integer
+        format: int64
+      publish_at:
+        type: string
+      expires_at:
+        type: string
+      never_expires_flag:
+        type: integer
+      discount_value:
+        type: number
+        format: double
+      real_value:
+        type: number
+        format: double
+      reward_languages:
+        type: array
+        items:
+          $ref: '#/definitions/RewardRequestLanguages'
+      images:
+        type: array
+        items:
+          $ref: '#/definitions/Images'
+      available_at_branches:
+        type: array
+        items:
+          $ref: '#/definitions/BranchIds'
+      points:
+        type: integer
+        format: int64
+      amount:
+        type: number
+        format: float
+      partner_reward:
+        type: boolean
+      partner_reward_type:
+        type: integer
+      redeem_for_gift_card:
+        type: boolean
+  CreateUpdateRewardResponse:
+    type: "object"
+    x-model: CreateUpdateRewardResponseModel
+    required:
+      - data
+    properties:
+      data:
+        type: object
+        $ref: './businessRewards.yaml#/definitions/Reward'
+  RewardRequestLanguages:
+    type: "object"
+    properties:
+      language_id:
+        type: integer
+        format: int64
+      title:
+        type: string
+      description:
+        type: string
+      terms_conditions:
+        type: string
+      link:
+        type: string
+  Images:
+    type: object
+    properties:
+      large:
+        type: string
+      medium:
+        type: string
+      thumbnail:
+        type: string
+      original:
+        type: string
+  BranchIds:
+    type: object
+    properties:
+      id:
+        type: string
