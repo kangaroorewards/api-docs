@@ -27,8 +27,8 @@ paths:
           required: true
           schema:
             type: object
-            $ref: 'schemas/businessOffers/createUpdateReward.yaml#/definitions/CreateUpdateRewardRequest'
+            $ref: 'schemas/businessRewards/createUpdateReward.yaml#/definitions/CreateUpdateRewardRequest'
       responses:
         "200":
           schema:
-            $ref: "schemas/businessOffers/createUpdateReward.yaml#/definitions/CreateUpdateRewardResponse"
+            $ref: "schemas/businessRewards/createUpdateReward.yaml#/definitions/CreateUpdateRewardResponse"
