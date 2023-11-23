@@ -18,7 +18,7 @@ paths:
       summary: Retrieves recommendations related to this business
       operationId: getBusinessRecommendations
       tags:
-        - getBusinessRecommendations
+        - businessRecommendations
       responses:
         "200":
           description: retrieves recommendations related to this business
