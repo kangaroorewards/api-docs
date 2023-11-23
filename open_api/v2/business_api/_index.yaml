@@ -112,3 +112,15 @@ paths:
       operationId: updateBusinessReward
       tags:
         - core
+  businessRecommendations:
+    patch:
+      x-file: businessRecommendations.yaml
+      operationId: getBusinessRecommendations
+      tags:
+        - core
+  deleteRecommendationById:
+    patch:
+      x-file: deleteRecommendationById.yaml
+      operationId: deleteRecommendationById
+      tags:
+        - core

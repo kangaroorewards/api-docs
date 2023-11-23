@@ -1,0 +1,51 @@
+definitions:
+  BusinessRecommendationsResponse:
+    type: "object"
+    x-model: BusinessRecommendationsModel
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        description: A list of all business recommendations
+        items:
+          $ref: '#/definitions/Recommendation'
+  Recommendation:
+    type: "object"
+    x-model: RecommendationModel
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        description: recommendation unique id
+      title:
+        type: String
+        description: recommendation title
+      tagline:
+        type: String
+        description: recommendation tagline
+      short_description:
+        type: String
+        description: recommendation short description
+      long_description:
+        type: String
+        description: recommendation long description
+      link:
+        type: String
+        description: recommendation link
+      publication_start_date:
+        type: String
+        description: recommendation publication start date
+      publication_end_date:
+        type: String
+        description: recommendation publication end date
+      type_id:
+        type: integer
+        description: recommendation type id
+      priority:
+        type: integer
+        description: recommendation priority
+      action:
+        type: String
+        description: recommendation action
