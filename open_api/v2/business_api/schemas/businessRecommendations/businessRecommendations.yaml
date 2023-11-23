@@ -20,25 +20,25 @@ definitions:
         type: integer
         description: recommendation unique id
       title:
-        type: String
+        type: string
         description: recommendation title
       tagline:
-        type: String
+        type: string
         description: recommendation tagline
       short_description:
-        type: String
+        type: string
         description: recommendation short description
       long_description:
-        type: String
+        type: string
         description: recommendation long description
       link:
-        type: String
+        type: string
         description: recommendation link
       publication_start_date:
-        type: String
+        type: string
         description: recommendation publication start date
       publication_end_date:
-        type: String
+        type: string
         description: recommendation publication end date
       type_id:
         type: integer
@@ -47,5 +47,5 @@ definitions:
         type: integer
         description: recommendation priority
       action:
-        type: String
+        type: string
         description: recommendation action
