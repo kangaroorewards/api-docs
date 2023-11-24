@@ -71,6 +71,8 @@ definitions:
         type: string
       link:
         type: string
+      note:
+        type: string
   Images:
     type: object
     properties:
