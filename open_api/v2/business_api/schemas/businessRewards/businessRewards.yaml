@@ -27,6 +27,9 @@ definitions:
       id:
         type: integer
         description: A unique ID identifying this reward
+      type_id:
+        type: integer
+        format: int64
       points:
         type: integer
         format: int64
