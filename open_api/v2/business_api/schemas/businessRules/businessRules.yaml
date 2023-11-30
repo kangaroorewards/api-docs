@@ -25,6 +25,7 @@ definitions:
     properties:
       reward_ratio:
         type: number
+        format: double
       reward_amount:
         type: integer
         format: int64
