@@ -124,3 +124,9 @@ paths:
       operationId: deleteRecommendationById
       tags:
         - core
+  businessCampaigns:
+    patch:
+      x-file: businessCampaigns.yaml
+      operationId: getBusinessCampaigns
+      tags:
+        - core

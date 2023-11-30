@@ -62,10 +62,10 @@ definitions:
     x-model: UseDetailsIncludedModel
     properties:
       business:
-        $ref: '#/definitions/UseDetailsIncludedBusiness'
+        $ref: '#/definitions/Business'
       branches:
         $ref: '#/definitions/UseDetailsIncludedBranchesList'
-  UseDetailsIncludedBusiness:
+  Business:
     type: "object"
     description: Business profile data
     properties:
