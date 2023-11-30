@@ -24,8 +24,7 @@ definitions:
     type: "object"
     properties:
       reward_ratio:
-        type: integer
-        format: int64
+        type: number
       reward_amount:
         type: integer
         format: int64

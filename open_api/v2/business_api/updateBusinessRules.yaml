@@ -33,8 +33,7 @@ paths:
               - welcome_points
             properties:
               reward_ratio:
-                type: integer
-                format: int64
+                type: number
                 description: points earned by user after spending x amount
               reward_milestone_amount:
                 type: integer
