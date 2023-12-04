@@ -62,7 +62,7 @@ definitions:
         items:
           $ref: "../../schemas/businessOffers/businessOffers.yaml#/definitions/Offer"
       options:
-        type: array
+        type: object
         items:
           $ref: '#/definitions/Options'
       business:
