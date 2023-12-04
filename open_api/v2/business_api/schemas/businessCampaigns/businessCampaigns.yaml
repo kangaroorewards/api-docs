@@ -10,16 +10,16 @@ definitions:
         description: A list of all business campaigns
         items:
           $ref: '#/definitions/Campaign'
-  OfferByIdResponse:
+  CampaignByIdResponse:
     type: "object"
-    x-model: BusinessOfferByIdModel
+    x-model: CampaignByIdResponseModel
     required:
       - data
     properties:
       data:
         type: object
-        description: An offer returned by its id only
-        $ref: '#/definitions/Offer'
+        description: A campaign returned by its id only
+        $ref: '#/definitions/Campaign'
   Campaign:
     type: object
     description: |
@@ -64,6 +64,12 @@ definitions:
       options:
         type: object
         $ref: '#/definitions/Options'
+      summary:
+        type: object
+        $ref: '#/definitions/Summary'
+      statistics:
+        type: object
+        $ref: '#/definitions/Statistics'
       business:
         type: object
         $ref: "../../schemas/userDetails/userDetails.yaml#/definitions/Business"
@@ -113,3 +119,38 @@ definitions:
         type: string
       ptsExpireInactiveDays:
         type: string
+  Summary:
+    type: object
+    properties:
+      total_targeted_customers:
+        type: integer
+        format: int64
+      total_reachable_customers:
+        type: integer
+        format: int64
+      total_unreachable_customers:
+        type: integer
+        format: int64
+  Statistics:
+    type: object
+    properties:
+      currency_symbol:
+        type: string
+      purchases_amount:
+        type: number
+        format: float
+      overall_purchases:
+        type: number
+        format: float
+      revenue_from_email_opens:
+        type: number
+        format: float
+      total_coupons_redeemed:
+        type: integer
+        format: int64
+      unique_customer_visits:
+        type: integer
+        format: int64
+      total_customer_visits:
+        type: integer
+        format: int64

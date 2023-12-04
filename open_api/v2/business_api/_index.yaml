@@ -130,3 +130,9 @@ paths:
       operationId: getBusinessCampaigns
       tags:
         - core
+  businessCampaignById:
+    patch:
+      x-file: businessCampaignById.yaml
+      operationId: getBusinessCampaignById
+      tags:
+        - core
