@@ -1,0 +1,62 @@
+definitions:
+  TouchPointsResult:
+    type: "object"
+    x-model: TouchPointsResultModel
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        description: A list of total touch points, broken down by month.
+        items:
+          $ref: '#/definitions/TouchPointsTotal'
+  TouchPointsTotal:
+    type: object
+    description: |
+      The total amount of touch points for this period. Touch points are a combination
+      of check-in events, sales events, and redemption events.
+    properties:
+      date:
+        type: string
+      total:
+        type: integer
+  SignUpsResult:
+    type: "object"
+    x-model: SignUpsResultModel
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        description: A list of total sign ups for this period.
+        items:
+          $ref: '#/definitions/SignUpsTotal'
+  SignUpsTotal:
+    type: object
+    description: |
+      The total amount of sign ups for this period.
+    properties:
+      date:
+        type: string
+      total:
+        type: integer
+  SalesTotalResult:
+    type: "object"
+    x-model: SalesTotalResultModel
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        description: A list of sales total for this period.
+        items:
+          $ref: '#/definitions/SalesTotal'
+  SalesTotal:
+    type: object
+    description: |
+      The sales total amount for this period.
+    properties:
+      date:
+        type: string
+      total:
+        type: string

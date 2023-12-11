@@ -1,0 +1,31 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Business Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /insights/total-purchases?months_back={monthsCount}:
+    get:
+      summary: Get a list of sales totals by month
+      operationId: getBusinessMonthlySalesTotalInsight
+      tags:
+        - businessMonthlySalesTotals
+      parameters:
+        - in: path
+          name: monthsCount
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: List of sales totals by month
+          schema:
+            $ref: 'schemas/businessInsights/businessInsights.yaml#/definitions/SalesTotalResult'
