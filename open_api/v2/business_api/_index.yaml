@@ -172,3 +172,9 @@ paths:
       operationId: getBusinessMonthlyTouchPointsInsight
       tags:
         - core
+  userDeviceToken:
+    get:
+      x-file: userDeviceToken.yaml
+      operationId: updateUserDeviceToken
+      tags:
+        - core
