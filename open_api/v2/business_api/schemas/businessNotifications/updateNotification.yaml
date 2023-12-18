@@ -15,4 +15,4 @@ definitions:
     properties:
       data:
         type: object
-        $ref: './businessNotifications.yaml#/definitions/Notification'
+        $ref: './businessNotifications.yaml#/definitions/BusinessNotificationsResponse'
