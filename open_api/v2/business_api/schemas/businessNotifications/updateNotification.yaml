@@ -1,0 +1,18 @@
+definitions:
+  UpdateNotificationRequest:
+    type: "object"
+    x-model: UpdateNotificationRequestModel
+    properties:
+      read:
+        type: boolean
+      hidden:
+        type: boolean
+  UpdateNotificationResponse:
+    type: "object"
+    x-model: UpdateNotificationResponseModel
+    required:
+      - data
+    properties:
+      data:
+        type: object
+        $ref: './businessNotifications.yaml#/definitions/Notification'

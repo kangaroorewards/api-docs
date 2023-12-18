@@ -1,0 +1,51 @@
+definitions:
+  BusinessNotificationsResponse:
+    type: "object"
+    x-model: BusinessNotificationsModel
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        description: A list of all user notifications
+        items:
+          $ref: '#/definitions/Notification'
+  Notification:
+    type: "object"
+    x-model: NotificationModel
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        description: notification unique id
+      type_id:
+        type: integer
+        description: notification unique type id
+      category_id:
+        type: integer
+        description: notification unique category id
+      resource_id:
+        type: integer
+        description: notification unique resource id
+      description:
+        type: string
+        description: notification description
+      read:
+        type: boolean
+        description: Whether this notification is read or not.
+      hidden:
+        type: boolean
+        description: Whether this notification is hidden or not.
+      created_at:
+        type: string
+        description: notification creation date
+      campaign:
+        type: object
+        $ref: "../../schemas/businessCampaigns/businessCampaigns.yaml#/definitions/Campaign"
+      offer:
+        type: object
+        $ref: "../../schemas/businessOffers/businessOffers.yaml#/definitions/Offer"
+      reward:
+        type: object
+        $ref: "../../schemas/businessRewards/businessRewards.yaml#/definitions/Reward"

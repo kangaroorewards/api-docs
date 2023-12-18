@@ -178,3 +178,15 @@ paths:
       operationId: updateUserDeviceToken
       tags:
         - core
+  businessNotifications:
+    get:
+      x-file: businessNotifications.yaml
+      operationId: getBusinessNotifications
+      tags:
+        - core
+  updateNotificationById:
+    get:
+      x-file: updateNotificationById.yaml
+      operationId: updateNotificationById
+      tags:
+        - core
