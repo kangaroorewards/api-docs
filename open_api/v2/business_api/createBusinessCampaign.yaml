@@ -99,7 +99,7 @@ paths:
           type: string
         - in: formData
           name: specificCustomersList
-          required: true
+          required: false
           type: array
           items:
             type: string
