@@ -40,6 +40,78 @@ paths:
           required: false
           type: bool
         - in: formData
+          name: campaign_name
+          required: true
+          type: string
+        - in: formData
+          name: messageEmail
+          required: false
+          type: string
+        - in: formData
+          name: messageSMS
+          required: false
+          type: string
+        - in: formData
+          name: pushNotificationTitle
+          required: false
+          type: string
+        - in: formData
+          name: pushNotificationMessage
+          required: false
+          type: string
+        - in: formData
+          name: pushNotificationLink
+          required: false
+          type: string
+        - in: formData
+          name: pushNotificationImage
+          required: false
+          type: string
+        - in: formData
+          name: email_subject
+          required: false
+          type: string
+        - in: formData
+          name: redirectFromEditor
+          required: false
+          type: string
+        - in: formData
+          name: selectedOffers
+          required: false
+          type: string
+        - in: formData
+          name: selectedOffers
+          required: false
+          type: string
+        - in: formData
+          name: autoCampaign
+          required: false
+          type: string
+        - in: formData
+          name: frequency
+          required: false
+          type: string
+        - in: formData
+          name: scheduleFlag
+          required: false
+          type: string
+        - in: formData
+          name: scheduleDate
+          required: false
+          type: string
+        - in: formData
+          name: scheduleTime
+          required: false
+          type: string
+        - in: formData
+          name: expiryDate
+          required: false
+          type: string
+        - in: formData
+          name: idempotency_key
+          required: false
+          type: string
+        - in: formData
           name: excludeDormants
           required: false
           type: bool
