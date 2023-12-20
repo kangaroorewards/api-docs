@@ -33,4 +33,4 @@ paths:
       responses:
         "200":
           schema:
-            $ref: "schemas/businessNotifications/businessNotifications.yaml#/definitions/BusinessNotificationsResponse"
+            $ref: "schemas/businessNotifications/updateNotification.yaml#/definitions/UpdateNotificationResponse"
