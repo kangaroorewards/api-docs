@@ -190,3 +190,9 @@ paths:
       operationId: updateNotificationById
       tags:
         - core
+  createBusinessCampaign:
+    get:
+      x-file: createBusinessCampaign.yaml
+      operationId: createBusinessCampaign
+      tags:
+        - core
