@@ -1,809 +1,809 @@
-swagger: "2.0"
-info:
-  version: 1.0.0
-  title: Kangaroo Customer Api
-  license:
-    name: MIT
-host: com.kangaroo.com
-basePath: /v1
-schemes:
-  - http
-consumes:
-  - application/json
-produces:
-  - application/json
-paths:
-  /internal/marketing/campaign-audience:
-    post:
-      summary: |
-        Create a marketing campaign
-      operationId: createBusinessCampaign
-      consumes:
-        - application/x-www-form-urlencoded
-      tags:
-        - createBusinessCampaign
-      parameters:
-        - in: formData
-          name: sendPromoBy
-          required: true
-          type: string
-        - in: formData
-          name: sendEmailSms
-          required: true
-          type: string
-        - in: formData
-          name: messageSMS
-          required: true
-          type: string
-        - in: formData
-          name: applyConditionsAnd
-          required: false
-          type: bool
-        - in: formData
-          name: excludeDormants
-          required: false
-          type: bool
-        - in: formData
-          name: excludeCustPrevRegCamp
-          required: false
-          type: bool
-        - in: formData
-          name: excCustPrevRegCampDays
-          required: false
-          type: integer
-        - in: formData
-          name: excCustPrevRegCampUnit
-          required: false
-          type: string
-        - in: formData
-          name: excludeCustPrevRegCampIds
-          required: false
-          type: string
-        - in: formData
-          name: excludeCustPrevRegCriteria
-          required: false
-          type: integer
-        - in: formData
-          name: excludeCustPrevAutoCamp
-          required: false
-          type: bool
-        - in: formData
-          name: excCustPrevAutoCampDays
-          required: false
-          type: integer
-        - in: formData
-          name: excCustPrevAutoCampUnit
-          required: false
-          type: string
-        - in: formData
-          name: excludeCustPrevAutoCampIds
-          required: false
-          type: string
-        - in: formData
-          name: excludeCustPrevAutoCriteria
-          required: false
-          type: integer
-        - in: formData
-          name: whoWillReceive
-          required: true
-          type: array
-          items:
-            type: integer
-        - in: formData
-          name: topSpending
-          required: false
-          type: integer
-        - in: formData
-          name: specificCustomer
-          required: false
-          type: string
-        - in: formData
-          name: specificCustomersList
-          required: false
-          type: array
-          items:
-            type: string
+#swagger: "2.0"
+#info:
+#  version: 1.0.0
+#  title: Kangaroo Customer Api
+#  license:
+#    name: MIT
+#host: com.kangaroo.com
+#basePath: /v1
+#schemes:
+#  - http
+#consumes:
+#  - application/json
+#produces:
+#  - application/json
+#paths:
+#  /internal/marketing/campaign-audience:
+#    post:
+#      summary: |
+#        Create a marketing campaign
+#      operationId: createBusinessCampaign
+#      consumes:
+#        - application/x-www-form-urlencoded
+#      tags:
+#        - createBusinessCampaign
+#      parameters:
 #        - in: formData
-#          name: productRewardListId
+#          name: sendPromoBy
 #          required: true
-#          type: json TODO JSON??
-        - in: formData
-          name: havePtsOperator
-          required: false
-          type: integer
-        - in: formData
-          name: havePts
-          required: false
-          type: integer
-        - in: formData
-          name: haveEndPts
-          required: false
-          type: integer
-        - in: formData
-          name: punchItemIds
-          required: false
-          type: array
-          items:
-            type: integer
-        - in: formData
-          name: daysOp51
-          required: false
-          type: integer
-        - in: formData
-          name: branchIdOp51
-          required: false
-          type: array
-          items:
-            type: integer
-        - in: formData
-          name: offerIds
-          required: false
-          type: array
-          items:
-            type: integer
-        - in: formData
-          name: daysOp50
-          required: false
-          type: integer
-        - in: formData
-          name: branchIdOp50
-          required: false
-          type: array
-          items:
-            type: integer
-        - in: formData
-          name: customerTypesId
-          required: false
-          type: array
-          items:
-            type: integer
-        - in: formData
-          name: tagsId
-          required: false
-          type: array
-          items:
-            type: integer
-        - in: formData
-          name: referredBetwFirst
-          required: false
-          type: string
-        - in: formData
-          name: referredBetwLast
-          required: false
-          type: string
-        - in: formData
-          name: referredCustomersNumber
-          required: false
-          type: integer
-        - in: formData
-          name: referredCustomersStatus
-          required: false
-          type: array
-          items:
-            type: integer
-        - in: formData
-          name: referralStatus
-          required: false
-          type: array
-          items:
-            type: integer
-        - in: formData
-          name: haveLifetime
-          required: false
-          type: integer
-        - in: formData
-          name: haveLifetimeOperator
-          required: false
-          type: integer
-        - in: formData
-          name: spentWeeksAmount
-          required: false
-          type: integer
-        - in: formData
-          name: spentWeeksNumber
-          required: false
-          type: integer
-        - in: formData
-          name: spentWeeksOperator
-          required: false
-          type: integer
-        - in: formData
-          name: segmentsId
-          required: false
-          type: array
-          items:
-            type: integer
-        - in: formData
-          name: noRegTrxDays
-          required: false
-          type: integer
-        - in: formData
-          name: noRegTrxFlag
-          required: false
-          type: integer
-        - in: formData
-          name: noRegTrxBranchIds
-          required: false
-          type: array
-          items:
-            type: integer
-        - in: formData
-          name: atLeastOneTrxIn
-          required: false
-          type: integer
-        - in: formData
-          name: atLeastOneTrxNum
-          required: false
-          type: integer
-        - in: formData
-          name: weeksOperator
-          required: false
-          type: integer
-        - in: formData
-          name: firstVisitBetwFirst
-          required: false
-          type: string
-        - in: formData
-          name: firstVisitBetwLast
-          required: false
-          type: string
-        - in: formData
-          name: branchIdOp18
-          required: false
-          type: array
-          items:
-            type: integer
-        - in: formData
-          name: branchId
-          required: false
-          type: array
-          items:
-            type: integer
-        - in: formData
-          name: customerLanguagesId
-          required: false
-          type: array
-          items:
-            type: integer
-        - in: formData
-          name: postalCode
-          required: false
-          type: string
-        - in: formData
-          name: bookedAppointmentBetwFirst
-          required: false
-          type: string
-        - in: formData
-          name: bookedAppointmentBetwLast
-          required: false
-          type: string
-        - in: formData
-          name: bookingServiceId
-          required: false
-          type: array
-          items:
-            type: integer
-        - in: formData
-          name: bookingServiceOperator
-          required: false
-          type: integer
-        - in: formData
-          name: bookingLastAppointmentsDays
-          required: false
-          type: integer
-        - in: formData
-          name: reviewOperator
-          required: false
-          type: integer
-        - in: formData
-          name: reviewDays
-          required: false
-          type: integer
-        - in: formData
-          name: productTags
-          required: false
-          type: array
-          items:
-            type: object
-            properties:
-              tagId:
-                type: integer
-                format: int64
-              tagName:
-                type: string
-        - in: formData
-          name: productTagsDays
-          required: false
-          type: array
-          items:
-            type: integer
-        - in: formData
-          name: lsRetailBrands
-          required: false
-          type: array
-          items:
-            type: object
-            properties:
-              itemId:
-                type: integer
-                format: int64
-              itemName:
-                type: string
-        - in: formData
-          name: lsRetailBrandsDays
-          required: false
-          type: integer
-        - in: formData
-          name: lsRetailProducts
-          required: false
-          type: string
-        - in: formData
-          name: lsRetailProductsBranches
-          required: false
-          type: array
-          items:
-            type: string
-        - in: formData
-          name: lsRetailProductsDays
-          required: false
-          type: integer
-        - in: formData
-          name: lsRetailCategories
-          required: false
-          type: string
-        - in: formData
-          name: lsRetailCategoriesDays
-          required: false
-          type: integer
-        - in: formData
-          name: shopifyAccount
-          required: false
-          type: string
-        - in: formData
-          name: shopifyCategories
-          required: false
-          type: string
-        - in: formData
-          name: shopifyCategoriesDays
-          required: false
-          type: integer
-        - in: formData
-          name: shopifyProducts
-          required: false
-          type: string
-        - in: formData
-          name: shopifyProductsDays
-          required: false
-          type: integer
-        - in: formData
-          name: shopifyVendors
-          required: false
-          type: string
-        - in: formData
-          name: shopifyVendorsDays
-          required: false
-          type: integer
-        - in: formData
-          name: shopifyTags
-          required: false
-          type: string
-        - in: formData
-          name: shopifyTagsDays
-          required: false
-          type: integer
-        - in: formData
-          name: lsEcomAccount
-          required: false
-          type: string
-        - in: formData
-          name: lsEcomCategories
-          required: false
-          type: string
-        - in: formData
-          name: lsEcomCategoriesDays
-          required: false
-          type: integer
-        - in: formData
-          name: lsEcomProducts
-          required: false
-          type: string
-        - in: formData
-          name: lsEcomProductsDays
-          required: false
-          type: integer
-        - in: formData
-          name: lsEcomVendors
-          required: false
-          type: string
-        - in: formData
-          name: lsEcomVendorsDays
-          required: false
-          type: integer
-        - in: formData
-          name: lsEcomTags
-          required: false
-          type: string
-        - in: formData
-          name: lsEcomTagsDays
-          required: false
-          type: integer
-        - in: formData
-          name: lsEcomBrands
-          required: false
-          type: string
-        - in: formData
-          name: lsEcomBrandsDays
-          required: false
-          type: integer
-        - in: formData
-          name: ecomzProducts
-          required: false
-          type: string
-        - in: formData
-          name: ecomzProductsDays
-          required: false
-          type: integer
-        - in: formData
-          name: ecomzTags
-          required: false
-          type: string
-        - in: formData
-          name: ecomzTagsDays
-          required: false
-          type: integer
-        - in: formData
-          name: ecomzBrands
-          required: false
-          type: string
-        - in: formData
-          name: ecomzBrandsDays
-          required: false
-          type: integer
-        - in: formData
-          name: ecomzAccount
-          required: false
-          type: string
-        - in: formData
-          name: ecomzCategories
-          required: false
-          type: string
-        - in: formData
-          name: ecomzCategoriesDays
-          required: false
-          type: integer
-        - in: formData
-          name: wooProducts
-          required: false
-          type: string
-        - in: formData
-          name: wooProductsDays
-          required: false
-          type: integer
-        - in: formData
-          name: wooTags
-          required: false
-          type: string
-        - in: formData
-          name: wooTagsDays
-          required: false
-          type: integer
-        - in: formData
-          name: wooAccount
-          required: false
-          type: string
-        - in: formData
-          name: wooCategories
-          required: false
-          type: string
-        - in: formData
-          name: wooCategoriesDays
-          required: false
-          type: integer
-        - in: formData
-          name: bcProducts
-          required: false
-          type: string
-        - in: formData
-          name: bcProductsDays
-          required: false
-          type: integer
-        - in: formData
-          name: bcBrands
-          required: false
-          type: string
-        - in: formData
-          name: bcBrandsDays
-          required: false
-          type: integer
-        - in: formData
-          name: bcAccount
-          required: false
-          type: string
-        - in: formData
-          name: magentoAccount
-          required: false
-          type: string
-        - in: formData
-          name: magentoCategories
-          required: false
-          type: string
-        - in: formData
-          name: magentoCategoriesDays
-          required: false
-          type: integer
-        - in: formData
-          name: magentoProducts
-          required: false
-          type: string
-        - in: formData
-          name: magentoProductsDays
-          required: false
-          type: integer
-        - in: formData
-          name: vendProducts
-          required: false
-          type: string
-        - in: formData
-          name: vendProductsDays
-          required: false
-          type: integer
-        - in: formData
-          name: vendVendors
-          required: false
-          type: string
-        - in: formData
-          name: vendVendorsDays
-          required: false
-          type: integer
-        - in: formData
-          name: vendTags
-          required: false
-          type: string
-        - in: formData
-          name: vendTagsDays
-          required: false
-          type: integer
-        - in: formData
-          name: vendBrands
-          required: false
-          type: string
-        - in: formData
-          name: vendBrandsDays
-          required: false
-          type: integer
-        - in: formData
-          name: heartlandAccount
-          required: false
-          type: string
-        - in: formData
-          name: heartlandProducts
-          required: false
-          type: string
-        - in: formData
-          name: heartlandProductsDays
-          required: false
-          type: integer
-        - in: formData
-          name: heartlandCategories
-          required: false
-          type: string
-        - in: formData
-          name: heartlandCategoriesDays
-          required: false
-          type: integer
-        - in: formData
-          name: heartlandVendors
-          required: false
-          type: string
-        - in: formData
-          name: heartlandVendorsDays
-          required: false
-          type: integer
-        - in: formData
-          name: lskProducts
-          required: false
-          type: string
-        - in: formData
-          name: lskProductsDays
-          required: false
-          type: integer
-        - in: formData
-          name: lskProductsQuantity
-          required: false
-          type: integer
-        - in: formData
-          name: lskAccountingGroups
-          required: false
-          type: string
-        - in: formData
-          name: lskAccountingGroupsDays
-          required: false
-          type: integer
-        - in: formData
-          name: qrCodeAccount
-          required: false
-          type: string
-        - in: formData
-          name: qrCodeProducts
-          required: false
-          type: string
-        - in: formData
-          name: qrCodeProductsDays
-          required: false
-          type: integer
-        - in: formData
-          name: campaignedOffersRedemptionsOperator
-          required: false
-          type: string
-        - in: formData
-          name: campaignedOffersRedemptionsDays
-          required: false
-          type: integer
-        - in: formData
-          name: campaignedOffersRedemptionsCampaignIds
-          required: false
-          type: array
-          items:
-            type: string
-        - in: formData
-          name: campaignedOffersRedemptionsBranches
-          required: false
-          type: array
-          items:
-            type: string
-        - in: formData
-          name: campaignedOffersRedemptionsOffersList
-          required: false
-          type: array
-          items:
-            type: string
-        - in: formData
-          name: campaignedOffersRedemptionsRedemptionsList
-          required: false
-          type: array
-          items:
-            type: string
-        - in: formData
-          name: branchIdOp75
-          required: false
-          type: array
-          items:
-            type: integer
-        - in: formData
-          name: branchIdOp76
-          required: false
-          type: array
-          items:
-            type: integer
-        - in: formData
-          name: customerCriteriaOp9
-          required: false
-          type: integer
-        - in: formData
-          name: customerTypesOp9
-          required: false
-          type: array
-          items:
-            type: integer
-        - in: formData
-          name: daysBeforeBirthday
-          required: false
-          type: integer
-        - in: formData
-          name: ptsExpireInactiveDays
-          required: false
-          type: integer
-        - in: formData
-          name: ptsExpireDays
-          required: false
-          type: integer
-        - in: formData
-          name: afterFirstVisit
-          required: false
-          type: integer
-        - in: formData
-          name: branchIdOp13
-          required: false
-          type: array
-          items:
-            type: integer
-        - in: formData
-          name: nbRewardRedemp
-          required: false
-          type: integer
-        - in: formData
-          name: optRewardRedemp
-          required: false
-          type: integer
-        - in: formData
-          name: noTrxDays
-          required: false
-          type: integer
-        - in: formData
-          name: noTrxBranchIds
-          required: false
-          type: array
-          items:
-            type: integer
-        - in: formData
-          name: regNoTrxDays
-          required: false
-          type: integer
-        - in: formData
-          name: registeredCustomersBetwFirst
-          required: false
-          type: string
-        - in: formData
-          name: registeredCustomersBetwLast
-          required: false
-          type: string
-        - in: formData
-          name: movedFromCustomerTypeId
-          required: false
-          type: array
-          items:
-            type: integer
-        - in: formData
-          name: movedToCustomerTypeId
-          required: false
-          type: array
-          items:
-            type: integer
-        - in: formData
-          name: haveGiftcard
-          required: false
-          type: integer
-        - in: formData
-          name: haveGiftcardOperator
-          required: false
-          type: integer
-        - in: formData
-          name: haveEndGiftcard
-          required: false
-          type: integer
-        - in: formData
-          name: isCustomerExport
-          required: false
-          type: integer
-        - in: formData
-          name: ignore_consent
-          required: false
-          type: integer
-        - in: formData
-          name: send_to_invalid_sms
-          required: false
-          type: string
-        - in: formData
-          name: ecwidProducts
-          required: false
-          type: string
-        - in: formData
-          name: ecwidProductsDays
-          required: false
-          type: integer
-        - in: formData
-          name: ecwidBrands
-          required: false
-          type: string
-        - in: formData
-          name: ecwidBrandsDays
-          required: false
-          type: integer
-        - in: formData
-          name: ecwidCategories
-          required: false
-          type: string
-        - in: formData
-          name: ecwidCategoriesDays
-          required: false
-          type: integer
-        - in: formData
-          name: summary_storage
-          required: false
-          type: string
-      responses:
-        "200":
-          description: |
-            The result of creating a marketing campaign
-          schema:
-            $ref: 'schemas/businessCampaigns/businessCampaigns.yaml#/definitions/CreateCampaignResponse'
+#          type: string
+#        - in: formData
+#          name: sendEmailSms
+#          required: true
+#          type: string
+#        - in: formData
+#          name: messageSMS
+#          required: true
+#          type: string
+#        - in: formData
+#          name: applyConditionsAnd
+#          required: false
+#          type: bool
+#        - in: formData
+#          name: excludeDormants
+#          required: false
+#          type: bool
+#        - in: formData
+#          name: excludeCustPrevRegCamp
+#          required: false
+#          type: bool
+#        - in: formData
+#          name: excCustPrevRegCampDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: excCustPrevRegCampUnit
+#          required: false
+#          type: string
+#        - in: formData
+#          name: excludeCustPrevRegCampIds
+#          required: false
+#          type: string
+#        - in: formData
+#          name: excludeCustPrevRegCriteria
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: excludeCustPrevAutoCamp
+#          required: false
+#          type: bool
+#        - in: formData
+#          name: excCustPrevAutoCampDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: excCustPrevAutoCampUnit
+#          required: false
+#          type: string
+#        - in: formData
+#          name: excludeCustPrevAutoCampIds
+#          required: false
+#          type: string
+#        - in: formData
+#          name: excludeCustPrevAutoCriteria
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: whoWillReceive
+#          required: true
+#          type: array
+#          items:
+#            type: integer
+#        - in: formData
+#          name: topSpending
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: specificCustomer
+#          required: false
+#          type: string
+#        - in: formData
+#          name: specificCustomersList
+#          required: false
+#          type: array
+#          items:
+#            type: string
+##        - in: formData
+##          name: productRewardListId
+##          required: true
+##          type: json TODO JSON??
+#        - in: formData
+#          name: havePtsOperator
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: havePts
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: haveEndPts
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: punchItemIds
+#          required: false
+#          type: array
+#          items:
+#            type: integer
+#        - in: formData
+#          name: daysOp51
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: branchIdOp51
+#          required: false
+#          type: array
+#          items:
+#            type: integer
+#        - in: formData
+#          name: offerIds
+#          required: false
+#          type: array
+#          items:
+#            type: integer
+#        - in: formData
+#          name: daysOp50
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: branchIdOp50
+#          required: false
+#          type: array
+#          items:
+#            type: integer
+#        - in: formData
+#          name: customerTypesId
+#          required: false
+#          type: array
+#          items:
+#            type: integer
+#        - in: formData
+#          name: tagsId
+#          required: false
+#          type: array
+#          items:
+#            type: integer
+#        - in: formData
+#          name: referredBetwFirst
+#          required: false
+#          type: string
+#        - in: formData
+#          name: referredBetwLast
+#          required: false
+#          type: string
+#        - in: formData
+#          name: referredCustomersNumber
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: referredCustomersStatus
+#          required: false
+#          type: array
+#          items:
+#            type: integer
+#        - in: formData
+#          name: referralStatus
+#          required: false
+#          type: array
+#          items:
+#            type: integer
+#        - in: formData
+#          name: haveLifetime
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: haveLifetimeOperator
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: spentWeeksAmount
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: spentWeeksNumber
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: spentWeeksOperator
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: segmentsId
+#          required: false
+#          type: array
+#          items:
+#            type: integer
+#        - in: formData
+#          name: noRegTrxDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: noRegTrxFlag
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: noRegTrxBranchIds
+#          required: false
+#          type: array
+#          items:
+#            type: integer
+#        - in: formData
+#          name: atLeastOneTrxIn
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: atLeastOneTrxNum
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: weeksOperator
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: firstVisitBetwFirst
+#          required: false
+#          type: string
+#        - in: formData
+#          name: firstVisitBetwLast
+#          required: false
+#          type: string
+#        - in: formData
+#          name: branchIdOp18
+#          required: false
+#          type: array
+#          items:
+#            type: integer
+#        - in: formData
+#          name: branchId
+#          required: false
+#          type: array
+#          items:
+#            type: integer
+#        - in: formData
+#          name: customerLanguagesId
+#          required: false
+#          type: array
+#          items:
+#            type: integer
+#        - in: formData
+#          name: postalCode
+#          required: false
+#          type: string
+#        - in: formData
+#          name: bookedAppointmentBetwFirst
+#          required: false
+#          type: string
+#        - in: formData
+#          name: bookedAppointmentBetwLast
+#          required: false
+#          type: string
+#        - in: formData
+#          name: bookingServiceId
+#          required: false
+#          type: array
+#          items:
+#            type: integer
+#        - in: formData
+#          name: bookingServiceOperator
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: bookingLastAppointmentsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: reviewOperator
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: reviewDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: productTags
+#          required: false
+#          type: array
+#          items:
+#            type: object
+#            properties:
+#              tagId:
+#                type: integer
+#                format: int64
+#              tagName:
+#                type: string
+#        - in: formData
+#          name: productTagsDays
+#          required: false
+#          type: array
+#          items:
+#            type: integer
+#        - in: formData
+#          name: lsRetailBrands
+#          required: false
+#          type: array
+#          items:
+#            type: object
+#            properties:
+#              itemId:
+#                type: integer
+#                format: int64
+#              itemName:
+#                type: string
+#        - in: formData
+#          name: lsRetailBrandsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: lsRetailProducts
+#          required: false
+#          type: string
+#        - in: formData
+#          name: lsRetailProductsBranches
+#          required: false
+#          type: array
+#          items:
+#            type: string
+#        - in: formData
+#          name: lsRetailProductsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: lsRetailCategories
+#          required: false
+#          type: string
+#        - in: formData
+#          name: lsRetailCategoriesDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: shopifyAccount
+#          required: false
+#          type: string
+#        - in: formData
+#          name: shopifyCategories
+#          required: false
+#          type: string
+#        - in: formData
+#          name: shopifyCategoriesDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: shopifyProducts
+#          required: false
+#          type: string
+#        - in: formData
+#          name: shopifyProductsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: shopifyVendors
+#          required: false
+#          type: string
+#        - in: formData
+#          name: shopifyVendorsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: shopifyTags
+#          required: false
+#          type: string
+#        - in: formData
+#          name: shopifyTagsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: lsEcomAccount
+#          required: false
+#          type: string
+#        - in: formData
+#          name: lsEcomCategories
+#          required: false
+#          type: string
+#        - in: formData
+#          name: lsEcomCategoriesDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: lsEcomProducts
+#          required: false
+#          type: string
+#        - in: formData
+#          name: lsEcomProductsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: lsEcomVendors
+#          required: false
+#          type: string
+#        - in: formData
+#          name: lsEcomVendorsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: lsEcomTags
+#          required: false
+#          type: string
+#        - in: formData
+#          name: lsEcomTagsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: lsEcomBrands
+#          required: false
+#          type: string
+#        - in: formData
+#          name: lsEcomBrandsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: ecomzProducts
+#          required: false
+#          type: string
+#        - in: formData
+#          name: ecomzProductsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: ecomzTags
+#          required: false
+#          type: string
+#        - in: formData
+#          name: ecomzTagsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: ecomzBrands
+#          required: false
+#          type: string
+#        - in: formData
+#          name: ecomzBrandsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: ecomzAccount
+#          required: false
+#          type: string
+#        - in: formData
+#          name: ecomzCategories
+#          required: false
+#          type: string
+#        - in: formData
+#          name: ecomzCategoriesDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: wooProducts
+#          required: false
+#          type: string
+#        - in: formData
+#          name: wooProductsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: wooTags
+#          required: false
+#          type: string
+#        - in: formData
+#          name: wooTagsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: wooAccount
+#          required: false
+#          type: string
+#        - in: formData
+#          name: wooCategories
+#          required: false
+#          type: string
+#        - in: formData
+#          name: wooCategoriesDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: bcProducts
+#          required: false
+#          type: string
+#        - in: formData
+#          name: bcProductsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: bcBrands
+#          required: false
+#          type: string
+#        - in: formData
+#          name: bcBrandsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: bcAccount
+#          required: false
+#          type: string
+#        - in: formData
+#          name: magentoAccount
+#          required: false
+#          type: string
+#        - in: formData
+#          name: magentoCategories
+#          required: false
+#          type: string
+#        - in: formData
+#          name: magentoCategoriesDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: magentoProducts
+#          required: false
+#          type: string
+#        - in: formData
+#          name: magentoProductsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: vendProducts
+#          required: false
+#          type: string
+#        - in: formData
+#          name: vendProductsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: vendVendors
+#          required: false
+#          type: string
+#        - in: formData
+#          name: vendVendorsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: vendTags
+#          required: false
+#          type: string
+#        - in: formData
+#          name: vendTagsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: vendBrands
+#          required: false
+#          type: string
+#        - in: formData
+#          name: vendBrandsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: heartlandAccount
+#          required: false
+#          type: string
+#        - in: formData
+#          name: heartlandProducts
+#          required: false
+#          type: string
+#        - in: formData
+#          name: heartlandProductsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: heartlandCategories
+#          required: false
+#          type: string
+#        - in: formData
+#          name: heartlandCategoriesDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: heartlandVendors
+#          required: false
+#          type: string
+#        - in: formData
+#          name: heartlandVendorsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: lskProducts
+#          required: false
+#          type: string
+#        - in: formData
+#          name: lskProductsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: lskProductsQuantity
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: lskAccountingGroups
+#          required: false
+#          type: string
+#        - in: formData
+#          name: lskAccountingGroupsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: qrCodeAccount
+#          required: false
+#          type: string
+#        - in: formData
+#          name: qrCodeProducts
+#          required: false
+#          type: string
+#        - in: formData
+#          name: qrCodeProductsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: campaignedOffersRedemptionsOperator
+#          required: false
+#          type: string
+#        - in: formData
+#          name: campaignedOffersRedemptionsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: campaignedOffersRedemptionsCampaignIds
+#          required: false
+#          type: array
+#          items:
+#            type: string
+#        - in: formData
+#          name: campaignedOffersRedemptionsBranches
+#          required: false
+#          type: array
+#          items:
+#            type: string
+#        - in: formData
+#          name: campaignedOffersRedemptionsOffersList
+#          required: false
+#          type: array
+#          items:
+#            type: string
+#        - in: formData
+#          name: campaignedOffersRedemptionsRedemptionsList
+#          required: false
+#          type: array
+#          items:
+#            type: string
+#        - in: formData
+#          name: branchIdOp75
+#          required: false
+#          type: array
+#          items:
+#            type: integer
+#        - in: formData
+#          name: branchIdOp76
+#          required: false
+#          type: array
+#          items:
+#            type: integer
+#        - in: formData
+#          name: customerCriteriaOp9
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: customerTypesOp9
+#          required: false
+#          type: array
+#          items:
+#            type: integer
+#        - in: formData
+#          name: daysBeforeBirthday
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: ptsExpireInactiveDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: ptsExpireDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: afterFirstVisit
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: branchIdOp13
+#          required: false
+#          type: array
+#          items:
+#            type: integer
+#        - in: formData
+#          name: nbRewardRedemp
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: optRewardRedemp
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: noTrxDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: noTrxBranchIds
+#          required: false
+#          type: array
+#          items:
+#            type: integer
+#        - in: formData
+#          name: regNoTrxDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: registeredCustomersBetwFirst
+#          required: false
+#          type: string
+#        - in: formData
+#          name: registeredCustomersBetwLast
+#          required: false
+#          type: string
+#        - in: formData
+#          name: movedFromCustomerTypeId
+#          required: false
+#          type: array
+#          items:
+#            type: integer
+#        - in: formData
+#          name: movedToCustomerTypeId
+#          required: false
+#          type: array
+#          items:
+#            type: integer
+#        - in: formData
+#          name: haveGiftcard
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: haveGiftcardOperator
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: haveEndGiftcard
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: isCustomerExport
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: ignore_consent
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: send_to_invalid_sms
+#          required: false
+#          type: string
+#        - in: formData
+#          name: ecwidProducts
+#          required: false
+#          type: string
+#        - in: formData
+#          name: ecwidProductsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: ecwidBrands
+#          required: false
+#          type: string
+#        - in: formData
+#          name: ecwidBrandsDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: ecwidCategories
+#          required: false
+#          type: string
+#        - in: formData
+#          name: ecwidCategoriesDays
+#          required: false
+#          type: integer
+#        - in: formData
+#          name: summary_storage
+#          required: false
+#          type: string
+#      responses:
+#        "200":
+#          description: |
+#            The result of creating a marketing campaign
+#          schema:
+#            $ref: 'schemas/businessCampaigns/businessCampaigns.yaml#/definitions/CreateCampaignResponse'
