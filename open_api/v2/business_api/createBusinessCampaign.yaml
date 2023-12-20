@@ -32,10 +32,6 @@ paths:
           required: true
           type: string
         - in: formData
-          name: messageSMS
-          required: true
-          type: string
-        - in: formData
           name: applyConditionsAnd
           required: false
           type: bool
