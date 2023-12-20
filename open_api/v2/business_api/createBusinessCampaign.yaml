@@ -98,7 +98,7 @@ paths:
           required: false
           type: string
         - in: formData
-          name: specificCustomer
+          name: specificCustomersList
           required: true
           type: array
           items:
