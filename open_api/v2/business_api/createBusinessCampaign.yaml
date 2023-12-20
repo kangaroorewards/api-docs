@@ -299,36 +299,36 @@ paths:
           name: reviewDays
           required: false
           type: integer
-#        - in: formData
-#          name: productTags
-#          required: false
-#          type: array
-#          items:
-#            type: object
-#            properties:
-#              tagId:
-#                type: integer
-#                format: int64
-#              tagName:
-#                type: string
+        - in: formData
+          name: productTags
+          required: false
+          type: array
+          items:
+            type: object
+            properties:
+              tagId:
+                type: integer
+                format: int64
+              tagName:
+                type: string
         - in: formData
           name: productTagsDays
           required: false
           type: array
           items:
             type: integer
-#        - in: formData
-#          name: lsRetailBrands
-#          required: false
-#          type: array
-#          items:
-#            type: object
-#            properties:
-#              itemId:
-#                type: integer
-#                format: int64
-#              itemName:
-#                type: string
+        - in: formData
+          name: lsRetailBrands
+          required: false
+          type: array
+          items:
+            type: object
+            properties:
+              itemId:
+                type: integer
+                format: int64
+              itemName:
+                type: string
         - in: formData
           name: lsRetailBrandsDays
           required: false
