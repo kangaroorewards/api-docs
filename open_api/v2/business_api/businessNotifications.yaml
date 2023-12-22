@@ -1,0 +1,26 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Business Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /notifications?per_page=20&include=campaign,offer,reward:
+    get:
+      summary: Retrieves notifications related to this user
+      operationId: getBusinessNotifications
+      tags:
+        - businessNotifications
+      responses:
+        "200":
+          description: retrieves notifications related to this user
+          schema:
+            $ref: "schemas/businessNotifications/businessNotifications.yaml#/definitions/BusinessNotificationsResponse"

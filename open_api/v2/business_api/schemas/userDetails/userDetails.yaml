@@ -18,13 +18,13 @@ definitions:
       - id
     properties:
       id:
-        type: String
+        type: string
         description: user unique id
       email:
-        type: String
+        type: string
         description: user email
       phone:
-        type: String
+        type: string
         description: user phone
       first_name:
         type: string

@@ -20,6 +20,16 @@ definitions:
         type: object
         description: A campaign returned by its id only
         $ref: '#/definitions/Campaign'
+  CreateCampaignResponse:
+    type: "object"
+    x-model: CreateCampaignResponseModel
+    required:
+      - data
+    properties:
+      data:
+        type: object
+        description: A campaign returned after it's creation
+        $ref: '#/definitions/Campaign'
   Campaign:
     type: object
     description: |

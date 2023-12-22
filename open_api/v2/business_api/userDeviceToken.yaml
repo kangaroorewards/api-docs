@@ -1,0 +1,42 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Business Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /customers/{userId}:
+    put:
+      summary: Updates the user's device token
+      operationId: updateUserDeviceToken
+      tags:
+        - userDeviceToken
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          type: string
+        - in: body
+          name: updateDeviceTokenRequest
+          description: the user's device token to be sent
+          required: true
+          schema:
+            type: object
+            properties:
+              android_device_token:
+                type: string
+              ios_device_token:
+                type: string
+      responses:
+        "200":
+          description: Business rules
+          schema:
+            $ref: "schemas/userDetails/userDetails.yaml#/definitions/UseDetailsResponse"

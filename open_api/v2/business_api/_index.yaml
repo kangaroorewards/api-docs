@@ -172,3 +172,27 @@ paths:
       operationId: getBusinessMonthlyTouchPointsInsight
       tags:
         - core
+  userDeviceToken:
+    get:
+      x-file: userDeviceToken.yaml
+      operationId: updateUserDeviceToken
+      tags:
+        - core
+  businessNotifications:
+    get:
+      x-file: businessNotifications.yaml
+      operationId: getBusinessNotifications
+      tags:
+        - core
+  updateNotificationById:
+    get:
+      x-file: updateNotificationById.yaml
+      operationId: updateNotificationById
+      tags:
+        - core
+  createBusinessCampaign:
+    get:
+      x-file: createBusinessCampaign.yaml
+      operationId: createBusinessCampaign
+      tags:
+        - core
