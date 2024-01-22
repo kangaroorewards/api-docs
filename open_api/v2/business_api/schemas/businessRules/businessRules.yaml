@@ -30,8 +30,8 @@ definitions:
         type: integer
         format: int64
       reward_points:
-        type: integer
-        format: int64
+        type: number
+        format: double
       social_media:
         type: object
         $ref: '#/definitions/SocialMediaRules'
@@ -80,5 +80,5 @@ definitions:
           type: string
         description: currency symbol
       reward_points_max:
-        type: integer
-        format: int64
+        type: number
+        format: double
