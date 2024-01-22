@@ -1,0 +1,222 @@
+definitions:
+  GetCampaignAudienceRequest:
+    type: "object"
+    x-model: GetCampaignAudienceRequestModel
+    properties:
+      name:
+        type: string
+        description: 'campaign name'
+      send_by:
+        type: integer
+        format: int64
+        description: 'delivery method this campaign will be sent with: sms / push / email'
+      send_by_priority:
+        type: string
+        description: 'in what priority the campaign will be sent in'
+      send_to_invalid_phone_number:
+        type: bool
+        description: 'whether to send sms campaigns to invalid phone numbers or not'
+      auto:
+        type: bool
+        description: 'whether this is an auto campaign or not'
+      exclude_dormants:
+        type: bool
+        description: 'whether to exclude dormant customers or not'
+      exclude_customer_in_previous_campaign:
+        type: bool
+        description: 'whether to exclude customers targeted in the previous campaign or not'
+      exclude_customer_in_previous_campaign_criteria:
+        type: integer
+        format: int64
+        description: 'whether to exclude customers targeted in the previous campaign criteria or not'
+      exclude_customer_in_previous_campaign_ids:
+        type: array
+        items:
+          type: integer
+        description: 'whether to exclude customers targeted in previous campaigns of ids x or not'
+      exclude_customer_in_previous_campaign_past_days:
+        type: integer
+        format: int64
+        description: 'whether to exclude customers targeted in the previous campaign passed days or'
+      exclude_customer_in_previous_campaign_past_hours:
+        type: integer
+        format: int64
+        description: 'whether to exclude customers targeted in the previous campaign passed hours or not'
+      exclude_customer_in_previous_automated_campaign:
+        type: bool
+        description: 'whether to exclude customers targeted in the previous automated campaign or not'
+      exclude_customer_in_previous_automated_campaign_criteria:
+        type: integer
+        format: int64
+        description: 'whether to exclude customers targeted in the previous automated campaign criteria or not'
+      exclude_customer_in_previous_automated_campaign_ids:
+        type: array
+        items:
+          type: integer
+        description: 'whether to exclude customers targeted in previous automated campaigns of ids x or not'
+      exclude_customer_in_previous_automated_campaign_past_days:
+        type: integer
+        format: int64
+        description: 'whether to exclude customers targeted in the previous automated campaign passed days or'
+      apply_and_criteria:
+        type: bool
+        description: 'whether to apply the and criteria or not'
+      include_offer_link_in_sms:
+        type: bool
+        description: 'whether to include the offer link in sms campaign or not'
+      include_referral_link_in_sms:
+        type: bool
+        description: 'whether to include the referral link in sms campaign or not'
+      targeted_customer_criteria:
+        type: array
+        items:
+          $ref: "../../schemas/businessCampaigns/businessCampaigns.yaml#/definitions/Filter"
+        description: 'list of selected filters'
+  GetCampaignAudienceResponse:
+    type: "object"
+    x-model: GetCampaignAudienceResponseModel
+    required:
+      - data
+    properties:
+      data:
+        type: object
+        description: A campaign returned after it's creation
+        $ref: '#/definitions/CampaignAudience'
+  CampaignAudience:
+    type: object
+    properties:
+      summary:
+        type: object
+        $ref: '#/definitions/Summary'
+      reachable_customers:
+        type: array
+        items:
+          $ref: '#/definitions/Customer'
+      unreachable_customers:
+        type: array
+        items:
+          $ref: '#/definitions/Customer'
+      targeted_customers:
+        type: array
+        items:
+          $ref: '#/definitions/Customer'
+  Summary:
+    type: object
+    properties:
+      total_targeted:
+        type: integer
+        format: int64
+      total_reachable:
+        type: integer
+        format: int64
+      total_reachable_email:
+        type: integer
+        format: int64
+      total_reachable_phone:
+        type: integer
+        format: int64
+
+      total_reachable_push:
+        type: integer
+        format: int64
+      total_allow_push_android:
+        type: integer
+        format: int64
+      total_allow_push_ios:
+        type: integer
+        format: int64
+      total_unreachable:
+        type: integer
+        format: int64
+      fake_emails:
+        type: integer
+        format: int64
+      fake_phone_numbers:
+        type: integer
+        format: int64
+      blacklist_emails:
+        type: integer
+        format: int64
+      blacklist_phone_numbers:
+        type: integer
+        format: int64
+      invalid_phone_numbers:
+        type: integer
+        format: int64
+      landline_phone_numbers:
+        type: integer
+        format: int64
+      do_not_allow_email:
+        type: integer
+        format: int64
+      do_not_allow_text:
+        type: integer
+        format: int64
+      do_not_allow_push:
+        type: integer
+        format: int64
+      no_answer:
+        type: integer
+        format: int64
+      not_in_selected_criteria:
+        type: integer
+        format: int64
+      not_enough_credit:
+        type: bool
+      not_enough_credit_email_count:
+        type: integer
+        format: int64
+      not_enough_credit_sms_count:
+        type: integer
+        format: int64
+      not_enough_credit_push_count:
+        type: integer
+        format: int64
+      sms_segments:
+        type: integer
+        format: int64
+      top_highest_spending_customers:
+        type: object
+        properties:
+          highest:
+            type: string
+          lowest:
+            type: string
+          average:
+            type: string
+      single_opt_in_sms:
+        type: integer
+        format: int64
+      allow_sms_spending:
+        type: integer
+        format: int64
+      total_excluded_reg:
+        type: integer
+        format: int64
+      total_excluded_auto:
+        type: integer
+        format: int64
+      estimated_credit_deduction:
+        type: object
+        properties:
+          email:
+            type: integer
+            format: int64
+          sms:
+            type: integer
+            format: int64
+          push:
+            type: integer
+            format: int64
+  Customer:
+    type: object
+    properties:
+      first_name:
+        type: string
+      last_name:
+        type: string
+      email:
+        type: string
+      phone:
+        type: string
+

@@ -20,16 +20,6 @@ definitions:
         type: object
         description: A campaign returned by its id only
         $ref: '#/definitions/Campaign'
-  CreateCampaignResponse:
-    type: "object"
-    x-model: CreateCampaignResponseModel
-    required:
-      - data
-    properties:
-      data:
-        type: object
-        description: A campaign returned after it's creation
-        $ref: '#/definitions/Campaign'
   Campaign:
     type: object
     description: |
@@ -95,40 +85,33 @@ definitions:
   Options:
     type: object
     properties:
-      whoWillReceive:
+      send_by:
+        type: integer
+        format: int64
+        description: 'delivery method this campaign will be sent with: sms / push / email'
+      send_by_priority:
+        type: string
+        description: 'in what priority the campaign will be sent in'
+      apply_and_criteria:
+        type: bool
+        description: 'whether to apply the and criteria or not'
+      exclude_dormants:
+        type: bool
+        description: 'whether to exclude dormant customers or not'
+      send_to_invalid_phone_number:
+        type: bool
+        description: 'whether to send sms campaigns to invalid phone numbers or not'
+      include_offer_link_in_sms:
+        type: bool
+        description: 'whether to include the offer link in sms campaign or not'
+      include_referral_link_in_sms:
+        type: bool
+        description: 'whether to include the referral link in sms campaign or not'
+      targeted_customer_criteria:
         type: array
         items:
-          type: integer
-      applyConditionsAnd:
-        type: string
-      excludeDormants:
-        type: string
-      valEnoughCredit:
-        type: boolean
-      excludeCustPrevRegCamp:
-        type: string
-      excCustPrevRegCampDays:
-        type: string
-      excCustPrevRegCampUnit:
-        type: string
-      excludeCustPrevAutoCamp:
-        type: string
-      excCustPrevAutoCampDays:
-        type: string
-      addOffersLinkFlag:
-        type: string
-      addReferralLinkFlag:
-        type: string
-      valAskSaveMKNewDateTime:
-        type: string
-      ptsExpireDays:
-        type: string
-      redirectFromEditor:
-        type: string
-      specificCustomer:
-        type: string
-      ptsExpireInactiveDays:
-        type: string
+          $ref: "#/definitions/Filter"
+        description: 'list of selected filters'
   Summary:
     type: object
     properties:
@@ -164,3 +147,234 @@ definitions:
       total_customer_visits:
         type: integer
         format: int64
+  Filter:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: the filter's id
+      purchase_weeks_number:
+        type: integer
+        format: int64
+      purchases_number:
+        type: integer
+        format: int64
+      purchase_weeks_operator:
+        type: integer
+        format: int64
+      top_spending_customers:
+        type: integer
+        format: int64
+      birthday_customers_criteria:
+        type: integer
+        format: int64
+      birthday_notification_days:
+        type: integer
+        format: int64
+      birthday_customers_types_list:
+        type: array
+        items:
+          type: integer
+      last_purchase_days:
+        type: integer
+        format: int64
+      last_purchase_branches:
+        type: array
+        items:
+          type: string
+      customers_postal_code:
+        type: string
+      customers_branches:
+        type: array
+        items:
+          type: string
+      after_first_visit_days:
+        type: integer
+        format: int64
+      after_first_visit_branches:
+        type: array
+        items:
+          type: string
+      specific_customer_email_phone:
+        type: string
+      product_reward_list:
+        type: array
+        items:
+          type: integer
+      customer_points_operator:
+        type: integer
+        format: int64
+      customer_have_points:
+        type: integer
+        format: int64
+      customer_have_end_points:
+        type: integer
+        format: int64
+      spending_weeks_operator:
+        type: integer
+        format: int64
+      spending_weeks_number:
+        type: integer
+        format: int64
+      spending_weeks_amount:
+        type: integer
+        format: int64
+      visits_start_date:
+        type: string
+      visits_end_date:
+        type: string
+      visits_branches:
+        type: array
+        items:
+          type: string
+      customer_types_list:
+        type: array
+        items:
+          type: integer
+      segments_list:
+        type: array
+        items:
+          type: integer
+      lifetime_balance_operator:
+        type: integer
+        format: int64
+      lifetime_balance:
+        type: integer
+        format: int64
+      customer_tags_list:
+        type: array
+        items:
+          type: integer
+      no_purchases_days:
+        type: integer
+        format: int64
+      no_purchases_flag:
+        type: integer
+        format: int64
+      no_purchases_days_range_operator:
+        type: integer
+        format: int64
+      no_purchases_days_range_end:
+        type: integer
+        format: int64
+      no_purchases_branches:
+        type: array
+        items:
+          type: string
+      earn_or_reward_option:
+        type: integer
+        format: int64
+      earn_or_reward_number:
+        type: integer
+        format: int64
+      referral_status_list:
+        type: array
+        items:
+          type: integer
+      customers_languages_list:
+        type: array
+        items:
+          type: integer
+      register_no_transaction_days:
+        type: integer
+        format: int64
+      product_review_operator:
+        type: integer
+        format: int64
+      product_review_days:
+        type: integer
+        format: int64
+      customers_offer_days:
+        type: integer
+        format: int64
+      customers_offer_list:
+        type: array
+        items:
+          type: integer
+      customers_offer_branches:
+        type: array
+        items:
+          type: string
+      customers_redemption_days:
+        type: integer
+        format: int64
+      customers_redemption_list:
+        type: array
+        items:
+          type: integer
+      customers_redemption_branches:
+        type: array
+        items:
+          type: string
+      store_credit_operator:
+        type: integer
+        format: int64
+      store_credit_amount:
+        type: integer
+        format: int64
+      store_credit_end_amount:
+        type: integer
+        format: int64
+      referred_start_date:
+        type: string
+      referred_end_date:
+        type: string
+      pts_expire_days:
+        type: integer
+        format: int64
+      pts_expire_inactive_days:
+        type: integer
+        format: int64
+      booked_appointment_start_date:
+        type: string
+      booked_appointment_end_date:
+        type: string
+      booking_appointment_operator:
+        type: integer
+        format: int64
+      booking_appointment_days:
+        type: integer
+        format: int64
+      booking_appointments_list:
+        type: array
+        items:
+          type: integer
+      moved_from_tiers_list:
+        type: array
+        items:
+          type: integer
+      moved_to_tiers_list:
+        type: array
+        items:
+          type: integer
+      customers_registered_start_date:
+        type: string
+      customers_registered_end_date:
+        type: string
+      specific_customer_email_phone_array:
+        type: array
+        items:
+          type: string
+      referred_customers_number:
+        type: integer
+        format: int64
+      referred_customers_status_list:
+        type: array
+        items:
+          type: integer
+      customers_campaigned_offers_redemptions_days:
+        type: integer
+        format: int64
+      customers_campaigned_offers_redemptions_offers_list:
+        type: array
+        items:
+          type: integer
+      customers_campaigned_offers_redemptions_redemptions_list:
+        type: array
+        items:
+          type: integer
+      customers_campaigned_offers_redemptions_campaign_ids:
+        type: array
+        items:
+          type: integer

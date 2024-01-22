@@ -196,3 +196,9 @@ paths:
       operationId: createBusinessCampaign
       tags:
         - core
+  getCampaignAudience:
+    get:
+      x-file: getCampaignAudience.yaml
+      operationId: getCampaignAudience
+      tags:
+        - core

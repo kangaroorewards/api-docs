@@ -17,21 +17,21 @@ paths:
     post:
       summary: |
         Create a marketing campaign
-      operationId: createBusinessCampaign
+      operationId: getCampaignAudience
       consumes:
         - application/json
       tags:
-        - createBusinessCampaign
+        - getCampaignAudience
       parameters:
         - in: body
-          name: createCampaignRequest
+          name: getCampaignAudienceRequest
           required: true
           schema:
             type: object
-            $ref: 'schemas/businessCampaigns/createCampaign.yaml#/definitions/CreateCampaignRequest'
+            $ref: 'schemas/campaignAudience/campaignAudience.yaml#/definitions/GetCampaignAudienceRequest'
       responses:
         "200":
           description: |
-            The result of creating a marketing campaign
+            The result of getting audience of a marketing campaign
           schema:
-            $ref: 'schemas/businessCampaigns/createCampaign.yaml#/definitions/CreateCampaignResponse'
+            $ref: 'schemas/campaignAudience/campaignAudience.yaml#/definitions/GetCampaignAudienceResponse'

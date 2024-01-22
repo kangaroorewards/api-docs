@@ -1,0 +1,76 @@
+definitions:
+  CreateCampaignRequest:
+    type: "object"
+    x-model: CreateCampaignRequestModel
+    properties:
+      name:
+        type: string
+        description: 'campaign name'
+      send_by:
+        type: integer
+        format: int64
+        description: 'delivery method this campaign will be sent with: sms / push / email'
+      send_by_priority:
+        type: string
+        description: 'in what priority the campaign will be sent in'
+      email_subject:
+        type: string
+        description: 'subject sent via the email campaign'
+      email_body:
+        type: string
+        description: 'body message sent via the email campaign'
+      sms_body:
+        type: string
+        description: 'body message sent via the sms campaign'
+      send_to_invalid_phone_number:
+        type: bool
+        description: 'whether to send sms campaigns to invalid phone numbers or not'
+      auto:
+        type: bool
+        description: 'whether this is an auto campaign or not'
+      exclude_dormants:
+        type: bool
+        description: 'whether to exclude dormant customers or not'
+      exclude_customer_in_previous_campaign:
+        type: bool
+        description: 'whether to exclude customers targeted in the previous campaign or not'
+      exclude_customer_in_previous_campaign_criteria:
+        type: integer
+        format: int64
+        description: 'whether to exclude customers targeted in the previous campaign criteria or not'
+      exclude_customer_in_previous_campaign_ids:
+        type: array
+        items:
+          type: integer
+        description: 'whether to exclude customers targeted in previous campaigns of ids x or not'
+      exclude_customer_in_previous_campaign_past_hours:
+        type: integer
+        format: int64
+        description: 'whether to exclude customers targeted in the previous campaign passed hours or not'
+      apply_and_criteria:
+        type: bool
+        description: 'whether to apply the and criteria or not'
+      include_offer_link_in_sms:
+        type: bool
+        description: 'whether to include the offer link in sms campaign or not'
+      include_referral_link_in_sms:
+        type: bool
+        description: 'whether to include the referral link in sms campaign or not'
+      idempotency_key:
+        type: string
+        description: 'unique key generated on the app side'
+      targeted_customer_criteria:
+        type: array
+        items:
+          $ref: "../../schemas/businessCampaigns/businessCampaigns.yaml#/definitions/Filter"
+        description: 'list of selected filters'
+  CreateCampaignResponse:
+    type: "object"
+    x-model: CreateCampaignResponseModel
+    required:
+      - data
+    properties:
+      data:
+        type: object
+        description: A campaign returned after it's creation
+        $ref: "../../schemas/businessCampaigns/businessCampaigns.yaml#/definitions/Campaign"
