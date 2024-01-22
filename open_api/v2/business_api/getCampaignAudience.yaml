@@ -24,7 +24,7 @@ paths:
         - getCampaignAudience
       parameters:
         - in: body
-          name: getCampaignAudienceRequest
+          name: getBusinessCampaignAudienceRequest
           required: true
           schema:
             type: object
