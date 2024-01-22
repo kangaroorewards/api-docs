@@ -93,19 +93,19 @@ definitions:
         type: string
         description: 'in what priority the campaign will be sent in'
       apply_and_criteria:
-        type: bool
+        type: boolean
         description: 'whether to apply the and criteria or not'
       exclude_dormants:
-        type: bool
+        type: boolean
         description: 'whether to exclude dormant customers or not'
       send_to_invalid_phone_number:
-        type: bool
+        type: boolean
         description: 'whether to send sms campaigns to invalid phone numbers or not'
       include_offer_link_in_sms:
-        type: bool
+        type: boolean
         description: 'whether to include the offer link in sms campaign or not'
       include_referral_link_in_sms:
-        type: bool
+        type: boolean
         description: 'whether to include the referral link in sms campaign or not'
       targeted_customer_criteria:
         type: array

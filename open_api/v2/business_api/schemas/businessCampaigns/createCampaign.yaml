@@ -23,16 +23,16 @@ definitions:
         type: string
         description: 'body message sent via the sms campaign'
       send_to_invalid_phone_number:
-        type: bool
+        type: boolean
         description: 'whether to send sms campaigns to invalid phone numbers or not'
       auto:
-        type: bool
+        type: boolean
         description: 'whether this is an auto campaign or not'
       exclude_dormants:
-        type: bool
+        type: boolean
         description: 'whether to exclude dormant customers or not'
       exclude_customer_in_previous_campaign:
-        type: bool
+        type: boolean
         description: 'whether to exclude customers targeted in the previous campaign or not'
       exclude_customer_in_previous_campaign_criteria:
         type: integer
@@ -48,13 +48,13 @@ definitions:
         format: int64
         description: 'whether to exclude customers targeted in the previous campaign passed hours or not'
       apply_and_criteria:
-        type: bool
+        type: boolean
         description: 'whether to apply the and criteria or not'
       include_offer_link_in_sms:
-        type: bool
+        type: boolean
         description: 'whether to include the offer link in sms campaign or not'
       include_referral_link_in_sms:
-        type: bool
+        type: boolean
         description: 'whether to include the referral link in sms campaign or not'
       idempotency_key:
         type: string
