@@ -64,7 +64,7 @@ definitions:
         format: int64
         description: 'whether to exclude customers targeted in the previous campaign passed hours or not'
       exclude_customer_in_previous_automated_campaign:
-        type: bool
+        type: boolean
         description: 'whether to exclude customers targeted in the previous automated campaign or not'
       exclude_customer_in_previous_automated_campaign_criteria:
         type: integer
