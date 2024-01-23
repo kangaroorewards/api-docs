@@ -1,0 +1,33 @@
+definitions:
+  TagsResponse:
+    type: "object"
+    x-model: BusinessTagsModel
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        description: A list of all business tags
+        items:
+          $ref: '#/definitions/Tag'
+  Tag:
+    type: "object"
+    x-model: TagModel
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        description: 'A unique ID identifying this tag'
+      name:
+        type: string
+        description: 'tag name'
+      abbreviation:
+        type: string
+        description: 'abbreviation of tag name'
+      color:
+        type: string
+        description: 'color of tag'
+      created_at:
+        type: boolean
+        description: 'date of tag creation'
