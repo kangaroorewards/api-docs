@@ -202,3 +202,21 @@ paths:
       operationId: getCampaignAudience
       tags:
         - core
+  deleteCampaignById:
+    patch:
+      x-file: deleteCampaignById.yaml
+      operationId: deleteCampaignById
+      tags:
+        - core
+  businessTags:
+    patch:
+      x-file: businessTags.yaml
+      operationId: getBusinessTags
+      tags:
+        - core
+  businessSegments:
+    patch:
+      x-file: businessSegments.yaml
+      operationId: getBusinessSegments
+      tags:
+        - core
