@@ -1,0 +1,24 @@
+definitions:
+  SegmentsResponse:
+    type: "object"
+    x-model: BusinessSegmentsModel
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        description: A list of all business segments
+        items:
+          $ref: '#/definitions/Segment'
+  Segment:
+    type: "object"
+    x-model: SegmentModel
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        description: 'A unique ID identifying this segment'
+      name:
+        type: string
+        description: 'segment name'
