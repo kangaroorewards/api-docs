@@ -57,6 +57,14 @@ definitions:
         type: string
       scheduled_at:
         type: string
+        description: 'schedule date of a campaign'
+      expires_at:
+        type: string
+        description: 'expiry date of a campaign'
+      frequency:
+        type: integer
+        format: int64
+        description: 'frequency of a recurring campaign // 2: weekly, 3: monthly'
       offers:
         type: array
         items:
@@ -88,16 +96,56 @@ definitions:
       send_by:
         type: integer
         format: int64
-        description: 'delivery method this campaign will be sent with: sms / push / email'
+        description: 'delivery method this campaign will be sent with: email_sms:1, push:2, email:3, sms:4, sms_push:5'
       send_by_priority:
         type: string
         description: 'in what priority the campaign will be sent in'
+      exclude_dormants:
+        type: bool
+        description: 'whether to exclude dormant customers or not'
+      exclude_customer_in_previous_campaign:
+        type: bool
+        description: 'whether to exclude customers targeted in the previous campaign or not'
+      exclude_customer_in_previous_campaign_criteria:
+        type: integer
+        format: int64
+        description: 'whether to exclude customers targeted in the previous campaign criteria or not //0:or, 1:and'
+      exclude_customer_in_previous_campaign_ids:
+        type: array
+        items:
+          type: integer
+        description: 'whether to exclude customers targeted in previous campaigns of ids x or not'
+      exclude_customer_in_previous_campaign_past_days:
+        type: integer
+        format: int64
+        description: 'whether to exclude customers targeted in the previous campaign passed days or'
+      exclude_customer_in_previous_campaign_past_hours:
+        type: integer
+        format: int64
+        description: 'whether to exclude customers targeted in the previous campaign passed hours or not'
+      exclude_customer_in_previous_automated_campaign:
+        type: bool
+        description: 'whether to exclude customers targeted in the previous automated campaign or not'
+      exclude_customer_in_previous_automated_campaign_criteria:
+        type: integer
+        format: int64
+        description: 'whether to exclude customers targeted in the previous automated campaign criteria or not //0:or, 1:and'
+      exclude_customer_in_previous_automated_campaign_ids:
+        type: array
+        items:
+          type: integer
+        description: 'whether to exclude customers targeted in previous automated campaigns of ids x or not'
+      exclude_customer_in_previous_automated_campaign_past_days:
+        type: integer
+        format: int64
+        description: 'whether to exclude customers targeted in the previous automated campaign passed days or'
+      exclude_customer_in_previous_automated_campaign_past_hours:
+        type: integer
+        format: int64
+        description: 'whether to exclude customers targeted in the previous campaign passed days or not'
       apply_and_criteria:
         type: boolean
         description: 'whether to apply the and criteria or not'
-      exclude_dormants:
-        type: boolean
-        description: 'whether to exclude dormant customers or not'
       send_to_invalid_phone_number:
         type: boolean
         description: 'whether to send sms campaigns to invalid phone numbers or not'
