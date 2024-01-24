@@ -1,8 +1,11 @@
 definitions:
-  CreateCampaignRequest:
+  CreateUpdateCampaignRequest:
     type: "object"
-    x-model: CreateCampaignRequestModel
+    x-model: CreateUpdateCampaignModel
     properties:
+      id:
+        type: integer
+        format: int64
       name:
         type: string
         description: 'campaign name'
@@ -10,6 +13,10 @@ definitions:
         type: integer
         format: int64
         description: 'delivery method this campaign will be sent with: email_sms:1, push:2, email:3, sms:4, sms_push:5'
+      mode:
+        type: integer
+        format: int64
+        description: 'mode of this campaign creation // 1: Edit | 2: EditDraft | 3:CancelClon'
       send_by_priority:
         type: string
         description: 'in what priority the campaign will be sent in'
@@ -116,9 +123,9 @@ definitions:
         items:
           $ref: "../../schemas/businessCampaigns/businessCampaigns.yaml#/definitions/Filter"
         description: 'list of selected filters'
-  CreateCampaignResponse:
+  CreateUpdateCampaignResponse:
     type: "object"
-    x-model: CreateCampaignResponseModel
+    x-model: CreateUpdateCampaignResponseModel
     required:
       - data
     properties:
