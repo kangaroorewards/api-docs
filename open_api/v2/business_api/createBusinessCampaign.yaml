@@ -13,7 +13,7 @@ consumes:
 produces:
   - application/json
 paths:
-  /internal/marketing/campaign-audience:
+  /campaigns:
     post:
       summary: |
         Create a marketing campaign
@@ -28,10 +28,10 @@ paths:
           required: true
           schema:
             type: object
-            $ref: 'schemas/businessCampaigns/createCampaign.yaml#/definitions/CreateCampaignRequest'
+            $ref: 'schemas/businessCampaigns/createUpdateCampaign.yaml#/definitions/CreateUpdateCampaignRequest'
       responses:
         "200":
           description: |
             The result of creating a marketing campaign
           schema:
-            $ref: 'schemas/businessCampaigns/createCampaign.yaml#/definitions/CreateCampaignResponse'
+            $ref: 'schemas/businessCampaigns/createUpdateCampaign.yaml#/definitions/CreateUpdateCampaignResponse'
