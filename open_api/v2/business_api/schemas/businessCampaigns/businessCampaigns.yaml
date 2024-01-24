@@ -202,227 +202,298 @@ definitions:
         type: integer
         format: int64
         description: the filter's id
+        required: false
       purchase_weeks_number:
         type: integer
         format: int64
+        required: false
       purchases_number:
         type: integer
         format: int64
+        required: false
       purchase_weeks_operator:
         type: integer
         format: int64
+        required: false
       top_spending_customers:
         type: integer
         format: int64
+        required: false
       birthday_customers_criteria:
         type: integer
         format: int64
+        required: false
       birthday_notification_days:
         type: integer
         format: int64
+        required: false
       birthday_customers_types_list:
         type: array
         items:
           type: integer
+        required: false
       last_purchase_days:
         type: integer
         format: int64
+        required: false
       last_purchase_branches:
         type: array
         items:
           type: string
+        required: false
       customers_postal_code:
         type: string
+        required: false
       customers_branches:
         type: array
         items:
           type: string
+        required: false
       after_first_visit_days:
         type: integer
         format: int64
+        required: false
       after_first_visit_branches:
         type: array
         items:
           type: string
+        required: false
       specific_customer_email_phone:
         type: string
+        required: false
       product_reward_list:
         type: array
         items:
           type: integer
+        required: false
       customer_points_operator:
         type: integer
         format: int64
+        required: false
       customer_have_points:
         type: integer
         format: int64
+        required: false
       customer_have_end_points:
         type: integer
         format: int64
+        required: false
       spending_weeks_operator:
         type: integer
         format: int64
+        required: false
       spending_weeks_number:
         type: integer
         format: int64
+        required: false
       spending_weeks_amount:
         type: integer
         format: int64
+        required: false
       visits_start_date:
         type: string
+        required: false
       visits_end_date:
         type: string
+        required: false
       visits_branches:
         type: array
         items:
           type: string
+        required: false
       customer_types_list:
         type: array
         items:
           type: integer
+        required: false
       segments_list:
         type: array
         items:
           type: integer
+        required: false
       lifetime_balance_operator:
         type: integer
         format: int64
+        required: false
       lifetime_balance:
         type: integer
         format: int64
+        required: false
       customer_tags_list:
         type: array
         items:
           type: integer
+        required: false
       no_purchases_days:
         type: integer
         format: int64
+        required: false
       no_purchases_flag:
         type: integer
         format: int64
+        required: false
       no_purchases_days_range_operator:
         type: integer
         format: int64
+        required: false
       no_purchases_days_range_end:
         type: integer
         format: int64
+        required: false
       no_purchases_branches:
         type: array
         items:
           type: string
+        required: false
       earn_or_reward_option:
         type: integer
         format: int64
+        required: false
       earn_or_reward_number:
         type: integer
         format: int64
+        required: false
       referral_status_list:
         type: array
         items:
           type: integer
+        required: false
       customers_languages_list:
         type: array
         items:
           type: integer
+        required: false
       register_no_transaction_days:
         type: integer
         format: int64
+        required: false
       product_review_operator:
         type: integer
         format: int64
+        required: false
       product_review_days:
         type: integer
         format: int64
+        required: false
       customers_offer_days:
         type: integer
         format: int64
+        required: false
       customers_offer_list:
         type: array
         items:
           type: integer
+        required: false
       customers_offer_branches:
         type: array
         items:
           type: string
+        required: false
       customers_redemption_days:
         type: integer
         format: int64
+        required: false
       customers_redemption_list:
         type: array
         items:
           type: integer
+        required: false
       customers_redemption_branches:
         type: array
         items:
           type: string
+        required: false
       store_credit_operator:
         type: integer
         format: int64
+        required: false
       store_credit_amount:
         type: integer
         format: int64
+        required: false
       store_credit_end_amount:
         type: integer
         format: int64
+        required: false
       referred_start_date:
         type: string
+        required: false
       referred_end_date:
         type: string
+        required: false
       pts_expire_days:
         type: integer
         format: int64
+        required: false
       pts_expire_inactive_days:
         type: integer
         format: int64
+        required: false
       booked_appointment_start_date:
         type: string
+        required: false
       booked_appointment_end_date:
         type: string
+        required: false
       booking_appointment_operator:
         type: integer
         format: int64
+        required: false
       booking_appointment_days:
         type: integer
         format: int64
+        required: false
       booking_appointments_list:
         type: array
         items:
           type: integer
+        required: false
       moved_from_tiers_list:
         type: array
         items:
           type: integer
+        required: false
       moved_to_tiers_list:
         type: array
         items:
           type: integer
+        required: false
       customers_registered_start_date:
         type: string
+        required: false
       customers_registered_end_date:
         type: string
+        required: false
       specific_customer_email_phone_array:
         type: array
         items:
           type: string
+        required: false
       referred_customers_number:
         type: integer
         format: int64
+        required: false
       referred_customers_status_list:
         type: array
         items:
           type: integer
+        required: false
       customers_campaigned_offers_redemptions_days:
         type: integer
         format: int64
+        required: false
       customers_campaigned_offers_redemptions_offers_list:
         type: array
         items:
           type: integer
+        required: false
       customers_campaigned_offers_redemptions_redemptions_list:
         type: array
         items:
           type: integer
+        required: false
       customers_campaigned_offers_redemptions_campaign_ids:
         type: array
         items:
           type: integer
+        required: false
