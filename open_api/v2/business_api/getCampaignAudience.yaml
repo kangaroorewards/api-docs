@@ -13,10 +13,10 @@ consumes:
 produces:
   - application/json
 paths:
-  /internal/marketing/campaign-audience:
-    post:
+  /campaigns/audience:
+    get:
       summary: |
-        Create a marketing campaign
+        Get audience data of a marketing campaign
       operationId: getCampaignAudience
       consumes:
         - application/json
