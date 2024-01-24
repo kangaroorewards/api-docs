@@ -13,15 +13,14 @@ consumes:
 produces:
   - application/json
 paths:
-  /campaigns/audience:
+  /campaigns/audience?include=reachable,unreachable,targeted:
     get:
-      summary: |
-        Get audience data of a marketing campaign
-      operationId: getCampaignAudience
+      summary: Get audience data of a marketing campaign
+      operationId: getBusinessCampaignAudience
       consumes:
         - application/json
       tags:
-        - getCampaignAudience
+        - businessCampaignAudience
       parameters:
         - in: body
           name: getBusinessCampaignAudienceRequest

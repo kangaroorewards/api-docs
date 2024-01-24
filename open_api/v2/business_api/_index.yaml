@@ -196,10 +196,10 @@ paths:
       operationId: createBusinessCampaign
       tags:
         - core
-  getCampaignAudience:
+  businessCampaignAudience:
     get:
-      x-file: getCampaignAudience.yaml
-      operationId: getCampaignAudience
+      x-file: businessCampaignAudience.yaml
+      operationId: getBusinessCampaignAudience
       tags:
         - core
   deleteCampaignById:
