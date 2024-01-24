@@ -29,5 +29,5 @@ definitions:
         type: string
         description: 'color of tag'
       created_at:
-        type: boolean
+        type: string
         description: 'date of tag creation'
