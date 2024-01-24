@@ -1,0 +1,36 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /campaigns:
+    post:
+      summary: update a campaign
+      operationId: updateBusinessCampaign
+      consumes:
+        - application/json
+      tags:
+        - updateBusinessCampaign
+      parameters:
+        - in: body
+          name: updateCampaignRequest
+          required: true
+          schema:
+            type: object
+            $ref: 'schemas/businessCampaigns/createUpdateCampaign.yaml#/definitions/CreateUpdateCampaignRequest'
+      responses:
+        "200":
+          description: |
+            The result of updating a marketing campaign
+          schema:
+            $ref: 'schemas/businessCampaigns/createUpdateCampaign.yaml#/definitions/CreateUpdateCampaignResponse'
