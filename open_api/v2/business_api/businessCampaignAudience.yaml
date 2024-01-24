@@ -14,7 +14,7 @@ produces:
   - application/json
 paths:
   /campaigns/audience?include=reachable,unreachable,targeted:
-    get:
+    post:
       summary: Get audience data of a marketing campaign
       operationId: getBusinessCampaignAudience
       consumes:
