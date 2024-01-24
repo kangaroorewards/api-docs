@@ -125,13 +125,13 @@ paths:
       tags:
         - core
   businessCampaigns:
-    patch:
+    get:
       x-file: businessCampaigns.yaml
       operationId: getBusinessCampaigns
       tags:
         - core
   businessCampaignById:
-    patch:
+    get:
       x-file: businessCampaignById.yaml
       operationId: getBusinessCampaignById
       tags:
@@ -185,13 +185,13 @@ paths:
       tags:
         - core
   updateNotificationById:
-    get:
+    put:
       x-file: updateNotificationById.yaml
       operationId: updateNotificationById
       tags:
         - core
   createBusinessCampaign:
-    get:
+    post:
       x-file: createBusinessCampaign.yaml
       operationId: createBusinessCampaign
       tags:
@@ -209,19 +209,19 @@ paths:
       tags:
         - core
   businessTags:
-    patch:
+    get:
       x-file: businessTags.yaml
       operationId: getBusinessTags
       tags:
         - core
   businessSegments:
-    patch:
+    get:
       x-file: businessSegments.yaml
       operationId: getBusinessSegments
       tags:
         - core
   updateBusinessCampaign:
-    patch:
+    post:
       x-file: updateBusinessCampaign.yaml
       operationId: updateBusinessCampaign
       tags:
