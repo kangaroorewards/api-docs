@@ -72,9 +72,6 @@ definitions:
       options:
         type: object
         $ref: '#/definitions/Options'
-      summary:
-        type: object
-        $ref: '#/definitions/Summary'
       statistics:
         type: object
         $ref: '#/definitions/Statistics'
@@ -160,18 +157,6 @@ definitions:
         items:
           $ref: "#/definitions/Filter"
         description: 'list of selected filters'
-  Summary:
-    type: object
-    properties:
-      total_targeted_customers:
-        type: integer
-        format: int64
-      total_reachable_customers:
-        type: integer
-        format: int64
-      total_unreachable_customers:
-        type: integer
-        format: int64
   Statistics:
     type: object
     properties:
