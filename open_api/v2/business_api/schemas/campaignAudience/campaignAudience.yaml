@@ -3,9 +3,9 @@ definitions:
     type: "object"
     x-model: GetCampaignAudienceRequestModel
     properties:
-      name:
+      sms_body:
         type: string
-        description: 'campaign name'
+        description: 'body message sent via the sms campaign'
       send_by:
         type: integer
         format: int64
@@ -14,16 +14,13 @@ definitions:
         type: string
         description: 'in what priority the campaign will be sent in'
       send_to_invalid_phone_number:
-        type: bool
+        type: boolean
         description: 'whether to send sms campaigns to invalid phone numbers or not'
-      auto:
-        type: bool
-        description: 'whether this is an auto campaign or not'
       exclude_dormants:
-        type: bool
+        type: boolean
         description: 'whether to exclude dormant customers or not'
       exclude_customer_in_previous_campaign:
-        type: bool
+        type: boolean
         description: 'whether to exclude customers targeted in the previous campaign or not'
       exclude_customer_in_previous_campaign_criteria:
         type: integer
@@ -62,30 +59,14 @@ definitions:
         type: integer
         format: int64
         description: 'whether to exclude customers targeted in the previous campaign passed days or not'
-      schedule_date:
-        type: string
-        description: 'schedule date of a campaign'
-      schedule_time:
-        type: string
-        description: 'schedule time of a campaign'
-      expiry_date:
-        type: string
-        description: 'expiry date of a campaign'
-      delivery_date:
-        type: string
-        description: 'delivery date of a campaign'
-      frequency:
-        type: integer
-        format: int64
-        description: 'frequency of a recurring campaign // 2: weekly, 3: monthly'
       apply_and_criteria:
-        type: bool
+        type: boolean
         description: 'whether to apply the and criteria or not'
       include_offer_link_in_sms:
-        type: bool
+        type: boolean
         description: 'whether to include the offer link in sms campaign or not'
       include_referral_link_in_sms:
-        type: bool
+        type: boolean
         description: 'whether to include the referral link in sms campaign or not'
       targeted_customer_criteria:
         type: array
@@ -135,7 +116,6 @@ definitions:
       total_reachable_phone:
         type: integer
         format: int64
-
       total_reachable_push:
         type: integer
         format: int64
@@ -182,7 +162,7 @@ definitions:
         type: integer
         format: int64
       not_enough_credit:
-        type: bool
+        type: boolean
       not_enough_credit_email_count:
         type: integer
         format: int64
