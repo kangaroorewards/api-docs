@@ -13,6 +13,9 @@ definitions:
       send_by_priority:
         type: string
         description: 'in what priority the campaign will be sent in'
+      auto:
+        type: boolean
+        description: 'whether this is an auto campaign or not'
       send_to_invalid_phone_number:
         type: boolean
         description: 'whether to send sms campaigns to invalid phone numbers or not'
