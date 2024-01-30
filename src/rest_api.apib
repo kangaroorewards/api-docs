@@ -105,7 +105,7 @@ Example:
 
 ## Rate Limit
 
-The number of requests that can be made through the API is currently limited to 60 per minute per OAuth token.
+The number of requests that can be made through the API is currently limited to 240 per minute per OAuth token or IP.
 The rate limiting information is contained within the response headers of each request. The relevant headers are:
 
 - **X-RateLimit-Limit** - The number of requests that can be made per minute.
@@ -115,7 +115,7 @@ The rate limiting information is contained within the response headers of each r
 
 Example
 ```
-X-RateLimit-Limit: 60
+X-RateLimit-Limit: 239
 X-RateLimit-Remaining: 0
 X-RateLimit-Reset: 1476571703
 ```
