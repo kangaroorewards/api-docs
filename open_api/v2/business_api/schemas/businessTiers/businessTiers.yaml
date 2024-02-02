@@ -1,0 +1,56 @@
+definitions:
+  TiersResponse:
+    type: "object"
+    x-model: BusinessTiersModel
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        description: A list of all business tiers program
+        items:
+          $ref: '#/definitions/TierProgram'
+  TierProgram:
+    type: "object"
+    x-model: TierProgramModel
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        description: 'A unique ID identifying this tier program'
+      tiers_sequence:
+        type: array
+        items:
+          type: integer
+      tiers_relation:
+        type: integer
+      reset_type:
+        type: integer
+      reset_period_month:
+        type: integer
+      base_previous_period:
+        type: integer
+      enabled:
+        type: boolean
+      tier_levels:
+        type: array
+        items:
+          $ref: '#/definitions/TierLevel'
+  TierLevel:
+    type: "object"
+    x-model: TierLevelModel
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        description: 'A unique ID identifying this tier level'
+      name:
+        type: string
+      reach_spend:
+        type: integer
+      reach_visits:
+        type: integer
+      reach_points:
+        type: integer

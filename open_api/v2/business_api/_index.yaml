@@ -226,3 +226,9 @@ paths:
       operationId: updateBusinessCampaign
       tags:
         - core
+  businessTiers:
+    get:
+      x-file: businessTiers.yaml
+      operationId: getBusinessTiers
+      tags:
+        - core
