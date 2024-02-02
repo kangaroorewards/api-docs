@@ -13,7 +13,7 @@ consumes:
 produces:
   - application/json
 paths:
-  /tags?per_page=50:
+  /tiers?relationships=tier_levels:
     get:
       summary: Get a list of business tiers
       operationId: getBusinessTiers
