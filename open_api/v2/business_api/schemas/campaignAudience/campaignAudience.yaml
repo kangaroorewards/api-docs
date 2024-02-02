@@ -222,4 +222,10 @@ definitions:
         type: string
       phone:
         type: string
+      allow_sms:
+        type: boolean
+      allow_email:
+        type: boolean
+      allow_push:
+        type: boolean
 
