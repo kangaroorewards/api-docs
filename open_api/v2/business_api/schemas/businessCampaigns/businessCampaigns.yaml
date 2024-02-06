@@ -221,6 +221,14 @@ definitions:
         type: integer
         format: int64
         required: false
+      last_purchase_days_range_end:
+        type: integer
+        format: int64
+        required: false
+      last_purchase_days_range_operator:
+        type: integer
+        format: int64
+        required: false
       last_purchase_branches:
         type: array
         items:
