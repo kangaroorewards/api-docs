@@ -13,12 +13,17 @@ consumes:
 produces:
   - application/json
 paths:
-  /rewards?status=inactive&per_page=50:
+  /rewards?status=inactive&per_page={perPage}:
     get:
       summary: Get a list of business rewards that are inactive
       operationId: getBusinessInActiveRewards
       tags:
         - businessInActiveRewards
+      parameters:
+        - in: path
+          name: perPage
+          type: integer
+          default: 50
       responses:
         "200":
           description: Business inactive reward list

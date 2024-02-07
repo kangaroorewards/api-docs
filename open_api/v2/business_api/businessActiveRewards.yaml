@@ -13,12 +13,17 @@ consumes:
 produces:
   - application/json
 paths:
-  /rewards?status=active&per_page=50:
+  /rewards?status=active&per_page={perPage}:
     get:
       summary: Get a list of business rewards that are active
       operationId: getBusinessActiveRewards
       tags:
         - businessActiveRewards
+      parameters:
+        - in: path
+          name: perPage
+          type: integer
+          default: 50
       responses:
         "200":
           description: Business active reward list

@@ -13,12 +13,17 @@ consumes:
 produces:
   - application/json
 paths:
-  /segments?per_page=50:
+  /segments?per_page={perPage}:
     get:
       summary: Get a list of business segments
       operationId: getBusinessSegments
       tags:
         - businessSegments
+      parameters:
+        - in: path
+          name: perPage
+          type: integer
+          default: 50
       responses:
         "200":
           description: Business segments list

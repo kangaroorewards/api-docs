@@ -13,12 +13,17 @@ consumes:
 produces:
   - application/json
 paths:
-  /notifications?per_page=20&include=campaign,offer,reward:
+  /notifications?per_page={perPage}&include=campaign,offer,reward:
     get:
       summary: Retrieves notifications related to this user
       operationId: getBusinessNotifications
       tags:
         - businessNotifications
+      parameters:
+        - in: path
+          name: perPage
+          type: integer
+          default: 50
       responses:
         "200":
           description: retrieves notifications related to this user
