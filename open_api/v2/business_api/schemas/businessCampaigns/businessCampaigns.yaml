@@ -471,6 +471,10 @@ definitions:
         items:
           type: integer
         required: false
+      customers_campaigned_offers_redemptions_operator:
+        type: integer
+        format: int64
+        required: false
       customers_campaigned_offers_redemptions_days:
         type: integer
         format: int64
@@ -489,4 +493,9 @@ definitions:
         type: array
         items:
           type: integer
+        required: false
+      customers_campaigned_offers_redemptions_branches:
+        type: array
+        items:
+          type: string
         required: false
