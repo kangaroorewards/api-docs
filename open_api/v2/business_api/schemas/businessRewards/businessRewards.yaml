@@ -54,6 +54,15 @@ definitions:
         type: integer
       redeem_for_gift_card:
         type: boolean
+      targeted_flag:
+        type: integer
+        format: int64
+        description: '(0,1,2) Default 1 - targeted customers, 0 - available for everyone, 2 - available for tier customers'
+      redemption_user_tiers:
+        type: array
+        items:
+          type: integer
+        description: 'field will be returned only when the targeted_flag is set to 2'
       shipping_option:
         type: integer
         format: int64
