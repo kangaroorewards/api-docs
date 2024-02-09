@@ -436,6 +436,38 @@ Response Body
 }
 ```
 
+Example get the referral program and referral link for a customer
+```bash
+GET /customers/{customerId}?include=referral_programs
+```
+
+Response:
+```json
+{
+  "data": {
+    "id": "11ec045006743d2b9d2eb42e99312ac8",
+    "email": "john@example.com",
+    "phone": null,
+    "first_name": "John",
+    "last_name": "Doe"
+  },
+  "included": {
+    "referral_programs": [
+      {
+        "id": 1109,
+        "rule_name": "BACKEND_REFERRAL_RULES_PURCHASE",
+        "cond_min_amount": 10,
+        "referee_earns": 0,
+        "referer_earns": 0,
+        "expires_in": 60,
+        "enabled": true,
+        "link_referral_enabled": true,
+        "referral_link": "https://krn.biz/15b9hZaM"
+      }
+    ]
+  }
+}
+```
 
 + Parameters
     + id: `11e696103f8ff5eabb02089e01cf89b5` - The unique ID of the customer.
