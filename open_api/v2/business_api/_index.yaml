@@ -232,3 +232,9 @@ paths:
       operationId: getBusinessTiers
       tags:
         - core
+  getResetPasswordToken:
+    post:
+      x-file: getResetPasswordToken.yaml
+      operationId: getResetPasswordToken
+      tags:
+        - core
