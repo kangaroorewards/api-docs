@@ -16,7 +16,7 @@ paths:
   /shopify/searchProducts?store={shopifyStoreId}&query={query}:
     get:
       summary: Retrieves the business's products on shopify
-      operationId: getBusinessShopifyProducts
+      operationId: optionone
       tags:
         - businessShopifyProducts
       parameters:
