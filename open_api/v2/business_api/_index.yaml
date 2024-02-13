@@ -238,3 +238,9 @@ paths:
       operationId: getResetPasswordToken
       tags:
         - core
+  businessShopifyProducts:
+    post:
+      x-file: businessShopifyProducts.yaml
+      operationId: getBusinessShopifyProducts
+      tags:
+        - core
