@@ -241,7 +241,6 @@ paths:
   businessShopifyProducts:
     post:
       x-file: businessShopifyProducts.yaml
-      operationId: optiontwo
-      isIntegration: true
+      operationId: getBusinessShopifyProducts
       tags:
         - core
