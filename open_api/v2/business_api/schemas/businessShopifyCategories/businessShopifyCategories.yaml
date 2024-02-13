@@ -1,5 +1,6 @@
 definitions:
   BusinessShopifyCategoriesResponse:
+    x-model: BusinessShopifyCategoriesModel
     type: array
     items:
       $ref: '#/definitions/ShopifyCategory'
