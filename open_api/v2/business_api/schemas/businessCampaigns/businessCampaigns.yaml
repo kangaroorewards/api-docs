@@ -499,3 +499,62 @@ definitions:
         items:
           type: string
         required: false
+      shopify_account:
+        type: string
+        required: false
+      shopify_categories:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+        required: false
+      shopify_categories_days:
+        type: integer
+        format: int64
+        required: false
+      shopify_products:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+        required: false
+      shopify_products_days:
+        type: integer
+        format: int64
+        required: false
+      shopify_product_vendors:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+        required: false
+      shopify_product_vendors_days:
+        type: integer
+        format: int64
+        required: false
+      shopify_product_tags:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+        required: false
+      shopify_product_tags_days:
+        type: integer
+        format: int64
+        required: false
