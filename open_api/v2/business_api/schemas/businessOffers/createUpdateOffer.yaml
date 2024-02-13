@@ -79,6 +79,9 @@ definitions:
       displays_in:
         type: integer
         format: int64
+      shipping_option:
+        type: integer
+        format: int64
   CreateUpdateOfferResponse:
     type: "object"
     x-model: CreateUpdateOfferResponseModel

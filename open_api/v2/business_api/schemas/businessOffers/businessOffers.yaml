@@ -149,6 +149,9 @@ definitions:
       displays_in:
         type: integer
         format: int64
+      shipping_option:
+        type: integer
+        format: int64
   OfferTranslation:
     type: object
     description: A language translation of this offer.
