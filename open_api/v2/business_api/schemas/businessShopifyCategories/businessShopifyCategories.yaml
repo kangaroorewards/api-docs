@@ -1,0 +1,47 @@
+definitions:
+  BusinessShopifyCategoriesResponse:
+    type: array
+    items:
+      $ref: '#/definitions/ShopifyCategory'
+  ShopifyCategory:
+    type: "object"
+    x-model: ShopifyCategoryModel
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: 'shopify category id'
+      handle:
+        type: string
+      title:
+        type: string
+        description: 'shopify category title'
+      updated_at:
+        type: string
+      body_html:
+        type: string
+      published_at:
+        type: string
+      sort_order:
+        type: string
+      template_suffix:
+        type: string
+      disjunctive:
+        type: boolean
+      rules:
+        type: array
+        items:
+          type: object
+          properties:
+            column:
+              type: string
+            relation:
+              type: string
+            condition:
+              type: string
+      published_scope:
+        type: string
+      admin_graphql_api_id:
+        type: string
