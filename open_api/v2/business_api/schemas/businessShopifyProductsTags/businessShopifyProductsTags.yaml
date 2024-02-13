@@ -1,0 +1,24 @@
+definitions:
+  BusinessShopifyProductsTagsResponse:
+    type: "object"
+    x-model: BusinessShopifyProductsTagsModel
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        description: A list of all business's products tags on shopify
+        items:
+          $ref: '#/definitions/ShopifyProductTag'
+  ShopifyProductTag:
+    type: "object"
+    x-model: ShopifyProductTagModel
+    required:
+      - id
+    properties:
+      id:
+        type: string
+        description: 'shopify product tag id'
+      title:
+        type: string
+        description: 'shopify product tag title'

@@ -1,0 +1,32 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Business Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /shopify/productTags?store={shopifyStoreId}:
+    get:
+      summary: Retrieves the business's products tags on shopify
+      operationId: getBusinessShopifyProductsTags
+      x-is-integration: true
+      tags:
+        - businessShopifyProductsTags
+      parameters:
+        - in: path
+          name: shopifyStoreId
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Retrieved business's products tags on shopify
+          schema:
+            $ref: "schemas/businessShopifyProductsTags/businessShopifyProductsTags.yaml#/definitions/BusinessShopifyProductsTagsResponse"
