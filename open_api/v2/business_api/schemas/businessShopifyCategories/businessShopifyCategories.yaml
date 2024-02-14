@@ -1,9 +1,15 @@
 definitions:
   BusinessShopifyCategoriesResponse:
+    type: "object"
     x-model: BusinessShopifyCategoriesModel
-    type: array
-    items:
-      $ref: '#/definitions/ShopifyCategory'
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        description: A list of all business's categories on shopify
+        items:
+          $ref: '#/definitions/ShopifyCategory'
   ShopifyCategory:
     type: "object"
     x-model: ShopifyCategoryModel
