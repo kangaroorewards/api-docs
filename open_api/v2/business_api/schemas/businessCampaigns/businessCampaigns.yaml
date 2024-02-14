@@ -506,6 +506,7 @@ definitions:
         type: array
         items:
           type: object
+          x-model: FilterShopifyCategories
           properties:
             id:
               type: string
@@ -520,6 +521,7 @@ definitions:
         type: array
         items:
           type: object
+          x-model: FilterShopifyProducts
           properties:
             id:
               type: string
@@ -534,6 +536,7 @@ definitions:
         type: array
         items:
           type: object
+          x-model: FilterShopifyVendors
           properties:
             id:
               type: string
@@ -548,6 +551,7 @@ definitions:
         type: array
         items:
           type: object
+          x-model: FilterShopifyProductTags
           properties:
             id:
               type: string
