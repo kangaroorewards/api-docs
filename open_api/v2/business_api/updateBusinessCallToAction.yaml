@@ -27,9 +27,13 @@ paths:
           required: true
           type: integer
         - in: body
-          name: points
+          name: updateCallToActionRequest
           required: true
-          type: integer
+          schema:
+            type: object
+            properties:
+              points:
+                type: integer
       responses:
         "200":
           schema:
