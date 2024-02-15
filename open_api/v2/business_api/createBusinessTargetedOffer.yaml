@@ -1,0 +1,34 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /offers/targeting:
+    post:
+      summary: create a targeted offer
+      operationId: createBusinessTargetedOffer
+      consumes:
+        - application/json
+      tags:
+        - createBusinessTargetedOffer
+      parameters:
+        - in: body
+          name: createTargetedOfferRequest
+          required: true
+          schema:
+            type: object
+            $ref: 'schemas/businessOffers/createUpdateOffer.yaml#/definitions/CreateUpdateOfferRequest'
+      responses:
+        "200":
+          schema:
+            $ref: "schemas/businessOffers/createUpdateOffer.yaml#/definitions/CreateUpdateOfferResponse"
