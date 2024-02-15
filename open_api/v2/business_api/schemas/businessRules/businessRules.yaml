@@ -20,6 +20,18 @@ definitions:
       currency:
         type: object
         $ref: '#/definitions/CurrencyRules'
+      partner_rewards_enabled:
+        type: boolean
+      uber_voucher_enabled:
+        type: boolean
+      amazon_gift_card_enabled:
+        type: boolean
+      rolling_points_expiry:
+        type: object
+        $ref: '#/definitions/RollingPointsExpiry'
+      inactive_points_expiry:
+        type: object
+        $ref: '#/definitions/InactivePointsExpiry'
   EarningRules:
     type: "object"
     properties:
@@ -82,3 +94,27 @@ definitions:
       reward_points_max:
         type: number
         format: double
+  RollingPointsExpiry:
+    type: "object"
+    properties:
+      active:
+        type: boolean
+      period:
+        type: "object"
+        $ref: '#/definitions/Period'
+  InactivePointsExpiry:
+    type: "object"
+    properties:
+      active:
+        type: boolean
+      period:
+        type: "object"
+        $ref: '#/definitions/Period'
+  Period:
+    type: "object"
+    properties:
+      value:
+        type: integer
+        format: int64
+      unit:
+        type: string
