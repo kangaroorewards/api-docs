@@ -82,6 +82,9 @@ definitions:
       shipping_option:
         type: integer
         format: int64
+      filters_criteria:
+        type: object
+        $ref: "../../schemas/offerRewardAudience/offerRewardAudience.yaml#/definitions/FiltersCriteria"
   CreateUpdateOfferResponse:
     type: "object"
     x-model: CreateUpdateOfferResponseModel

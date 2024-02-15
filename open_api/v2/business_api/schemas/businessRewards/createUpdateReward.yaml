@@ -52,6 +52,9 @@ definitions:
         type: integer
         format: int64
         description: 'to create a free shipping reward ///Values:  1: free shipping 2: discount 3: the discount is not applied to shipping /// Shopify integration branch only support Free Shipping with shipping_option = 1, type_id = 18, discount_value = 0'
+      filters_criteria:
+        type: object
+        $ref: "../../schemas/offerRewardAudience/offerRewardAudience.yaml#/definitions/FiltersCriteria"
   CreateUpdateRewardResponse:
     type: "object"
     x-model: CreateUpdateRewardResponseModel
