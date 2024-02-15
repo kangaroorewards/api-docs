@@ -89,7 +89,7 @@ paths:
       tags:
         - core
   createBusinessOffer:
-    patch:
+    post:
       x-file: createBusinessOffer.yaml
       operationId: createBusinessOffer
       tags:
@@ -101,7 +101,7 @@ paths:
       tags:
         - core
   createBusinessReward:
-    patch:
+    post:
       x-file: createBusinessReward.yaml
       operationId: createRewardRequest
       tags:
@@ -260,5 +260,47 @@ paths:
     get:
       x-file: businessShopifyCategories.yaml
       operationId: getBusinessShopifyCategories
+      tags:
+        - core
+  businessSettings:
+    get:
+      x-file: businessSettings.yaml
+      operationId: getBusinessSettings
+      tags:
+        - core
+  createBusinessTargetedOffer:
+    post:
+      x-file: createBusinessTargetedOffer.yaml
+      operationId: createBusinessTargetedOffer
+      tags:
+        - core
+  createBusinessTargetedReward:
+    post:
+      x-file: createBusinessTargetedReward.yaml
+      operationId: createBusinessTargetedReward
+      tags:
+        - core
+  businessOfferAudience:
+    post:
+      x-file: businessOfferAudience.yaml
+      operationId: getBusinessOfferAudience
+      tags:
+        - core
+  businessRewardAudience:
+    post:
+      x-file: businessRewardAudience.yaml
+      operationId: getBusinessRewardAudience
+      tags:
+        - core
+  businessCallToAction:
+    get:
+      x-file: businessCallToAction.yaml
+      operationId: getBusinessCallToAction
+      tags:
+        - core
+  updateBusinessCallToAction:
+    patch:
+      x-file: updateBusinessCallToAction.yaml
+      operationId: updateBusinessCallToAction
       tags:
         - core
