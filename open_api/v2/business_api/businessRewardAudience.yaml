@@ -1,0 +1,36 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /rewards/targeted-audience:
+    post:
+      summary: Get audience data of a targeted reward
+      operationId: getBusinessRewardAudience
+      consumes:
+        - application/json
+      tags:
+        - businessRewardAudience
+      parameters:
+        - in: body
+          name: getBusinessRewardAudienceRequest
+          required: true
+          schema:
+            type: object
+            $ref: "schemas/offerRewardAudience/offerRewardAudience.yaml#/definitions/FiltersCriteria"
+      responses:
+        "200":
+          description: |
+            The result of getting audience of a targeted reward
+          schema:
+            $ref: "schemas/offerRewardAudience/offerRewardAudience.yaml#/definitions/OfferRewardAudienceResponse"
