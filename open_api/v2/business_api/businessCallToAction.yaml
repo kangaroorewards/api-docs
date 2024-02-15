@@ -1,0 +1,26 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Business Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /call-to-actions?action_enabled=eq|1&action_id=in|4,6,7,8:
+    get:
+      summary: Get the business's social media and points
+      operationId: getBusinessCallToAction
+      tags:
+        - businessCallToAction
+      responses:
+        "200":
+          description: Response from getting the business's social media and points
+          schema:
+            $ref: "schemas/businessCallToActions/businessCallToActions.yaml#/definitions/BusinessCallToActionsResponse"

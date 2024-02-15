@@ -1,0 +1,36 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /call-to-actions/{socialMediaPlatformId}:
+    put:
+      summary: update a social media platform points
+      operationId: updateBusinessCallToAction
+      consumes:
+        - application/json
+      tags:
+        - updateBusinessCallToAction
+      parameters:
+        - in: path
+          name: socialMediaPlatformId
+          required: true
+          type: integer
+        - in: body
+          name: points
+          required: true
+          type: integer
+      responses:
+        "200":
+          schema:
+            $ref: "schemas/businessCallToActions/businessCallToActions.yaml#/definitions/UpdateBusinessCallToActionResponse"
