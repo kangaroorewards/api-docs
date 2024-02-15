@@ -84,7 +84,6 @@ definitions:
     properties:
       data:
         type: object
-        description: A campaign returned after it's creation
         $ref: '#/definitions/CampaignAudience'
   CampaignAudience:
     type: object
