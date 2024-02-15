@@ -1,0 +1,72 @@
+definitions:
+  BusinessSettings:
+    type: "object"
+    x-model: BusinessSettings
+    description: |
+      Settings and Integrations of the business
+    properties:
+      data:
+        $ref: '#/definitions/BusinessSettingsData'
+  BusinessSettingsData:
+    type: "object"
+    description: Business settings and integrations data
+    properties:
+      business:
+        type: object
+        $ref: "../../schemas/userDetails/userDetails.yaml#/definitions/Business"
+      integrations:
+        type: array
+        items:
+          $ref: '#/definitions/Integration'
+      languages:
+        type: array
+        items:
+          $ref: './../languages/language.yaml'
+      app_context:
+        type: object
+        $ref: '#/definitions/AppContext'
+  Integration:
+    type: "object"
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      accounts:
+        type: array
+        items:
+          $ref: '#/definitions/Account'
+      is_ecom:
+        type: boolean
+      active:
+        type: boolean
+  AppContext:
+    type: "object"
+    properties:
+      user_signup:
+        type: integer
+        format: int64
+      points_label:
+        type: object
+        $ref: '#/definitions/PointsLabel'
+  PointsLabel:
+    type: "object"
+    properties:
+      plural:
+        type: string
+      singular:
+        type: string
+      plural_short:
+        type: string
+      singular_short:
+        type: string
+  Account:
+    type: "object"
+    properties:
+      id:
+        type: string
+      store_name:
+        type: string
+      store_domain:
+        type: string

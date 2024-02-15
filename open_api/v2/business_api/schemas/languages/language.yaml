@@ -13,3 +13,5 @@ properties:
   name:
     description: The full name of this language (English, French, Spanish)
     type: string
+  default:
+    type: boolean
