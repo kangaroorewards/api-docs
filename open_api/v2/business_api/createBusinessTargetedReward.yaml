@@ -1,0 +1,34 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /rewards/targeting:
+    post:
+      summary: create a targeted reward
+      operationId: createBusinessTargetedReward
+      consumes:
+        - application/json
+      tags:
+        - createBusinessTargetedReward
+      parameters:
+        - in: body
+          name: createTargetedRewardRequest
+          required: true
+          schema:
+            type: object
+            $ref: 'schemas/businessRewards/createUpdateReward.yaml#/definitions/CreateUpdateRewardRequest'
+      responses:
+        "200":
+          schema:
+            $ref: "schemas/businessRewards/createUpdateReward.yaml#/definitions/CreateUpdateRewardResponse"

@@ -87,6 +87,9 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/RewardTranslation'
+      filters_criteria:
+        type: object
+        $ref: "../../schemas/offerRewardAudience/offerRewardAudience.yaml#/definitions/FiltersCriteria"
   RewardTranslation:
     type: object
     properties:
