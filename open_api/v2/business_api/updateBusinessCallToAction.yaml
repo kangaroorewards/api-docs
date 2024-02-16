@@ -14,7 +14,7 @@ produces:
   - application/json
 paths:
   /call-to-actions/{socialMediaPlatformId}:
-    put:
+    patch:
       summary: update a social media platform points
       operationId: updateBusinessCallToAction
       consumes:
