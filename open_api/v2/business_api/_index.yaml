@@ -262,10 +262,10 @@ paths:
       operationId: getBusinessShopifyCategories
       tags:
         - core
-  businessSettings:
+  businessSettingsIntegrations:
     get:
-      x-file: businessSettings.yaml
-      operationId: getBusinessSettings
+      x-file: businessSettingsIntegrations.yaml
+      operationId: getBusinessSettingsIntegrations
       tags:
         - core
   createBusinessTargetedOffer:

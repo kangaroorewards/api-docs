@@ -16,11 +16,11 @@ paths:
   /business-settings?include=integrations,languages:
     get:
       summary: Get the business's settings and integrations
-      operationId: getBusinessSettings
+      operationId: getBusinessSettingsIntegrations
       tags:
-        - businessSettings
+        - businessSettingsIntegrations
       responses:
         "200":
           description: Business settings and integrations
           schema:
-            $ref: "schemas/businessSettings/businessSettings.yaml#/definitions/BusinessSettings"
+            $ref: "schemas/businessSettingsIntegrations/businessSettingsIntegrations.yaml#/definitions/BusinessSettingsIntegrations"

@@ -1,13 +1,13 @@
 definitions:
-  BusinessSettings:
+  BusinessSettingsIntegrations:
     type: "object"
-    x-model: BusinessSettings
+    x-model: BusinessSettingsIntegrations
     description: |
       Settings and Integrations of the business
     properties:
       data:
-        $ref: '#/definitions/BusinessSettingsData'
-  BusinessSettingsData:
+        $ref: '#/definitions/BusinessSettingsIntegrationsData'
+  BusinessSettingsIntegrationsData:
     type: "object"
     description: Business settings and integrations data
     properties:
