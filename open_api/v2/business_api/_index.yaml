@@ -304,3 +304,15 @@ paths:
       operationId: updateBusinessCallToAction
       tags:
         - core
+  businessPinnedModules:
+    get:
+      x-file: businessPinnedModules.yaml
+      operationId: getBusinessPinnedModules
+      tags:
+        - core
+  updateBusinessPinnedModules:
+    patch:
+      x-file: updateBusinessPinnedModules.yaml
+      operationId: updateBusinessPinnedModules
+      tags:
+        - core

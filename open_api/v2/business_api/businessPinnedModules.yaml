@@ -1,0 +1,26 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Business Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /app-modules:
+    get:
+      summary: Get the business's pinned modules
+      operationId: getBusinessPinnedModules
+      tags:
+        - businessPinnedModules
+      responses:
+        "200":
+          description: Business's pinned modules
+          schema:
+            $ref: 'schemas/businessPinnedModules/businessPinnedModules.yaml#/definitions/BusinessPinnedModulesResponse'

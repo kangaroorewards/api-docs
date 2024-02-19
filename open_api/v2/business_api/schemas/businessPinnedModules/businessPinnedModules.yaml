@@ -1,0 +1,38 @@
+definitions:
+  BusinessPinnedModulesResponse:
+    type: "object"
+    x-model: BusinessPinnedModulesModel
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        description: A list of business's pinned modules
+        items:
+          $ref: '#/definitions/PinnedModule'
+  UpdatePinnedModulesRequest:
+    type: "object"
+    x-model: UpdatePinnedModulesRequestModel
+    required:
+      - modules
+    properties:
+      modules:
+        type: array
+        description: An update list of business's pinned modules
+        items:
+          $ref: '#/definitions/PinnedModule'
+  PinnedModule:
+    type: "object"
+    x-model: PinnedModuleModel
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        description: 'A unique ID identifying this module'
+      name:
+        type: string
+        description: 'name of module'
+      pinned:
+        type: boolean
+        description: 'if this module is pinned or not'
