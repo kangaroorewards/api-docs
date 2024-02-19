@@ -44,6 +44,12 @@ paths:
                 type: integer
                 format: int64
                 description: sign up bonus
+              tiers_earning_override:
+                type: boolean
+              tiers_earning_rules:
+                type: array
+                items:
+                  $ref: "schemas/businessRules/businessRules.yaml#/definitions/TierEarningRule"
       responses:
         "200":
           description: Business rules
