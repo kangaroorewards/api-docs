@@ -27,10 +27,6 @@ paths:
           required: true
           schema:
             type: object
-            required:
-              - reward_ratio
-              - reward_milestone_amount
-              - welcome_points
             properties:
               reward_ratio:
                 type: number
