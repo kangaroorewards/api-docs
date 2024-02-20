@@ -210,12 +210,6 @@ definitions:
             type: number
             format: float
       virtual_branch_flag:
-          type: boolean
-      ecom_integration:
-        type: object
-        properties:
-          id:
-            type: integer
-            format: int64
-          name:
-            type: string
+        type: boolean
+      is_ecom:
+        type: boolean
