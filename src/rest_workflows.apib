@@ -1,5 +1,161 @@
 # Workflows
 
+## Main triggers[/workflow-main-triggers{?page}]
+
+### List all workflow main triggers [GET]
+
+Returns a list of workflow triggers
+
+**Query Parameters**
+
+|Name|Type|Description|
+|-----|----|-----------|
+|page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
+|per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15; Maximum value 100|
+
+**Response**
+conditions: The available conditions for the trigger.
+conditions.*.url: The URL that provides selectable options for the condition.
+conditions.*.relations: The selectable options for the condition.
+
+Examples
+```
+GET /workflow-main-triggers HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFmODNk
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+	"data": [
+		{
+			"id": 1,
+			"trigger_name": "Created Account",
+			"conditions": [
+				{
+					"id": 1,
+					"type": "list",
+					"label": "Branch",
+					"url": "https://api.kangaroorewards.com/branches?include=virtual_branch",
+					"relations": null
+				},
+				{
+					"id": 2,
+					"type": "list",
+					"label": "Specific Day",
+					"url": null,
+					"relations": [
+						{
+							"label": "Monday",
+							"value": 1
+						},
+						{
+							"label": "Tuesday",
+							"value": 2
+						},
+						{
+							"label": "Wednesday",
+							"value": 3
+						},
+						{
+							"label": "Thursday",
+							"value": 4
+						},
+						{
+							"label": "Friday",
+							"value": 5
+						},
+						{
+							"label": "Saturday",
+							"value": 6
+						},
+						{
+							"label": "Sunday",
+							"value": 7
+						}
+					]
+				}
+			]
+		}
+	],
+	"links": {
+		"first": "http://api.kangaroorewards.com/workflow-main-triggers?page=1",
+		"last": null,
+		"prev": null,
+		"next": null
+	},
+	"meta": {
+		"current_page": 1,
+		"from": 1,
+		"path": "http://api.kangaroorewards.com/workflow-main-triggers",
+		"per_page": 15,
+		"to": 2
+	}
+}
+
+## Main actions[/workflow-main-actions{?page}]
+
+### List all workflow main actions [GET]
+
+Returns a list of workflow actions
+
+**Query Parameters**
+
+|Name|Type|Description|
+|-----|----|-----------|
+|page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
+|per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15; Maximum value 100|
+
+Examples
+```
+GET /workflow-main-actions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFmODNk
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+	"data": [
+		{
+			"id": 1,
+			"action_name": "Email"
+		},
+		{
+			"id": 2,
+			"action_name": "Send SMS"
+		},
+		{
+			"id": 3,
+			"action_name": "Reward Points"
+		},
+		{
+			"id": 4,
+			"action_name": "Wait"
+		}
+	],
+	"links": {
+		"first": "http://api.kangaroorewards.com/workflow-main-actions?page=1",
+		"last": null,
+		"prev": null,
+		"next": null
+	},
+	"meta": {
+		"current_page": 1,
+		"from": 1,
+		"path": "http://api.kangaroorewards.com/workflow-main-actions",
+		"per_page": 15,
+		"to": 4
+	}
+}
+
 ## Workflows [/workflows{?page}]
 
 ### List all workflows [GET]
