@@ -1,0 +1,547 @@
+# Workflows
+
+## Main triggers[/workflow-main-triggers{?page}]
+
+### List all workflow main triggers [GET]
+
+Returns a list of workflow triggers
+
+**Query Parameters**
+
+|Name|Type|Description|
+|-----|----|-----------|
+|page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
+|per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15; Maximum value 100|
+
+**Response**
+conditions: The available conditions for the trigger.
+conditions.*.url: The URL that provides selectable options for the condition.
+conditions.*.relations: The selectable options for the condition.
+
+Examples
+```
+GET /workflow-main-triggers HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFmODNk
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+	"data": [
+		{
+			"id": 1,
+			"trigger_name": "Created Account",
+			"conditions": [
+				{
+					"id": 1,
+					"type": "list",
+					"label": "Branch",
+					"url": "https://api.kangaroorewards.com/branches?include=virtual_branch",
+					"relations": null
+				},
+				{
+					"id": 2,
+					"type": "list",
+					"label": "Specific Day",
+					"url": null,
+					"relations": [
+						{
+							"label": "Monday",
+							"value": 1
+						},
+						{
+							"label": "Tuesday",
+							"value": 2
+						},
+						{
+							"label": "Wednesday",
+							"value": 3
+						},
+						{
+							"label": "Thursday",
+							"value": 4
+						},
+						{
+							"label": "Friday",
+							"value": 5
+						},
+						{
+							"label": "Saturday",
+							"value": 6
+						},
+						{
+							"label": "Sunday",
+							"value": 7
+						}
+					]
+				}
+			]
+		}
+	],
+	"links": {
+		"first": "http://api.kangaroorewards.com/workflow-main-triggers?page=1",
+		"last": null,
+		"prev": null,
+		"next": null
+	},
+	"meta": {
+		"current_page": 1,
+		"from": 1,
+		"path": "http://api.kangaroorewards.com/workflow-main-triggers",
+		"per_page": 15,
+		"to": 2
+	}
+}
+
+## Main actions[/workflow-main-actions{?page}]
+
+### List all workflow main actions [GET]
+
+Returns a list of workflow actions
+
+**Query Parameters**
+
+|Name|Type|Description|
+|-----|----|-----------|
+|page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
+|per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15; Maximum value 100|
+
+Examples
+```
+GET /workflow-main-actions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFmODNk
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+	"data": [
+		{
+			"id": 1,
+			"action_name": "Email"
+		},
+		{
+			"id": 2,
+			"action_name": "Send SMS"
+		},
+		{
+			"id": 3,
+			"action_name": "Reward Points"
+		},
+		{
+			"id": 4,
+			"action_name": "Wait"
+		}
+	],
+	"links": {
+		"first": "http://api.kangaroorewards.com/workflow-main-actions?page=1",
+		"last": null,
+		"prev": null,
+		"next": null
+	},
+	"meta": {
+		"current_page": 1,
+		"from": 1,
+		"path": "http://api.kangaroorewards.com/workflow-main-actions",
+		"per_page": 15,
+		"to": 4
+	}
+}
+
+## Workflows [/workflows{?page}]
+
+### List all workflows [GET]
+
+Returns a list of workflows
+
+**Query Parameters**
+
+|Name|Type|Description|
+|-----|----|-----------|
+|page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
+|per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15; Maximum value 100|
+|include|string|`Optional.` You can optionally include=triggers,actions in your request.|
+
+Examples
+```
+GET /workflows?include=triggers,actions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFmODNk
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+	"data": [
+		{
+			"id": 14,
+			"name": "Completed profile",
+			"created_at": "2024-02-06T16:07:52+00:00",
+			"published_at": "2024-01-10T01:01:01+00:00",
+			"expires_at": "2024-12-14T01:01:01+00:00",
+			"workflow_version": {
+				"id": 47,
+				"workflow_id": 14,
+				"external_workflow_revision_id": "000017-5a5",
+				"dsl_definition": {
+					...
+				},
+				"created_at": "2024-02-20T01:37:52.000000Z"
+			},
+			"triggers": [
+				{
+					"id": 29,
+					"main_trigger_id": 3,
+					"created_at": "2024-02-20T01:14:40+00:00"
+				}
+			],
+			"actions": [
+				{
+					"id": 35,
+					"main_action_id": 3,
+					"name": null,
+					"action_key": "Reward_Points_17072356685213_45745",
+					"parent_id": 61,
+					"created_at": "2024-02-20T01:37:52+00:00",
+					"conditions": null,
+					"relations": [
+						{
+							"label": "point",
+							"value": 10,
+							"entity_id": null,
+							"entity_type": "points"
+						}
+					]
+				},
+				{
+					"id": 61,
+					"main_action_id": 4,
+					"name": null,
+					"action_key": "Wait_17072356685358_92300",
+					"parent_id": null,
+					"created_at": "2024-02-20T01:37:52+00:00",
+					"conditions": null,
+					"relations": null
+				}
+			]
+		}
+	],
+	"links": {
+		"first": "http://api.kangaroorewards.com/workflows?page=1",
+		"last": null,
+		"prev": null,
+		"next": null
+	},
+	"meta": {
+		"current_page": 1,
+		"from": 1,
+		"path": "http://api.kangaroorewards.com/workflows",
+		"per_page": 15,
+		"to": 1
+	}
+}
+
+## Workflows [/workflows]
+
+### Create a workflow [POST]
+
+*Body parameters*
+|Name|Type|Description|
+|-----|----|-----------|
+|name|string|`Required` Between 1 and 255 characters in length|
+|published_at|string|`Required` ISO 8601 date.|
+|expires_at|string|`Optional` ISO 8601 date.|
+|targeted_flag|integer|`Required` (0,1,2) 0 - available for everyone, 1 - targeted customers, 2 - available for tier customers|
+|marketing_filters|array|`Required when targeted_flag is 1`.|
+|tiers|array|`Required when targeted_flag is 2`.|
+|tiers.*|integer|Tier level id|
+|triggers|array|`Required`|
+|triggers.*.main_trigger_id|integer|`Required`|
+|triggers.*.frequency|array|`Optional`|
+|triggers.*.frequency.freq|string|`Required when frequency is present` In: hourly,daily,weekly,monthly,yearly,flow|
+|triggers.*.frequency.interval|integer|`Optional` Default 1. The trigger needs to occur in X hours/days/months/years.|
+|triggers.*.frequency.count|`Optional` Default 1. How many times does the trigger need to occur.|
+|triggers.*.conditions|array|`Optional`|
+|triggers.*.conditions.*.id|integer|`Required when the condition is present`.|
+|triggers.*.conditions.*.operator|string|`Required when the condition is present`. In: eq,gt,gte,lt,lte,in,between,intersect,contains. The operator depends on the condition ID.|
+|triggers.*.conditions.*.value|Mixed|`Required when the condition is present`. Could be string, integer, array, depends on the operator.|
+|actions|array|`Required`|
+|actions.*.main_action_id|integer|`Required`|
+|actions.*.name|string|`Optional` Between 1 and 255 characters in length|
+|actions.*.action_key|string|`Optional` The action_key name should be between 1 and 255 characters in length and will be used as the DSL step name. It must be unique among actions.|
+|actions.*.enabled|boolean|`Optional` Default: true.|
+|actions.*.temp_id|integer|`Required`|
+|actions.*.temp_parent_id|integer|`Required` Default: null. The parent action temp id.|
+|actions.*.frequency|array|`Optional`|
+|actions.*.frequency.freq|string|`Required when frequency is present` In: hourly,daily,weekly,monthly,yearly,flow|
+|actions.*.frequency.interval|integer|`Optional` Default 1. The maximum number of times the action will be executed in X hours/days/months/years.|
+|actions.*.frequency.count|`Optional` Default 1. The maximum number of times the action will be executed.|
+|actions.*.relations|array|`Optional`|
+|actions.*.relations.*.entity_id|integer|`Required when relation is present` Nullable|
+|actions.*.relations.*.entity_type|string|`Required when relation is present`|
+|actions.*.relations.*.value|string|`Optional` Depends on the entity_type, sometimes it's required.|
+|actions.*.relations.*.label|string|`Optional`|
+
+*Body parameters* specific for branch condition
+All common +
+
+|Name|Type|Description|
+|-----|----|-----------|
+|triggers.*.conditions|array|`Optional`|
+|triggers.*.conditions.*.id|integer|`Required` 1|
+|triggers.*.conditions.*.operator|string|`Required`. In: eq,in.|
+|triggers.*.conditions.*.value|array or string|`Required` Branch uuid or array of branch uuid.|
+
+*Body parameters* specific for specific day of the week
+All common +
+
+|Name|Type|Description|
+|-----|----|-----------|
+|triggers.*.conditions|array|`Optional`|
+|triggers.*.conditions.*.id|integer|`Required` 2|
+|triggers.*.conditions.*.operator|string|`Required`. In: eq,in.|
+|triggers.*.conditions.*.value|array or integer|`Required` Day of the week, in: 1 - Monday, 2 - Tuesday ... 7 - Sunday|
+
+*Body parameters* specific for specific time of the week
+All common +
+
+|Name|Type|Description|
+|-----|----|-----------|
+|triggers.*.conditions|array|`Optional`|
+|triggers.*.conditions.*.id|integer|`Required` 3|
+|triggers.*.conditions.*.operator|string|`Required`. "between".|
+|triggers.*.conditions.*.value|array|`Required` H:i time format, ex: ["08:00", "17:00"]|
+
+*Body parameters* specific for amount
+All common +
+
+|Name|Type|Description|
+|-----|----|-----------|
+|triggers.*.conditions|array|`Optional`|
+|triggers.*.conditions.*.id|integer|`Required` 4|
+|triggers.*.conditions.*.operator|string|`Required`. In: eq, gt, gte, lt, lte, between.|
+|triggers.*.conditions.*.value|array or numeric|`Required`|
+
+
+*Body parameters* specific for referral status
+All common +
+
+|Name|Type|Description|
+|-----|----|-----------|
+|triggers.*.conditions|array|`Optional`|
+|triggers.*.conditions.*.id|integer|`Required` 5|
+|triggers.*.conditions.*.operator|string|`Required`. In: eq,in.|
+|triggers.*.conditions.*.value|array or numeric|`Required` 1 - Referral Pending. 2 - Referral condition met. 3 - Referral condition not met|
+
+*Body parameters* specific for specific pos products or categories
+All common +
+
+|Name|Type|Description|
+|-----|----|-----------|
+|triggers.*.conditions|array|`Optional`|
+|triggers.*.conditions.*.id|integer|`Required` 6 - specific products, 7 - specific categories|
+|triggers.*.conditions.*.operator|string|`Required`. In: intersect(one of products/categories in condition.value), contains(all the products/categories in condition.value).|
+|triggers.*.conditions.*.value|array|`Required`|
+|triggers.*.conditions.*.value.integration_id|string|`Required`|
+|triggers.*.conditions.*.value.account_id|string|`Required`|
+|triggers.*.conditions.*.value.resource_id|array|`Required` array of product/category id.|
+
+*Body parameters* specific for completed profile
+All common +
+
+|Name|Type|Description|
+|-----|----|-----------|
+|triggers.*.conditions|array|`Optional`|
+|triggers.*.conditions.*.id|integer|`Required` 8|
+|triggers.*.conditions.*.operator|string|`Required`. "contains"|
+|triggers.*.conditions.*.value|array|`Required`. An array of integers representing the index of CRM settings' fields that require completion.|
+
+Example create a workflow for user sign up
+
+```
+POST /workflows HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+	"name": "User sign up",
+	"published_at": "2024-03-10T01:01:01+00:00",
+	"expires_at": "2024-12-10T01:01:01+00:00",
+	"targeted_flag": 2,
+	"tiers": [
+		29
+	],
+	"triggers": [
+		{
+			"main_trigger_id": 1,
+			"frequency": {
+				"freq": "flow",
+				"count": 1
+			},
+			"conditions": [
+				{
+					"id": 1,
+					"operator": "in",
+					"value": [
+						"11ea6d322b6dd08daf33b42e99312acc",
+						"11ea6d3e304d0189af33b42e99312acc"
+					]
+				}
+			]
+		}
+	],
+	"actions": [
+		{
+			"main_action_id": 3,
+			"temp_id": 1,
+			"parent_id": null,
+			"temp_parent_id": null,
+			"relations": [
+				{
+					"entity_id": null,
+					"label": "point",
+					"entity_type": "points",
+					"value": [
+						100
+					]
+				}
+			]
+		}
+	]
+}
+```
+
+### Update a workflow [PATCH]
+
+*Body parameters*
+|Name|Type|Description|
+|-----|----|-----------|
+|name|string|`Optional` Between 1 and 255 characters in length|
+|published_at|string|`Optional` ISO 8601 date. Can not be updated if the workflow is published|
+|expires_at|string|`Optional` ISO 8601 date.|
+|targeted_flag|integer|`Required` (0,1,2) 0 - available for everyone, 1 - targeted customers, 2 - available for tier customers|
+|marketing_filters|array|`Required when targeted_flag is 1`.|
+|tiers|array|`Required when targeted_flag is 2`.|
+|tiers.*|integer|Tier level id|
+|triggers|array|`Required`|
+|triggers.*.main_trigger_id|integer|`Required`|
+|triggers.*.enabled|boolean|`Optional` Default: true|
+|triggers.*.frequency|array|`Optional`|
+|triggers.*.frequency.freq|string|`Required when frequency is present` In: hourly,daily,weekly,monthly,yearly,flow|
+|triggers.*.frequency.interval|integer|`Optional` Default 1. The trigger needs to occur in X hours/days/months/years.|
+|triggers.*.frequency.count|`Optional` Default 1. How many times does the trigger need to occur.|
+|triggers.*.conditions|array|`Optional`|
+|triggers.*.conditions.*.id|integer|`Required when the condition is present`.|
+|triggers.*.conditions.*.operator|string|`Required when the condition is present`. In: eq,gt,gte,lt,lte,in,between,intersect,contains. The operator depends on the condition ID.|
+|triggers.*.conditions.*.value|Mixed|`Required when the condition is present`. Could be string, integer, array, depends on the operator.|
+|actions|array|`Required`|
+|actions.*.main_action_id|integer|`Required`|
+|actions.*.enabled|boolean|`Optional` Default: true|
+|actions.*.name|string|`Optional` Between 1 and 255 characters in length|
+|actions.*.action_key|string|`Optional` The action_key name should be between 1 and 255 characters in length and will be used as the DSL step name. It must be unique among actions.|
+|actions.*.enabled|boolean|`Optional` Default: true.|
+|actions.*.temp_id|integer|`Required`|
+|actions.*.temp_parent_id|integer|`Required` Default: null. The parent action temp id.|
+|actions.*.id|integer|`Optional`|
+|actions.*.parent_id|integer|`Optional` Default: null. The parent action id.|
+|actions.*.frequency|array|`Optional`|
+|actions.*.frequency.freq|string|`Required when frequency is present` In: hourly,daily,weekly,monthly,yearly,flow|
+|actions.*.frequency.interval|integer|`Optional` Default 1. The maximum number of times the action will be executed in X hours/days/months/years.|
+|actions.*.frequency.count|`Optional` Default 1. The maximum number of times the action will be executed.|
+|actions.*.relations|array|`Optional`|
+|actions.*.relations.*.entity_id|integer|`Required when relation is present` Nullable|
+|actions.*.relations.*.entity_type|string|`Required when relation is present`|
+|actions.*.relations.*.value|string|`Optional` Depends on the entity_type, sometimes it's required.|
+|actions.*.relations.*.label|string|`Optional`|
+
+Example update a workflow
+
+```
+PATCH /workflows/10 HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+	"targeted_flag": 0,
+	"triggers": [
+		{
+			"main_trigger_id": 3,
+			"frequency": {
+				"freq": "flow",
+				"count": 2
+			},
+			"conditions": [
+				{
+					"id": 8,
+					"operator": "contains",
+					"value": [
+						-2,
+						0,
+						1
+					]
+				}
+			]
+		}
+	],
+	"actions": [
+		{
+			"main_action_id": 3,
+			"id": 35,
+			"action_key": "Reward_Points_17072356685213_45745",
+			"frequency": {
+				"freq": "flow",
+				"count": 2
+			},
+			"parent_id": null,
+			"temp_parent_id": null,
+			"relations": [
+				{
+					"entity_id": null,
+					"value": 10,
+					"label": "point",
+					"entity_type": "points"
+				}
+			]
+		},
+		{
+			"main_action_id": 4,
+			"action_key": "Wait_17072356685358_92300",
+			"temp_id": 49,
+			"enabled": false
+		}
+	]
+}
+```
+
+### Delete a workflow [DELETE]
+
+Example Delete follow facebook action
+
+```
+DELETE /workflows/10 HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+
+
+
