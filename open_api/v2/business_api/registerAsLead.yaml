@@ -1,0 +1,34 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /leads:
+    post:
+      summary: update an offer
+      operationId: registerAsLead
+      consumes:
+        - application/json
+      tags:
+        - registerAsLead
+      parameters:
+        - in: body
+          name: registerLeadRequest
+          required: true
+          schema:
+            type: object
+            $ref: 'schemas/registerAsLead/registerAsLead.yaml#/definitions/RegisterAsALeadRequest'
+      responses:
+        "200":
+          schema:
+            $ref: "schemas/registerAsLead/registerAsLead.yaml#/definitions/RegisterAsALeadResponse"

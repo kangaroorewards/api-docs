@@ -1,0 +1,44 @@
+definitions:
+  RegisterAsALeadRequest:
+    type: "object"
+    x-model: RegisterAsALeadRequestModel
+    properties:
+      business:
+        type: object
+        properties:
+          name:
+            type: string
+      user:
+        type: object
+        properties:
+          first_name:
+            type: string
+          email:
+            type: string
+      platform_id:
+        type: integer
+        format: int64
+      cid:
+        type: integer
+        format: int64
+  RegisterAsALeadResponse:
+    type: "object"
+    x-model: RegisterAsALeadResponseModel
+    required:
+      - data
+    properties:
+      data:
+        type: object
+        $ref: '#/definitions/RegisterAsALead'
+  RegisterAsALead:
+    type: "object"
+    x-model: RegisterAsALeadModel
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      email:
+        type: string

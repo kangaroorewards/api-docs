@@ -316,3 +316,9 @@ paths:
       operationId: updateBusinessPinnedModules
       tags:
         - core
+  registerAsLead:
+    post:
+      x-file: registerAsLead.yaml
+      operationId: registerAsLead
+      tags:
+        - core
