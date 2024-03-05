@@ -1,0 +1,84 @@
+definitions:
+  BusinessALaCarteProductsResponse:
+    type: "object"
+    x-model: BusinessALaCarteProductsModel
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        description: A list of all business's a la carte products
+        items:
+          $ref: '#/definitions/ALaCarteProduct'
+  ALaCarteProduct:
+    type: "object"
+    x-model: ALaCarteProductModel
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        description: 'a la carte product id'
+      points:
+        type: integer
+        format: int64
+        description: 'a la carte product points'
+      product:
+        type: "object"
+        $ref: '#/definitions/Product'
+  Product:
+    type: "object"
+    x-model: Product
+    properties:
+      id:
+        type: integer
+      title:
+        type: string
+      description:
+        type: string
+      images:
+        type: array
+        items:
+          $ref: '#/definitions/Images'
+      product_sku:
+        type: string
+      actual_price:
+        type: number
+        format: float
+      real_price:
+        type: number
+        format: float
+      terms_conditions:
+        type: string
+      link:
+        type: string
+      product_languages:
+        type: array
+        items:
+          $ref: '#/definitions/Languages'
+  Images:
+    type: object
+    properties:
+      path:
+        type: string
+      large:
+        type: string
+      medium:
+        type: string
+      thumbnail:
+        type: string
+      default:
+        type: boolean
+  Languages:
+    type: object
+    properties:
+      language_id:
+        type: integer
+      title:
+        type: string
+      description:
+        type: string
+      language:
+        type: object
+        x-model:
+        $ref: './../languages/language.yaml'

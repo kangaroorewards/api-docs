@@ -1,0 +1,31 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Business Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /product-rewards?relationships=product&per_page={perPage}:
+    get:
+      summary: Get a list of business's a la carte products
+      operationId: getBusinessALaCarteProducts
+      tags:
+        - businessALaCarteProducts
+      parameters:
+        - in: path
+          name: perPage
+          type: integer
+          default: 50
+      responses:
+        "200":
+          description: Business a la carte products list
+          schema:
+            $ref: 'schemas/businessALaCarteProducts/businessALaCarteProducts.yaml#/definitions/BusinessALaCarteProductsResponse'

@@ -322,3 +322,9 @@ paths:
       operationId: registerAsLead
       tags:
         - core
+  businessALaCarteProducts:
+    get:
+      x-file: businessALaCarteProducts.yaml
+      operationId: getBusinessALaCarteProducts
+      tags:
+        - core
