@@ -39,7 +39,7 @@ definitions:
       images:
         type: array
         items:
-          $ref: '#/definitions/Images'
+          $ref: '#/definitions/ProductImages'
       product_sku:
         type: string
       actual_price:
@@ -56,7 +56,7 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Languages'
-  Images:
+  ProductImages:
     type: object
     properties:
       path:
