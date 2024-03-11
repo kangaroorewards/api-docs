@@ -38,6 +38,8 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/TierEarningRule'
+      product_review_enabled:
+        type: boolean
   EarningRules:
     type: "object"
     properties:
