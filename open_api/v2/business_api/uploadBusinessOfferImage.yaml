@@ -43,4 +43,4 @@ paths:
         "200":
           description: uploaded images of an offer
           schema:
-            $ref: 'schemas/images/image.yaml'
+            $ref: 'schemas/images/images.yaml#/definitions/ImagesResponse'
