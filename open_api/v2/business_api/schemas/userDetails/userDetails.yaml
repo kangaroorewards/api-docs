@@ -186,10 +186,10 @@ definitions:
             type: string
       logo:
         type: object
-        $ref: './../images/image.yaml'
+        $ref: '../../schemas/images/images.yaml#/definitions/Images'
       cover_photo:
         type: object
-        $ref: './../images/image.yaml'
+        $ref: '../../schemas/images/images.yaml#/definitions/Images'
       address:
         type: object
         properties:
