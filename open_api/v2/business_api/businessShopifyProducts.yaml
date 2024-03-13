@@ -17,7 +17,7 @@ paths:
     get:
       summary: Retrieves the business's products on shopify
       operationId: getBusinessShopifyProducts
-      x-is-integration: true
+      x-server-host-id: 1
       tags:
         - businessShopifyProducts
       parameters:

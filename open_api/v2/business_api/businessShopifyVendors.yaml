@@ -17,7 +17,7 @@ paths:
     get:
       summary: Retrieves the business's vendors on shopify
       operationId: getBusinessShopifyVendors
-      x-is-integration: true
+      x-server-host-id: 1
       tags:
         - businessShopifyVendors
       parameters:
