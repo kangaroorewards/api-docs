@@ -334,3 +334,15 @@ paths:
 #      operationId: uploadBusinessOfferImage
 #      tags:
 #        - core
+  requestResetPassword:
+    get:
+      x-file: requestResetPassword.yaml
+      operationId: requestResetPassword
+      tags:
+        - core
+  createNewPassword:
+    get:
+      x-file: createNewPassword.yaml
+      operationId: createNewPassword
+      tags:
+        - core
