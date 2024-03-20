@@ -1,0 +1,143 @@
+# Workflow Main Triggers
+
+# Group Workflow Main Triggers
+
+## Workflow Main Trigger [/workflow-main-triggers{?page}]
+
+### List all Main Triggers [GET]
+
+Returns a list of workflow triggers
+
+**Query Parameters**
+
+|Name|Type|Description|
+|-----|----|-----------|
+|page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
+|per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15; Maximum value 100|
+
+**Response**
+
+```
+conditions: The available conditions for the trigger.
+conditions.*.url: The URL that provides selectable options for the condition.
+conditions.*.relations: The selectable options for the condition.
+```
+
+Examples
+```
+GET /workflow-main-triggers HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFmODNk
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+  "data": [
+    {
+      "id": 1,
+      "trigger_name": "Created Account",
+      "conditions": [
+        {
+          "id": 1,
+          "type": "list",
+          "label": "Branch",
+          "url": "https://api.kangaroorewards.com/branches?include=virtual_branch",
+          "relations": null
+        },
+        {
+          "id": 2,
+          "type": "list",
+          "label": "Specific Day",
+          "url": null,
+          "relations": [
+            {
+              "label": "Monday",
+              "value": 1
+            },
+            {
+              "label": "Tuesday",
+              "value": 2
+            },
+            {
+              "label": "Wednesday",
+              "value": 3
+            },
+            {
+              "label": "Thursday",
+              "value": 4
+            },
+            {
+              "label": "Friday",
+              "value": 5
+            },
+            {
+              "label": "Saturday",
+              "value": 6
+            },
+            {
+              "label": "Sunday",
+              "value": 7
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer <access_token>
+            X-Application-Key: <X-Application-Key>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+
++ Response 200 (application/json)
+    + Attributes
+        - data (array[Workflow Main Trigger Response])
+
+# Data Structures
+
+## Workflow Main Trigger Response
+
++ id: 1 (number) - The ID
++ trigger_name: `Created Account` (string) - The name of the trigger
++ conditions (array[object])
+    + (object)
+        + id: 1 (number) - The ID of the condition
+        + type: list (string) - The type of the condition
+        + label: Branch (string) - The label of the condition
+        + url: `https://api.kangaroorewards.com/branches?include=virtual_branch` (string) - The URL associated with the condition
+        + relations: null (nullable) - The relations associated with the condition
+        + id: 2 (number) - The ID of the condition
+        + type: list (string) - The type of the condition
+        + label: `Specific Day` (string) - The label of the condition
+        + url: null (string, nullable) - The URL associated with the condition
+        + relations (array[object])
+            + (object)
+                + label: `Monday` (string) 
+                + value: 1 (number) 
+            + (object)    
+                + label: `Tuesday` (string)
+                + value: 2 (number) 
+            + (object)
+                + label: `Wednesday` (string)
+                + value: 3 (number) 
+            + (object)
+                + label: `Thursday` (string)
+                + value: 4 (number) 
+            + (object)
+                + label: `Friday` (string)
+                + value: 5 (number) 
+            + (object)
+                + label: `Saturday` (string)
+                + value: 6 (number) 
+            + (object)
+                + label: `Sunday` (string)
+                + value: 7 (number) 
