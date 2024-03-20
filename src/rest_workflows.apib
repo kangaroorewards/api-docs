@@ -543,45 +543,23 @@ Content-Type: application/json
             + (object)
                 + id: 1 (number) - Required when the condition is present. Represents the condition ID.
                 + operator: eq (string) - Required when the condition is present. Should be one of the values: eq, gt, gte, lt, lte, in, between, intersect, contains. The operator depends on the condition ID.
-                + value: 123 (array[string, number]) - Required when the condition is present. Could be a string, integer, or an array, depending on the operator.
+                + value: 123 (StringOrNumber) - Required when the condition is present. Could be a string, integer, or an array, depending on the operator.
 + actions (array, required) - Required. Represents an array of actions.
     + (object)
         + main_action_id: 1 (number) - Required. Represents the main action ID for each action.
-        + name Example action (string) - Optional, between 1 and 255 characters in length.
-        + action_key (string) - Optional, between 1 and 255 characters in length. Used as the DSL step name and must be unique among actions.
-        + enabled (boolean) - Optional. Default value is true.
-        + temp_id (number) - Required. Represents the temporary ID of the action.
-        + temp_parent_id (number) - Required. Default value is null. Represents the parent action's temporary ID.
+        + name: `Example action` (string) - Optional, between 1 and 255 characters in length.
+        + action_key: abc123 (string) - Optional, between 1 and 255 characters in length. Used as the DSL step name and must be unique among actions.
+        + enabled: true (boolean) - Optional. Default value is true.
+        + temp_id: 1 (number) - Required. Represents the temporary ID of the action.
+        + temp_parent_id: 2 (number) - Required. Default value is null. Represents the parent action's temporary ID.
         + frequency (object) - Optional. Represents the frequency of the action.
-            + freq (string) - Required when frequency is present. Should be one of the values: hourly, daily, weekly, monthly, yearly, flow.
-            + interval (number) - Optional. Default value is 1. Represents the maximum number of times the action will be executed in X hours/days/months/years.
+            + freq: hourly (string) - Required when frequency is present. Should be one of the values: hourly, daily, weekly, monthly, yearly, flow.
+            + interval: 1 (number) - Optional. Default value is 1. Represents the maximum number of times the action will be executed in X hours/days/months/years.
         + relations (object) - Optional. Represents an array of relations for the action.
-            + entity_id (number) - Required when the relation is present. Nullable.
-            + entity_type (string) - Required when the relation is present.
-            + value (string) - Optional. Depends on the entity_type, sometimes it's required.
-            + label (string) - Optional.
-
-## Workflow2Create(object)
-+ name: `Example flow` (string, required)
-+ published_at: `` (string, required)
-+ expires_at: `` (string)
-+ targeted_flag: `0` (number, required)
-+ marketing_filters: `1,2` (array)
-+ tiers: `1,2,3`(array)
-+ triggers (array, required)
-    + (object)
-        * main_trigger_id: 123 (number, required)
-        * enabled: true (boolean, required)
-        * frequency(object)
-            * interval: 1 (number)
-            * count: 1 (number)
-        * conditions(object)
-            * id: 1 (number)
-            * operator: eq (string)
-            * value: `1` (string)
-    + (object)
-        * id: 124 (number)
-        * quantity: 1 (number)
+            + entity_id: 1 (number, nullable) - Required when the relation is present. Nullable.
+            + entity_type: Transaction (string) - Required when the relation is present.
+            + value: 123 (string) - Optional. Depends on the entity_type, sometimes it's required.
+            + label: `Transaction Type` (string) - Optional.
 
 ##Workflow1Update (object)
 + targeted_flag: 0 (number) - The targeted flag value
@@ -604,8 +582,8 @@ Content-Type: application/json
         + frequency (object)
             + freq: `flow` (string) - The frequency type
             + count: 2 (number) - The frequency count
-        + parent_id: null (nullable) - The parent ID
-        + temp_parent_id: null (nullable) - The temporary parent ID
+        + parent_id: 1 (number, nullable) - The parent ID
+        + temp_parent_id: 2 (number, nullable) - The temporary parent ID
         + relations (array[object])
             + (object)
                 + entity_id: null (nullable) - The entity ID
@@ -680,3 +658,5 @@ Content-Type: application/json
     + status: `422` (array[string, number]) - The status code of the error
     + title: `Unprocessable Content` (string) - The title of the error
     + detail: `The triggers field is required.` (string) - The detailed description of the error
+
+### StringOrNumber (enum[string, number])
