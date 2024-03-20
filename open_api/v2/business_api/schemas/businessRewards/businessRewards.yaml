@@ -90,6 +90,11 @@ definitions:
       filters_criteria:
         type: object
         $ref: "../../schemas/offerRewardAudience/offerRewardAudience.yaml#/definitions/FiltersCriteria"
+      available_branches:
+        type: array
+        description: A list of branches where this reward is available at
+        items:
+          $ref: '#/definitions/AvailableBranch'
   RewardTranslation:
     type: object
     properties:
@@ -109,4 +114,13 @@ definitions:
         type: object
         $ref: './../languages/language.yaml'
       note:
+        type: string
+  AvailableBranch:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      name:
         type: string
