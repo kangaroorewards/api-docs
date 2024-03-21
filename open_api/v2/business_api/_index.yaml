@@ -328,12 +328,12 @@ paths:
       operationId: getBusinessALaCarteProducts
       tags:
         - core
-  uploadBusinessOfferImage:
-    patch:
-      x-file: uploadBusinessOfferImage.yaml
-      operationId: uploadBusinessOfferImage
-      tags:
-        - core
+#  uploadBusinessOfferImage:
+#    patch:
+#      x-file: uploadBusinessOfferImage.yaml
+#      operationId: uploadBusinessOfferImage
+#      tags:
+#        - core
   requestResetPassword:
     get:
       x-file: requestResetPassword.yaml
