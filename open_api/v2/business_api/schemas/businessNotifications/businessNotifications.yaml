@@ -17,7 +17,7 @@ definitions:
       - id
     properties:
       id:
-        type: integer
+        type: string
         description: notification unique id
       type_id:
         type: integer
