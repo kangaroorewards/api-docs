@@ -1,0 +1,80 @@
+# Workflow Main Actions
+
+# Group Workflow Main Actions
+
+## Workflow Main Action [/workflow-main-actions{?page}]
+
+### List all main actions [GET]
+
+Returns a list of workflow actions
+
+**Query Parameters**
+
+|Name|Type|Description|
+|-----|----|-----------|
+|page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
+|per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15; Maximum value 100|
+
+Examples
+```
+GET /workflow-main-actions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFmODNk
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+    "data": [
+        {
+            "id": 1,
+            "action_name": "Email"
+        },
+        {
+            "id": 2,
+            "action_name": "Send SMS"
+        },
+        {
+            "id": 3,
+            "action_name": "Reward Points"
+        },
+        {
+            "id": 4,
+            "action_name": "Wait"
+        }
+    ]
+}
+```
+
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer <access_token>
+            X-Application-Key: <X-Application-Key>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+
++ Response 200 (application/json)
+    + Attributes
+        - data (array[Workflow Main Action Response])
+
+# Data Structures
+
+## Workflow Main Action Response (object)
++ data (array[object])
+    + (object)
+        + id: 1 (number) 
+        + action_name: `Email` (string)
+    + (object)
+        + id: 2 (number) 
+        + action_name: `Send SMS` (string)
+    + (object)
+        + id: 3 (number) 
+        + action_name: `Reward Points` (string)
+    + (object)
+        + id: 4 (number) 
+        + action_name: `Wait` (string)

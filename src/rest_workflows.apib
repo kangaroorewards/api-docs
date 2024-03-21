@@ -1,162 +1,9 @@
+
 # Workflows
 
-## Main triggers[/workflow-main-triggers{?page}]
+# Group Workflows
 
-### List all workflow main triggers [GET]
-
-Returns a list of workflow triggers
-
-**Query Parameters**
-
-|Name|Type|Description|
-|-----|----|-----------|
-|page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
-|per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15; Maximum value 100|
-
-**Response**
-conditions: The available conditions for the trigger.
-conditions.*.url: The URL that provides selectable options for the condition.
-conditions.*.relations: The selectable options for the condition.
-
-Examples
-```
-GET /workflow-main-triggers HTTP/1.1
-Host: api.kangaroorewards.com
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFmODNk
-X-Application-Key: eyXai0XD7SLLzaOeJW
-Accept: application/vnd.kangaroorewards.api.v1+json;
-Content-Type: application/json
-```
-
-Response Body
-```
-{
-	"data": [
-		{
-			"id": 1,
-			"trigger_name": "Created Account",
-			"conditions": [
-				{
-					"id": 1,
-					"type": "list",
-					"label": "Branch",
-					"url": "https://api.kangaroorewards.com/branches?include=virtual_branch",
-					"relations": null
-				},
-				{
-					"id": 2,
-					"type": "list",
-					"label": "Specific Day",
-					"url": null,
-					"relations": [
-						{
-							"label": "Monday",
-							"value": 1
-						},
-						{
-							"label": "Tuesday",
-							"value": 2
-						},
-						{
-							"label": "Wednesday",
-							"value": 3
-						},
-						{
-							"label": "Thursday",
-							"value": 4
-						},
-						{
-							"label": "Friday",
-							"value": 5
-						},
-						{
-							"label": "Saturday",
-							"value": 6
-						},
-						{
-							"label": "Sunday",
-							"value": 7
-						}
-					]
-				}
-			]
-		}
-	],
-	"links": {
-		"first": "http://api.kangaroorewards.com/workflow-main-triggers?page=1",
-		"last": null,
-		"prev": null,
-		"next": null
-	},
-	"meta": {
-		"current_page": 1,
-		"from": 1,
-		"path": "http://api.kangaroorewards.com/workflow-main-triggers",
-		"per_page": 15,
-		"to": 2
-	}
-}
-
-## Main actions[/workflow-main-actions{?page}]
-
-### List all workflow main actions [GET]
-
-Returns a list of workflow actions
-
-**Query Parameters**
-
-|Name|Type|Description|
-|-----|----|-----------|
-|page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
-|per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15; Maximum value 100|
-
-Examples
-```
-GET /workflow-main-actions HTTP/1.1
-Host: api.kangaroorewards.com
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFmODNk
-X-Application-Key: eyXai0XD7SLLzaOeJW
-Accept: application/vnd.kangaroorewards.api.v1+json;
-Content-Type: application/json
-```
-
-Response Body
-```
-{
-	"data": [
-		{
-			"id": 1,
-			"action_name": "Email"
-		},
-		{
-			"id": 2,
-			"action_name": "Send SMS"
-		},
-		{
-			"id": 3,
-			"action_name": "Reward Points"
-		},
-		{
-			"id": 4,
-			"action_name": "Wait"
-		}
-	],
-	"links": {
-		"first": "http://api.kangaroorewards.com/workflow-main-actions?page=1",
-		"last": null,
-		"prev": null,
-		"next": null
-	},
-	"meta": {
-		"current_page": 1,
-		"from": 1,
-		"path": "http://api.kangaroorewards.com/workflow-main-actions",
-		"per_page": 15,
-		"to": 4
-	}
-}
-
-## Workflows [/workflows{?page}]
+## Workflow [/workflows{?page}]
 
 ### List all workflows [GET]
 
@@ -183,76 +30,86 @@ Content-Type: application/json
 Response Body
 ```
 {
-	"data": [
-		{
-			"id": 14,
-			"name": "Completed profile",
-			"created_at": "2024-02-06T16:07:52+00:00",
-			"published_at": "2024-01-10T01:01:01+00:00",
-			"expires_at": "2024-12-14T01:01:01+00:00",
-			"workflow_version": {
-				"id": 47,
-				"workflow_id": 14,
-				"external_workflow_revision_id": "000017-5a5",
-				"dsl_definition": {
-					...
-				},
-				"created_at": "2024-02-20T01:37:52.000000Z"
-			},
-			"triggers": [
-				{
-					"id": 29,
-					"main_trigger_id": 3,
-					"created_at": "2024-02-20T01:14:40+00:00"
-				}
-			],
-			"actions": [
-				{
-					"id": 35,
-					"main_action_id": 3,
-					"name": null,
-					"action_key": "Reward_Points_17072356685213_45745",
-					"parent_id": 61,
-					"created_at": "2024-02-20T01:37:52+00:00",
-					"conditions": null,
-					"relations": [
-						{
-							"label": "point",
-							"value": 10,
-							"entity_id": null,
-							"entity_type": "points"
-						}
-					]
-				},
-				{
-					"id": 61,
-					"main_action_id": 4,
-					"name": null,
-					"action_key": "Wait_17072356685358_92300",
-					"parent_id": null,
-					"created_at": "2024-02-20T01:37:52+00:00",
-					"conditions": null,
-					"relations": null
-				}
-			]
-		}
-	],
-	"links": {
-		"first": "http://api.kangaroorewards.com/workflows?page=1",
-		"last": null,
-		"prev": null,
-		"next": null
-	},
-	"meta": {
-		"current_page": 1,
-		"from": 1,
-		"path": "http://api.kangaroorewards.com/workflows",
-		"per_page": 15,
-		"to": 1
-	}
+  "data": [
+    {
+      "id": 14,
+      "name": "Completed profile",
+      "created_at": "2024-02-06T16:07:52+00:00",
+      "published_at": "2024-01-10T01:01:01+00:00",
+      "expires_at": "2024-12-14T01:01:01+00:00",
+      "workflow_version": {
+        "id": 47,
+        "workflow_id": 14,
+        "external_workflow_revision_id": "000017-5a5",
+        "created_at": "2024-02-20T01:37:52.000000Z"
+      },
+      "triggers": [
+        {
+          "id": 29,
+          "main_trigger_id": 3,
+          "created_at": "2024-02-20T01:14:40+00:00"
+        }
+      ],
+      "actions": [
+        {
+          "id": 35,
+          "main_action_id": 3,
+          "name": null,
+          "action_key": "Reward_Points_17072356685213_45745",
+          "parent_id": 61,
+          "created_at": "2024-02-20T01:37:52+00:00",
+          "conditions": null,
+          "relations": [
+            {
+              "label": "point",
+              "value": 10,
+              "entity_id": null,
+              "entity_type": "points"
+            }
+          ]
+        },
+        {
+          "id": 61,
+          "main_action_id": 4,
+          "name": null,
+          "action_key": "Wait_17072356685358_92300",
+          "parent_id": null,
+          "created_at": "2024-02-20T01:37:52+00:00",
+          "conditions": null,
+          "relations": null
+        }
+      ]
+    }
+  ],
+  "links": {
+    "first": "http://api.kangaroorewards.com/workflows?page=1",
+    "last": null,
+    "prev": null,
+    "next": null
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "path": "http://api.kangaroorewards.com/workflows",
+    "per_page": 15,
+    "to": 1
+  }
 }
+```
 
-## Workflows [/workflows]
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer <access_token>
+            X-Application-Key: <X-Application-Key>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+
++ Response 200 (application/json)
+    + Attributes
+        - data (array[WorkflowsListResponse])
+
+## Workflow [/workflows]
 
 ### Create a workflow [POST]
 
@@ -378,52 +235,78 @@ Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
 
 {
-	"name": "User sign up",
-	"published_at": "2024-03-10T01:01:01+00:00",
-	"expires_at": "2024-12-10T01:01:01+00:00",
-	"targeted_flag": 2,
-	"tiers": [
-		29
-	],
-	"triggers": [
-		{
-			"main_trigger_id": 1,
-			"frequency": {
-				"freq": "flow",
-				"count": 1
-			},
-			"conditions": [
-				{
-					"id": 1,
-					"operator": "in",
-					"value": [
-						"11ea6d322b6dd08daf33b42e99312acc",
-						"11ea6d3e304d0189af33b42e99312acc"
-					]
-				}
-			]
-		}
-	],
-	"actions": [
-		{
-			"main_action_id": 3,
-			"temp_id": 1,
-			"parent_id": null,
-			"temp_parent_id": null,
-			"relations": [
-				{
-					"entity_id": null,
-					"label": "point",
-					"entity_type": "points",
-					"value": [
-						100
-					]
-				}
-			]
-		}
-	]
+  "name": "User sign up",
+  "published_at": "2024-03-10T01:01:01+00:00",
+  "expires_at": "2024-12-10T01:01:01+00:00",
+  "targeted_flag": 2,
+  "tiers": [
+    29
+  ],
+  "triggers": [
+    {
+      "main_trigger_id": 1,
+      "frequency": {
+        "freq": "flow",
+        "count": 1
+      },
+      "conditions": [
+        {
+          "id": 1,
+          "operator": "in",
+          "value": [
+            "11ea6d322b6dd08daf33b42e99312acc",
+            "11ea6d3e304d0189af33b42e99312acc"
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "main_action_id": 3,
+      "temp_id": 1,
+      "parent_id": null,
+      "temp_parent_id": null,
+      "relations": [
+        {
+          "entity_id": null,
+          "label": "point",
+          "entity_type": "points",
+          "value": [
+            100
+          ]
+        }
+      ]
+    }
+  ]
 }
 ```
+
++ Request
+    + Headers
+
+            Authorization: Bearer <access_token>
+            X-Application-Key: <X-Application-Key>
+            Accept: application/vnd.kangaroorewards.api.v1+json
+            Content-Type: application/json
+
+    + Attributes (Workflow1Create)
+
++ Response 200 (application/json)
+    + Attributes
+        - data (WorkflowResponse)
+
++ Response 400 (application/json)
+    + Attributes (Workflows Error 400)
+
++ Response 401 (application/json)
+    + Attributes (Workflows Error 401)
+
++ Response 422 (application/json)
+    + Attributes (Workflows Error 422)
+
+
+## Workflow Resource [/workflows/{id}{?}]
 
 ### Update a workflow [PATCH]
 
@@ -479,56 +362,79 @@ Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
 
 {
-	"targeted_flag": 0,
-	"triggers": [
-		{
-			"main_trigger_id": 3,
-			"frequency": {
-				"freq": "flow",
-				"count": 2
-			},
-			"conditions": [
-				{
-					"id": 8,
-					"operator": "contains",
-					"value": [
-						-2,
-						0,
-						1
-					]
-				}
-			]
-		}
-	],
-	"actions": [
-		{
-			"main_action_id": 3,
-			"id": 35,
-			"action_key": "Reward_Points_17072356685213_45745",
-			"frequency": {
-				"freq": "flow",
-				"count": 2
-			},
-			"parent_id": null,
-			"temp_parent_id": null,
-			"relations": [
-				{
-					"entity_id": null,
-					"value": 10,
-					"label": "point",
-					"entity_type": "points"
-				}
-			]
-		},
-		{
-			"main_action_id": 4,
-			"action_key": "Wait_17072356685358_92300",
-			"temp_id": 49,
-			"enabled": false
-		}
-	]
+  "targeted_flag": 0,
+  "triggers": [
+    {
+      "main_trigger_id": 3,
+      "frequency": {
+        "freq": "flow",
+        "count": 2
+      },
+      "conditions": [
+        {
+          "id": 8,
+          "operator": "contains",
+          "value": [-2,0,1]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "main_action_id": 3,
+      "id": 35,
+      "action_key": "Reward_Points_17072356685213_45745",
+      "frequency": {
+        "freq": "flow",
+        "count": 2
+      },
+      "parent_id": null,
+      "temp_parent_id": null,
+      "relations": [
+        {
+          "entity_id": null,
+          "value": 10,
+          "label": "point",
+          "entity_type": "points"
+        }
+      ]
+    },
+    {
+      "main_action_id": 4,
+      "action_key": "Wait_17072356685358_92300",
+      "temp_id": 49,
+      "enabled": false
+    }
+  ]
 }
 ```
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer <access_token>
+            X-Application-Key: eyXai0XD7SLLzaOeJW
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+
++ Parameters
+    + id: 123 (required, number) - The unique ID of the workflow.
+
++ Attributes (Workflow1Update)
+
++ Response 200 (application/json)
+    + Attributes
+        - data (WorkflowResponse)
+
++ Response 400 (application/json)
+    + Attributes (Workflows Error 400)
+
++ Response 401 (application/json)
+    + Attributes (Workflows Error 401)
+
++ Response 403 (application/json)
+    + Attributes (Workflows Error 403)
+
++ Response 422 (application/json)
+    + Attributes (Workflows Error 422)    
 
 ### Delete a workflow [DELETE]
 
@@ -544,4 +450,213 @@ Content-Type: application/json
 ```
 
 
++ Request (application/json)
+    + Headers
 
+            Authorization: Bearer <access_token>
+            X-Application-Key: eyXai0XD7SLLzaOeJW
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+
++ Parameters
+    + id: 123 (required, number) - The unique ID of the workflow.
+
++ Response 204 (application/json)
+
++ Response 400 (application/json)
+    + Attributes (Workflows Error 400)
+
++ Response 403 (application/json)
+    + Attributes (Workflows Error 403)
+
+
+# Data Structures
+
+## WorkflowsListResponse(object)
++ id: 14 (number) - The ID of the profile
++ name: `Completed profile` (string) - The name of the profile
++ created_at: `2024-02-06T16:07:52+00:00` (string) - The creation timestamp of the profile
++ published_at: `2024-01-10T01:01:01+00:00` (string) - The publication timestamp of the profile
++ expires_at: `2024-12-14T01:01:01+00:00` (string) - The expiration timestamp of the profile
++ workflow_version (object)
+    + id: 47 (number) - The ID of the workflow version
+    + workflow_id: 14 (number) - The ID of the workflow
+    + external_workflow_revision_id: `000017-5a5` (string) - The revision ID of the external workflow
+    + created_at: `2024-02-20T01:37:52.000000Z` (string) - The creation timestamp of the workflow version
++ triggers (array[object])
+    + (object)
+        + id: 29 (number) - The ID of the trigger
+        + main_trigger_id: 3 (number) - The main trigger ID
+        + created_at: `2024-02-20T01:14:40+00:00` (string) - The creation timestamp of the trigger
++ actions (array[object])
+    + (object)
+        + id: 35 (number) - The ID of the action
+        + main_action_id: 3 (number) - The main action ID
+        + name: null (nullable) - The name of the action
+        + action_key: `Reward_Points_17072356685213_45745` (string) - The action key
+        + parent_id: 61 (number) - The ID of the parent action
+        + created_at: `2024-02-20T01:37:52+00:00` (string) - The creation timestamp of the action
+        + conditions: null (nullable) - The conditions of the action
+        + relations (array[object], nullable)
+            + (object)
+                + label: `point` (string) - The label of the relation
+                + value: 10 (number) - The value of the relation
+                + entity_id: null (array[number, string], nullable) - The ID of the entity
+                + entity_type: `points` (string) - The type of the entity
+        + id: 61 (number) - The ID of the action
+        + main_action_id: 4 (number) - The main action ID
+        + name: null ( string, nullable) - The name of the action
+        + action_key: `Wait_17072356685358_92300` (string) - The action key
+        + parent_id null (nullable) - The ID of the parent action
+        + created_at: `2024-02-20T01:37:52+00:00` (string) - The creation timestamp of the action
+        + conditions: null (nullable) - The conditions of the action
+        + relations: null (array[object], nullable) - The relations of the action
+
+## Workflow Pagination Links
++ links (object)
+    + first: `http://api.kangaroorewards.com/workflows?page=1` (string) - The link to the first page
+    + last: null (string, nullable) - The link to the last page
+    + prev: null (string, nullable) - The link to the previous page
+    + next: null (string, nullable) - The link to the next page
+
+## Workflow Pagination Meta
++ meta (object)
+    + current_page: 1 (number) - The current page number
+    + from: 1 (number) - The starting position of the data
+    + path: `http://api.kangaroorewards.com/workflows` (string) - The path of the API endpoint
+    + per_page: 15 (number) - The number of items per page
+    + to: 1 (number) - The ending position of the data
+    
+## Workflow1Create(object)
++ name: Example Flow (string, required) - Required, between 1 and 255 characters in length.
++ published_at: 2024-03-14T09:15:22Z (string, required) - Required, follows the ISO 8601 date format.
++ expires_at: 2028-03-14T09:15:22Z (string) -  Optional, follows the ISO 8601 date format.
++ targeted_flag: 0 (number, required) - Required, can have a value of 0, 1, or 2. 0 represents availability for everyone, 1 for targeted customers, and 2 for tier customers.
++ marketing_filters: (array) - Required when targeted_flag is 1. This property represents an array of marketing filters.
++ tiers: 1,2,3 (array) Required when targeted_flag is 2. This property represents an array of tier level IDs.
++ triggers(array, required) - Required. This property represents an array of triggers.
+    + (object)
+        + main_trigger_id: 1 (number) - Required. Represents the main trigger ID for each trigger.
+        + frequency (object) - Optional. Represents the frequency of the trigger.
+            + freq: hourly (string) - Required when frequency is present. Should be one of the values: hourly, daily, weekly, monthly, yearly, flow.
+            + interval: 1 (number) - Optional. Default value is 1. Represents the interval in hours/days/months/years for the trigger.
+        + conditions(array) - Optional. Represents an array of conditions for the trigger.
+            + (object)
+                + id: 1 (number) - Required when the condition is present. Represents the condition ID.
+                + operator: eq (string) - Required when the condition is present. Should be one of the values: eq, gt, gte, lt, lte, in, between, intersect, contains. The operator depends on the condition ID.
+                + value: 123 (StringOrNumber) - Required when the condition is present. Could be a string, integer, or an array, depending on the operator.
++ actions (array, required) - Required. Represents an array of actions.
+    + (object)
+        + main_action_id: 1 (number) - Required. Represents the main action ID for each action.
+        + name: `Example action` (string) - Optional, between 1 and 255 characters in length.
+        + action_key: abc123 (string) - Optional, between 1 and 255 characters in length. Used as the DSL step name and must be unique among actions.
+        + enabled: true (boolean) - Optional. Default value is true.
+        + temp_id: 1 (number) - Required. Represents the temporary ID of the action.
+        + temp_parent_id: 2 (number) - Required. Default value is null. Represents the parent action's temporary ID.
+        + frequency (object) - Optional. Represents the frequency of the action.
+            + freq: hourly (string) - Required when frequency is present. Should be one of the values: hourly, daily, weekly, monthly, yearly, flow.
+            + interval: 1 (number) - Optional. Default value is 1. Represents the maximum number of times the action will be executed in X hours/days/months/years.
+        + relations (object) - Optional. Represents an array of relations for the action.
+            + entity_id: 1 (number, nullable) - Required when the relation is present. Nullable.
+            + entity_type: Transaction (string) - Required when the relation is present.
+            + value: 123 (string) - Optional. Depends on the entity_type, sometimes it's required.
+            + label: `Transaction Type` (string) - Optional.
+
+##Workflow1Update (object)
++ targeted_flag: 0 (number) - The targeted flag value
++ triggers (array[object])
+    + (object)
+        + main_trigger_id: 3 (number) - The main trigger ID
+        + frequency(object)
+            + freq: `flow` (string) - The frequency type
+            + count: 2 (number) - The frequency count
+        + conditions (array[object])
+            + (object)
+                + id: 8 (number) - The condition ID
+                + operator: `contains` (string) - The operator for the condition
+                + value: [-2, 0, 1] (array[number]) - The values for the condition
++ actions (array[object])
+    + (object)
+        + main_action_id: 3 (number) - The main action ID
+        + id: 35 (number) - The action ID
+        + action_key: `Reward_Points_17072356685213_45745` (string) - The action key
+        + frequency (object)
+            + freq: `flow` (string) - The frequency type
+            + count: 2 (number) - The frequency count
+        + parent_id: 1 (number, nullable) - The parent ID
+        + temp_parent_id: 2 (number, nullable) - The temporary parent ID
+        + relations (array[object])
+            + (object)
+                + entity_id: null (nullable) - The entity ID
+                + value: 10 (number) - The value
+                + label: `point` (string) - The label
+                + entity_type: `points` (string) - The entity type
+        + main_action_id: 4 (number) - The main action ID
+        + action_key: `Wait_17072356685358_92300` (string) - The action key
+        + temp_id: 49 (number) - The temporary ID
+        + enabled: false (boolean) - Indicates if the action is enabled
+
+## WorkflowResponse (object)
++ id: 14 (number) - The ID
++ name: `Completed profile` (string) - The name\
++ created_at: `2024-02-06T16:07:52+00:00` (string) - The creation timestamp
++ published_at: `2024-01-10T01:01:01+00:00` (string) - The publication timestamp
++ expires_at: `2028-12-14T01:01:01+00:00` (string) - The expiration timestamp
++ workflow_version (object)
+    + id: 47 (number) - The workflow version ID
+    + workflow_id: 14 (number) - The workflow ID
+    + external_workflow_revision_id: `000017-5a5` (string) - The external workflow revision ID
+    + created_at: `2024-02-20T01:37:52.000000Z` (string) - The workflow version creation timestamp
++ triggers (array[object])
+    + (object)
+        + id: 29 (number) - The trigger ID
+        + main_trigger_id: 3 (number) - The main trigger ID
+        + created_at: `2024-02-20T01:14:40+00:00` (string) - The trigger creation timestamp
++ actions (array[object])
+    + (object)
+        + id: 35 (number) - The action ID
+        + main_action_id: 3 (number) - The main action ID
+        + name: null (nullable) - The name
+        + action_key: `Reward_Points_17072356685213_45745` (string) - The action key
+        + parent_id: 61 (number) - The parent ID
+        + created_at: `2024-02-20T01:37:52+00:00` (string) - The action creation timestamp
+        + conditions: null (nullable) - The conditions
+        + relations (array[object])
+            + (object)
+                + label: `point` (string) - The label
+                + value: 10 (number) - The value
+                + entity_id: null (nullable) - The entity ID
+                + entity_type: `points` (string) - The entity type
+        + id: 61 (number) - The action ID
+        + main_action_id: 4 (number) - The main action ID
+        + name: null (nullable) - The name
+        + action_key: `Wait_17072356685358_92300` (string) - The action key
+        + parent_id: null (nullable) - The parent ID
+        + created_at: `2024-02-20T01:37:52+00:00` (string) - The action creation timestamp
+        + conditions: null (nullable) - The conditions
+        + relations: null (nullable) - The relations
+
+## Workflows Error 400(object)
++ errors (array[object])
+    + status: `400` (array[string, number]) - The status code of the error
+    + title: `Invalid Attribute` (string) - The title of the error
+    + detail: `Email Already Taken.` (string) - The detailed description of the error
+
+## Workflows Error 401 (object)
++ errors (array[object])
+    + status: `401` (array[string, number]) - The status code of the error
+    + title: `Unauthorized` (string) - The title of the error
+    + detail: `Unauthenticated.` (string) - The detailed description of the error
+
+## Workflows Error 403(object)
++ errors (array[object])
+    + status: `403` (array[string, number]) - The status code of the error
+    + title: `Unauthorized` (string) - The title of the error
+    + detail: `Unauthorized to perform this action.` (string) - The detailed description of the error
+
+## Workflows Error 422 (object)
++ errors (array[object])
+    + status: `422` (array[string, number]) - The status code of the error
+    + title: `Unprocessable Content` (string) - The title of the error
+    + detail: `The triggers field is required.` (string) - The detailed description of the error
+
+### StringOrNumber (enum[string, number])
