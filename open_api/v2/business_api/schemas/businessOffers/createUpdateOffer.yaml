@@ -41,7 +41,7 @@ definitions:
       available_at_branches:
         type: array
         items:
-          $ref: '#/definitions/BranchIds'
+          $ref: '#/definitions/OfferBranchIds'
       coupon_auto_get:
         type: integer
         format: int64
@@ -121,7 +121,7 @@ definitions:
         type: string
       original:
         type: string
-  BranchIds:
+  OfferBranchIds:
     type: object
     properties:
       id:

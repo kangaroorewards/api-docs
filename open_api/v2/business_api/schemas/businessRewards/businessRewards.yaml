@@ -94,7 +94,7 @@ definitions:
         type: array
         description: A list of branches where this reward is available at
         items:
-          $ref: "../../schemas/businessRewards/createUpdateReward.yaml#/definitions/BranchIds"
+          $ref: "../../schemas/businessRewards/createUpdateReward.yaml#/definitions/RewardBranchIds"
   RewardTranslation:
     type: object
     properties:

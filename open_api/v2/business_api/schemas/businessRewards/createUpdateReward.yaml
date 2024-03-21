@@ -35,7 +35,7 @@ definitions:
       available_at_branches:
         type: array
         items:
-          $ref: '#/definitions/BranchIds'
+          $ref: '#/definitions/RewardBranchIds'
       points:
         type: integer
         format: int64
@@ -91,7 +91,7 @@ definitions:
         type: string
       original:
         type: string
-  BranchIds:
+  RewardBranchIds:
     type: object
     properties:
       id:

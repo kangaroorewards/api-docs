@@ -159,7 +159,7 @@ definitions:
         type: array
         description: A list of branches where this offer is available at
         items:
-          $ref: "../../schemas/businessOffers/createUpdateOffer.yaml#/definitions/BranchIds"
+          $ref: "../../schemas/businessOffers/createUpdateOffer.yaml#/definitions/OfferBranchIds"
   OfferTranslation:
     type: object
     description: A language translation of this offer.
