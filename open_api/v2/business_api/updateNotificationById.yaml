@@ -23,7 +23,7 @@ paths:
         - in: path
           name: notificationId
           required: true
-          type: integer
+          type: string
         - in: body
           name: updateNotificationRequest
           required: true
