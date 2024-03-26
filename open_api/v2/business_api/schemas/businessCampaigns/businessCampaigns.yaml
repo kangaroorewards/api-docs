@@ -499,7 +499,7 @@ definitions:
         items:
           type: string
         required: false
-      shopify_account:
+      account_id:
         type: string
         required: false
       shopify_categories:
