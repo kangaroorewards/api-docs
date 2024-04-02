@@ -64,6 +64,9 @@ definitions:
         type: "object"
         $ref: '#/definitions/UserAddress'
         required: false
+      language:
+        type: string
+        required: false
   UserConsent:
     type: "object"
     required:
