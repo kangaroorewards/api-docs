@@ -40,6 +40,8 @@ definitions:
           $ref: '#/definitions/TierEarningRule'
       product_review_enabled:
         type: boolean
+      product_review_program_enabled:
+        type: boolean
   EarningRules:
     type: "object"
     properties:
