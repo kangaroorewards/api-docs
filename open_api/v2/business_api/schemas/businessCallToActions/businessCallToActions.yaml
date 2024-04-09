@@ -7,9 +7,9 @@ definitions:
     properties:
       data:
         type: array
-        description: A list of social media platforms
+        description: A list of call to action objects
         items:
-          $ref: '#/definitions/SocialMediaPlatform'
+          $ref: '#/definitions/CallToAction'
   UpdateBusinessCallToActionResponse:
     type: "object"
     x-model: UpdateBusinessCallToActionResponseModel
@@ -18,11 +18,11 @@ definitions:
     properties:
       data:
         type: object
-        description: An updated social media platform
-        $ref: '#/definitions/SocialMediaPlatform'
-  SocialMediaPlatform:
+        description: An updated call to action object
+        $ref: '#/definitions/CallToAction'
+  CallToAction:
     type: "object"
-    x-model: SocialMediaPlatformModel
+    x-model: CallToActionModel
     properties:
       id:
         type: integer
@@ -35,3 +35,14 @@ definitions:
       action_id:
         type: integer
         format: int64
+      social_media:
+        type: object
+        $ref: '#/definitions/SocialMediaPlatform'
+  SocialMediaPlatform:
+    type: "object"
+    x-model: SocialMediaPlatformModel
+    properties:
+      icon:
+        type: string
+      url:
+        type: string
