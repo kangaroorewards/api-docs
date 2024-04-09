@@ -13,7 +13,7 @@ consumes:
 produces:
   - application/json
 paths:
-  /call-to-actions?action_enabled=eq|1&action_id=in|4,6,7,8:
+  /call-to-actions?include=action,social_media&action_enabled=eq|1&action_id=in|4,6,7,8:
     get:
       summary: Get the business's social media and points
       operationId: getBusinessCallToAction
