@@ -120,7 +120,7 @@ Response Body
 |published_at|string|`Required` ISO 8601 date.|
 |expires_at|string|`Optional` ISO 8601 date.|
 |targeted_flag|integer|`Required` (0,1,2) 0 - available for everyone, 1 - targeted customers, 2 - available for tier customers|
-|marketing_filters|array|`Required when targeted_flag is 1`.|
+|audience_filters|array|`Required when targeted_flag is 1`.|
 |tiers|array|`Required when targeted_flag is 2`.|
 |tiers.*|integer|Tier level id|
 |triggers|array|`Required`|
@@ -149,6 +149,12 @@ Response Body
 |actions.*.relations.*.entity_type|string|`Required when relation is present`|
 |actions.*.relations.*.value|string|`Optional` Depends on the entity_type, sometimes it's required.|
 |actions.*.relations.*.label|string|`Optional`|
+|actions.*.conditions|array|`Optional`|
+|actions.*.conditions.*.id|integer|`Required when the condition is present`.|
+|actions.*.conditions.*.main_trigger_id|integer|`Optional`. If there is multiple triggers, the condition should be for the specific type of trigger, by default is the first trigger's main_trigger_id|
+|actions.*.conditions.*.operator|string|`Required when the condition is present`. In: eq,gt,gte,lt,lte,in,between,intersect,contains. The operator depends on the condition ID.|
+|actions.*.conditions.*.value|Mixed|`Required when the condition is present`. Could be string, integer, array, depends on the operator.|
+|actions.*.conditions_met|boolean|`Required when the action is the child of an conditional split action`|
 
 *Body parameters* specific for branch condition
 All common +
@@ -281,6 +287,77 @@ Content-Type: application/json
   ]
 }
 ```
+Example create a workflow for user sign up with conditional split. If the user signup, if it's from a specific branch and on Monday, Tuesday, user will get 100pts, otherwise he gets 10pts.
+
+```
+POST /workflows HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+
+{
+	"name": "User sign up",
+	"published_at": "2024-04-22T01:01:01+00:00",
+	"expires_at": "2024-12-10T01:01:01+00:00",
+	"targeted_flag": 0,
+	"triggers": [
+		{
+			"main_trigger_id": 1,
+		}
+	],
+	"actions": [
+		{
+			"main_action_id": 6,
+			"temp_id": 1,
+			"temp_parent_id": null,
+			"conditions_relation": "or",
+			"conditions": [
+				{
+					"id": 1,
+					"operator": "eq",
+					"value": "11eb82ae6d3f1ec4b847e2865c66d9cc"
+				},
+				{
+					"id": 2,
+					"operator": "in",
+					"value": [
+						1,
+						2
+					]
+				}
+			]
+		},
+		{
+			"main_action_id": 3,
+			"temp_id": 2,
+			"temp_parent_id": 1,
+			"conditions_met": 1,
+			"relations": [
+				{
+					"label": "points",
+					"entity_type": "points",
+					"value":100
+				}
+			]
+		},
+		{
+			"main_action_id": 3,
+			"temp_id": 3,
+			"temp_parent_id": 1,
+			"conditions_met": false,
+			"relations": [
+				{
+					"label": "points",
+					"entity_type": "points",
+					"value":10
+				}
+			]
+		}
+	]
+}
+```
 
 + Request
     + Headers
@@ -317,7 +394,7 @@ Content-Type: application/json
 |published_at|string|`Optional` ISO 8601 date. Can not be updated if the workflow is published|
 |expires_at|string|`Optional` ISO 8601 date.|
 |targeted_flag|integer|`Required` (0,1,2) 0 - available for everyone, 1 - targeted customers, 2 - available for tier customers|
-|marketing_filters|array|`Required when targeted_flag is 1`.|
+|audience_filters|array|`Required when targeted_flag is 1`.|
 |tiers|array|`Required when targeted_flag is 2`.|
 |tiers.*|integer|Tier level id|
 |triggers|array|`Required`|
@@ -531,7 +608,7 @@ Content-Type: application/json
 + published_at: 2024-03-14T09:15:22Z (string, required) - Required, follows the ISO 8601 date format.
 + expires_at: 2028-03-14T09:15:22Z (string) -  Optional, follows the ISO 8601 date format.
 + targeted_flag: 0 (number, required) - Required, can have a value of 0, 1, or 2. 0 represents availability for everyone, 1 for targeted customers, and 2 for tier customers.
-+ marketing_filters: (array) - Required when targeted_flag is 1. This property represents an array of marketing filters.
++ audience_filters: (array) - Required when targeted_flag is 1. This property represents an array of marketing filters.
 + tiers: 1,2,3 (array) Required when targeted_flag is 2. This property represents an array of tier level IDs.
 + triggers(array, required) - Required. This property represents an array of triggers.
     + (object)
