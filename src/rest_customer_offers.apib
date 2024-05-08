@@ -6,7 +6,16 @@
 
 ### List all offers [GET]
 
-List all offers for a customer. Each offer might have a list of actions for that customer
+List all offers for a customer. This includes all types of offers:
+Points Multiplier, Free Product, Bonus Points, Regular/Basic offer (discount, free item, points) that a customer can choose from. 
+Each offer might have a list of actions for that customer. 
+
+- Basic Offer (coupon) - `type_id: 8,9,10`
+- Points Multiplier - `type_id: 1`
+- Free Product  - `type_id: 2`
+- Bonus Points - `type_id: 3`
+
+[See all Offer Types](#offer_types)
 
 **Path Parameters**
 |Name|Type|Description|
@@ -17,6 +26,7 @@ List all offers for a customer. Each offer might have a list of actions for that
 |Name|Type|Description|
 |-----|----|-----------|
 |relationships|enum|`Optional.` You can optionally request that the response include the branch object. To do so, specify relationships=branch in your request.|
+|coupon_type_id|mixed|`Optional.` This parameter filters offers based on their type, allowing users to specify the category of offers they want to view, such as pending, claimed, or convertible|
 |per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15; Maximum value 100|
 |page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
 
@@ -56,6 +66,26 @@ Response Body
   ]
 }
 ```
+
+**Coupon Types**
+
+- `coupon_type_id: 74` - Regular coupon percentage, amount or free item - available for redemption
+- `coupon_type_id: 75` - Regular coupon percentage, amount or free item - redeemed
+- `coupon_type_id: 91` - Convertible coupon available for redemption
+- `coupon_type_id: 92` - Convertible coupon redeemed
+
+Filtering by specific type can be done using the `coupon_type_id` query string parameter:
+
+`/customers/{id}/offers` - Show all offers for a customer, including targeted, claimable, or previously claimed/redeemed.
+
+`coupon_type_id=eq|74` - Show only regular offers that are pending to claim/redeem.
+
+`coupon_type_id=in|74,91` - Show only regular offers and convertible coupons that are pending to claim/redeem.
+
+`coupon_type_id=eq|75` - Show only regular offers that were previously claimed/redeemed.
+
+`coupon_type_id=not_in|74,75,91,92` - Show all offers that are not pending to claim and not previously claimed.
+
 
 **Relationships**
 
