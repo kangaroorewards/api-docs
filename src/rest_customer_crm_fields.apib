@@ -94,6 +94,8 @@ Update CRM fields values for a customer
 |postal_code|string|`Required` or `Optional`|
 |promotions_mail|string|`Required` or `Optional`|
 |notes|string|`Required` or `Optional`|
+|tags|array|`Required` or `Optional`|
+|tags.tag_name|string|`Required` or `Optional`|
 |custom_field_1|string|`Required` or `Optional`|
 |custom_field_2|string|`Required` or `Optional`|
 |custom_field_3|string|`Required` or `Optional`|
@@ -122,6 +124,14 @@ Content-Type: application/json
   "postal_code" : "123456",
   "promotions_mail" : false,
   "notes": "Some notes",
+  "tags": [
+      {
+        "tag_name": "High Spender"
+      },
+      {
+        "tag_name": "Social Media Follower"
+      }
+  ],
   "custom_field_1": "Custom field value 1",
   "custom_field_2": "Custom field value 2",
   "custom_field_3": "Custom field value 3",
@@ -178,6 +188,14 @@ Response Body
                 "birth_date": "1999-01-26",
                 "promotions_mail" : false,
                 "notes": "Some notes",
+                "tags": [
+                      {
+                        "tag_name": "High Spender"
+                      },
+                      {
+                        "tag_name": "Social Media Follower"
+                      }
+                ],
                 "custom_field_1": "Custom field value 1",
                 "custom_field_2": "Custom field value 2"
             }
