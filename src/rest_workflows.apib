@@ -404,7 +404,7 @@ Content-Type: application/json
 |published_at|string|`Optional` ISO 8601 date. Can not be updated if the workflow is published|
 |expires_at|string|`Optional` ISO 8601 date.|
 |targeted_flag|integer|`Required` (0,1,2) 0 - available for everyone, 1 - targeted customers, 2 - available for tier customers|
-|audience_filters|array|`Required when targeted_flag is 1`.|
+|audience_filters|object|`Required when targeted_flag is 1`.|
 |tiers|array|`Required when targeted_flag is 2`.|
 |tiers.*|integer|Tier level id|
 |triggers|array|`Required`|
