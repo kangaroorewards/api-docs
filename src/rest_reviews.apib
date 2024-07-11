@@ -20,11 +20,12 @@ Returns a list of reviews
 |Name|Type|Description|
 |-----|----|-----------|
 |page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
-|per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15; Maximum value 100|
-|include|string|`Optional.` You can optionally include=review_replies.|
+|per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15, Maximum value 100|
+|include|string|`Optional.` Optionally include=review_replies.|
 |created_at|string|`Optional.` Filter by created date. [See Filtering](#filtering-reviews)|
 |type|integer|`Optional.` Filter by review type, 1 - product review, 2 - website review. [See Filtering](#filtering-reviews)|
 |published|boolean|`Optional.` Filter by published. [See Filtering](#filtering-reviews)|
+|sort|string|`Optional.` [See Sorting](#sorting-reviews)|
 
 <a name="filtering-reviews"></a>
 
@@ -53,9 +54,34 @@ A single filter uses the form: `field=operator|VALUE`
 
 Each URL query parameter **must be URL encoded**.
 
+<a name="sorting-reviews"></a>
+
+**Sorting**
+
+When submitting a GET request, you can sort the reviews.
+To sort reviews, in the query string, specify one or more fields with an operator, followed by a separator (`,`)
+and the fields for the following:
+
+Fields:
+- `created_at` - Sort by created date. If `created_at` sorting is not specified, the results will always be sorted by the latest combination with other sorting conditions.
+- `rating` - Sort by rating
+- `photos` - Sort reviews by photos, displaying reviews with photos first or last.
+- `videos` - Sort reviews by videos, displaying reviews with videos first or last.
+- `verified_buyer` - Sort reviews by verified buyer, displaying reviews with verified buyer review first or last.
+
+Operators:
+- By default without any operator, sort reviews in ascending order.
+- `-` - Sort reviews in descending order.
+
+Filter Syntax
+
+A single filter uses the form: `sort=operatorFieldName1,operatorFieldName2`
+
+Each URL query parameter **must be URL encoded**.
+
 Examples
 ```
-GET /reviews?include=review_replies HTTP/1.1
+GET /reviews?sort=-rating,-created_at&include=review_replies HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFmODNk
 X-Application-Key: eyXai0XD7SLLzaOeJW
@@ -72,7 +98,7 @@ Response Body
 			"id": "61808119-7567-41c5-a183-389bf9819ccb",
 			"created_at": "2024-06-26T23:13:08+00:00",
 			"reviewer_email": "ttuser062601@yopmail.com",
-			"reviewer_first_name": "Liza",
+			"reviewer_first_name": "Lisa",
 			"rating": 5,
 			"comment": "Great leggings. For size reference, I ordered a medium and am 5’9, 155 lbs, with a long torso.",
 			"product_id": "09383628200",
@@ -83,7 +109,14 @@ Response Body
 			"review_source": 1,
 			"published": false,
 			"verified_buyer": false,
-			"review_replies": []
+			"review_replies": [
+			    {
+			        "id": "36f04d79-4116-4fb3-8d08-50581be3fa67",
+                    "created_at": "2024-07-11T15:55:03+00:00",
+                    "body": "Reply - 01",
+                    "public": true
+                }
+            ]
 		}
 	]
 }
@@ -94,13 +127,90 @@ Response Body
             Authorization: Bearer <access_token>
             X-Application-Key: <X-Application-Key>
             Accept: application/vnd.kangaroorewards.api.v1+json;
-            X-Store-Domain: XXX.com;
+            X-Store-Domain: <store_domain>;
 
 + Response 200 (application/json)
     + Attributes
-        + data (array[ReviewsListResponse])
+        - data (array[ReviewsListResponse])
 
-]
++ Response 401 (application/json)
+    + Attributes (Reviews Error 401)
+
+## Review [/reviews]
+
+### Create a review [POST]
+
+*Body parameters*
+|Name|Type|Description|
+|-----|----|-----------|
+|reviewer_email|string|`Required` Between 1 and 255 characters in length|
+|reviewer_first_name|string|`Required` Between 1 and 255 characters in length|
+|rating|integer|`Required` Between 1 and 5|
+|comment|string|`Required` Minimum 15 characters|
+|product_id|string|`Optional` Required if the type is 1 - product review|
+|product_title|string|`Optional`|
+|product_details.image|string|`Optional` product image URL|
+|product_details.price|numeric|`Optional` product price|
+|product_details.description|string|`Optional` product description|
+|photos|array|`Optional`|
+|photos.*|string|`Optional` review photo url [See Uploading Photos](#get-signed-url)|
+|videos|array|`Optional`|
+|videos.*|string|`Optional` review video url [See Uploading Videos](#get-signed-url)|
+|type|integer|`Required` (1, 2) 1: product review, 2: website review |
+|review_source|integer|`Required` (1, 2) The platform where the review was left. 1: website page, 2: review widget |
+|website_url|string|`Required` The URL of the website where the review was left. |
+
+Example create a review
+
+```
+POST /reviews HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+X-Store-Domain: XXX.com
+
+{
+	"reviewer_email": "ttuser062601@yopmail.com",
+	"reviewer_first_name": "Lisa",
+	"rating": 4,
+	"comment": "Very nice and cute",
+	"type": 1,
+	"review_source": 1,
+	"website_url": "https://XXX.com/XX/XX",
+	"product_id": "5157526",
+	"product_title": "Shoes",
+	"product_details": {
+		"image": "https://XXX.com/XXX.png",
+		"price": 59.99,
+		"description": "ABC"
+	},
+	"photos": [
+	    "https://storage.googleapis.com/reviews/11eb82ae6d3bb094b847e2865c66d9cc/668ee22b0db7e_1720640043.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=bigquery-for-dev%40kangaroo-dev-5223a.iam.gserviceaccount.com%2F20240710%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240710T193403Z&X-Goog-Expires=900&X-Goog-SignedHeaders=content-type%3Bhost&X-Goog-Signature=8593d255c54cc1341aa4f7f90b12c18d085fb84cbd4631f173eca4033a91ad43e131ec04cb3ab7502156bcdc23dcd69d2dd91eb1a437a5697113f0ccdb9dbe62d8cb99913a067f5e2dad2b56ac5351a1fede30e67609d19a83e403c3c6222659c99bca3dc7d9c1c02cbeb2d0c872352d73be465cca3a6bb31fde7d4e711be248c933291ca36a9353c3fe2e7a3bc56dd6e8d2eca93b8dfbbd480c524e05f25e93f1763a4ab0db4f86497fe631407db63137bf8ee2cc81e8de1f93f5aafb389ebd1dd19cadac05731b0b8c66cf00c22180e8bbc33199f5d57654a127178111921d45b6b98642332b2188825aabad3ced41d0d33ba25c7571b7836fd4a210f8892d"
+	],
+	"videos": [
+	    "https://storage.googleapis.com/reviews/11eb82ae6d3bb094b847e2865c66d9cc/668ee22ba162b_1720640043.mkv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=bigquery-for-dev%40kangaroo-dev-5223a.iam.gserviceaccount.com%2F20240710%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240710T193403Z&X-Goog-Expires=900&X-Goog-SignedHeaders=content-type%3Bhost&X-Goog-Signature=7e670a4694dde5fccab7200dd7134538a6af74b15a49095493583f9750e53f04979f46b950b305bc2d12c1370609f2d246c883c283a9c68edc0a474231dc0a5c25bbf3d38a8b54a200f35e8cd4ab8e34e46b457f153bec30cd1c0df9c5dc00f49a6c11e81cd8b7d08a96d685ab100fac846f92d7363ddf9c513c04c62f42cfde1048ace3263fb87f47afcf2efe0273682bc279edf629531f64b794b894783ad63bb7f0f28ebea3c1e83fe83d47a659614e2eab22d7f0121fedd43f9b6c84f5a0ec9d597f87aeab75a9585e7624d57abbe9b960150f4413d430b51cb62363138639263cf1a13fc88a72f06163c6cfa0c0e497804e5ca29e31843600affc751a6c"
+	]
+}
+```
+
++ Request
+    + Headers
+            Authorization: Bearer <access_token>
+            X-Application-Key: <X-Application-Key>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Store-Domain: <store_domain>;
+
+    + Attributes (ReviewCreate)
+
++ Response 401 (application/json)
+    + Attributes (Reviews Error 401)
+
++ Response 422 (application/json)
+    + Attributes (Reviews Error 422)
+
+## Reviews Resource [/reviews/{id}]
 
 ### Update a review [PATCH]
 
@@ -128,38 +238,37 @@ X-Store-Domain: XXX.com
 ```
 + Request (application/json)
     + Headers
-
             Authorization: Bearer <access_token>
-            X-Application-Key: eyXai0XD7SLLzaOeJW
-            Accept: application/vnd.kangaroorewards.api.v1+json;
-            X-Store-Domain: XXX.com
+            X-Application-Key: <X-Application-Key>
+            Accept: application/vnd.kangaroorewards.api.v1+json
+            X-Store-Domain: <store_domain>
 
 + Parameters
     + id: `61808119-7567-41c5-a183-389bf9819ccb` (required, string) - The unique ID of the review.
 
 + Attributes (ReviewUpdate)
+    + published: true (boolean) - Publish or unpublish the review
 
 + Response 200 (application/json)
     + Attributes
-        + data (ReviewResponse)
-
-+ Response 400 (application/json)
-    + Attributes (Reviews Error 400)
+        + data (ReviewsListResponse)
 
 + Response 401 (application/json)
     + Attributes (Reviews Error 401)
 
-+ Response 403 (application/json)
-    + Attributes (Reviews Error 403)
-
 + Response 422 (application/json)
-    + Attributes (Reviews Error 422)
+    + Attributes
+        + published (array)
+            + `The published field must be true or false.` (string)
 
-<a name="get-signed-url"></a>
+
 
 ## Upload images and videos [/reviews/signed-urls]
 
+<a name="get-signed-url"></a>
+
 ### Get signed urls [POST]
+
 
 *Body parameters*
 |Name|Type|Description|
@@ -169,7 +278,7 @@ X-Store-Domain: XXX.com
 
 >Note: To upload images or videos:
 > 1. Make a request to get the signed url(see above).
-> 2. After you get back the url from the response, upload the file directly to this url.
+> 2. After getting back the url from the response, upload the file directly to this url.
     Method: 'PUT', with header "content-type:application/octet-stream", body: the image/video file.
 
 Example get a signed url for uploading images and videos
@@ -209,10 +318,9 @@ Response Body
 + Request (application/json)
     + Headers
             Authorization: Bearer <access_token>
-            X-Application-Key: eyXai0XD7SLLzaOeJW
+            X-Application-Key: <X-Application-Key>
             Accept: application/vnd.kangaroorewards.api.v1+json;
-            X-Store-Domain: XXX.com
-
+            X-Store-Domain: <store_domain>;
 + Attributes
     + file_types: (array[string])
         + `image/jpeg` (string) - The file type that's going to upload.
@@ -221,17 +329,13 @@ Response Body
     + Attributes
         + data (array[SignedUrlsResponse])
 
-+ Response 400 (application/json)
-    + Attributes (Reviews Error 400)
-
 + Response 401 (application/json)
     + Attributes (Reviews Error 401)
 
-+ Response 403 (application/json)
-    + Attributes (Reviews Error 403)
-
 + Response 422 (application/json)
-    + Attributes (Reviews Error 422)
+    + Attributes
+        + file_types (array)
+            + `The file types field is required.` (string)
 
 # Data Structures
 
@@ -241,64 +345,67 @@ Response Body
 + created_at: `2024-02-06T16:07:52+00:00` (string) - The creation timestamp of the review
 + published_at: `2024-01-10T01:01:01+00:00` (string) - The publication timestamp of the review
 + reviewer_email: `ttuser062601@yopmail.com` (string)
-+ reviewer_first_name: `Liza` (string)
++ reviewer_first_name: `Lisa` (string)
 + rating: 5 (number)
 + comment: `Great leggings. For size reference, I ordered a medium and am 5’9, 155 lbs, with a long torso.` (string) - The review content.
 + product_id: `09383628200` (string) - Pos system product id if the review is a product review.
 + product_title: null (string) - Pos system product title.
 + photos (array[object])
-    + `09383628200` (string) - Pos system product id if the review is a product review
+    + `https://storage.googleapis.com/reviews/11eXX` (string) - The uploaded photo URL
 + videos: (array[object])
-    + `09383628200` (string) - Pos system product id if the review is a product review
+    + `https://storage.googleapis.com/reviews/11eXX` (string) - The uploaded video URL
 + type: 1 (number) - Review type, 1: product review, 2: website review.
 + review_source: 1 (number) - 1: website page, 2: review widget
 + published: false (boolean) - Is the review published or not
 + verified_buyer: false (boolean) - Is the review left by a verified buyer
-+ review_replies (array[object])
++ review_replies (array)
     + (object)
-    + id: 29 (number) - The ID of the trigger
-    + main_trigger_id: 3 (number) - The main trigger ID
-    + created_at: `2024-02-20T01:14:40+00:00` (string) - The creation timestamp of the trigger
+        + id: `36f04d79-4116-4fb3-8d08-50581be3fa67` (string) - The ID of the reply
+        + created_at: `2024-07-11T15:55:03+00:00` (string) - The creation timestamp of the reply
+        + body: `Reply content` (string) - The reply content
+        + public: true (boolean) - The reply is public or private
 
 ## ReviewCreate(object)
++ reviewer_email: `ttuser062601@yopmail.com` (string) - reviewer's email
++ reviewer_first_name: `Lisa` (string) - reviewer's first name
++ rating: 5 (number),
++ comment: `Very nice and cute.` (string) - review
++ product_id: `5157526` (string) - product id in the integration system
++ product_title: `Shoes` (string) - product title
++ product_details: (object)
+    + image: `https://XX/XX.png` (string) - product image url
+    + price: 26.99 (number)
+    + description: `XXX` - product description
++ photos: (array)
+    + `https://XX/XX` (string) - the uploaded photo URL
+  ,
++ videos: (array)
+    + `https://XX/XX` (string) - the uploaded video URL
++ type: 1 (number)
++ review_source: 1 (number)
++ website_url: `https://XX/XX.com` (string)
 
 
 ## ReviewUpdate (object)
 
 + published: true (boolean) - Publish the review
 
-## ReviewResponse (object)
-
-+ id: 14 (number) - The ID
-
 ## SignedUrlsResponse (object)
 + file_type: `image/jpeg` (string) - The upload file type
 + url: `https://storage.googleapis.com/reviews/11eb82ae6d3bb094b847e2865c66d9cc/668ee22ba162b_1720640043.mkv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=bigquery-for-dev%40kangaroo-dev-5223a.iam.gserviceaccount.com%2F20240710%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240710T193403Z&X-Goog-Expires=900&X-Goog-SignedHeaders=content-type%3Bhost&X-Goog-Signature=7e670a4694dde5fccab7200dd7134538a6af74b15a49095493583f9750e53f04979f46b950b305bc2d12c1370609f2d246c883c283a9c68edc0a474231dc0a5c25bbf3d38a8b54a200f35e8cd4ab8e34e46b457f153bec30cd1c0df9c5dc00f49a6c11e81cd8b7d08a96d685ab100fac846f92d7363ddf9c513c04c62f42cfde1048ace3263fb87f47afcf2efe0273682bc279edf629531f64b794b894783ad63bb7f0f28ebea3c1e83fe83d47a659614e2eab22d7f0121fedd43f9b6c84f5a0ec9d597f87aeab75a9585e7624d57abbe9b960150f4413d430b51cb62363138639263cf1a13fc88a72f06163c6cfa0c0e497804e5ca29e31843600affc751a6c` (string) - The signed url.
 
-## Reviews Error 400 (object)
-
-+ errors (array[object])
-    + status: `400` (array[string, number]) - The status code of the error
-    + title: `Invalid Attribute` (string) - The title of the error
-    + detail: `Email Already Taken.` (string) - The detailed description of the error
 
 ## Reviews Error 401 (object)
 
-+ errors (array[object])
-    + status: `401` (array[string, number]) - The status code of the error
-    + title: `Unauthorized` (string) - The title of the error
-    + detail: `Unauthenticated.` (string) - The detailed description of the error
++ error (object)
+    + status_code: `401` (number)
+    + message: `Unauthenticated.` (string)
+    + description: `Unauthenticated.` (string)
 
-## Reviews Error 403 (object)
-
-+ errors (array[object])
-    + status: `403` (array[string, number]) - The status code of the error
-    + title: `Unauthorized` (string) - The title of the error
-    + detail: `Unauthorized to perform this action.` (string) - The detailed description of the error
 
 ## Reviews Error 422 (object)
 
-+ errors (array[object])
-    + status: `422` (array[string, number]) - The status code of the error
-    + title: `Unprocessable Content` (string) - The title of the error
-    + detail: `The triggers field is required.` (string) - The detailed description of the error
++ reviewer_email (array)
+    + `The reviewer email field is required.` (string)
++ reviewer_first_name (array)
+    + `The reviewer first name field is required.` (string)
