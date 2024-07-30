@@ -352,3 +352,15 @@ paths:
       operationId: uploadBusinessOfferImage
       tags:
         - core
+  uploadBusinessRewardImage:
+    patch:
+      x-file: uploadBusinessRewardImage.yaml
+      operationId: uploadBusinessRewardImage
+      tags:
+        - core
+  uploadBusinessCampaignImage:
+    patch:
+      x-file: uploadBusinessCampaignImage.yaml
+      operationId: uploadBusinessCampaignImage
+      tags:
+        - core
