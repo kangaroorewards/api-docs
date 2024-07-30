@@ -10,7 +10,6 @@ schemes:
   - http
 consumes:
   - application/json
-  - multipart/form-data
 produces:
   - application/json
 paths:
@@ -21,37 +20,14 @@ paths:
       tags:
         - uploadBusinessOfferImage
       consumes:
-        - multipart/form-data
+        - application/json
       parameters:
-        - in: formData
-          name: image_large
-          schema:
-            type: object
-            schema:
-              type: object
-              required:
-                - intent
-                - branch_id
-                - catalog_items
-              properties:
-                branch_id:
-                  type: string
-                intent:
-                  type: string
-                  default: "redeem"
+        - in: body
+          name: uploadBusinessOfferImageRequest
           required: true
-        - in: formData
-          name: image_original
-          type: string
-        - in: formData
-          name: image_medium
-          schema:
-            $ref: 'schemas/images/images.yaml#/definitions/KRMultiPartFormFile'
-        - in: formData
-          name: image_thumbnail
           schema:
             type: object
-            $ref: 'schemas/images/images.yaml#/definitions/KRMultiPartFormFile'
+            $ref: 'schemas/uploadImages/uploadImages.yaml#/definitions/UploadImageRequest'
       responses:
         "200":
           description: uploaded images of an offer

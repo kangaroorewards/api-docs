@@ -20,15 +20,3 @@ definitions:
         type: string
       default:
         type: boolean
-  KRMultiPartFormFile:
-    type: "object"
-    x-model: KRMultiPartFormFileModel
-    properties:
-      large:
-        type: string
-      medium:
-        type: string
-      thumbnail:
-        type: string
-      default:
-        type: boolean
