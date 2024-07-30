@@ -1,0 +1,17 @@
+definitions:
+  UploadImageRequest:
+    type: "object"
+    x-model: UploadImageRequestModel
+    properties:
+      images:
+        type: array
+        items:
+          $ref: '#/definitions/KRMultiPartFormFile'
+  KRMultiPartFormFile:
+    type: "object"
+    x-model: KRMultiPartFormFileModel
+    properties:
+      name:
+        type: string
+      filePath:
+        type: string
