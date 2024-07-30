@@ -27,17 +27,25 @@ paths:
           name: image_large
           schema:
             type: object
-            $ref: 'schemas/images/images.yaml#/definitions/KRMultiPartFormFile'
+            schema:
+              type: object
+              required:
+                - intent
+                - branch_id
+                - catalog_items
+              properties:
+                branch_id:
+                  type: string
+                intent:
+                  type: string
+                  default: "redeem"
           required: true
         - in: formData
           name: image_original
-          schema:
-            type: object
-            $ref: 'schemas/images/images.yaml#/definitions/KRMultiPartFormFile'
+          type: string
         - in: formData
           name: image_medium
           schema:
-            type: object
             $ref: 'schemas/images/images.yaml#/definitions/KRMultiPartFormFile'
         - in: formData
           name: image_thumbnail
