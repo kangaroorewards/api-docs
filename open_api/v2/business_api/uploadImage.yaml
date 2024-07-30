@@ -13,23 +13,23 @@ consumes:
 produces:
   - application/json
 paths:
-  attachments:
+  mages:
     post:
-      summary: upload images of a campaign
-      operationId: uploadBusinessCampaignImage
+      summary: upload an image
+      operationId: uploadImage
       tags:
-        - uploadBusinessCampaignImage
+        - uploadImage
       consumes:
         - application/json
       parameters:
         - in: body
-          name: uploadBusinessCampaignImageBodyRequest
+          name: uploadImageBodyRequest
           required: true
           schema:
             type: object
             $ref: 'schemas/uploadImages/uploadImages.yaml#/definitions/UploadImageRequest'
       responses:
         "200":
-          description: uploaded images of a campaign
+          description: upload an image
           schema:
             $ref: 'schemas/images/images.yaml#/definitions/ImagesResponse'

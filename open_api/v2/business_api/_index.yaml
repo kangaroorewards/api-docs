@@ -346,21 +346,9 @@ paths:
       operationId: createNewPassword
       tags:
         - core
-  uploadBusinessOfferImage:
+  uploadImage:
     patch:
-      x-file: uploadBusinessOfferImage.yaml
-      operationId: uploadBusinessOfferImage
-      tags:
-        - core
-  uploadBusinessRewardImage:
-    patch:
-      x-file: uploadBusinessRewardImage.yaml
-      operationId: uploadBusinessRewardImage
-      tags:
-        - core
-  uploadBusinessCampaignImage:
-    patch:
-      x-file: uploadBusinessCampaignImage.yaml
-      operationId: uploadBusinessCampaignImage
+      x-file: uploadImage.yaml
+      operationId: uploadImage
       tags:
         - core
