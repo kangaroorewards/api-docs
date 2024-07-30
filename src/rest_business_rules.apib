@@ -52,7 +52,7 @@ Response Body
         - data (Business Rules Base)
 
 
-### Update Business Rules [PUT]
+### Update Business Rules [PATCH]
 
 Update business rules.
 
@@ -63,10 +63,16 @@ Update business rules.
 |reward_milestone_amount|numeric|`Optional.` For each $x. Positive number. Minimum: 1|
 |redemption_ratio|numeric|`Optional.` Redemption ratio. Only for E-comm |
 |redemption_amount|numeric|`Optional.` Redemption amount. Only for E-comm|
+|round_up_points|boolean|`Optional.` Round up earning points. The reward points calculation involves taking the floor value of the amount spent divided by the reward milestone amount, then multiplying by the reward ratio to get the reward points. If the round-up earning points feature is enabled, then round up the calculated reward points.|
+|tiers_earning_override|boolean|`Optional.` Override earning rules based on Tiers|
+|tiers_earning_rules|array|`Optional.`|
+|tiers_earning_override.*.id|integer|`Required when tiers_earning_rules is present.` Tier level Id.|
+|tiers_earning_override.*.amount|numeric|`Optional.` For each $x. |
+|tiers_earning_override.*.points|integer|`Optional.` The number of points customer will earn for $amount|
 
 Example:
 ```
-PUT /rules HTTP/1.1
+PATCH /rules HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLC...
 Accept: application/vnd.kangaroorewards.api.v1+json;
@@ -74,10 +80,30 @@ X-Application-Key: eyXai0XD7SLLzaOeJW...
 Content-Type: application/json
 
 {
-  "reward_ratio": 100,
-  "reward_milestone_amount": 1,
-  "redemption_ratio": 20,
-  "redemption_amount": 1
+    "reward_ratio": 100,
+    "reward_milestone_amount": 1,
+    "redemption_ratio": 20,
+    "redemption_amount": 1,
+	"round_up_points": true,
+	"welcome_points": 100,
+	"tiers_earning_override": true,
+	"tiers_earning_rules": [
+		{
+			"id": 78,
+			"amount": 1,
+			"points": 15
+		},
+		{
+			"id": 79,
+			"amount": 1,
+			"points": 20
+		},
+		{
+			"id": 475,
+			"amount": 1,
+			"points": 25
+		}
+	]
 }
 ```
 
@@ -113,7 +139,16 @@ Content-Type: application/json
     + reward_milestone_amount: 1 (number) - For each $1
     + reward_points: 100 (number) - ALIAS
     + reward_amount: 1 (number) - ALIAS 
-    + welcome_pointss: 100 (number) - Number of welcome points
+    + welcome_points: 100 (number) - Number of welcome points
+    + round_up_points: true (boolean) - Round up earning points.
+    + tiers_earning_override: true (boolean) - Override earning rules based on Tiers.
+    + tiers_earning_rules: (array) - Earning rules based on Tiers.
+        + (object)
+            + id: 78 (number)
+            + amount: 1 (number)
+            + points: 15 (number)
+
+
 + redeeming (object)    
     + redemption_ratio: 2 (number) - Redemption ratio. Only for E-comm
     + redemption_amount: 1 (number) - Redemption amount. Only for E-comm

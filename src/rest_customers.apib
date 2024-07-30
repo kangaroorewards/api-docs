@@ -630,8 +630,6 @@ PUT /customers/12e69610400894b2b02089e01cf89b5
 
 ### Delete a customer [DELETE]
 
-> **NOTE:** Not implemented yet. Coming soon.
-
 Deletes the customer with the requested id.
 
 + Request (application/json)
@@ -645,6 +643,7 @@ Deletes the customer with the requested id.
     + id: `11e696103f8ff5eabb02089e01cf89b5` - The unique ID of the customer.
 
 + Response 204 (application/json)
++ Response 404 (application/json)
 
 # Data Structures
 
@@ -672,15 +671,17 @@ Deletes the customer with the requested id.
 
 ## Error 400 (object)
 
-+ code: `400` (number)
-+ error: `Bad Request` (string)
-+ message: `Invalid ID supplied` (string)
++ error (object)
+    + status_code: `400` (number)
+    + description: `Bad Request` (string)
+    + message: `Invalid ID supplied` (string)
 
 ## Error 404 (object)
 
-+ code: `404` (number)
-+ error: `Not found` (string)
-+ message: `Customer not found` (string)
++ error (object)
+    + status_code: `404` (number)
+    + message: `Customer not found` (string)
+    + description: `The requested resource doesn't exist.` (string)
 
 ## Error 422 (object)
 

@@ -1,0 +1,885 @@
+
+# Reviews
+
+Before using the reviews API, please make sure you have connected the Kangaroo Reviews app from the business portal.
+
+All the following endpoints require header `X-Store-Domain`
+
+The X-Store-Domain needs to match the website that is connected to the Kangaroo Reviews app. ex: "X-Store-Domain:XXX.com"
+
+# Group Reviews
+
+## Reviews [/reviews{?page}]
+
+### List all reviews [GET]
+
+Returns a list of reviews
+
+**Query Parameters**
+
+|Name|Type|Description|
+|-----|----|-----------|
+|page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
+|per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15, Maximum value 100|
+|include|string|`Optional.` Optionally include=review_replies.|
+|created_at|string|`Optional.` Filter by created date. [See Filtering](#filtering-reviews)|
+|type|integer|`Optional.` Filter by review type, 1 - product review, 2 - website review. [See Filtering](#filtering-reviews)|
+|published|boolean|`Optional.` Filter by published. [See Filtering](#filtering-reviews)|
+|sort|string|`Optional.` [See Sorting](#sorting-reviews)|
+
+<a name="filtering-reviews"></a>
+
+**Filtering**
+
+When submitting a GET request, you can ask it to return only reviews that meet specific criteria.
+To filter reviews, in the query string, specify one or more fields with an operator, followed by a separator (`|`)
+and the values for the following:
+
+Fields:
+- `created_at` - Filter by created date
+- `type` - Filter by review type. 1 - Product, 2 - Website
+- `published` - Filter by published status
+
+Operators:
+- `gt` - Greater Than
+- `gte` - Greater Than or Equal
+- `lt` - Less Than
+- `lte` - Less Than or Equal
+- `eq` - Equal
+- `between` - Between
+
+Filter Syntax
+
+A single filter uses the form: `field=operator|VALUE`
+
+Each URL query parameter **must be URL encoded**.
+
+<a name="sorting-reviews"></a>
+
+**Sorting**
+
+When submitting a GET request, you can sort the reviews.
+To sort reviews, in the query string, specify one or more fields with an operator, followed by a separator (`,`)
+and the fields for the following:
+
+Fields:
+- `created_at` - Sort by created date. If `created_at` sorting is not specified, the results will always be sorted by the latest combination with other sorting conditions.
+- `rating` - Sort by rating
+- `photos` - Sort reviews by photos, displaying reviews with photos first or last.
+- `videos` - Sort reviews by videos, displaying reviews with videos first or last.
+- `verified_buyer` - Sort reviews by verified buyer, displaying reviews with verified buyer review first or last.
+
+Operators:
+- By default without any operator, sort reviews in ascending order.
+- `-` - Sort reviews in descending order.
+
+Filter Syntax
+
+A single filter uses the form: `sort=operatorFieldName1,operatorFieldName2`
+
+Each URL query parameter **must be URL encoded**.
+
+Examples
+```
+GET /reviews?sort=-rating,-created_at&include=review_replies HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFmODNk
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+X-Store-Domain: XXX.com
+```
+
+Response Body
+```
+{
+	"data": [
+		{
+			"id": "61808119-7567-41c5-a183-389bf9819ccb",
+			"created_at": "2024-06-26T23:13:08+00:00",
+			"reviewer_email": "ttuser062601@yopmail.com",
+			"reviewer_first_name": "Lisa",
+			"rating": 5,
+			"comment": "Great leggings. For size reference, I ordered a medium and am 5’9, 155 lbs, with a long torso.",
+			"product_id": "09383628200",
+			"product_title": null,
+			"photos": null,
+			"videos": null,
+			"type": 1,
+			"review_source": 1,
+			"published": false,
+			"verified_buyer": false,
+			"review_replies": [
+			    {
+			        "id": "36f04d79-4116-4fb3-8d08-50581be3fa67",
+                    "created_at": "2024-07-11T15:55:03+00:00",
+                    "body": "Reply - 01",
+                    "public": true
+                }
+            ]
+		}
+	]
+}
+```
+
++ Request (application/json)
+    + Headers
+            Authorization: Bearer <access_token>
+            X-Application-Key: <X-Application-Key>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Store-Domain: <store_domain>;
+
++ Response 200 (application/json)
+    + Attributes
+        - data (array[ReviewsListResponse])
+
++ Response 401 (application/json)
+    + Attributes (Reviews Error 401)
+
+## Review [/reviews]
+
+### Create a review [POST]
+
+*Body parameters*
+|Name|Type|Description|
+|-----|----|-----------|
+|reviewer_email|string|`Required` Between 1 and 255 characters in length|
+|reviewer_first_name|string|`Required` Between 1 and 255 characters in length|
+|rating|integer|`Required` Between 1 and 5|
+|comment|string|`Required` Minimum 15 characters|
+|product_id|string|`Optional` Required if the type is 1 - product review|
+|product_title|string|`Optional`|
+|product_details.image|string|`Optional` product image URL|
+|product_details.price|numeric|`Optional` product price|
+|product_details.description|string|`Optional` product description|
+|photos|array|`Optional`|
+|photos.*|string|`Optional` review photo url [See Uploading Photos](#get-signed-url)|
+|videos|array|`Optional`|
+|videos.*|string|`Optional` review video url [See Uploading Videos](#get-signed-url)|
+|type|integer|`Required` (1, 2) 1: product review, 2: website review |
+|review_source|integer|`Required` (1, 2) The platform where the review was left. 1: website page, 2: review widget |
+|website_url|string|`Required` The URL of the website where the review was left. |
+
+Example create a review
+
+```
+POST /reviews HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+X-Store-Domain: XXX.com
+
+{
+	"reviewer_email": "ttuser062601@yopmail.com",
+	"reviewer_first_name": "Lisa",
+	"rating": 4,
+	"comment": "Very nice and cute",
+	"type": 1,
+	"review_source": 1,
+	"website_url": "https://XXX.com/XX/XX",
+	"product_id": "5157526",
+	"product_title": "Shoes",
+	"product_details": {
+		"image": "https://XXX.com/XXX.png",
+		"price": 59.99,
+		"description": "ABC"
+	},
+	"photos": [
+	    "https://storage.googleapis.com/reviews/11eb82ae6d3bb094b847e2865c66d9cc/668ee22b0db7e_1720640043.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=bigquery-for-dev%40kangaroo-dev-5223a.iam.gserviceaccount.com%2F20240710%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240710T193403Z&X-Goog-Expires=900&X-Goog-SignedHeaders=content-type%3Bhost&X-Goog-Signature=8593d255c54cc1341aa4f7f90b12c18d085fb84cbd4631f173eca4033a91ad43e131ec04cb3ab7502156bcdc23dcd69d2dd91eb1a437a5697113f0ccdb9dbe62d8cb99913a067f5e2dad2b56ac5351a1fede30e67609d19a83e403c3c6222659c99bca3dc7d9c1c02cbeb2d0c872352d73be465cca3a6bb31fde7d4e711be248c933291ca36a9353c3fe2e7a3bc56dd6e8d2eca93b8dfbbd480c524e05f25e93f1763a4ab0db4f86497fe631407db63137bf8ee2cc81e8de1f93f5aafb389ebd1dd19cadac05731b0b8c66cf00c22180e8bbc33199f5d57654a127178111921d45b6b98642332b2188825aabad3ced41d0d33ba25c7571b7836fd4a210f8892d"
+	],
+	"videos": [
+	    "https://storage.googleapis.com/reviews/11eb82ae6d3bb094b847e2865c66d9cc/668ee22ba162b_1720640043.mkv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=bigquery-for-dev%40kangaroo-dev-5223a.iam.gserviceaccount.com%2F20240710%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240710T193403Z&X-Goog-Expires=900&X-Goog-SignedHeaders=content-type%3Bhost&X-Goog-Signature=7e670a4694dde5fccab7200dd7134538a6af74b15a49095493583f9750e53f04979f46b950b305bc2d12c1370609f2d246c883c283a9c68edc0a474231dc0a5c25bbf3d38a8b54a200f35e8cd4ab8e34e46b457f153bec30cd1c0df9c5dc00f49a6c11e81cd8b7d08a96d685ab100fac846f92d7363ddf9c513c04c62f42cfde1048ace3263fb87f47afcf2efe0273682bc279edf629531f64b794b894783ad63bb7f0f28ebea3c1e83fe83d47a659614e2eab22d7f0121fedd43f9b6c84f5a0ec9d597f87aeab75a9585e7624d57abbe9b960150f4413d430b51cb62363138639263cf1a13fc88a72f06163c6cfa0c0e497804e5ca29e31843600affc751a6c"
+	]
+}
+```
+
++ Request
+    + Headers
+            Authorization: Bearer <access_token>
+            X-Application-Key: <X-Application-Key>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Store-Domain: <store_domain>;
+
+    + Attributes (ReviewCreate)
++ Response 204 (No Content)
+
++ Response 401 (application/json)
+    + Attributes (Reviews Error 401)
+
++ Response 422 (application/json)
+    + Attributes (Reviews Error 422)
+
+## Review [/reviews/{id}]
+
+### Update a review [PATCH]
+
+*Body parameters*
+|Name|Type|Description|
+|-----|----|-----------|
+|published|boolean|`Required.` Publish or unpublish the review|
+
+
+Example publish a review
+
+```
+PATCH /reviews/61808119-7567-41c5-a183-389bf9819ccb HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+X-Store-Domain: XXX.com
+
+{
+  "published": true,
+}
+
+```
++ Request (application/json)
+    + Headers
+            Authorization: Bearer <access_token>
+            X-Application-Key: <X-Application-Key>
+            Accept: application/vnd.kangaroorewards.api.v1+json
+            X-Store-Domain: <store_domain>
+
++ Parameters
+    + id: `61808119-7567-41c5-a183-389bf9819ccb` (required, string) - The unique ID of the review.
+
++ Attributes (ReviewUpdate)
+    + published: true (boolean) - Publish or unpublish the review
+
++ Response 204 (not content)
+
++ Response 401 (application/json)
+    + Attributes (Reviews Error 401)
+
++ Response 422 (application/json)
+    + Attributes
+        + published (array)
+            + `The published field must be true or false.` (string)
+
+
+
+## Upload images and videos [/reviews/signed-urls]
+
+<a name="get-signed-url"></a>
+
+### Get signed urls [POST]
+
+
+*Body parameters*
+|Name|Type|Description|
+|-----|----|-----------|
+|file_types|array|`required`|
+|file_types.*|string|`required` One of image/jpeg,image/png,image/jpg,image/gif,video/mp4,video/mkv,video/mov,video/avi,video/flv|
+
+>Note: To upload images or videos:
+> 1. Make a request to get the signed url(see above).
+> 2. After getting back the url from the response, upload the file directly to this url.
+    Method: 'PUT', with header "content-type:application/octet-stream", body: the image/video file.
+
+Example get a signed url for uploading images and videos
+
+```
+POST /reviews/signed-urls HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+X-Store-Domain: XXX.com
+
+{
+	"file_types": [
+		"image/jpeg",
+		"video/mkv"
+	]
+}
+```
+Response Body
+```
+{
+	"data": [
+		{
+			"file_type": "image/jpeg",
+			"url": "https://storage.googleapis.com/reviews/11eb82ae6d3bb094b847e2865c66d9cc/668ee22b0db7e_1720640043.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=bigquery-for-dev%40kangaroo-dev-5223a.iam.gserviceaccount.com%2F20240710%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240710T193403Z&X-Goog-Expires=900&X-Goog-SignedHeaders=content-type%3Bhost&X-Goog-Signature=8593d255c54cc1341aa4f7f90b12c18d085fb84cbd4631f173eca4033a91ad43e131ec04cb3ab7502156bcdc23dcd69d2dd91eb1a437a5697113f0ccdb9dbe62d8cb99913a067f5e2dad2b56ac5351a1fede30e67609d19a83e403c3c6222659c99bca3dc7d9c1c02cbeb2d0c872352d73be465cca3a6bb31fde7d4e711be248c933291ca36a9353c3fe2e7a3bc56dd6e8d2eca93b8dfbbd480c524e05f25e93f1763a4ab0db4f86497fe631407db63137bf8ee2cc81e8de1f93f5aafb389ebd1dd19cadac05731b0b8c66cf00c22180e8bbc33199f5d57654a127178111921d45b6b98642332b2188825aabad3ced41d0d33ba25c7571b7836fd4a210f8892d"
+		},
+		{
+			"file_type": "video/mkv",
+			"url": "https://storage.googleapis.com/reviews/11eb82ae6d3bb094b847e2865c66d9cc/668ee22ba162b_1720640043.mkv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=bigquery-for-dev%40kangaroo-dev-5223a.iam.gserviceaccount.com%2F20240710%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240710T193403Z&X-Goog-Expires=900&X-Goog-SignedHeaders=content-type%3Bhost&X-Goog-Signature=7e670a4694dde5fccab7200dd7134538a6af74b15a49095493583f9750e53f04979f46b950b305bc2d12c1370609f2d246c883c283a9c68edc0a474231dc0a5c25bbf3d38a8b54a200f35e8cd4ab8e34e46b457f153bec30cd1c0df9c5dc00f49a6c11e81cd8b7d08a96d685ab100fac846f92d7363ddf9c513c04c62f42cfde1048ace3263fb87f47afcf2efe0273682bc279edf629531f64b794b894783ad63bb7f0f28ebea3c1e83fe83d47a659614e2eab22d7f0121fedd43f9b6c84f5a0ec9d597f87aeab75a9585e7624d57abbe9b960150f4413d430b51cb62363138639263cf1a13fc88a72f06163c6cfa0c0e497804e5ca29e31843600affc751a6c"
+		}
+	]
+}
+```
+
++ Request (application/json)
+    + Headers
+            Authorization: Bearer <access_token>
+            X-Application-Key: <X-Application-Key>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Store-Domain: <store_domain>;
++ Attributes
+    + file_types: (array[string])
+        + `image/jpeg` (string) - The file type that's going to upload.
+
++ Response 200 (application/json)
+    + Attributes
+        + data (array[SignedUrlsResponse])
+
++ Response 401 (application/json)
+    + Attributes (Reviews Error 401)
+
++ Response 422 (application/json)
+    + Attributes
+        + file_types (array)
+            + `The file types field is required.` (string)
+
+## List reviews for the website [/bff/reviews]
+
+### List published reviews [GET]
+The reviews displayed on the website are filtered and configured by the review app's settings. This endpoint only returns reviews that match those settings, and the results are sorted accordingly.
+
+*Body parameters*
+|Name|Type|Description|
+|-----|----|-----------|
+|page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
+|per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15, Maximum value 100|
+|include|string|`Optional.` Optionally include=review_replies.|
+
+Example
+
+```
+GET /bff/reviews?include=review_replies HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+X-Store-Domain: XXX.com
+```
+
+Response Body
+```
+{
+	"data": [
+		{
+			"id": "61808119-7567-41c5-a183-389bf9819ccb",
+			"created_at": "2024-06-26T23:13:08+00:00",
+			"reviewer_email": "ttuser062601@yopmail.com",
+			"reviewer_first_name": "Lisa",
+			"rating": 5,
+			"comment": "Great leggings. For size reference, I ordered a medium and am 5’9, 155 lbs, with a long torso.",
+			"product_id": "09383628200",
+			"product_title": null,
+			"photos": null,
+			"videos": null,
+			"type": 1,
+			"review_source": 1,
+			"published": false,
+			"verified_buyer": false,
+			"review_replies": [
+			    {
+			        "id": "36f04d79-4116-4fb3-8d08-50581be3fa67",
+                    "created_at": "2024-07-11T15:55:03+00:00",
+                    "body": "Reply - 01",
+                    "public": true
+                }
+            ]
+		}
+	]
+}
+```
+
++ Request (application/json)
+    + Headers
+            Authorization: Bearer <access_token>
+            X-Application-Key: <X-Application-Key>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Store-Domain: <store_domain>;
+
++ Response 200 (application/json)
+    + Attributes
+        - data (array[ReviewsListResponse])
+
++ Response 401 (application/json)
+    + Attributes (Reviews Error 401)
+
+## Review Replies [/review-replies]
+
+### Create a review reply[POST]
+
+*Body parameters*
+|Name|Type|Description|
+|-----|----|-----------|
+|review_id|string|`Required` The review id that reply to.|
+|body|string|`Required` Reply content|
+|public|boolean|`Required` If it's a public reply, it can be listed in the website. If it's a private reply, the reply will be sent to the customer by email.|
+
+Example create a reply
+
+```
+POST /review-replies HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+X-Store-Domain: XXX.com
+
+{
+	"review_id": "2a6c99d6-195c-47a1-86ee-9b3f5ae8bdaf",
+	"body": "Thanks for your feedback.",
+	"public": true
+}
+```
+
++ Request
+    + Headers
+            Authorization: Bearer <access_token>
+            X-Application-Key: <X-Application-Key>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Store-Domain: <store_domain>;
+
+    + Attributes (ReviewReplyCreate)
++ Response 204 (No Content)
+
++ Response 401 (application/json)
+    + Attributes (Reviews Error 401)
+
++ Response 422 (application/json)
+    + Attributes
+        + review_id: (array)
+            + `The review id field is required.` (string)
+        + body: (array)
+            + `The review body field is required.` (string)
+        + public: (array)
+            + `The public field is required.` (string)
+
+## Review Analysis [/reviews-analysis]
+
+### List reviews analysis[GET]
+
+*Body parameters*
+|Name|Type|Description|
+|-----|----|-----------|
+|date_from|string|`Optional` Get analysis start by date_from. Format Y-m-d\\TH:i:sP|
+|date_to|string|`Optional` Get analysis end by date_to. Format Y-m-d\\TH:i:sP|
+>Note: Both date_from and date_to are required to get the custom range reviews analysis.
+>By default, if one of date_from or date_to is not be passed, it will get back the last 7, 14, 30 days report.
+
+Example
+
+```
+GET /reviews-analysis HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+X-Store-Domain: XXX.com
+```
+
+Response Body
+```
+{
+	"data": {
+		"last7Days": {
+			"reviews_count": 2,
+			"requests_count": 0,
+			"average_rating": 4,
+			"revenue": 0
+		},
+		"last14Days": {
+			"reviews_count": 2,
+			"requests_count": 0,
+			"average_rating": 4,
+			"revenue": 0
+		},
+		"last30Days": {
+			"reviews_count": 8,
+			"requests_count": 0,
+			"average_rating": 4.13,
+			"revenue": 749.95
+		},
+		"customRange": null
+	}
+}
+```
+Example for custom range
+
+```
+GET /reviews-analysis?date_from=2024-01-01T00%3A00%3A00%2B00%3A00&date_to=2024-09-01T00%3A00%3A00%2B00%3A00 HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+X-Store-Domain: XXX.com
+```
+
+Response Body
+```
+{
+	"data": {
+		"last7Days": null,
+		"last14Days": null,
+		"last30Days": null,
+		"customRange": {
+			"reviews_count": 895,
+			"requests_count": 356,
+			"average_rating": 3.5,
+			"revenue": 3836
+		}
+	}
+}
+```
++ Request
+    + Headers
+            Authorization: Bearer <access_token>
+            X-Application-Key: <X-Application-Key>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Store-Domain: <store_domain>;
+
++ Response 200 (application/json)
+    + Attributes
+        - data(ReviewAnalysis)
+
++ Response 401 (application/json)
+    + Attributes (Reviews Error 401)
+
++ Response 422 (application/json)
+    + Attributes
+        + date_from: (array)
+            + `The date from does not match the format Y-m-d\\TH:i:sP.` (string)
+        + date_to: (array)
+            + `The date to does not match the format Y-m-d\\TH:i:sP.` (string)
+
+## Reviews app settings [/review-app-settings]
+
+### List reviews app settings[GET]
+
+Example
+
+```
+GET /review-app-settings HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+X-Store-Domain: XXX.com
+```
+
+Response Body
+```
+{
+	"data": {
+		"id": 1,
+		"created_at": "2024-06-11T18:40:53+00:00",
+		"updated_at": "2024-06-21T20:06:21+00:00",
+		"coupon_auto": true,
+		"coupon_min_rating": null,
+		"coupon_user_segment": 0,
+		"coupon_type": 3,
+		"coupon_value": 12.15,
+		"coupon_prefix": null,
+		"widget_primary_color": "#111111",
+		"widget_position": "bottom-left",
+		"widget_published": true,
+		"allow_photos": true,
+		"allow_videos": true,
+		"mute_videos": true,
+		"carousel_published": true,
+		"carousel_slides": 3,
+		"carousel_max_slides": 2,
+		"carousel_sort": 5,
+		"carousel_scroll": 1,
+		"review_auto_publish": true,
+		"review_auto_publish_min_rating": 4,
+		"review_auto_request": true,
+		"review_auto_request_days": 10,
+		"review_auto_reminder_days": 12,
+		"display_customer_info": true,
+		"display_verified_buyer": true,
+		"word_blocks": []
+	}
+}
+```
+
++ Request
+    + Headers
+            Authorization: Bearer <access_token>
+            X-Application-Key: <X-Application-Key>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Store-Domain: <store_domain>;
+
++ Response 200 (application/json)
+    + Attributes
+        - data(ReviewAppSettings)
+
++ Response 401 (application/json)
+    + Attributes (Reviews Error 401)
+
+## Reviews app settings [/review-app-settings]
+### Update reviews app settings[PATCH]
+
+*Body parameters*
+|Name|Type|Description|
+|-----|----|-----------|
+|coupon_auto|boolean|`Optional` Auto send out the coupon by email to the reviewers|
+|coupon_min_rating|integer|`Optional` To be eligible for a coupon, the minimum review rating required|
+|coupon_user_segment|integer|`Optional` Any reviewer can be eligible for a coupon, 1: only verified buyer can be eligible for a coupon|
+|coupon_type|integer|`Optional` Coupon type:1 - Amount; 2 - Percentage; 3 - FreeShipping|
+|coupon_value|number|`Optional` The discount amount|
+|coupon_prefix|string|`Optional` |
+|widget_primary_color|string|`Optional` |
+|widget_position|string|`Optional` One of `bottom-left` (string) - `bottom-right`, `bottom-left`, `top-right`, `top-left`, `left-side-top`, `left-side-center`, `left-side-bottom`, `right-side-top`, `right-side-center`, `right-side-bottom`|
+|widget_published|boolean|`Optional` |
+|allow_photos|boolean|`Optional` Allow the reviewer to upload the photos|
+|allow_videos|boolean|`Optional` Allow the reviewer to upload the videos|
+|mute_videos|boolean|`Optional` Mute the video by default when it is played.|
+|carousel_published|boolean|`Optional` |
+|carousel_slides|integer|`Optional` (1,2,3) |
+|carousel_max_slides|integer|`Optional`  (2,3) |
+|carousel_sort|integer|`Optional` 1-newest first, 2-highest rated first, 3-photos first, 4-videos first, 5-verified buyers first|
+|carousel_scroll|integer|`Optional` 1-one slide,2-scroll freely|
+|review_auto_publish|boolean|`Optional` |
+|review_auto_publish_min_rating|integer|`Optional` The minimum rating of auto publishing a review|
+|review_auto_request|boolean|`Optional` Auto send out review request email|
+|review_auto_request_days|integer|`Optional` The number of days for auto send out review request email|
+|review_auto_reminder_days|integer|`Optional` The number of days for auto send out reminder email|
+|display_customer_info|boolean|`Optional` Display the reviewers name and email to the website|
+|display_verified_buyer|boolean|`Optional` Display the verified buyer badge to the website|
+|word_blocks|array|`Optional` A list of words that will automatically cause a review to be unpublished if any of them are included in the review|
+|word_blocks.*|string|`Optional` |
+
+Example
+
+```
+PATCH /review-app-settings HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+X-Store-Domain: XXX.com
+
+{
+    "coupon_auto": true,
+    "coupon_min_rating": null,
+    "coupon_user_segment": 0,
+    "coupon_type": 3,
+    "coupon_value": 12.15,
+    "coupon_prefix": null,
+    "widget_primary_color": "#111111",
+    "widget_position": "bottom-left",
+    "widget_published": true,
+    "allow_photos": true,
+    "allow_videos": true,
+    "mute_videos": true,
+    "carousel_published": true,
+    "carousel_slides": 3,
+    "carousel_max_slides": 2,
+    "carousel_sort": 5,
+    "carousel_scroll": 1,
+    "review_auto_publish": true,
+    "review_auto_publish_min_rating": 4,
+    "review_auto_request": true,
+    "review_auto_request_days": 10,
+    "review_auto_reminder_days": 12,
+    "display_customer_info": true,
+    "display_verified_buyer": true,
+    "word_blocks": []
+}
+```
+
+Response Body
+```
+{
+	"data": {
+		"id": 1,
+		"created_at": "2024-06-11T18:40:53+00:00",
+		"updated_at": "2024-06-21T20:06:21+00:00",
+		"coupon_auto": true,
+		"coupon_min_rating": null,
+		"coupon_user_segment": 0,
+		"coupon_type": 3,
+		"coupon_value": 12.15,
+		"coupon_prefix": null,
+		"widget_primary_color": "#111111",
+		"widget_position": "bottom-left",
+		"widget_published": true,
+		"allow_photos": true,
+		"allow_videos": true,
+		"mute_videos": true,
+		"carousel_published": true,
+		"carousel_slides": 3,
+		"carousel_max_slides": 2,
+		"carousel_sort": 5,
+		"carousel_scroll": 1,
+		"review_auto_publish": true,
+		"review_auto_publish_min_rating": 4,
+		"review_auto_request": true,
+		"review_auto_request_days": 10,
+		"review_auto_reminder_days": 12,
+		"display_customer_info": true,
+		"display_verified_buyer": true,
+		"word_blocks": []
+	}
+}
+```
+
++ Request
+    + Headers
+            Authorization: Bearer <access_token>
+            X-Application-Key: <X-Application-Key>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Store-Domain: <store_domain>;
+
++ Response 200 (application/json)
+    + Attributes
+        - data(ReviewAppSettings)
+
++ Response 401 (application/json)
+    + Attributes (Reviews Error 401)
+
++ Response 422 (application/json)
+    + Attributes
+        + coupon_min_rating: (array)
+            + `The coupon min rating may not be greater than 5.` (string)
+        + carousel_max_slides: (array)
+            + `The selected carousel max slides is invalid.` (string)
+
+# Data Structures
+
+## ReviewsListResponse(object)
+
++ id: `61808119-7567-41c5-a183-389bf9819ccb` (string) - The ID of the review
++ created_at: `2024-02-06T16:07:52+00:00` (string) - The creation timestamp of the review
++ published_at: `2024-01-10T01:01:01+00:00` (string) - The publication timestamp of the review
++ reviewer_email: `ttuser062601@yopmail.com` (string)
++ reviewer_first_name: `Lisa` (string)
++ rating: 5 (number)
++ comment: `Great leggings. For size reference, I ordered a medium and am 5’9, 155 lbs, with a long torso.` (string) - The review content.
++ product_id: `09383628200` (string) - Pos system product id if the review is a product review.
++ product_title: null (string) - Pos system product title.
++ photos (array[object])
+    + `https://storage.googleapis.com/reviews/11eXX` (string) - The uploaded photo URL
++ videos: (array[object])
+    + `https://storage.googleapis.com/reviews/11eXX` (string) - The uploaded video URL
++ type: 1 (number) - Review type, 1: product review, 2: website review.
++ review_source: 1 (number) - 1: website page, 2: review widget
++ published: false (boolean) - Is the review published or not
++ verified_buyer: false (boolean) - Is the review left by a verified buyer
++ review_replies (array)
+    + (object)
+        + id: `36f04d79-4116-4fb3-8d08-50581be3fa67` (string) - The ID of the reply
+        + created_at: `2024-07-11T15:55:03+00:00` (string) - The creation timestamp of the reply
+        + body: `Reply content` (string) - The reply content
+        + public: true (boolean) - The reply is public or private
+
+## ReviewCreate(object)
++ reviewer_email: `ttuser062601@yopmail.com` (string) - reviewer's email
++ reviewer_first_name: `Lisa` (string) - reviewer's first name
++ rating: 5 (number),
++ comment: `Very nice and cute.` (string) - review
++ product_id: `5157526` (string) - product id in the integration system
++ product_title: `Shoes` (string) - product title
++ product_details: (object)
+    + image: `https://XX/XX.png` (string) - product image url
+    + price: 26.99 (number)
+    + description: `XXX` - product description
++ photos: (array)
+    + `https://XX/XX` (string) - the uploaded photo URL
+  ,
++ videos: (array)
+    + `https://XX/XX` (string) - the uploaded video URL
++ type: 1 (number)
++ review_source: 1 (number)
++ website_url: `https://XX/XX.com` (string)
+
+
+## ReviewUpdate (object)
+
++ published: true (boolean) - Publish the review
+
+## SignedUrlsResponse (object)
++ file_type: `image/jpeg` (string) - The upload file type
++ url: `https://storage.googleapis.com/reviews/11eb82ae6d3bb094b847e2865c66d9cc/668ee22ba162b_1720640043.mkv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=bigquery-for-dev%40kangaroo-dev-5223a.iam.gserviceaccount.com%2F20240710%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240710T193403Z&X-Goog-Expires=900&X-Goog-SignedHeaders=content-type%3Bhost&X-Goog-Signature=7e670a4694dde5fccab7200dd7134538a6af74b15a49095493583f9750e53f04979f46b950b305bc2d12c1370609f2d246c883c283a9c68edc0a474231dc0a5c25bbf3d38a8b54a200f35e8cd4ab8e34e46b457f153bec30cd1c0df9c5dc00f49a6c11e81cd8b7d08a96d685ab100fac846f92d7363ddf9c513c04c62f42cfde1048ace3263fb87f47afcf2efe0273682bc279edf629531f64b794b894783ad63bb7f0f28ebea3c1e83fe83d47a659614e2eab22d7f0121fedd43f9b6c84f5a0ec9d597f87aeab75a9585e7624d57abbe9b960150f4413d430b51cb62363138639263cf1a13fc88a72f06163c6cfa0c0e497804e5ca29e31843600affc751a6c` (string) - The signed url.
+
+## ReviewReplyCreate(object)
++ review_id: `2a6c99d6-195c-47a1-86ee-9b3f5ae8bdaf` (string) - The review id that your are trying to reply to.
++ body: `Thanks for your feedback.` (string) - The reply content
++ public: true (boolean) - public or private reply
+
+## ReviewAnalysis (object)
++ last7Days (object)
+    + reviews_count: 100 (number) - The total number of reviews in the last 7 days
+    + requests_count: 562 (number) - The total number of requested in the last 7 days
+    + average_rating: 4 (number) - The average rating in the last 7 days
+    + revenue: 15369 (number) - The total revenue in the last 7 days
++ last14Days (object)
+    + reviews_count: 343 (number) - The total number of reviews in the last 14 days
+    + requests_count: 1589 (number) - The total number of requested in the last 14 days
+    + average_rating: 4.5 (number) - The average rating in the last 14 days
+    + revenue: 35369 (number) - The total revenue in the last 14 days
++ last30Days (object)
+    + reviews_count: 584 (number) - The total number of reviews in the last 30 days
+    + requests_count: 14570 (number) - The total number of requested in the last 30 days
+    + average_rating: 3.3 (number) - The average rating in the last 30 days
+    + revenue: 105369 (number) - The total revenue in the last 30 days
++ customRange (object)
+    + reviews_count: 25 (number) - The total number of reviews in the custom range
+    + requests_count: 254 (number) - The total number of requested in the custom range
+    + average_rating: 3.6 (number) - The average rating in the the custom range
+    + revenue: 14293.25 (number) - The total revenue in the custom range
+
+## ReviewAppSettings (object)
+
++ id: 1(number) - The id of review app settings
++ created_at: `2024-06-11T18:40:53+00:00` (string)
++ updated_at: `2024-06-21T20:06:21+00:00` (string)
++ coupon_auto: true (boolean) - Auto send out the coupon by email to the reviewers
++ coupon_min_rating: 1 (number) - To be eligible for a coupon, the minimum review rating required
++ coupon_user_segment: 0 (number) - 0: Any reviewer can be eligible for a coupon, 1: only verified buyer can be eligible for a coupon
++ coupon_type: 3 (number) - Coupon type:1 - Amount; 2 - Percentage; 3 - FreeShipping
++ coupon_value: 10 (number)
++ coupon_prefix: `KR` (string)
++ widget_primary_color: `#111111` (string),
++ widget_position: `bottom-left` (string) - `bottom-right`, `bottom-left`, `top-right`, `top-left`, `left-side-top`, `left-side-center`, `left-side-bottom`, `right-side-top`, `right-side-center`, `right-side-bottom`
++ widget_published: true (boolean)
++ allow_photos: true (boolean) - Allow the reviewer to upload the photos
++ allow_videos: true (boolean) - Allow the reviewer to upload the videos
++ mute_videos: true(boolean) - Mute the video by default when it is played
++ carousel_published: true (boolean)
++ carousel_slides: 3 (number) - 1,2,3
++ carousel_max_slides: 3 (number) - 2,3
++ carousel_sort: 5 (number) - 1-newest first, 2-highest rated first, 3-photos first, 4-videos first, 5-verified buyers first
++ carousel_scroll: 1 (number) - 1-one slide,2-scroll freely
++ review_auto_publish: true (boolean)
++ review_auto_publish_min_rating: 4 (number) - The minimum rating of auto publishing a review
++ review_auto_request: true (boolean) - Auto send out review request email
++ review_auto_request_days: 10 (number) - The number of days for auto send out review request email
++ review_auto_reminder_days: 12 (number) - The number of days for auto send out reminder email
++ display_customer_info: true (boolean) - Display the reviewers name and email to the website
++ display_verified_buyer: true (boolean) - Display the verified buyer badge to the website
++ word_blocks: (array) - A list of words that will automatically cause a review to be unpublished if any of them are included in the review
+    + `XX` (string)
+
+
+## Reviews Error 401 (object)
+
++ error (object)
+    + status_code: `401` (number)
+    + message: `Unauthenticated.` (string)
+    + description: `Unauthenticated.` (string)
+
+
+## Reviews Error 422 (object)
+
++ reviewer_email (array)
+    + `The reviewer email field is required.` (string)
++ reviewer_first_name (array)
+    + `The reviewer first name field is required.` (string)
