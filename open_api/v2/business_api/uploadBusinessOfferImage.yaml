@@ -25,20 +25,25 @@ paths:
       parameters:
         - in: formData
           name: image_large
-          type: binary
+          schema:
+            type: object
+            $ref: 'schemas/images/images.yaml#/definitions/KRMultiPartFormFile'
           required: true
         - in: formData
           name: image_original
-          type: binary
-          required: true
+          schema:
+            type: object
+            $ref: 'schemas/images/images.yaml#/definitions/KRMultiPartFormFile'
         - in: formData
           name: image_medium
-          type: binary
-          required: true
+          schema:
+            type: object
+            $ref: 'schemas/images/images.yaml#/definitions/KRMultiPartFormFile'
         - in: formData
           name: image_thumbnail
-          type: binary
-          required: true
+          schema:
+            type: object
+            $ref: 'schemas/images/images.yaml#/definitions/KRMultiPartFormFile'
       responses:
         "200":
           description: uploaded images of an offer
