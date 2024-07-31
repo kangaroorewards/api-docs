@@ -1,0 +1,22 @@
+definitions:
+  ImagesResponse:
+    type: "object"
+    x-model: ImagesResponseModel
+    required:
+      - data
+    properties:
+      data:
+        type: object
+        $ref: '#/definitions/Images'
+  Images:
+    type: "object"
+    x-model: ImageModel
+    properties:
+      large:
+        type: string
+      medium:
+        type: string
+      thumbnail:
+        type: string
+      default:
+        type: boolean
