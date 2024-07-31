@@ -346,9 +346,3 @@ paths:
       operationId: createNewPassword
       tags:
         - core
-  uploadImage:
-    patch:
-      x-file: uploadImage.yaml
-      operationId: uploadImage
-      tags:
-        - core
