@@ -130,7 +130,7 @@ definitions:
           The images attached to this offer. There are 3 available
           sizes: thumbnail, medium, and large.
         items:
-          $ref: './../images/image.yaml'
+          $ref: '../../schemas/images/images.yaml#/definitions/Images'
       never_expires_flag:
         type: boolean
         description: |
@@ -243,7 +243,7 @@ definitions:
           The images attached to this offer. There are 3 available
           sizes: thumbnail, medium, and large.
         items:
-          $ref: './../images/image.yaml'
+          $ref: '../../schemas/images/images.yaml#/definitions/Images'
       never_expires_flag:
         type: boolean
         description: |

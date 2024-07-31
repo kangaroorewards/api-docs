@@ -57,13 +57,13 @@ definitions:
         description: General about text for the business
       logo:
         type: object
-        $ref: './../images/image.yaml'
+        $ref: '../../schemas/images/images.yaml#/definitions/Images'
       logo_transparent_background:
         type: object
-        $ref: './../images/image.yaml'
+        $ref: '../../schemas/images/images.yaml#/definitions/Images'
       cover_photo:
         type: object
-        $ref: './../images/image.yaml'
+        $ref: '../../schemas/images/images.yaml#/definitions/Images'
       category:
         type: object
         $ref: "#/definitions/BusinessCategory"
@@ -151,10 +151,10 @@ definitions:
             type: string
       logo:
         type: object
-        $ref: './../images/image.yaml'
+        $ref: '../../schemas/images/images.yaml#/definitions/Images'
       cover_photo:
         type: object
-        $ref: './../images/image.yaml'
+        $ref: '../../schemas/images/images.yaml#/definitions/Images'
       address:
         type: object
         properties:

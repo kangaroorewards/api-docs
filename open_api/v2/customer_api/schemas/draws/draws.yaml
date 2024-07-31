@@ -34,7 +34,7 @@ definitions:
           The images attached to this draw. There are 3 available
           sizes: thumbnail, medium, and large.
         items:
-          $ref: './../images/image.yaml'
+          $ref: '../../schemas/images/images.yaml#/definitions/Images'
       enabled:
         type: boolean
         description: If this draw is enabled or not.

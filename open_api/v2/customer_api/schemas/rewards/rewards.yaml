@@ -85,7 +85,7 @@ definitions:
       images:
         type: array
         items:
-          $ref: './../images/image.yaml'
+          $ref: '../../schemas/images/images.yaml#/definitions/Images'
       never_expires_flag:
         type: boolean
       terms_conditions:
@@ -138,7 +138,7 @@ definitions:
       images:
         type: array
         items:
-          $ref: './../images/image.yaml'
+          $ref: '../../schemas/images/images.yaml#/definitions/Images'
       never_expires_flag:
         type: boolean
       terms_conditions:
