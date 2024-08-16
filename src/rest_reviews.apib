@@ -124,10 +124,12 @@ Response Body
 
 + Request (application/json)
     + Headers
+
             Authorization: Bearer <access_token>
             X-Application-Key: <X-Application-Key>
             Accept: application/vnd.kangaroorewards.api.v1+json;
             X-Store-Domain: <store_domain>;
+
 
 + Response 200 (application/json)
     + Attributes
@@ -195,12 +197,14 @@ X-Store-Domain: XXX.com
 }
 ```
 
-+ Request
++ Request (application/json)
     + Headers
+
             Authorization: Bearer <access_token>
             X-Application-Key: <X-Application-Key>
             Accept: application/vnd.kangaroorewards.api.v1+json;
             X-Store-Domain: <store_domain>;
+
 
     + Attributes (ReviewCreate)
 + Response 204 (No Content)
@@ -239,10 +243,11 @@ X-Store-Domain: XXX.com
 ```
 + Request (application/json)
     + Headers
+
             Authorization: Bearer <access_token>
             X-Application-Key: <X-Application-Key>
-            Accept: application/vnd.kangaroorewards.api.v1+json
-            X-Store-Domain: <store_domain>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Store-Domain: <store_domain>;
 
 + Parameters
     + id: `61808119-7567-41c5-a183-389bf9819ccb` (required, string) - The unique ID of the review.
@@ -316,13 +321,16 @@ Response Body
 
 + Request (application/json)
     + Headers
+
             Authorization: Bearer <access_token>
             X-Application-Key: <X-Application-Key>
             Accept: application/vnd.kangaroorewards.api.v1+json;
             X-Store-Domain: <store_domain>;
+
 + Attributes
-    + file_types: (array[string])
+    + file_types (array)
         + `image/jpeg` (string) - The file type that's going to upload.
+        + `image/png` (string) - Another possible file type.
 
 + Response 200 (application/json)
     + Attributes
@@ -394,10 +402,12 @@ Response Body
 
 + Request (application/json)
     + Headers
+
             Authorization: Bearer <access_token>
             X-Application-Key: <X-Application-Key>
             Accept: application/vnd.kangaroorewards.api.v1+json;
             X-Store-Domain: <store_domain>;
+
 
 + Response 200 (application/json)
     + Attributes
@@ -435,8 +445,9 @@ X-Store-Domain: XXX.com
 }
 ```
 
-+ Request
++ Request (application/json)
     + Headers
+
             Authorization: Bearer <access_token>
             X-Application-Key: <X-Application-Key>
             Accept: application/vnd.kangaroorewards.api.v1+json;
@@ -450,12 +461,9 @@ X-Store-Domain: XXX.com
 
 + Response 422 (application/json)
     + Attributes
-        + review_id: (array)
-            + `The review id field is required.` (string)
-        + body: (array)
-            + `The review body field is required.` (string)
-        + public: (array)
-            + `The public field is required.` (string)
+        + review_id: `2a6c99d6-195c-47a1-86ee-9b3f5ae8bdaf` (string) - The review id field is required.
+        + body: `Thanks for your feedback.` (string) - `The review body field is required.`
+        + public: true (boolean) - The public field is required.
 
 ## Review Analysis [/reviews-analysis]
 
@@ -535,12 +543,14 @@ Response Body
 	}
 }
 ```
-+ Request
++ Request (application/json)
     + Headers
+
             Authorization: Bearer <access_token>
             X-Application-Key: <X-Application-Key>
             Accept: application/vnd.kangaroorewards.api.v1+json;
             X-Store-Domain: <store_domain>;
+
 
 + Response 200 (application/json)
     + Attributes
@@ -551,9 +561,9 @@ Response Body
 
 + Response 422 (application/json)
     + Attributes
-        + date_from: (array)
+        + date_from (array)
             + `The date from does not match the format Y-m-d\\TH:i:sP.` (string)
-        + date_to: (array)
+        + date_to (array)
             + `The date to does not match the format Y-m-d\\TH:i:sP.` (string)
 
 ## Reviews app settings [/review-app-settings]
@@ -608,12 +618,14 @@ Response Body
 }
 ```
 
-+ Request
++ Request (application/json)
     + Headers
+
             Authorization: Bearer <access_token>
             X-Application-Key: <X-Application-Key>
             Accept: application/vnd.kangaroorewards.api.v1+json;
             X-Store-Domain: <store_domain>;
+
 
 + Response 200 (application/json)
     + Attributes
@@ -622,7 +634,6 @@ Response Body
 + Response 401 (application/json)
     + Attributes (Reviews Error 401)
 
-## Reviews app settings [/review-app-settings]
 ### Update reviews app settings[PATCH]
 
 *Body parameters*
@@ -731,8 +742,9 @@ Response Body
 }
 ```
 
-+ Request
++ Request (application/json)
     + Headers
+
             Authorization: Bearer <access_token>
             X-Application-Key: <X-Application-Key>
             Accept: application/vnd.kangaroorewards.api.v1+json;
@@ -747,9 +759,9 @@ Response Body
 
 + Response 422 (application/json)
     + Attributes
-        + coupon_min_rating: (array)
+        + coupon_min_rating (array)
             + `The coupon min rating may not be greater than 5.` (string)
-        + carousel_max_slides: (array)
+        + carousel_max_slides (array)
             + `The selected carousel max slides is invalid.` (string)
 
 # Data Structures
@@ -767,7 +779,7 @@ Response Body
 + product_title: null (string) - Pos system product title.
 + photos (array[object])
     + `https://storage.googleapis.com/reviews/11eXX` (string) - The uploaded photo URL
-+ videos: (array[object])
++ videos (array[object])
     + `https://storage.googleapis.com/reviews/11eXX` (string) - The uploaded video URL
 + type: 1 (number) - Review type, 1: product review, 2: website review.
 + review_source: 1 (number) - 1: website page, 2: review widget
@@ -787,14 +799,14 @@ Response Body
 + comment: `Very nice and cute.` (string) - review
 + product_id: `5157526` (string) - product id in the integration system
 + product_title: `Shoes` (string) - product title
-+ product_details: (object)
++ product_details (object)
     + image: `https://XX/XX.png` (string) - product image url
     + price: 26.99 (number)
     + description: `XXX` - product description
-+ photos: (array)
++ photos (array)
     + `https://XX/XX` (string) - the uploaded photo URL
   ,
-+ videos: (array)
++ videos (array)
     + `https://XX/XX` (string) - the uploaded video URL
 + type: 1 (number)
 + review_source: 1 (number)
@@ -865,7 +877,7 @@ Response Body
 + review_auto_reminder_days: 12 (number) - The number of days for auto send out reminder email
 + display_customer_info: true (boolean) - Display the reviewers name and email to the website
 + display_verified_buyer: true (boolean) - Display the verified buyer badge to the website
-+ word_blocks: (array) - A list of words that will automatically cause a review to be unpublished if any of them are included in the review
++ word_blocks (array) - A list of words that will automatically cause a review to be unpublished if any of them are included in the review
     + `XX` (string)
 
 
