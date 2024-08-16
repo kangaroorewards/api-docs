@@ -483,3 +483,10 @@ paths:
       operationId: getUserBusinessUsedCoupons
       tags:
         - core
+
+  publicDepositGiftCard:
+    patch:
+      x-file: publicDepositGiftCard.yaml
+      operationId: publicDepositGiftCard
+      tags:
+        - core

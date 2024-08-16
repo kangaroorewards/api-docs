@@ -1,0 +1,35 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /public/users/{user_id}/messages/{message_id}?intent=accept_giftcard:
+    patch:
+      summary: Deposit a gift card using public API
+      operationId: publicDepositGiftCard
+      tags:
+        - publicDepositGiftCard
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          type: string
+        - in: path
+          name: message_id
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Public gift card deposit response
+          schema:
+            $ref: "schemas/messages/transferMessages.yaml#/definitions/TransferActionResultModel"
