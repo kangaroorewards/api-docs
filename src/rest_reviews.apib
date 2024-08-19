@@ -5,7 +5,7 @@ Before using the reviews API, please make sure you have connected the Kangaroo R
 
 All the following endpoints require header `X-Store-Domain`
 
-The X-Store-Domain needs to match the website that is connected to the Kangaroo Reviews app. ex: "X-Store-Domain:XXX.com"
+The X-Store-Domain needs to match the website that is connected to the Kangaroo Reviews app. ex: "X-Store-Domain:example.com"
 
 # Group Reviews
 
@@ -87,7 +87,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFmODNk
 X-Application-Key: eyXai0XD7SLLzaOeJW
 Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
-X-Store-Domain: XXX.com
+X-Store-Domain: example.com
 ```
 
 Response Body
@@ -171,7 +171,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLC
 X-Application-Key: eyXai0XD7SLLzaOeJW
 Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
-X-Store-Domain: XXX.com
+X-Store-Domain: example.com
 
 {
 	"reviewer_email": "ttuser062601@yopmail.com",
@@ -180,11 +180,11 @@ X-Store-Domain: XXX.com
 	"comment": "Very nice and cute",
 	"type": 1,
 	"review_source": 1,
-	"website_url": "https://XXX.com/XX/XX",
+	"website_url": "https://example.com/product/1234",
 	"product_id": "5157526",
 	"product_title": "Shoes",
 	"product_details": {
-		"image": "https://XXX.com/XXX.png",
+		"image": "https://example.com/1234.png",
 		"price": 59.99,
 		"description": "ABC"
 	},
@@ -234,7 +234,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLC
 X-Application-Key: eyXai0XD7SLLzaOeJW
 Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
-X-Store-Domain: XXX.com
+X-Store-Domain: example.com
 
 {
   "published": true,
@@ -294,7 +294,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLC
 X-Application-Key: eyXai0XD7SLLzaOeJW
 Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
-X-Store-Domain: XXX.com
+X-Store-Domain: example.com
 
 {
 	"file_types": [
@@ -365,7 +365,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLC
 X-Application-Key: eyXai0XD7SLLzaOeJW
 Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
-X-Store-Domain: XXX.com
+X-Store-Domain: example.com
 ```
 
 Response Body
@@ -436,7 +436,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLC
 X-Application-Key: eyXai0XD7SLLzaOeJW
 Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
-X-Store-Domain: XXX.com
+X-Store-Domain: example.com
 
 {
 	"review_id": "2a6c99d6-195c-47a1-86ee-9b3f5ae8bdaf",
@@ -486,7 +486,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLC
 X-Application-Key: eyXai0XD7SLLzaOeJW
 Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
-X-Store-Domain: XXX.com
+X-Store-Domain: example.com
 ```
 
 Response Body
@@ -524,7 +524,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLC
 X-Application-Key: eyXai0XD7SLLzaOeJW
 Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
-X-Store-Domain: XXX.com
+X-Store-Domain: example.com
 ```
 
 Response Body
@@ -579,7 +579,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLC
 X-Application-Key: eyXai0XD7SLLzaOeJW
 Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
-X-Store-Domain: XXX.com
+X-Store-Domain: example.com
 ```
 
 Response Body
@@ -675,7 +675,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLC
 X-Application-Key: eyXai0XD7SLLzaOeJW
 Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
-X-Store-Domain: XXX.com
+X-Store-Domain: example.com
 
 {
     "coupon_auto": true,
@@ -778,9 +778,9 @@ Response Body
 + product_id: `09383628200` (string) - Pos system product id if the review is a product review.
 + product_title: null (string) - Pos system product title.
 + photos (array[object])
-    + `https://storage.googleapis.com/reviews/11eXX` (string) - The uploaded photo URL
+    + `https://storage.googleapis.com/reviews/11exyz` (string) - The uploaded photo URL
 + videos (array[object])
-    + `https://storage.googleapis.com/reviews/11eXX` (string) - The uploaded video URL
+    + `https://storage.googleapis.com/reviews/11ezyz` (string) - The uploaded video URL
 + type: 1 (number) - Review type, 1: product review, 2: website review.
 + review_source: 1 (number) - 1: website page, 2: review widget
 + published: false (boolean) - Is the review published or not
@@ -800,17 +800,17 @@ Response Body
 + product_id: `5157526` (string) - product id in the integration system
 + product_title: `Shoes` (string) - product title
 + product_details (object)
-    + image: `https://XX/XX.png` (string) - product image url
+    + image: `https://product/1234.png` (string) - product image url
     + price: 26.99 (number)
-    + description: `XXX` - product description
+    + description: `1234` - product description
 + photos (array)
-    + `https://XX/XX` (string) - the uploaded photo URL
+    + `https://product/1234` (string) - the uploaded photo URL
   ,
 + videos (array)
-    + `https://XX/XX` (string) - the uploaded video URL
+    + `https://product/1234` (string) - the uploaded video URL
 + type: 1 (number)
 + review_source: 1 (number)
-+ website_url: `https://XX/XX.com` (string)
++ website_url: `https://product/1234.com` (string)
 
 
 ## ReviewUpdate (object)
@@ -878,7 +878,8 @@ Response Body
 + display_customer_info: true (boolean) - Display the reviewers name and email to the website
 + display_verified_buyer: true (boolean) - Display the verified buyer badge to the website
 + word_blocks (array) - A list of words that will automatically cause a review to be unpublished if any of them are included in the review
-    + `XX` (string)
+    + `keyword1` (string)
+	+ `keyword2` (string)
 
 
 ## Reviews Error 401 (object)
