@@ -13,7 +13,7 @@ consumes:
 produces:
   - application/json
 paths:
-  /public/users/{user_id}/messages/{message_id}?intent=accept_giftcard:
+  /public/users/{userId}/messages/{messageId}?intent=accept_giftcard:
     patch:
       summary: Deposit a gift card using public API
       operationId: publicDepositGiftCard
@@ -21,11 +21,11 @@ paths:
         - publicDepositGiftCard
       parameters:
         - in: path
-          name: user_id
+          name: userId
           required: true
           type: string
         - in: path
-          name: message_id
+          name: messageId
           required: true
           type: string
       responses:
