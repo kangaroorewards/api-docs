@@ -36,10 +36,6 @@ paths:
           required: false
           type: string
         - in: formData
-          name: intent
-          required: true
-          type: string
-        - in: formData
           name: token
           required: true
           type: string
