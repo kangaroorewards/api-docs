@@ -309,63 +309,69 @@ Accept: application/vnd.kangaroorewards.api.v1+json;
 Content-Type: application/json
 
 {
-	"name": "User sign up",
-	"published_at": "2024-04-22T01:01:01+00:00",
-	"expires_at": "2024-12-10T01:01:01+00:00",
-	"targeted_flag": 0,
-	"triggers": [
-		{
-			"main_trigger_id": 1,
-		}
-	],
-	"actions": [
-		{
-			"main_action_id": 6,
-			"temp_id": 1,
-			"temp_parent_id": null,
-			"conditions": [
-				{
-					"id": 1,
-					"operator": "eq",
-					"value": "11eb82ae6d3f1ec4b847e2865c66d9cc"
-				},
-				{
-					"id": 2,
-					"operator": "in",
-					"value": [
-						1,
-						2
-					]
-				}
-			]
-		},
-		{
-			"main_action_id": 3,
-			"temp_id": 2,
-			"temp_parent_id": 1,
-			"conditions_met": 1,
-			"relations": [
-				{
-					"label": "points",
-					"entity_type": "points",
-					"value":100
-				}
-			]
-		},
-		{
-			"main_action_id": 3,
-			"temp_id": 3,
-			"temp_parent_id": 1,
-			"conditions_met": false,
-			"relations": [
-				{
-					"label": "points",
-					"entity_type": "points",
-					"value":10
-				}
-			]
-		}
-	]
+    "expires_at": "2024-12-10T01:01:01+00:00",
+    "name": "User sign up",
+    "published_at": "2024-04-22T01:01:01+00:00",
+    "targeted_flag": 0,
+    "triggers":
+    [
+        {
+            "main_trigger_id": 1
+        }
+    ],
+    "actions":
+    [
+        {
+            "conditions":
+            [
+                {
+                    "id": 1,
+                    "operator": "eq",
+                    "value": "11eb82ae6d3f1ec4b847e2865c66d9cc"
+                },
+                {
+                    "id": 2,
+                    "operator": "in",
+                    "value":
+                    [
+                        1,
+                        2
+                    ]
+                }
+            ],
+            "main_action_id": 6,
+            "temp_id": 1,
+            "temp_parent_id": null
+        },
+        {
+            "conditions_met": 1,
+            "main_action_id": 3,
+            "relations":
+            [
+                {
+                    "entity_type": "points",
+                    "label": "points",
+                    "value": 100
+                }
+            ],
+            "temp_id": 2,
+            "temp_parent_id": 1
+        },
+        {
+            "conditions_met": false,
+            "main_action_id": 3,
+            "relations":
+            [
+                {
+                    "entity_type": "points",
+                    "label": "points",
+                    "value": 10
+                }
+            ],
+            "temp_id": 3,
+            "temp_parent_id": 1
+        }
+    ]
 }
 ```
 
