@@ -12,7 +12,7 @@ definitions:
           $ref: '#/definitions/Offer'
   PublicOfferResponse:
     type: "object"
-    x-model: PublicOfferModel
+    x-model: PublicOfferResponseModel
     required:
       - data
     properties:

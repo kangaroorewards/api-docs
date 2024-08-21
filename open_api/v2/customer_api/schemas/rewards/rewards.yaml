@@ -9,7 +9,7 @@ definitions:
         $ref: '#/definitions/UserRewardsData'
   PublicRewardResponse:
     type: "object"
-    x-model: PublicRewardModel
+    x-model: PublicRewardResponseModel
     required:
       - data
     properties:
