@@ -162,7 +162,7 @@ definitions:
     properties:
       id:
         type: integer
-        description: A unique ID identifying this reward
+        description: A unique ID identifying this offer
       points:
         type: integer
         format: int64

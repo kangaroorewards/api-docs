@@ -23,4 +23,4 @@ paths:
         "200":
           description: Public offers list
           schema:
-            $ref: 'schemas/offers/offers.yaml#/definitions/OffersResponse'
+            $ref: 'schemas/offers/offers.yaml#/definitions/PublicOfferResponse'
