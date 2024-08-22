@@ -41,6 +41,17 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Offer'
+  PublicOffersResponse:
+    type: "object"
+    x-model: PublicOffersModel
+    properties:
+      description: "Contains a list of offers available to all users"
+      data:
+        $ref: '#/definitions/Offers'
+  Offers:
+    type: array
+    items:
+      $ref: '#/definitions/Offer'
   Offer:
     type: "object"
     x-model: OfferModel
