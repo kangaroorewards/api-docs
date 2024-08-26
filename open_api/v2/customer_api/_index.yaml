@@ -490,3 +490,10 @@ paths:
       operationId: publicDepositGiftCard
       tags:
         - core
+
+  userPinResetWithToken:
+    post:
+      x-file: userPinResetWithToken.yaml
+      operationId: resetPinWithToken
+      tags:
+        - core

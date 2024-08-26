@@ -1,0 +1,42 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/pincode/reset:
+    post:
+      summary: |
+        Reset a customer PIN. Requires both a token and
+        either a phone number or email address
+      operationId: resetPinWithToken
+      consumes:
+        - application/x-www-form-urlencoded
+      tags:
+        - userPinResetWithToken
+      parameters:
+        - in: formData
+          name: token
+          required: true
+          type: string
+        - in: formData
+          name: pin_code
+          required: true
+          type: string
+        - in: formData
+          name: use_same_pin
+          required: false
+          type: boolean
+      responses:
+        "200":
+          description: |
+            User PIN reset response.
