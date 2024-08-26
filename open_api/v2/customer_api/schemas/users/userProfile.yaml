@@ -10,6 +10,14 @@ definitions:
       included:
         description: "Contains user balance data"
         $ref: '#/definitions/UserProfileInclude'
+  UserVerificationResponse:
+    type: "object"
+    x-model: UserVerificationResponseModel
+    description: User Profile model class containing user data
+    properties:
+      data:
+        description: "Contains all user profile data"
+        $ref: '#/definitions/UserProfileData'
   UserDetails:
     type: "object"
     x-model: UserDetailsModel
@@ -82,6 +90,45 @@ definitions:
       phone_verified:
         type: boolean
         description: Denotes whether the phone number for this user has been verified.
+      business:
+        type: "object"
+        $ref: "../business/business.yaml#/definitions/BusinessData"
+      profiles:
+        type: array
+        description: A list business this user is associated to
+        items:
+          $ref: "#/definitions/ProfilesData"
+  ProfilesData:
+    type: "object"
+    x-model: ProfilesDataModel
+    properties:
+      id:
+        type: string
+        description: Unique user ID.
+      email:
+        type: string
+        description: Email address identifying this user.
+      phone:
+        type: string
+        description: Phone number associated with this user.
+      first_name:
+        type: string
+        description: First name associated with this user.
+      last_name:
+        type: string
+        description: Last name associated with this user.
+      qrcode:
+        type: string
+        description: Unique QR code identifying this user.
+      created_at:
+        type: string
+        description: Date the account for this user was created.
+      master_account:
+        type: boolean
+        description: Denotes whether this is the master account or not
+      business:
+        type: "object"
+        $ref: "../business/business.yaml#/definitions/BusinessData"
   UserProfileInclude:
     type: "object"
     description: Extra user profile data

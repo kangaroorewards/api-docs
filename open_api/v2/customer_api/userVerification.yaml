@@ -44,4 +44,4 @@ paths:
           description: |
             User verification request.
           schema:
-            $ref: "schemas/users/userProfile.yaml#/definitions/UserProfile"
+            $ref: "schemas/users/userProfile.yaml#/definitions/UserVerificationResponse"
