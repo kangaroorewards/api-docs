@@ -20,7 +20,7 @@ paths:
         either a phone number or email address
       operationId: resetPinWithToken
       consumes:
-        - application/x-www-form-urlencoded
+        - application/json
       tags:
         - userPinResetWithToken
       parameters:
