@@ -29,18 +29,23 @@ paths:
           required: true
           schema:
             type: object
-            required:
-              - token
-              - pin_code
-              - use_same_pin
-            properties:
-              token:
-                type: string
-              pin_code:
-                type: string
-              use_same_pin:
-                type: boolean
+            $ref: '#/definitions/PinResetWithTokenRequest'
       responses:
         "200":
           description: |
             User PIN reset response.
+definitions:
+  PinResetWithTokenRequest:
+    type: object
+    x-model: PinResetWithTokenRequestModel
+    required:
+      - token
+      - pin_code
+      - use_same_pin
+    properties:
+      token:
+        type: string
+      pin_code:
+        type: string
+      use_same_pin:
+        type: boolean
