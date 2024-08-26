@@ -24,18 +24,22 @@ paths:
       tags:
         - userPinResetWithToken
       parameters:
-        - in: formData
-          name: token
+        - in: body
+          name: pinResetWithTokenRequest
           required: true
-          type: string
-        - in: formData
-          name: pin_code
-          required: true
-          type: string
-        - in: formData
-          name: use_same_pin
-          required: false
-          type: boolean
+          schema:
+            type: object
+            required:
+              - token
+              - pin_code
+              - use_same_pin
+            properties:
+              token:
+                type: string
+              pin_code:
+                type: string
+              use_same_pin:
+                type: boolean
       responses:
         "200":
           description: |
