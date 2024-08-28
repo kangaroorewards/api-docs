@@ -497,3 +497,10 @@ paths:
       operationId: resetPinWithToken
       tags:
         - core
+
+  getPublicCampaign:
+    patch:
+      x-file: getPublicCampaign.yaml
+      operationId: getPublicCampaign
+      tags:
+        - core
