@@ -152,6 +152,9 @@ definitions:
       branch:
         type: object
         $ref: './../business/business.yaml#/definitions/Branch'
+      business:
+        type: object
+        $ref: "../business/business.yaml#/definitions/BusinessData"
   RewardTranslation:
     type: object
     properties:

@@ -281,6 +281,9 @@ definitions:
       branch:
         type: object
         $ref: './../business/business.yaml#/definitions/Branch'
+      business:
+        type: object
+        $ref: "../business/business.yaml#/definitions/BusinessData"
   OfferTranslation:
     type: object
     description: A language translation of this offer.
