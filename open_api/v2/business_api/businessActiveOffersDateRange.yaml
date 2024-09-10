@@ -1,0 +1,35 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Business Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /offers?offer_start_date=gte|{startDate}&offer_end_date=lte|{endDate}:
+    get:
+      summary: Get a list of business active offers between two dates
+      operationId: getBusinessActiveOffersDateRange
+      tags:
+        - businessActiveOffersDateRange
+      parameters:
+        - in: path
+          name: startDate
+          type: string
+          required: true
+        - in: path
+          name: endDate
+          type: string
+          required: true
+      responses:
+        "200":
+          description: Business active offer list between two dates
+          schema:
+            $ref: 'schemas/businessOffers/businessOffers.yaml#/definitions/OffersResponse'

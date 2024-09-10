@@ -346,3 +346,21 @@ paths:
       operationId: createNewPassword
       tags:
         - core
+  businessCampaignsDateRange:
+    get:
+      x-file: businessCampaignsDateRange.yaml
+      operationId: getBusinessCampaignsDateRange
+      tags:
+        - core
+  businessActiveOffersDateRange:
+    get:
+      x-file: businessActiveOffersDateRange.yaml
+      operationId: getBusinessActiveOffersDateRange
+      tags:
+        - core
+  businessActiveRewardsDateRange:
+    get:
+      x-file: businessActiveRewardsDateRange.yaml
+      operationId: getBusinessActiveRewardsDateRange
+      tags:
+        - core

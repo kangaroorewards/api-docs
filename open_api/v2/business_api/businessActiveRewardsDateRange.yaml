@@ -1,0 +1,35 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Business Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /rewards?start_date={startDate}&end_date={endDate}:
+    get:
+      summary: Get a list of business rewards that are active between two dates
+      operationId: getBusinessActiveRewardsDateRange
+      tags:
+        - businessActiveRewardsDateRange
+      parameters:
+        - in: path
+          name: startDate
+          type: string
+          required: true
+        - in: path
+          name: endDate
+          type: string
+          required: true
+      responses:
+        "200":
+          description: Business active reward list between two dates
+          schema:
+            $ref: 'schemas/businessRewards/businessRewards.yaml#/definitions/RewardsResponse'

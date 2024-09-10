@@ -1,0 +1,35 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Business Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /campaigns?start_date={startDate}&end_date={endDate}:
+    get:
+      summary: Get a list of business marketing campaigns between two dates
+      operationId: getBusinessCampaignsDateRange
+      tags:
+        - businessCampaignsDateRange
+      parameters:
+        - in: path
+          name: startDate
+          type: string
+          required: true
+        - in: path
+          name: endDate
+          type: string
+          required: true
+      responses:
+        "200":
+          description: Business marketing campaigns between two dates
+          schema:
+            $ref: 'schemas/businessCampaigns/businessCampaigns.yaml#/definitions/CampaignsResponse'
