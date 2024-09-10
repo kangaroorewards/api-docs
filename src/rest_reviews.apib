@@ -100,6 +100,7 @@ Response Body
 			"reviewer_email": "ttuser062601@yopmail.com",
 			"reviewer_first_name": "Lisa",
 			"rating": 5,
+			"title": null,
 			"comment": "Great leggings. For size reference, I ordered a medium and am 5’9, 155 lbs, with a long torso.",
 			"product_id": "09383628200",
 			"product_title": null,
@@ -148,6 +149,7 @@ Response Body
 |reviewer_email|string|`Required` Between 1 and 255 characters in length|
 |reviewer_first_name|string|`Required` Between 1 and 255 characters in length|
 |rating|integer|`Required` Between 1 and 5|
+|title|string|`Optional`|
 |comment|string|`Required` Minimum 15 characters|
 |product_id|string|`Optional` Required if the type is 1 - product review|
 |product_title|string|`Optional`|
@@ -177,6 +179,7 @@ X-Store-Domain: example.com
 	"reviewer_email": "ttuser062601@yopmail.com",
 	"reviewer_first_name": "Lisa",
 	"rating": 4,
+	"title": "Good",
 	"comment": "Very nice and cute",
 	"type": 1,
 	"review_source": 1,
@@ -207,7 +210,7 @@ X-Store-Domain: example.com
 
 
     + Attributes (ReviewCreate)
-+ Response 204 (No Content)
++ Response 200 (No Content)
 
 + Response 401 (application/json)
     + Attributes (Reviews Error 401)
@@ -255,7 +258,7 @@ X-Store-Domain: example.com
 + Attributes (ReviewUpdate)
     + published: true (boolean) - Publish or unpublish the review
 
-+ Response 204 (not content)
++ Response 200 (not content)
 
 + Response 401 (application/json)
     + Attributes (Reviews Error 401)
@@ -378,6 +381,7 @@ Response Body
 			"reviewer_email": "ttuser062601@yopmail.com",
 			"reviewer_first_name": "Lisa",
 			"rating": 5,
+			"title": null,
 			"comment": "Great leggings. For size reference, I ordered a medium and am 5’9, 155 lbs, with a long torso.",
 			"product_id": "09383628200",
 			"product_title": null,
@@ -454,117 +458,16 @@ X-Store-Domain: example.com
             X-Store-Domain: <store_domain>;
 
     + Attributes (ReviewReplyCreate)
-+ Response 204 (No Content)
++ Response 200 (No Content)
 
 + Response 401 (application/json)
     + Attributes (Reviews Error 401)
 
 + Response 422 (application/json)
     + Attributes
-        + review_id: `2a6c99d6-195c-47a1-86ee-9b3f5ae8bdaf` (string) - The review id field is required.
-        + body: `Thanks for your feedback.` (string) - `The review body field is required.`
-        + public: true (boolean) - The public field is required.
-
-## Review Analysis [/reviews-analysis]
-
-### List reviews analysis[GET]
-
-*Body parameters*
-|Name|Type|Description|
-|-----|----|-----------|
-|date_from|string|`Optional` Get analysis start by date_from. Format Y-m-d\\TH:i:sP|
-|date_to|string|`Optional` Get analysis end by date_to. Format Y-m-d\\TH:i:sP|
->Note: Both date_from and date_to are required to get the custom range reviews analysis.
->By default, if one of date_from or date_to is not be passed, it will get back the last 7, 14, 30 days report.
-
-Example
-
-```
-GET /reviews-analysis HTTP/1.1
-Host: api.kangaroorewards.com
-Authorization: Bearer eyJ0eXAiOiJKV1QiLC
-X-Application-Key: eyXai0XD7SLLzaOeJW
-Accept: application/vnd.kangaroorewards.api.v1+json;
-Content-Type: application/json
-X-Store-Domain: example.com
-```
-
-Response Body
-```
-{
-	"data": {
-		"last7Days": {
-			"reviews_count": 2,
-			"requests_count": 0,
-			"average_rating": 4,
-			"revenue": 0
-		},
-		"last14Days": {
-			"reviews_count": 2,
-			"requests_count": 0,
-			"average_rating": 4,
-			"revenue": 0
-		},
-		"last30Days": {
-			"reviews_count": 8,
-			"requests_count": 0,
-			"average_rating": 4.13,
-			"revenue": 749.95
-		},
-		"customRange": null
-	}
-}
-```
-Example for custom range
-
-```
-GET /reviews-analysis?date_from=2024-01-01T00%3A00%3A00%2B00%3A00&date_to=2024-09-01T00%3A00%3A00%2B00%3A00 HTTP/1.1
-Host: api.kangaroorewards.com
-Authorization: Bearer eyJ0eXAiOiJKV1QiLC
-X-Application-Key: eyXai0XD7SLLzaOeJW
-Accept: application/vnd.kangaroorewards.api.v1+json;
-Content-Type: application/json
-X-Store-Domain: example.com
-```
-
-Response Body
-```
-{
-	"data": {
-		"last7Days": null,
-		"last14Days": null,
-		"last30Days": null,
-		"customRange": {
-			"reviews_count": 895,
-			"requests_count": 356,
-			"average_rating": 3.5,
-			"revenue": 3836
-		}
-	}
-}
-```
-+ Request (application/json)
-    + Headers
-
-            Authorization: Bearer <access_token>
-            X-Application-Key: <X-Application-Key>
-            Accept: application/vnd.kangaroorewards.api.v1+json;
-            X-Store-Domain: <store_domain>;
-
-
-+ Response 200 (application/json)
-    + Attributes
-        - data(ReviewAnalysis)
-
-+ Response 401 (application/json)
-    + Attributes (Reviews Error 401)
-
-+ Response 422 (application/json)
-    + Attributes
-        + date_from (array)
-            + `The date from does not match the format Y-m-d\\TH:i:sP.` (string)
-        + date_to (array)
-            + `The date to does not match the format Y-m-d\\TH:i:sP.` (string)
+        + review_id: `The review id field is required`.
+        + body: `The review body field is required.`
+        + public: `The public field is required`.
 
 ## Reviews app settings [/review-app-settings]
 
@@ -592,6 +495,10 @@ Response Body
 		"coupon_auto": true,
 		"coupon_min_rating": null,
 		"coupon_user_segment": 0,
+		"coupon_min_photos": null,
+		"coupon_min_videos": null,
+		"coupon_min_chars": null,
+		"coupon_min_title_chars": null,
 		"coupon_type": 3,
 		"coupon_value": 12.15,
 		"coupon_prefix": null,
@@ -613,7 +520,9 @@ Response Body
 		"review_auto_reminder_days": 12,
 		"display_customer_info": true,
 		"display_verified_buyer": true,
-		"word_blocks": []
+		"word_blocks": [],
+		"community_enabled": false,
+        "community_reply_permission": 1
 	}
 }
 ```
@@ -642,6 +551,10 @@ Response Body
 |coupon_auto|boolean|`Optional` Auto send out the coupon by email to the reviewers|
 |coupon_min_rating|integer|`Optional` To be eligible for a coupon, the minimum review rating required|
 |coupon_user_segment|integer|`Optional` Any reviewer can be eligible for a coupon, 1: only verified buyer can be eligible for a coupon|
+|coupon_min_photos|integer|`Optional` To be eligible for a coupon, the minimum number of review photos is required in the review.|
+|coupon_min_videos|integer|`Optional` To be eligible for a coupon, the minimum number of review videos is required in the review.|
+|coupon_min_title_chars|integer|`Optional` To be eligible for a coupon, the minimum number of number of characters is required in the review title.|
+|coupon_min_chars|integer|`Optional` To be eligible for a coupon, the minimum number of number of characters is required in the review.|
 |coupon_type|integer|`Optional` Coupon type:1 - Amount; 2 - Percentage; 3 - FreeShipping|
 |coupon_value|number|`Optional` The discount amount|
 |coupon_prefix|string|`Optional` |
@@ -665,6 +578,8 @@ Response Body
 |display_verified_buyer|boolean|`Optional` Display the verified buyer badge to the website|
 |word_blocks|array|`Optional` A list of words that will automatically cause a review to be unpublished if any of them are included in the review|
 |word_blocks.*|string|`Optional` |
+|community_enabled|boolean|`Optional` Enable community(Q/A) section |
+|community_reply_permission|integer|`Optional` (1, 2) Who can reply to the questions 1: business employee, 2: business employee + verified buyer|
 
 Example
 
@@ -681,6 +596,10 @@ X-Store-Domain: example.com
     "coupon_auto": true,
     "coupon_min_rating": null,
     "coupon_user_segment": 0,
+    "coupon_min_photos": null,
+    "coupon_min_videos": null,
+    "coupon_min_chars": null,
+    "coupon_min_title_chars": null,
     "coupon_type": 3,
     "coupon_value": 12.15,
     "coupon_prefix": null,
@@ -702,7 +621,9 @@ X-Store-Domain: example.com
     "review_auto_reminder_days": 12,
     "display_customer_info": true,
     "display_verified_buyer": true,
-    "word_blocks": []
+    "word_blocks": [],
+    "community_enabled": false,
+    "community_reply_permission": 1
 }
 ```
 
@@ -716,6 +637,10 @@ Response Body
 		"coupon_auto": true,
 		"coupon_min_rating": null,
 		"coupon_user_segment": 0,
+		"coupon_min_photos": null,
+		"coupon_min_videos": null,
+		"coupon_min_chars": null,
+		"coupon_min_title_chars": null,
 		"coupon_type": 3,
 		"coupon_value": 12.15,
 		"coupon_prefix": null,
@@ -737,7 +662,9 @@ Response Body
 		"review_auto_reminder_days": 12,
 		"display_customer_info": true,
 		"display_verified_buyer": true,
-		"word_blocks": []
+		"word_blocks": [],
+		"community_enabled": false,
+		"community_reply_permission": 1
 	}
 }
 ```
@@ -764,6 +691,116 @@ Response Body
         + carousel_max_slides (array)
             + `The selected carousel max slides is invalid.` (string)
 
+## Questions [/questions]
+
+### Create a question [POST]
+
+*Body parameters*
+|Name|Type|Description|
+|-----|----|-----------|
+|email|string|`Optional` Between 1 and 255 characters in length|
+|first_name|string|`Optional` Between 1 and 255 characters in length|
+|body|string|`Required` Minimum 15 characters|
+|product_id|string|`Optional` Required if the type is 1 - product review|
+|type|integer|`Required` (1, 2) 1: product question, 2: website question |
+|source|integer|`Required` (1, 2) The platform where the question was left. 1: website page, 2: review widget |
+
+Example create a question
+
+```
+POST /questions HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+X-Store-Domain: example.com
+
+{
+	"email": "ttuser062601@yopmail.com",
+	"first_name": "Lisa",
+	"body": "What are the key features and benefits of this product?",
+	"type": 1,
+	"source": 1,
+	"product_id": "5157526"
+}
+```
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer <access_token>
+            X-Application-Key: <X-Application-Key>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Store-Domain: <store_domain>;
+
+
+    + Attributes (QuestionCreate)
++ Response 200 (No Content)
+
++ Response 401 (application/json)
+    + Attributes (Reviews Error 401)
+
++ Response 422 (application/json)
+    + Attributes
+        + body (array)
+            + `The body field is required.` (string)
+        + source (array)
+            + `The source field is required.` (string)
+
+## Question Replies [/question-replies]
+
+### Create a reply[POST]
+
+*Body parameters*
+|Name|Type|Description|
+|-----|----|-----------|
+|question_id|string|`Required` The question id that reply to.|
+|body|string|`Required` Reply content|
+|email|string|`Optional`|
+
+Example create a reply
+
+```
+POST /question-replies HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+X-Store-Domain: example.com
+
+{
+	"question_id": "603b051e-9ba0-49cf-a111-b9f622c5c9a6",
+    "body": "Reply"
+	"email": "XXX@example.com"
+}
+```
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer <access_token>
+            X-Application-Key: <X-Application-Key>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+            X-Store-Domain: <store_domain>;
+
+    + Attributes (QuestionReplyCreate)
++ Response 200 (No Content)
+
++ Response 401 (application/json)
+    + Attributes (Reviews Error 401)
+
++ Response 403 (application/json)
+    + Attributes (Reviews Error 403)
+
++ Response 422 (application/json)
+    + Attributes
+        + question_id(array)
+            + `The question id field is required.` (string)
+        + body(array)
+            + `The body field is required.` (string)
+
 # Data Structures
 
 ## ReviewsListResponse(object)
@@ -774,6 +811,7 @@ Response Body
 + reviewer_email: `ttuser062601@yopmail.com` (string)
 + reviewer_first_name: `Lisa` (string)
 + rating: 5 (number)
++ title: `Good` (string)
 + comment: `Great leggings. For size reference, I ordered a medium and am 5’9, 155 lbs, with a long torso.` (string) - The review content.
 + product_id: `09383628200` (string) - Pos system product id if the review is a product review.
 + product_title: null (string) - Pos system product title.
@@ -796,6 +834,7 @@ Response Body
 + reviewer_email: `ttuser062601@yopmail.com` (string) - reviewer's email
 + reviewer_first_name: `Lisa` (string) - reviewer's first name
 + rating: 5 (number),
++ title: `Good` (string) - review title
 + comment: `Very nice and cute.` (string) - review
 + product_id: `5157526` (string) - product id in the integration system
 + product_title: `Shoes` (string) - product title
@@ -826,28 +865,6 @@ Response Body
 + body: `Thanks for your feedback.` (string) - The reply content
 + public: true (boolean) - public or private reply
 
-## ReviewAnalysis (object)
-+ last7Days (object)
-    + reviews_count: 100 (number) - The total number of reviews in the last 7 days
-    + requests_count: 562 (number) - The total number of requested in the last 7 days
-    + average_rating: 4 (number) - The average rating in the last 7 days
-    + revenue: 15369 (number) - The total revenue in the last 7 days
-+ last14Days (object)
-    + reviews_count: 343 (number) - The total number of reviews in the last 14 days
-    + requests_count: 1589 (number) - The total number of requested in the last 14 days
-    + average_rating: 4.5 (number) - The average rating in the last 14 days
-    + revenue: 35369 (number) - The total revenue in the last 14 days
-+ last30Days (object)
-    + reviews_count: 584 (number) - The total number of reviews in the last 30 days
-    + requests_count: 14570 (number) - The total number of requested in the last 30 days
-    + average_rating: 3.3 (number) - The average rating in the last 30 days
-    + revenue: 105369 (number) - The total revenue in the last 30 days
-+ customRange (object)
-    + reviews_count: 25 (number) - The total number of reviews in the custom range
-    + requests_count: 254 (number) - The total number of requested in the custom range
-    + average_rating: 3.6 (number) - The average rating in the the custom range
-    + revenue: 14293.25 (number) - The total revenue in the custom range
-
 ## ReviewAppSettings (object)
 
 + id: 1(number) - The id of review app settings
@@ -856,6 +873,10 @@ Response Body
 + coupon_auto: true (boolean) - Auto send out the coupon by email to the reviewers
 + coupon_min_rating: 1 (number) - To be eligible for a coupon, the minimum review rating required
 + coupon_user_segment: 0 (number) - 0: Any reviewer can be eligible for a coupon, 1: only verified buyer can be eligible for a coupon
++ coupon_min_photos: 1 (number) - To be eligible for a coupon, the minimum number of review photos is required in the review.
++ coupon_min_videos: 1 (number) - To be eligible for a coupon, the minimum number of review videos is required in the review.
++ coupon_min_chars: 1 (number) - To be eligible for a coupon, the minimum number of characters is required in the review.
++ coupon_min_title_chars: 1 (number) - To be eligible for a coupon, the minimum number of characters is required in the review title.
 + coupon_type: 3 (number) - Coupon type:1 - Amount; 2 - Percentage; 3 - FreeShipping
 + coupon_value: 10 (number)
 + coupon_prefix: `KR` (string)
@@ -880,6 +901,22 @@ Response Body
 + word_blocks (array) - A list of words that will automatically cause a review to be unpublished if any of them are included in the review
     + `keyword1` (string)
 	+ `keyword2` (string)
++ community_enabled: false (boolean) - Display the verified buyer badge to the website
++ community_reply_permission: 1 (number) - Who can reply to the questions. 1: business employee, 2: business employee + verified buyer
+
+## QuestionCreate(object)
++ email: `ttuser062601@yopmail.com` (string)
++ first_name: `Lisa` (string)
++ body: `What are the key features and benefits of this product?` (string) - question
++ product_id: `5157526` (string) - product id in the integration system
++ type: 1 (number) - 1: product question 2: general question
++ source: 1 (number) - 1: website 2: widget
+
+
+## QuestionReplyCreate(object)
++ question_id: `603b051e-9ba0-49cf-a111-b9f622c5c9a6` (string) - The question id that your are trying to reply to.
++ body: `Reply` (string) - The reply content
++ email: `XXX@example.com` (string) - email address
 
 
 ## Reviews Error 401 (object)
@@ -888,6 +925,13 @@ Response Body
     + status_code: `401` (number)
     + message: `Unauthenticated.` (string)
     + description: `Unauthenticated.` (string)
+
+## Reviews Error 403 (object)
+
++ error (object)
+    + status_code: `403` (number)
+    + message: `This action is unauthorized.` (string)
+    + description: `This action is unauthorized.` (string)
 
 
 ## Reviews Error 422 (object)
