@@ -517,8 +517,12 @@ Response Body
 		"review_auto_publish_min_rating": 4,
 		"review_auto_request": true,
 		"review_auto_request_days": 10,
+		"review_auto_reminder": true,
 		"review_auto_reminder_days": 12,
-		"display_customer_info": true,
+		"review_max_products": 10,
+		"review_products_option": 0,
+		"display_customer_name": true,
+		"display_customer_email": true,
 		"display_verified_buyer": true,
 		"word_blocks": [],
 		"community_enabled": false,
@@ -573,8 +577,12 @@ Response Body
 |review_auto_publish_min_rating|integer|`Optional` The minimum rating of auto publishing a review|
 |review_auto_request|boolean|`Optional` Auto send out review request email|
 |review_auto_request_days|integer|`Optional` The number of days for auto send out review request email|
+|review_auto_reminder|boolean|`Optional` Auto send out review reminder email|
 |review_auto_reminder_days|integer|`Optional` The number of days for auto send out reminder email|
-|display_customer_info|boolean|`Optional` Display the reviewers name and email to the website|
+|review_max_products|integer|`Optional` Maximum: 100. The maximum number of product in the review request/reminder email.|
+|review_products_option|integer|`Optional` The option for listing the product in the review request/reminder email. 0: random, 1: least reviewed product, 2: highest priced product, 3:lowest priced product, 4: based on the order|
+|display_customer_name|boolean|`Optional` Display the reviewers name to the website|
+|display_customer_email|boolean|`Optional` Display the reviewers email to the website|
 |display_verified_buyer|boolean|`Optional` Display the verified buyer badge to the website|
 |word_blocks|array|`Optional` A list of words that will automatically cause a review to be unpublished if any of them are included in the review|
 |word_blocks.*|string|`Optional` |
@@ -618,8 +626,12 @@ X-Store-Domain: example.com
     "review_auto_publish_min_rating": 4,
     "review_auto_request": true,
     "review_auto_request_days": 10,
+    "review_auto_reminder": true,
     "review_auto_reminder_days": 12,
-    "display_customer_info": true,
+    "review_max_products": 10,
+    "review_products_option": 0,
+    "display_customer_name": true,
+    "display_customer_email": true,
     "display_verified_buyer": true,
     "word_blocks": [],
     "community_enabled": false,
@@ -659,8 +671,12 @@ Response Body
 		"review_auto_publish_min_rating": 4,
 		"review_auto_request": true,
 		"review_auto_request_days": 10,
+		"review_auto_reminder": true,
 		"review_auto_reminder_days": 12,
-		"display_customer_info": true,
+		"review_max_products": 10,
+		"review_products_option": 0,
+		"display_customer_name": true,
+		"display_customer_email": true,
 		"display_verified_buyer": true,
 		"word_blocks": [],
 		"community_enabled": false,
@@ -895,8 +911,12 @@ X-Store-Domain: example.com
 + review_auto_publish_min_rating: 4 (number) - The minimum rating of auto publishing a review
 + review_auto_request: true (boolean) - Auto send out review request email
 + review_auto_request_days: 10 (number) - The number of days for auto send out review request email
++ review_auto_reminder: true (boolean) - Auto send out review reminder email
 + review_auto_reminder_days: 12 (number) - The number of days for auto send out reminder email
-+ display_customer_info: true (boolean) - Display the reviewers name and email to the website
++ review_max_products": 10 (number) - The maximum number of products in the review request/reminder email
++ review_products_option: 0 (number) - The option for listing the product in the review request/reminder email
++ display_customer_name: true (boolean) - Display the reviewers name to the website
++ display_customer_email: true (boolean) - Display the reviewers email to the website
 + display_verified_buyer: true (boolean) - Display the verified buyer badge to the website
 + word_blocks (array) - A list of words that will automatically cause a review to be unpublished if any of them are included in the review
     + `keyword1` (string)
