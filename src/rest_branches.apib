@@ -5,7 +5,16 @@
 
 ### GET /branches
 
-Provides the details for all of a business's branches.
+This endpoint retrieves a list of all physical branches associated with the business. By default, virtual branches are excluded from the response. 
+To include virtual branches in the result, use the `include` parameter.
+
+**Query Parameters**
+
+|Name|Type|Description|
+|-----|----|-----------|
+|page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
+|per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15; Maximum value 100|
+|include|string|`Optional.` Optionally include extra resources in the response. Ex: virtual_branch|
 
 Example
 
@@ -24,7 +33,7 @@ Response Body
   "data": [
     {
       "id": "11e696103f8ff5eabb02089e01cf89b5",
-      "name": "Retrorant (Gauchetiere)",
+      "name": "Retrorant",
       "address": {
         "formatted": "1060 Boulevard Robert-Bourassa",
         "city": "Montreal",
@@ -36,6 +45,17 @@ Response Body
     }
   ]
 }
+```
+
+Example request including virtual branches (E-commerce)
+
+```
+GET /branches?include=virtual_branch HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+X-Application-Key: eyXai0XD7SLLzaOeJW
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
 ```
 
 + Request
