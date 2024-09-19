@@ -495,6 +495,7 @@ Response Body
 		"coupon_auto": true,
 		"coupon_min_rating": null,
 		"coupon_user_segment": 0,
+		"coupon_min_media": null,
 		"coupon_min_photos": null,
 		"coupon_min_videos": null,
 		"coupon_min_chars": null,
@@ -555,6 +556,7 @@ Response Body
 |coupon_auto|boolean|`Optional` Auto send out the coupon by email to the reviewers|
 |coupon_min_rating|integer|`Optional` To be eligible for a coupon, the minimum review rating required|
 |coupon_user_segment|integer|`Optional` Any reviewer can be eligible for a coupon, 1: only verified buyer can be eligible for a coupon|
+|coupon_min_media|integer|`Optional` To be eligible for a coupon, the minimum number of videos and photos is required in the review.|
 |coupon_min_photos|integer|`Optional` To be eligible for a coupon, the minimum number of review photos is required in the review.|
 |coupon_min_videos|integer|`Optional` To be eligible for a coupon, the minimum number of review videos is required in the review.|
 |coupon_min_title_chars|integer|`Optional` To be eligible for a coupon, the minimum number of number of characters is required in the review title.|
@@ -604,6 +606,7 @@ X-Store-Domain: example.com
     "coupon_auto": true,
     "coupon_min_rating": null,
     "coupon_user_segment": 0,
+    "coupon_min_media": null,
     "coupon_min_photos": null,
     "coupon_min_videos": null,
     "coupon_min_chars": null,
@@ -649,6 +652,7 @@ Response Body
 		"coupon_auto": true,
 		"coupon_min_rating": null,
 		"coupon_user_segment": 0,
+		"coupon_min_media": null,
 		"coupon_min_photos": null,
 		"coupon_min_videos": null,
 		"coupon_min_chars": null,
@@ -889,6 +893,7 @@ X-Store-Domain: example.com
 + coupon_auto: true (boolean) - Auto send out the coupon by email to the reviewers
 + coupon_min_rating: 1 (number) - To be eligible for a coupon, the minimum review rating required
 + coupon_user_segment: 0 (number) - 0: Any reviewer can be eligible for a coupon, 1: only verified buyer can be eligible for a coupon
++ coupon_min_media: 1 (number) - To be eligible for a coupon, the minimum number of review photos and videos is required in the review.
 + coupon_min_photos: 1 (number) - To be eligible for a coupon, the minimum number of review photos is required in the review.
 + coupon_min_videos: 1 (number) - To be eligible for a coupon, the minimum number of review videos is required in the review.
 + coupon_min_chars: 1 (number) - To be eligible for a coupon, the minimum number of characters is required in the review.
