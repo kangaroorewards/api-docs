@@ -420,21 +420,20 @@ Response Body
 + Response 401 (application/json)
     + Attributes (Reviews Error 401)
 
-## Review Replies [/review-replies]
+## Review Replies [/reviews/{id}/replies]
 
 ### Create a review reply[POST]
 
 *Body parameters*
 |Name|Type|Description|
 |-----|----|-----------|
-|review_id|string|`Required` The review id that reply to.|
 |body|string|`Required` Reply content|
 |public|boolean|`Required` If it's a public reply, it can be listed in the website. If it's a private reply, the reply will be sent to the customer by email.|
 
 Example create a reply
 
 ```
-POST /review-replies HTTP/1.1
+POST /reviews/2a6c99d6-195c-47a1-86ee-9b3f5ae8bdaf/replies HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLC
 X-Application-Key: eyXai0XD7SLLzaOeJW
@@ -443,7 +442,6 @@ Content-Type: application/json
 X-Store-Domain: example.com
 
 {
-	"review_id": "2a6c99d6-195c-47a1-86ee-9b3f5ae8bdaf",
 	"body": "Thanks for your feedback.",
 	"public": true
 }
@@ -465,7 +463,6 @@ X-Store-Domain: example.com
 
 + Response 422 (application/json)
     + Attributes
-        + review_id: `The review id field is required`.
         + body: `The review body field is required.`
         + public: `The public field is required`.
 
@@ -768,21 +765,20 @@ X-Store-Domain: example.com
         + source (array)
             + `The source field is required.` (string)
 
-## Question Replies [/question-replies]
+## Question Replies [/questions/{id}/replies]
 
 ### Create a reply[POST]
 
 *Body parameters*
 |Name|Type|Description|
 |-----|----|-----------|
-|question_id|string|`Required` The question id that reply to.|
 |body|string|`Required` Reply content|
 |email|string|`Optional`|
 
 Example create a reply
 
 ```
-POST /question-replies HTTP/1.1
+POST /questions/603b051e-9ba0-49cf-a111-b9f622c5c9a6/replies HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLC
 X-Application-Key: eyXai0XD7SLLzaOeJW
@@ -791,7 +787,6 @@ Content-Type: application/json
 X-Store-Domain: example.com
 
 {
-	"question_id": "603b051e-9ba0-49cf-a111-b9f622c5c9a6",
     "body": "Reply"
 	"email": "john@example.com"
 }
@@ -816,8 +811,6 @@ X-Store-Domain: example.com
 
 + Response 422 (application/json)
     + Attributes
-        + question_id(array)
-            + `The question id field is required.` (string)
         + body(array)
             + `The body field is required.` (string)
 
@@ -881,7 +874,6 @@ X-Store-Domain: example.com
 + url: `https://storage.googleapis.com/reviews/11eb82ae6d3bb094b847e2865c66d9cc/668ee22ba162b_1720640043.mkv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=bigquery-for-dev%40kangaroo-dev-5223a.iam.gserviceaccount.com%2F20240710%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240710T193403Z&X-Goog-Expires=900&X-Goog-SignedHeaders=content-type%3Bhost&X-Goog-Signature=7e670a4694dde5fccab7200dd7134538a6af74b15a49095493583f9750e53f04979f46b950b305bc2d12c1370609f2d246c883c283a9c68edc0a474231dc0a5c25bbf3d38a8b54a200f35e8cd4ab8e34e46b457f153bec30cd1c0df9c5dc00f49a6c11e81cd8b7d08a96d685ab100fac846f92d7363ddf9c513c04c62f42cfde1048ace3263fb87f47afcf2efe0273682bc279edf629531f64b794b894783ad63bb7f0f28ebea3c1e83fe83d47a659614e2eab22d7f0121fedd43f9b6c84f5a0ec9d597f87aeab75a9585e7624d57abbe9b960150f4413d430b51cb62363138639263cf1a13fc88a72f06163c6cfa0c0e497804e5ca29e31843600affc751a6c` (string) - The signed url.
 
 ## ReviewReplyCreate(object)
-+ review_id: `2a6c99d6-195c-47a1-86ee-9b3f5ae8bdaf` (string) - The review id that your are trying to reply to.
 + body: `Thanks for your feedback.` (string) - The reply content
 + public: true (boolean) - public or private reply
 
