@@ -157,9 +157,9 @@ Response Body
 |product_details.price|numeric|`Optional` product price|
 |product_details.description|string|`Optional` product description|
 |photos|array|`Optional`|
-|photos.*|string|`Optional` review photo url [See Uploading Photos](#get-signed-url)|
+|photos.*.path|string|`Optional` review photo url [See Uploading Photos](#get-signed-url)|
 |videos|array|`Optional`|
-|videos.*|string|`Optional` review video url [See Uploading Videos](#get-signed-url)|
+|videos.*.path|string|`Optional` review video url [See Uploading Videos](#get-signed-url)|
 |type|integer|`Required` (1, 2) 1: product review, 2: website review |
 |review_source|integer|`Required` (1, 2) The platform where the review was left. 1: website page, 2: review widget |
 |website_url|string|`Required` The URL of the website where the review was left. |
@@ -192,10 +192,14 @@ X-Store-Domain: example.com
 		"description": "ABC"
 	},
 	"photos": [
-	    "https://storage.googleapis.com/reviews/11eb82ae6d3bb094b847e2865c66d9cc/668ee22b0db7e_1720640043.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=bigquery-for-dev%40kangaroo-dev-5223a.iam.gserviceaccount.com%2F20240710%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240710T193403Z&X-Goog-Expires=900&X-Goog-SignedHeaders=content-type%3Bhost&X-Goog-Signature=8593d255c54cc1341aa4f7f90b12c18d085fb84cbd4631f173eca4033a91ad43e131ec04cb3ab7502156bcdc23dcd69d2dd91eb1a437a5697113f0ccdb9dbe62d8cb99913a067f5e2dad2b56ac5351a1fede30e67609d19a83e403c3c6222659c99bca3dc7d9c1c02cbeb2d0c872352d73be465cca3a6bb31fde7d4e711be248c933291ca36a9353c3fe2e7a3bc56dd6e8d2eca93b8dfbbd480c524e05f25e93f1763a4ab0db4f86497fe631407db63137bf8ee2cc81e8de1f93f5aafb389ebd1dd19cadac05731b0b8c66cf00c22180e8bbc33199f5d57654a127178111921d45b6b98642332b2188825aabad3ced41d0d33ba25c7571b7836fd4a210f8892d"
+	    {
+	        "path": "https://storage.googleapis.com/reviews/11eb82ae6d3bb094b847e2865c66d9cc/668ee22b0db7e_1720640043.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=bigquery-for-dev%40kangaroo-dev-5223a.iam.gserviceaccount.com%2F20240710%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240710T193403Z&X-Goog-Expires=900&X-Goog-SignedHeaders=content-type%3Bhost&X-Goog-Signature=8593d255c54cc1341aa4f7f90b12c18d085fb84cbd4631f173eca4033a91ad43e131ec04cb3ab7502156bcdc23dcd69d2dd91eb1a437a5697113f0ccdb9dbe62d8cb99913a067f5e2dad2b56ac5351a1fede30e67609d19a83e403c3c6222659c99bca3dc7d9c1c02cbeb2d0c872352d73be465cca3a6bb31fde7d4e711be248c933291ca36a9353c3fe2e7a3bc56dd6e8d2eca93b8dfbbd480c524e05f25e93f1763a4ab0db4f86497fe631407db63137bf8ee2cc81e8de1f93f5aafb389ebd1dd19cadac05731b0b8c66cf00c22180e8bbc33199f5d57654a127178111921d45b6b98642332b2188825aabad3ced41d0d33ba25c7571b7836fd4a210f8892d"
+	    }
 	],
 	"videos": [
-	    "https://storage.googleapis.com/reviews/11eb82ae6d3bb094b847e2865c66d9cc/668ee22ba162b_1720640043.mkv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=bigquery-for-dev%40kangaroo-dev-5223a.iam.gserviceaccount.com%2F20240710%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240710T193403Z&X-Goog-Expires=900&X-Goog-SignedHeaders=content-type%3Bhost&X-Goog-Signature=7e670a4694dde5fccab7200dd7134538a6af74b15a49095493583f9750e53f04979f46b950b305bc2d12c1370609f2d246c883c283a9c68edc0a474231dc0a5c25bbf3d38a8b54a200f35e8cd4ab8e34e46b457f153bec30cd1c0df9c5dc00f49a6c11e81cd8b7d08a96d685ab100fac846f92d7363ddf9c513c04c62f42cfde1048ace3263fb87f47afcf2efe0273682bc279edf629531f64b794b894783ad63bb7f0f28ebea3c1e83fe83d47a659614e2eab22d7f0121fedd43f9b6c84f5a0ec9d597f87aeab75a9585e7624d57abbe9b960150f4413d430b51cb62363138639263cf1a13fc88a72f06163c6cfa0c0e497804e5ca29e31843600affc751a6c"
+	    {
+	        "path": "https://storage.googleapis.com/reviews/11eb82ae6d3bb094b847e2865c66d9cc/668ee22ba162b_1720640043.mkv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=bigquery-for-dev%40kangaroo-dev-5223a.iam.gserviceaccount.com%2F20240710%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240710T193403Z&X-Goog-Expires=900&X-Goog-SignedHeaders=content-type%3Bhost&X-Goog-Signature=7e670a4694dde5fccab7200dd7134538a6af74b15a49095493583f9750e53f04979f46b950b305bc2d12c1370609f2d246c883c283a9c68edc0a474231dc0a5c25bbf3d38a8b54a200f35e8cd4ab8e34e46b457f153bec30cd1c0df9c5dc00f49a6c11e81cd8b7d08a96d685ab100fac846f92d7363ddf9c513c04c62f42cfde1048ace3263fb87f47afcf2efe0273682bc279edf629531f64b794b894783ad63bb7f0f28ebea3c1e83fe83d47a659614e2eab22d7f0121fedd43f9b6c84f5a0ec9d597f87aeab75a9585e7624d57abbe9b960150f4413d430b51cb62363138639263cf1a13fc88a72f06163c6cfa0c0e497804e5ca29e31843600affc751a6c"
+	    }
 	]
 }
 ```
@@ -347,7 +351,7 @@ Response Body
         + file_types (array)
             + `The file types field is required.` (string)
 
-## List reviews for the website [/bff/reviews]
+## List reviews for the website [/bff/web/published-reviews]
 
 ### List published reviews [GET]
 The reviews displayed on the website are filtered and configured by the review app's settings. This endpoint only returns reviews that match those settings, and the results are sorted accordingly.
@@ -362,7 +366,7 @@ The reviews displayed on the website are filtered and configured by the review a
 Example
 
 ```
-GET /bff/reviews?include=review_replies HTTP/1.1
+GET /bff/web/published-reviews?include=review_replies HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLC
 X-Application-Key: eyXai0XD7SLLzaOeJW
@@ -828,10 +832,12 @@ X-Store-Domain: example.com
 + comment: `Great leggings. For size reference, I ordered a medium and am 5’9, 155 lbs, with a long torso.` (string) - The review content.
 + product_id: `09383628200` (string) - Pos system product id if the review is a product review.
 + product_title: null (string) - Pos system product title.
-+ photos (array[object])
-    + `https://storage.googleapis.com/reviews/11exyz` (string) - The uploaded photo URL
-+ videos (array[object])
-    + `https://storage.googleapis.com/reviews/11ezyz` (string) - The uploaded video URL
++ photos (array)
+    + (object)
+        + path: `https://storage.googleapis.com/reviews/11exyz` (string) - The uploaded photo URL
++ videos (array)
+    + (object)
+        + path: `https://storage.googleapis.com/reviews/11exyz` (string) - The uploaded photo URL
 + type: 1 (number) - Review type, 1: product review, 2: website review.
 + review_source: 1 (number) - 1: website page, 2: review widget
 + published: false (boolean) - Is the review published or not
@@ -856,10 +862,11 @@ X-Store-Domain: example.com
     + price: 26.99 (number)
     + description: `1234` - product description
 + photos (array)
-    + `https://product/1234` (string) - the uploaded photo URL
-  ,
+    + (object)
+        + path: `https://storage.googleapis.com/reviews/11exyz` (string) - The uploaded photo URL
 + videos (array)
-    + `https://product/1234` (string) - the uploaded video URL
+    + (object)
+        + path: `https://storage.googleapis.com/reviews/11exyz` (string) - The uploaded photo URL
 + type: 1 (number)
 + review_source: 1 (number)
 + website_url: `https://product/1234.com` (string)
