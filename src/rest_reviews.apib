@@ -97,7 +97,7 @@ Response Body
 		{
 			"id": "61808119-7567-41c5-a183-389bf9819ccb",
 			"created_at": "2024-06-26T23:13:08+00:00",
-			"reviewer_email": "ttuser062601@yopmail.com",
+			"reviewer_email": "lisa@example.com",
 			"reviewer_first_name": "Lisa",
 			"rating": 5,
 			"title": null,
@@ -157,9 +157,9 @@ Response Body
 |product_details.price|numeric|`Optional` product price|
 |product_details.description|string|`Optional` product description|
 |photos|array|`Optional`|
-|photos.*|string|`Optional` review photo url [See Uploading Photos](#get-signed-url)|
+|photos.*.path|string|`Optional` review photo url [See Uploading Photos](#get-signed-url)|
 |videos|array|`Optional`|
-|videos.*|string|`Optional` review video url [See Uploading Videos](#get-signed-url)|
+|videos.*.path|string|`Optional` review video url [See Uploading Videos](#get-signed-url)|
 |type|integer|`Required` (1, 2) 1: product review, 2: website review |
 |review_source|integer|`Required` (1, 2) The platform where the review was left. 1: website page, 2: review widget |
 |website_url|string|`Required` The URL of the website where the review was left. |
@@ -176,7 +176,7 @@ Content-Type: application/json
 X-Store-Domain: example.com
 
 {
-	"reviewer_email": "ttuser062601@yopmail.com",
+	"reviewer_email": "lisa@example.com",
 	"reviewer_first_name": "Lisa",
 	"rating": 4,
 	"title": "Good",
@@ -192,10 +192,14 @@ X-Store-Domain: example.com
 		"description": "ABC"
 	},
 	"photos": [
-	    "https://storage.googleapis.com/reviews/11eb82ae6d3bb094b847e2865c66d9cc/668ee22b0db7e_1720640043.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=bigquery-for-dev%40kangaroo-dev-5223a.iam.gserviceaccount.com%2F20240710%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240710T193403Z&X-Goog-Expires=900&X-Goog-SignedHeaders=content-type%3Bhost&X-Goog-Signature=8593d255c54cc1341aa4f7f90b12c18d085fb84cbd4631f173eca4033a91ad43e131ec04cb3ab7502156bcdc23dcd69d2dd91eb1a437a5697113f0ccdb9dbe62d8cb99913a067f5e2dad2b56ac5351a1fede30e67609d19a83e403c3c6222659c99bca3dc7d9c1c02cbeb2d0c872352d73be465cca3a6bb31fde7d4e711be248c933291ca36a9353c3fe2e7a3bc56dd6e8d2eca93b8dfbbd480c524e05f25e93f1763a4ab0db4f86497fe631407db63137bf8ee2cc81e8de1f93f5aafb389ebd1dd19cadac05731b0b8c66cf00c22180e8bbc33199f5d57654a127178111921d45b6b98642332b2188825aabad3ced41d0d33ba25c7571b7836fd4a210f8892d"
+	    {
+	        "path": "https://storage.googleapis.com/reviews/11eb82ae6d3bb094b847e2865c66d9cc/668ee22b0db7e_1720640043.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=bigquery-for-dev%40kangaroo-dev-5223a.iam.gserviceaccount.com%2F20240710%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240710T193403Z&X-Goog-Expires=900&X-Goog-SignedHeaders=content-type%3Bhost&X-Goog-Signature=8593d255c54cc1341aa4f7f90b12c18d085fb84cbd4631f173eca4033a91ad43e131ec04cb3ab7502156bcdc23dcd69d2dd91eb1a437a5697113f0ccdb9dbe62d8cb99913a067f5e2dad2b56ac5351a1fede30e67609d19a83e403c3c6222659c99bca3dc7d9c1c02cbeb2d0c872352d73be465cca3a6bb31fde7d4e711be248c933291ca36a9353c3fe2e7a3bc56dd6e8d2eca93b8dfbbd480c524e05f25e93f1763a4ab0db4f86497fe631407db63137bf8ee2cc81e8de1f93f5aafb389ebd1dd19cadac05731b0b8c66cf00c22180e8bbc33199f5d57654a127178111921d45b6b98642332b2188825aabad3ced41d0d33ba25c7571b7836fd4a210f8892d"
+	    }
 	],
 	"videos": [
-	    "https://storage.googleapis.com/reviews/11eb82ae6d3bb094b847e2865c66d9cc/668ee22ba162b_1720640043.mkv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=bigquery-for-dev%40kangaroo-dev-5223a.iam.gserviceaccount.com%2F20240710%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240710T193403Z&X-Goog-Expires=900&X-Goog-SignedHeaders=content-type%3Bhost&X-Goog-Signature=7e670a4694dde5fccab7200dd7134538a6af74b15a49095493583f9750e53f04979f46b950b305bc2d12c1370609f2d246c883c283a9c68edc0a474231dc0a5c25bbf3d38a8b54a200f35e8cd4ab8e34e46b457f153bec30cd1c0df9c5dc00f49a6c11e81cd8b7d08a96d685ab100fac846f92d7363ddf9c513c04c62f42cfde1048ace3263fb87f47afcf2efe0273682bc279edf629531f64b794b894783ad63bb7f0f28ebea3c1e83fe83d47a659614e2eab22d7f0121fedd43f9b6c84f5a0ec9d597f87aeab75a9585e7624d57abbe9b960150f4413d430b51cb62363138639263cf1a13fc88a72f06163c6cfa0c0e497804e5ca29e31843600affc751a6c"
+	    {
+	        "path": "https://storage.googleapis.com/reviews/11eb82ae6d3bb094b847e2865c66d9cc/668ee22ba162b_1720640043.mkv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=bigquery-for-dev%40kangaroo-dev-5223a.iam.gserviceaccount.com%2F20240710%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240710T193403Z&X-Goog-Expires=900&X-Goog-SignedHeaders=content-type%3Bhost&X-Goog-Signature=7e670a4694dde5fccab7200dd7134538a6af74b15a49095493583f9750e53f04979f46b950b305bc2d12c1370609f2d246c883c283a9c68edc0a474231dc0a5c25bbf3d38a8b54a200f35e8cd4ab8e34e46b457f153bec30cd1c0df9c5dc00f49a6c11e81cd8b7d08a96d685ab100fac846f92d7363ddf9c513c04c62f42cfde1048ace3263fb87f47afcf2efe0273682bc279edf629531f64b794b894783ad63bb7f0f28ebea3c1e83fe83d47a659614e2eab22d7f0121fedd43f9b6c84f5a0ec9d597f87aeab75a9585e7624d57abbe9b960150f4413d430b51cb62363138639263cf1a13fc88a72f06163c6cfa0c0e497804e5ca29e31843600affc751a6c"
+	    }
 	]
 }
 ```
@@ -347,7 +351,7 @@ Response Body
         + file_types (array)
             + `The file types field is required.` (string)
 
-## List reviews for the website [/bff/reviews]
+## List reviews for the website [/bff/web/published-reviews]
 
 ### List published reviews [GET]
 The reviews displayed on the website are filtered and configured by the review app's settings. This endpoint only returns reviews that match those settings, and the results are sorted accordingly.
@@ -362,7 +366,7 @@ The reviews displayed on the website are filtered and configured by the review a
 Example
 
 ```
-GET /bff/reviews?include=review_replies HTTP/1.1
+GET /bff/web/published-reviews?include=review_replies HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLC
 X-Application-Key: eyXai0XD7SLLzaOeJW
@@ -378,7 +382,7 @@ Response Body
 		{
 			"id": "61808119-7567-41c5-a183-389bf9819ccb",
 			"created_at": "2024-06-26T23:13:08+00:00",
-			"reviewer_email": "ttuser062601@yopmail.com",
+			"reviewer_email": "lisa@example.com",
 			"reviewer_first_name": "Lisa",
 			"rating": 5,
 			"title": null,
@@ -420,21 +424,20 @@ Response Body
 + Response 401 (application/json)
     + Attributes (Reviews Error 401)
 
-## Review Replies [/review-replies]
+## Review Replies [/reviews/{id}/replies]
 
 ### Create a review reply[POST]
 
 *Body parameters*
 |Name|Type|Description|
 |-----|----|-----------|
-|review_id|string|`Required` The review id that reply to.|
 |body|string|`Required` Reply content|
 |public|boolean|`Required` If it's a public reply, it can be listed in the website. If it's a private reply, the reply will be sent to the customer by email.|
 
 Example create a reply
 
 ```
-POST /review-replies HTTP/1.1
+POST /reviews/2a6c99d6-195c-47a1-86ee-9b3f5ae8bdaf/replies HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLC
 X-Application-Key: eyXai0XD7SLLzaOeJW
@@ -443,7 +446,6 @@ Content-Type: application/json
 X-Store-Domain: example.com
 
 {
-	"review_id": "2a6c99d6-195c-47a1-86ee-9b3f5ae8bdaf",
 	"body": "Thanks for your feedback.",
 	"public": true
 }
@@ -465,7 +467,6 @@ X-Store-Domain: example.com
 
 + Response 422 (application/json)
     + Attributes
-        + review_id: `The review id field is required`.
         + body: `The review body field is required.`
         + public: `The public field is required`.
 
@@ -495,6 +496,7 @@ Response Body
 		"coupon_auto": true,
 		"coupon_min_rating": null,
 		"coupon_user_segment": 0,
+		"coupon_min_media": null,
 		"coupon_min_photos": null,
 		"coupon_min_videos": null,
 		"coupon_min_chars": null,
@@ -517,8 +519,12 @@ Response Body
 		"review_auto_publish_min_rating": 4,
 		"review_auto_request": true,
 		"review_auto_request_days": 10,
+		"review_auto_reminder": true,
 		"review_auto_reminder_days": 12,
-		"display_customer_info": true,
+		"review_max_products": 10,
+		"review_products_option": 0,
+		"display_customer_name": true,
+		"display_customer_email": true,
 		"display_verified_buyer": true,
 		"word_blocks": [],
 		"community_enabled": false,
@@ -551,6 +557,7 @@ Response Body
 |coupon_auto|boolean|`Optional` Auto send out the coupon by email to the reviewers|
 |coupon_min_rating|integer|`Optional` To be eligible for a coupon, the minimum review rating required|
 |coupon_user_segment|integer|`Optional` Any reviewer can be eligible for a coupon, 1: only verified buyer can be eligible for a coupon|
+|coupon_min_media|integer|`Optional` To be eligible for a coupon, the minimum number of videos and photos is required in the review.|
 |coupon_min_photos|integer|`Optional` To be eligible for a coupon, the minimum number of review photos is required in the review.|
 |coupon_min_videos|integer|`Optional` To be eligible for a coupon, the minimum number of review videos is required in the review.|
 |coupon_min_title_chars|integer|`Optional` To be eligible for a coupon, the minimum number of number of characters is required in the review title.|
@@ -573,8 +580,12 @@ Response Body
 |review_auto_publish_min_rating|integer|`Optional` The minimum rating of auto publishing a review|
 |review_auto_request|boolean|`Optional` Auto send out review request email|
 |review_auto_request_days|integer|`Optional` The number of days for auto send out review request email|
+|review_auto_reminder|boolean|`Optional` Auto send out review reminder email|
 |review_auto_reminder_days|integer|`Optional` The number of days for auto send out reminder email|
-|display_customer_info|boolean|`Optional` Display the reviewers name and email to the website|
+|review_max_products|integer|`Optional` Maximum: 100. The maximum number of product in the review request/reminder email.|
+|review_products_option|integer|`Optional` The option for listing the product in the review request/reminder email. 0: random, 1: least reviewed product, 2: highest priced product, 3:lowest priced product, 4: based on the order|
+|display_customer_name|boolean|`Optional` Display the reviewers name to the website|
+|display_customer_email|boolean|`Optional` Display the reviewers email to the website|
 |display_verified_buyer|boolean|`Optional` Display the verified buyer badge to the website|
 |word_blocks|array|`Optional` A list of words that will automatically cause a review to be unpublished if any of them are included in the review|
 |word_blocks.*|string|`Optional` |
@@ -596,6 +607,7 @@ X-Store-Domain: example.com
     "coupon_auto": true,
     "coupon_min_rating": null,
     "coupon_user_segment": 0,
+    "coupon_min_media": null,
     "coupon_min_photos": null,
     "coupon_min_videos": null,
     "coupon_min_chars": null,
@@ -618,8 +630,12 @@ X-Store-Domain: example.com
     "review_auto_publish_min_rating": 4,
     "review_auto_request": true,
     "review_auto_request_days": 10,
+    "review_auto_reminder": true,
     "review_auto_reminder_days": 12,
-    "display_customer_info": true,
+    "review_max_products": 10,
+    "review_products_option": 0,
+    "display_customer_name": true,
+    "display_customer_email": true,
     "display_verified_buyer": true,
     "word_blocks": [],
     "community_enabled": false,
@@ -637,6 +653,7 @@ Response Body
 		"coupon_auto": true,
 		"coupon_min_rating": null,
 		"coupon_user_segment": 0,
+		"coupon_min_media": null,
 		"coupon_min_photos": null,
 		"coupon_min_videos": null,
 		"coupon_min_chars": null,
@@ -659,8 +676,12 @@ Response Body
 		"review_auto_publish_min_rating": 4,
 		"review_auto_request": true,
 		"review_auto_request_days": 10,
+		"review_auto_reminder": true,
 		"review_auto_reminder_days": 12,
-		"display_customer_info": true,
+		"review_max_products": 10,
+		"review_products_option": 0,
+		"display_customer_name": true,
+		"display_customer_email": true,
 		"display_verified_buyer": true,
 		"word_blocks": [],
 		"community_enabled": false,
@@ -717,7 +738,7 @@ Content-Type: application/json
 X-Store-Domain: example.com
 
 {
-	"email": "ttuser062601@yopmail.com",
+	"email": "lisa@example.com",
 	"first_name": "Lisa",
 	"body": "What are the key features and benefits of this product?",
 	"type": 1,
@@ -748,21 +769,20 @@ X-Store-Domain: example.com
         + source (array)
             + `The source field is required.` (string)
 
-## Question Replies [/question-replies]
+## Question Replies [/questions/{id}/replies]
 
 ### Create a reply[POST]
 
 *Body parameters*
 |Name|Type|Description|
 |-----|----|-----------|
-|question_id|string|`Required` The question id that reply to.|
 |body|string|`Required` Reply content|
 |email|string|`Optional`|
 
 Example create a reply
 
 ```
-POST /question-replies HTTP/1.1
+POST /questions/603b051e-9ba0-49cf-a111-b9f622c5c9a6/replies HTTP/1.1
 Host: api.kangaroorewards.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLC
 X-Application-Key: eyXai0XD7SLLzaOeJW
@@ -771,9 +791,8 @@ Content-Type: application/json
 X-Store-Domain: example.com
 
 {
-	"question_id": "603b051e-9ba0-49cf-a111-b9f622c5c9a6",
     "body": "Reply"
-	"email": "XXX@example.com"
+	"email": "john@example.com"
 }
 ```
 
@@ -796,8 +815,6 @@ X-Store-Domain: example.com
 
 + Response 422 (application/json)
     + Attributes
-        + question_id(array)
-            + `The question id field is required.` (string)
         + body(array)
             + `The body field is required.` (string)
 
@@ -808,17 +825,19 @@ X-Store-Domain: example.com
 + id: `61808119-7567-41c5-a183-389bf9819ccb` (string) - The ID of the review
 + created_at: `2024-02-06T16:07:52+00:00` (string) - The creation timestamp of the review
 + published_at: `2024-01-10T01:01:01+00:00` (string) - The publication timestamp of the review
-+ reviewer_email: `ttuser062601@yopmail.com` (string)
++ reviewer_email: `lisa@example.com` (string)
 + reviewer_first_name: `Lisa` (string)
 + rating: 5 (number)
 + title: `Good` (string)
 + comment: `Great leggings. For size reference, I ordered a medium and am 5’9, 155 lbs, with a long torso.` (string) - The review content.
 + product_id: `09383628200` (string) - Pos system product id if the review is a product review.
 + product_title: null (string) - Pos system product title.
-+ photos (array[object])
-    + `https://storage.googleapis.com/reviews/11exyz` (string) - The uploaded photo URL
-+ videos (array[object])
-    + `https://storage.googleapis.com/reviews/11ezyz` (string) - The uploaded video URL
++ photos (array)
+    + (object)
+        + path: `https://storage.googleapis.com/reviews/11exyz` (string) - The uploaded photo URL
++ videos (array)
+    + (object)
+        + path: `https://storage.googleapis.com/reviews/11exyz` (string) - The uploaded photo URL
 + type: 1 (number) - Review type, 1: product review, 2: website review.
 + review_source: 1 (number) - 1: website page, 2: review widget
 + published: false (boolean) - Is the review published or not
@@ -831,7 +850,7 @@ X-Store-Domain: example.com
         + public: true (boolean) - The reply is public or private
 
 ## ReviewCreate(object)
-+ reviewer_email: `ttuser062601@yopmail.com` (string) - reviewer's email
++ reviewer_email: `lisa@example.com` (string) - reviewer's email
 + reviewer_first_name: `Lisa` (string) - reviewer's first name
 + rating: 5 (number),
 + title: `Good` (string) - review title
@@ -843,10 +862,11 @@ X-Store-Domain: example.com
     + price: 26.99 (number)
     + description: `1234` - product description
 + photos (array)
-    + `https://product/1234` (string) - the uploaded photo URL
-  ,
+    + (object)
+        + path: `https://storage.googleapis.com/reviews/11exyz` (string) - The uploaded photo URL
 + videos (array)
-    + `https://product/1234` (string) - the uploaded video URL
+    + (object)
+        + path: `https://storage.googleapis.com/reviews/11exyz` (string) - The uploaded photo URL
 + type: 1 (number)
 + review_source: 1 (number)
 + website_url: `https://product/1234.com` (string)
@@ -861,7 +881,6 @@ X-Store-Domain: example.com
 + url: `https://storage.googleapis.com/reviews/11eb82ae6d3bb094b847e2865c66d9cc/668ee22ba162b_1720640043.mkv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=bigquery-for-dev%40kangaroo-dev-5223a.iam.gserviceaccount.com%2F20240710%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240710T193403Z&X-Goog-Expires=900&X-Goog-SignedHeaders=content-type%3Bhost&X-Goog-Signature=7e670a4694dde5fccab7200dd7134538a6af74b15a49095493583f9750e53f04979f46b950b305bc2d12c1370609f2d246c883c283a9c68edc0a474231dc0a5c25bbf3d38a8b54a200f35e8cd4ab8e34e46b457f153bec30cd1c0df9c5dc00f49a6c11e81cd8b7d08a96d685ab100fac846f92d7363ddf9c513c04c62f42cfde1048ace3263fb87f47afcf2efe0273682bc279edf629531f64b794b894783ad63bb7f0f28ebea3c1e83fe83d47a659614e2eab22d7f0121fedd43f9b6c84f5a0ec9d597f87aeab75a9585e7624d57abbe9b960150f4413d430b51cb62363138639263cf1a13fc88a72f06163c6cfa0c0e497804e5ca29e31843600affc751a6c` (string) - The signed url.
 
 ## ReviewReplyCreate(object)
-+ review_id: `2a6c99d6-195c-47a1-86ee-9b3f5ae8bdaf` (string) - The review id that your are trying to reply to.
 + body: `Thanks for your feedback.` (string) - The reply content
 + public: true (boolean) - public or private reply
 
@@ -873,6 +892,7 @@ X-Store-Domain: example.com
 + coupon_auto: true (boolean) - Auto send out the coupon by email to the reviewers
 + coupon_min_rating: 1 (number) - To be eligible for a coupon, the minimum review rating required
 + coupon_user_segment: 0 (number) - 0: Any reviewer can be eligible for a coupon, 1: only verified buyer can be eligible for a coupon
++ coupon_min_media: 1 (number) - To be eligible for a coupon, the minimum number of review photos and videos is required in the review.
 + coupon_min_photos: 1 (number) - To be eligible for a coupon, the minimum number of review photos is required in the review.
 + coupon_min_videos: 1 (number) - To be eligible for a coupon, the minimum number of review videos is required in the review.
 + coupon_min_chars: 1 (number) - To be eligible for a coupon, the minimum number of characters is required in the review.
@@ -895,8 +915,12 @@ X-Store-Domain: example.com
 + review_auto_publish_min_rating: 4 (number) - The minimum rating of auto publishing a review
 + review_auto_request: true (boolean) - Auto send out review request email
 + review_auto_request_days: 10 (number) - The number of days for auto send out review request email
++ review_auto_reminder: true (boolean) - Auto send out review reminder email
 + review_auto_reminder_days: 12 (number) - The number of days for auto send out reminder email
-+ display_customer_info: true (boolean) - Display the reviewers name and email to the website
++ review_max_products": 10 (number) - The maximum number of products in the review request/reminder email
++ review_products_option: 0 (number) - The option for listing the product in the review request/reminder email
++ display_customer_name: true (boolean) - Display the reviewers name to the website
++ display_customer_email: true (boolean) - Display the reviewers email to the website
 + display_verified_buyer: true (boolean) - Display the verified buyer badge to the website
 + word_blocks (array) - A list of words that will automatically cause a review to be unpublished if any of them are included in the review
     + `keyword1` (string)
@@ -905,7 +929,7 @@ X-Store-Domain: example.com
 + community_reply_permission: 1 (number) - Who can reply to the questions. 1: business employee, 2: business employee + verified buyer
 
 ## QuestionCreate(object)
-+ email: `ttuser062601@yopmail.com` (string)
++ email: `lisa@example.com` (string)
 + first_name: `Lisa` (string)
 + body: `What are the key features and benefits of this product?` (string) - question
 + product_id: `5157526` (string) - product id in the integration system
@@ -916,7 +940,7 @@ X-Store-Domain: example.com
 ## QuestionReplyCreate(object)
 + question_id: `603b051e-9ba0-49cf-a111-b9f622c5c9a6` (string) - The question id that your are trying to reply to.
 + body: `Reply` (string) - The reply content
-+ email: `XXX@example.com` (string) - email address
++ email: `john@example.com` (string) - email address
 
 
 ## Reviews Error 401 (object)
