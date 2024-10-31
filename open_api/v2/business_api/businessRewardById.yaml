@@ -13,7 +13,7 @@ consumes:
 produces:
   - application/json
 paths:
-  /rewards/{rewardId}:
+  /rewards/{rewardId}?relationships=branches:
     get:
       summary: Get a an reward by its id
       operationId: getBusinessRewardById

@@ -155,11 +155,11 @@ definitions:
       filters_criteria:
         type: object
         $ref: "../../schemas/offerRewardAudience/offerRewardAudience.yaml#/definitions/FiltersCriteria"
-      available_at_branches:
+      branches:
         type: array
         description: A list of branches where this offer is available at
         items:
-          $ref: "../../schemas/businessOffers/createUpdateOffer.yaml#/definitions/OfferBranchIds"
+          $ref: "../../schemas/userDetails/userDetails.yaml#/definitions/Branch"
   OfferTranslation:
     type: object
     description: A language translation of this offer.

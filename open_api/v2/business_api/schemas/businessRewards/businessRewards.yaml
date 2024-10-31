@@ -90,11 +90,11 @@ definitions:
       filters_criteria:
         type: object
         $ref: "../../schemas/offerRewardAudience/offerRewardAudience.yaml#/definitions/FiltersCriteria"
-      available_at_branches:
+      branches:
         type: array
         description: A list of branches where this reward is available at
         items:
-          $ref: "../../schemas/businessRewards/createUpdateReward.yaml#/definitions/RewardBranchIds"
+         $ref: "../../schemas/userDetails/userDetails.yaml#/definitions/Branch"
   RewardTranslation:
     type: object
     properties:
