@@ -98,9 +98,9 @@ Response Body
 			"id": "61808119-7567-41c5-a183-389bf9819ccb",
 			"created_at": "2024-06-26T23:13:08+00:00",
 			"reviewer_email": "lisa@example.com",
-			"reviewer_first_name": "Lisa",
+			"reviewer_name": "Lisa",
 			"rating": 5,
-			"title": null,
+			"title": "Good",
 			"comment": "Great leggings. For size reference, I ordered a medium and am 5’9, 155 lbs, with a long torso.",
 			"product_id": "09383628200",
 			"product_title": null,
@@ -147,9 +147,9 @@ Response Body
 |Name|Type|Description|
 |-----|----|-----------|
 |reviewer_email|string|`Required` Between 1 and 255 characters in length|
-|reviewer_first_name|string|`Required` Between 1 and 255 characters in length|
+|reviewer_name|string|`Required` Between 1 and 255 characters in length|
 |rating|integer|`Required` Between 1 and 5|
-|title|string|`Optional`|
+|title|string|`Required`|
 |comment|string|`Required` Minimum 15 characters|
 |product_id|string|`Optional` Required if the type is 1 - product review|
 |product_title|string|`Optional`|
@@ -177,7 +177,7 @@ X-Store-Domain: example.com
 
 {
 	"reviewer_email": "lisa@example.com",
-	"reviewer_first_name": "Lisa",
+	"reviewer_name": "Lisa",
 	"rating": 4,
 	"title": "Good",
 	"comment": "Very nice and cute",
@@ -383,9 +383,9 @@ Response Body
 			"id": "61808119-7567-41c5-a183-389bf9819ccb",
 			"created_at": "2024-06-26T23:13:08+00:00",
 			"reviewer_email": "lisa@example.com",
-			"reviewer_first_name": "Lisa",
+			"reviewer_name": "Lisa",
 			"rating": 5,
-			"title": null,
+			"title": "Good",
 			"comment": "Great leggings. For size reference, I ordered a medium and am 5’9, 155 lbs, with a long torso.",
 			"product_id": "09383628200",
 			"product_title": null,
@@ -504,7 +504,7 @@ Response Body
 		"coupon_type": 3,
 		"coupon_value": 12.15,
 		"coupon_prefix": null,
-		"widget_primary_color": "#111111",
+		"primary_color": "#111111",
 		"widget_position": "bottom-left",
 		"widget_published": true,
 		"allow_photos": true,
@@ -524,7 +524,7 @@ Response Body
 		"review_max_products": 10,
 		"review_products_option": 0,
 		"display_customer_name": true,
-		"display_customer_email": true,
+		"show_widget_product_page": true,
 		"display_verified_buyer": true,
 		"word_blocks": [],
 		"community_enabled": false,
@@ -565,7 +565,7 @@ Response Body
 |coupon_type|integer|`Optional` Coupon type:1 - Amount; 2 - Percentage; 3 - FreeShipping|
 |coupon_value|number|`Optional` The discount amount|
 |coupon_prefix|string|`Optional` |
-|widget_primary_color|string|`Optional` |
+|primary_color|string|`Optional` |
 |widget_position|string|`Optional` One of `bottom-left` (string) - `bottom-right`, `bottom-left`, `top-right`, `top-left`, `left-side-top`, `left-side-center`, `left-side-bottom`, `right-side-top`, `right-side-center`, `right-side-bottom`|
 |widget_published|boolean|`Optional` |
 |allow_photos|boolean|`Optional` Allow the reviewer to upload the photos|
@@ -585,7 +585,7 @@ Response Body
 |review_max_products|integer|`Optional` Maximum: 100. The maximum number of product in the review request/reminder email.|
 |review_products_option|integer|`Optional` The option for listing the product in the review request/reminder email. 0: random, 1: least reviewed product, 2: highest priced product, 3:lowest priced product, 4: based on the order|
 |display_customer_name|boolean|`Optional` Display the reviewers name to the website|
-|display_customer_email|boolean|`Optional` Display the reviewers email to the website|
+|show_widget_product_page|boolean|`Optional` Display the widget in the product page|
 |display_verified_buyer|boolean|`Optional` Display the verified buyer badge to the website|
 |word_blocks|array|`Optional` A list of words that will automatically cause a review to be unpublished if any of them are included in the review|
 |word_blocks.*|string|`Optional` |
@@ -615,7 +615,7 @@ X-Store-Domain: example.com
     "coupon_type": 3,
     "coupon_value": 12.15,
     "coupon_prefix": null,
-    "widget_primary_color": "#111111",
+    "primary_color": "#111111",
     "widget_position": "bottom-left",
     "widget_published": true,
     "allow_photos": true,
@@ -635,7 +635,7 @@ X-Store-Domain: example.com
     "review_max_products": 10,
     "review_products_option": 0,
     "display_customer_name": true,
-    "display_customer_email": true,
+    "show_widget_product_page": true,
     "display_verified_buyer": true,
     "word_blocks": [],
     "community_enabled": false,
@@ -661,7 +661,7 @@ Response Body
 		"coupon_type": 3,
 		"coupon_value": 12.15,
 		"coupon_prefix": null,
-		"widget_primary_color": "#111111",
+		"primary_color": "#111111",
 		"widget_position": "bottom-left",
 		"widget_published": true,
 		"allow_photos": true,
@@ -681,7 +681,7 @@ Response Body
 		"review_max_products": 10,
 		"review_products_option": 0,
 		"display_customer_name": true,
-		"display_customer_email": true,
+		"show_widget_product_page": true,
 		"display_verified_buyer": true,
 		"word_blocks": [],
 		"community_enabled": false,
@@ -791,7 +791,7 @@ Content-Type: application/json
 X-Store-Domain: example.com
 
 {
-    "body": "Reply"
+    "body": "Reply",
 	"email": "john@example.com"
 }
 ```
@@ -826,7 +826,7 @@ X-Store-Domain: example.com
 + created_at: `2024-02-06T16:07:52+00:00` (string) - The creation timestamp of the review
 + published_at: `2024-01-10T01:01:01+00:00` (string) - The publication timestamp of the review
 + reviewer_email: `lisa@example.com` (string)
-+ reviewer_first_name: `Lisa` (string)
++ reviewer_name: `Lisa` (string)
 + rating: 5 (number)
 + title: `Good` (string)
 + comment: `Great leggings. For size reference, I ordered a medium and am 5’9, 155 lbs, with a long torso.` (string) - The review content.
@@ -851,7 +851,7 @@ X-Store-Domain: example.com
 
 ## ReviewCreate(object)
 + reviewer_email: `lisa@example.com` (string) - reviewer's email
-+ reviewer_first_name: `Lisa` (string) - reviewer's first name
++ reviewer_name: `Lisa` (string) - reviewer's first name
 + rating: 5 (number),
 + title: `Good` (string) - review title
 + comment: `Very nice and cute.` (string) - review
@@ -900,7 +900,7 @@ X-Store-Domain: example.com
 + coupon_type: 3 (number) - Coupon type:1 - Amount; 2 - Percentage; 3 - FreeShipping
 + coupon_value: 10 (number)
 + coupon_prefix: `KR` (string)
-+ widget_primary_color: `#111111` (string),
++ primary_color: `#111111` (string),
 + widget_position: `bottom-left` (string) - `bottom-right`, `bottom-left`, `top-right`, `top-left`, `left-side-top`, `left-side-center`, `left-side-bottom`, `right-side-top`, `right-side-center`, `right-side-bottom`
 + widget_published: true (boolean)
 + allow_photos: true (boolean) - Allow the reviewer to upload the photos
@@ -920,7 +920,7 @@ X-Store-Domain: example.com
 + review_max_products": 10 (number) - The maximum number of products in the review request/reminder email
 + review_products_option: 0 (number) - The option for listing the product in the review request/reminder email
 + display_customer_name: true (boolean) - Display the reviewers name to the website
-+ display_customer_email: true (boolean) - Display the reviewers email to the website
++ show_widget_product_page: true (boolean) - Display the widget in the product page
 + display_verified_buyer: true (boolean) - Display the verified buyer badge to the website
 + word_blocks (array) - A list of words that will automatically cause a review to be unpublished if any of them are included in the review
     + `keyword1` (string)
@@ -962,5 +962,5 @@ X-Store-Domain: example.com
 
 + reviewer_email (array)
     + `The reviewer email field is required.` (string)
-+ reviewer_first_name (array)
++ reviewer_name (array)
     + `The reviewer first name field is required.` (string)
