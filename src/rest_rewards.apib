@@ -112,7 +112,7 @@ A reward can only avaliable for the specific branches or all branches.
 |redemption_user_tiers.*.id|integer|`Required` The tier ID.|
 |points|integer|`Required` The points for redeeming this reward.|
 |partner_reward|boolean|This is a Partner Reward or not, only work for the business who enable the partner reward feature.|
-|external_id|`string`|`Optional` External Id|
+|external_id|`string`|`Optional` External Id. max: 64|
 |images|array|`Required` Up to 4 items|
 |images.*.original|string,url|`Required` The uploaded image path, max: 255|
 |images.*.large|string,url|`Required` The uploaded image path, max: 255|
