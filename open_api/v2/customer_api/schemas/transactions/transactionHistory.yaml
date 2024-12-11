@@ -37,3 +37,23 @@ definitions:
       updated_at:
         type: string
         description: Date the transaction was last updated.
+      transaction_details:
+        type: object
+        $ref: "#/definitions/TransactionDetails"
+  TransactionDetails:
+    type: "object"
+    description: |
+      Details about this transaction and holds value of each custom field for this transaction
+    properties:
+      external_order_id:
+        type: string
+      custom_field_1:
+        type: string
+      custom_field_2:
+        type: string
+      custom_field_3:
+        type: string
+      custom_field_4:
+        type: string
+      custom_field_5:
+        type: string
