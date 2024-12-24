@@ -242,6 +242,7 @@ The `employee.pin_code` is required only when redeeming on behalf of the custome
 |points|number|Required if none of `amount`, *visits* are present|
 |visits|number|Required if none of `amount`, *points* are present|
 |subtotal|number|Required if intent is redeem_ecom_coupon and catalog_item is not present.|
+|created_at|string|`Optional` Default current date and time. ISO 8601 date. Example: `2000-07-01T00:00:00+00:00`|
 |catalog_item|object|Required if intent is redeem_ecom_coupon and amount is not present.|
 |catalog_item.id|string|Required if catalog_item is present|
 |customer|object|Required. The customer object and at least `id`, `email` or `phone` must be provided|
