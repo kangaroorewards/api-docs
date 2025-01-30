@@ -13,7 +13,7 @@ consumes:
 produces:
   - application/json
 paths:
-  /offers?offer_start_date=gte|{startDate}&offer_end_date=lte|{endDate}&relationships=branches:
+  /offers?offer_start_date=gte|{startDate}&offer_end_date=lte|{endDate}&relationships=branches&per_page={perPage}:
     get:
       summary: Get a list of business active offers between two dates
       operationId: getBusinessActiveOffersDateRange
@@ -28,6 +28,10 @@ paths:
           name: endDate
           type: string
           required: true
+        - in: path
+          name: perPage
+          type: integer
+          default: 50
       responses:
         "200":
           description: Business active offer list between two dates
