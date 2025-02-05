@@ -96,8 +96,10 @@ definitions:
     properties:
       points:
         type: number
+        format: float
       giftcard:
         type: number
+        format: float
   CustomerConsent:
     type: "object"
     x-model: CustomerConsentModel
