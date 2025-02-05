@@ -1,0 +1,38 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /customers/{customerId}:
+    put:
+      summary: update a customer
+      operationId: updateBusinessCustomer
+      consumes:
+        - application/json
+      tags:
+        - updateBusinessCustomer
+      parameters:
+        - in: path
+          name: customerId
+          required: true
+          type: string
+        - in: body
+          name: updateCustomerRequest
+          required: true
+          schema:
+            type: object
+            $ref: 'schemas/businessCustomers/createUpdateCustomer.yaml#/definitions/CreateUpdateCustomerRequest'
+      responses:
+        "200":
+          schema:
+            $ref: "schemas/businessCustomers/createUpdateCustomer.yaml#/definitions/CreateUpdateCustomerResponse"
