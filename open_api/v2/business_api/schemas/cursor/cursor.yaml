@@ -1,0 +1,8 @@
+type: object
+properties:
+  count:
+    type: integer
+  next:
+    type: integer
+  next_uri:
+    type: string
