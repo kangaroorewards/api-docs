@@ -13,13 +13,29 @@ consumes:
 produces:
   - application/json
 paths:
-  /customers?include=tier_level&order_first=asc&per_page={perPage}&page={pageNumber}:
+  /customers?include=tier_level&order_first={orderType}&search={searchValue}&customer_tiers={tiersQuery}&customer_segments={segmentsQuery}&per_page={perPage}&page={pageNumber}:
     get:
       summary: Get a list of business customers
       operationId: getBusinessCustomers
       tags:
         - businessCustomers
       parameters:
+        - in: path
+          name: orderType
+          required: true
+          type: string
+        - in: path
+          name: searchValue
+          required: true
+          type: string
+        - in: path
+          name: tiersQuery
+          required: true
+          type: string
+        - in: path
+          name: segmentsQuery
+          required: true
+          type: string
         - in: path
           name: perPage
           required: true
