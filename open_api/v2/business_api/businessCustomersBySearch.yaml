@@ -1,0 +1,39 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Business Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /customers?include=tier_level&search={searchValue}&order_first=asc&per_page={perPage}&page={pageNumber}:
+    get:
+      summary: Get a list of business customers by search value
+      operationId: getBusinessCustomersBySearch
+      tags:
+        - businessCustomersBySearch
+      parameters:
+        - in: path
+          name: searchValue
+          required: true
+          type: string
+        - in: path
+          name: perPage
+          required: true
+          type: integer
+        - in: path
+          name: pageNumber
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: list of customers by search value
+          schema:
+            $ref: 'schemas/businessCustomers/businessCustomers.yaml#/definitions/CustomersResponse'
