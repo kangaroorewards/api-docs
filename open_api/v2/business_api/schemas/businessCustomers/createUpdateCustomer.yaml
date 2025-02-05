@@ -1,0 +1,45 @@
+definitions:
+  CreateUpdateCustomerRequest:
+    type: "object"
+    x-model: CreateUpdateCustomerRequestModel
+    properties:
+      email:
+        type: string
+      phone:
+        type: string
+      first_name:
+        type: string
+      last_name:
+        type: string
+      qrcode:
+        type: string
+      gender:
+        type: string
+      birth_date:
+        type: string
+      language:
+        type: string
+      country_code:
+        type: string
+      image:
+        type: string
+      created_at:
+        type: string
+      updated_at:
+        type: string
+      enabled:
+        type: boolean
+      note:
+        type: string
+      consent:
+        type: object
+        $ref: './businessCustomers.yaml#/definitions/CustomerConsent'
+  CreateUpdateCustomerResponse:
+    type: "object"
+    x-model: CreateUpdateCustomerResponseModel
+    required:
+      - data
+    properties:
+      data:
+        type: object
+        $ref: './businessCustomers.yaml#/definitions/CustomerDetails'
