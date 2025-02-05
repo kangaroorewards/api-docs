@@ -364,3 +364,45 @@ paths:
       operationId: getBusinessActiveRewardsDateRange
       tags:
         - core
+  businessCustomerById:
+    get:
+      x-file: businessCustomerById.yaml
+      operationId: getBusinessCustomerById
+      tags:
+        - core
+  businessCustomers:
+    get:
+      x-file: businessCustomers.yaml
+      operationId: getBusinessCustomers
+      tags:
+        - core
+  businessCustomersByTier:
+    get:
+      x-file: businessCustomersByTier.yaml
+      operationId: getBusinessCustomersByTier
+      tags:
+        - core
+  businessCustomersBySegment:
+    get:
+      x-file: businessCustomersBySegment.yaml
+      operationId: getBusinessCustomersBySegment
+      tags:
+        - core
+  businessCustomersBySearch:
+    get:
+      x-file: businessCustomersBySearch.yaml
+      operationId: getBusinessCustomersBySearch
+      tags:
+        - core
+  createBusinessCustomer:
+    post:
+      x-file: createBusinessCustomer.yaml
+      operationId: createBusinessCustomer
+      tags:
+        - core
+  updateBusinessCustomer:
+    patch:
+      x-file: updateBusinessCustomer.yaml
+      operationId: updateBusinessCustomer
+      tags:
+        - core
