@@ -54,3 +54,75 @@ definitions:
         type: integer
       reach_points:
         type: integer
+  TierProgress:
+    type: "object"
+    description: |
+      Represents a users' tier progress within their current tier.
+      This also includes other useful information about the tier such as start
+      and end dates, as well as the next tier the user will reach.
+    properties:
+      start_date:
+        type: string
+        description: The start date for this tier session.
+      end_date:
+        type: string
+        description: |
+          The end date for this tier session.
+          The tier will be reset once this date is reached.
+      tier_level:
+        type: string
+        description: |
+          The name of the user's current tier level
+      tier_level_live:
+        type: string
+        description: |
+          The name of the user's current tier level.
+          Tiers are recalculated once per day, as such "tier_level" may
+          not be completely up to date.
+      next_tier_level:
+        type: string
+        description: |
+          The name of the user's next tier level.
+      tier_progress:
+        type: number
+        format: float
+        description: |
+          The users current tier progress in their "tier_level".
+          This will be a number between 0 and 1. A tier progress of 0.5
+          means that the user has made 50% progress in their current tier.
+      left_points:
+        type: integer
+        format: int64
+        description: |
+          The amount of points left in the user's current tier progress.
+          Once they have acquired this many more amount of points, they
+          will be moved into the next tier.
+      left_amount:
+        type: number
+        format: float
+        description: |
+          The amount of spend left in the user's current tier progress.
+          Once they have acquired this many more amount of spend, they
+          will be moved into the next tier.
+      left_visits:
+        type: integer
+        format: int64
+        description: |
+          The amount of visits left in the user's current tier progress.
+          Once they have acquired this many more amount of visits, they
+          will be moved into the next tier.
+      total_points:
+        type: integer
+        format: int64
+        description: |
+          Purchase points between start_date and end_date.
+      total_amount:
+        type: number
+        format: float
+        description: |
+          Purchase amount between start_date and end_date.
+      total_visits:
+        type: integer
+        format: int64
+        description: |
+          Purchase visits between start_date and end_date.
