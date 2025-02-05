@@ -1,0 +1,118 @@
+definitions:
+  CustomersResponse:
+    type: "object"
+    x-model: CustomersModel
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        description: A list of all customers
+        items:
+          $ref: '#/definitions/CustomerResponse'
+      cursor:
+        type: object
+        $ref: './../cursor/cursor.yaml'
+  CustomerResponse:
+    type: "object"
+    x-model: CustomerModel
+    required:
+      - data
+    properties:
+      data:
+        type: object
+        description: A customer's details
+        $ref: '#/definitions/CustomerDetails'
+      included:
+        type: object
+        description: Included details of a customer
+        $ref: '#/definitions/IncludedCustomerDetails'
+  CustomerDetails:
+    type: "object"
+    x-model: CustomerDetailsModel
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        description: A unique ID identifying this customer
+      email:
+        type: string
+      phone:
+        type: string
+      first_name:
+        type: string
+      last_name:
+        type: string
+      qrcode:
+        type: string
+      gender:
+        type: string
+      birth_date:
+        type: string
+      language:
+        type: string
+      country_code:
+        type: string
+      profile_photo:
+        type: string
+      created_at:
+        type: string
+      updated_at:
+        type: string
+      enabled:
+        type: boolean
+      email_verified:
+        type: boolean
+      phone_verified:
+        type: boolean
+  IncludedCustomerDetails:
+    type: "object"
+    x-model: IncludedCustomerDetailsModel
+    properties:
+      balance:
+        type: object
+        description: Included balance of a customer
+        $ref: '#/definitions/CustomerBalance'
+      tier_level:
+        type: object
+        description: Included tier level of a customer
+        $ref: '../../schemas/businessTiers/businessTiers.yaml#/definitions/TierLevel'
+      tier_progress:
+        type: object
+        description: Included tier progress of a customer
+        $ref: '../../schemas/businessTiers/businessTiers.yaml#/definitions/TierProgress'
+      user_consent:
+        type: object
+        description: Included consent of a customer
+        $ref: '#/definitions/CustomerConsent'
+      user_note:
+        type: object
+        description: Included note of a customer
+        $ref: '#/definitions/CustomerNote'
+  CustomerBalance:
+    type: "object"
+    x-model: CustomerBalanceModel
+    properties:
+      points:
+        type: num
+      giftcard:
+        type: num
+  CustomerConsent:
+    type: "object"
+    x-model: CustomerConsentModel
+    properties:
+      allow_sms:
+        type: boolean
+      allow_email:
+        type: boolean
+      allow_push:
+        type: boolean
+  CustomerNote:
+    type: "object"
+    x-model: CustomerNoteModel
+    properties:
+      note:
+        type: string
+      created_at:
+        type: boolean
