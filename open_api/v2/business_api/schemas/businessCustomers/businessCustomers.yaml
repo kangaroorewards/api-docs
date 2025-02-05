@@ -95,9 +95,9 @@ definitions:
     x-model: CustomerBalanceModel
     properties:
       points:
-        type: num
+        type: number
       giftcard:
-        type: num
+        type: number
   CustomerConsent:
     type: "object"
     x-model: CustomerConsentModel
