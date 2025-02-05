@@ -376,24 +376,6 @@ paths:
       operationId: getBusinessCustomers
       tags:
         - core
-  businessCustomersByTier:
-    get:
-      x-file: businessCustomersByTier.yaml
-      operationId: getBusinessCustomersByTier
-      tags:
-        - core
-  businessCustomersBySegment:
-    get:
-      x-file: businessCustomersBySegment.yaml
-      operationId: getBusinessCustomersBySegment
-      tags:
-        - core
-  businessCustomersBySearch:
-    get:
-      x-file: businessCustomersBySearch.yaml
-      operationId: getBusinessCustomersBySearch
-      tags:
-        - core
   createBusinessCustomer:
     post:
       x-file: createBusinessCustomer.yaml
