@@ -34,7 +34,7 @@ definitions:
       - id
     properties:
       id:
-        type: integer
+        type: string
         description: A unique ID identifying this customer
       email:
         type: string
