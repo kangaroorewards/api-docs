@@ -1,0 +1,39 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Business Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /customers?include=tier_level&customer_tiers=in|{tierId}&order_first=asc&per_page={perPage}&page={pageNumber}:
+    get:
+      summary: Get a list of business customers by tier
+      operationId: getBusinessCustomersByTier
+      tags:
+        - businessCustomersByTier
+      parameters:
+        - in: path
+          name: tierId
+          required: true
+          type: string
+        - in: path
+          name: perPage
+          required: true
+          type: integer
+        - in: path
+          name: pageNumber
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: list of customers by tier
+          schema:
+            $ref: 'schemas/businessCustomers/businessCustomers.yaml#/definitions/CustomersResponse'
