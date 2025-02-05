@@ -117,4 +117,4 @@ definitions:
       note:
         type: string
       created_at:
-        type: boolean
+        type: string
