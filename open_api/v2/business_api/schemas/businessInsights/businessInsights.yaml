@@ -59,4 +59,5 @@ definitions:
       date:
         type: string
       total:
-        type: string
+        type: number
+        format: float
