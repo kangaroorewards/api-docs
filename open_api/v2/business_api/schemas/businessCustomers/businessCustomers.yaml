@@ -36,6 +36,8 @@ definitions:
       id:
         type: string
         description: A unique ID identifying this customer
+      display_name:
+        type: string
       email:
         type: string
       phone:
