@@ -137,8 +137,8 @@ definitions:
       name:
         type: string
       amount:
-        type: integer
-        format: int64
+        type: number
+        format: double
       points:
-        type: integer
-        format: int64
+        type: number
+        format: double
