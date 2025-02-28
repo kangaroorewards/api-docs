@@ -42,6 +42,10 @@ definitions:
         type: boolean
       product_review_program_enabled:
         type: boolean
+      languages:
+        type: array
+        items:
+          $ref: './../languages/language.yaml'
   EarningRules:
     type: "object"
     properties:
