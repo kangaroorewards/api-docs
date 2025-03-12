@@ -388,3 +388,9 @@ paths:
       operationId: updateBusinessCustomer
       tags:
         - core
+  countries:
+    get:
+      x-file: countries.yaml
+      operationId: getCountries
+      tags:
+        - core
