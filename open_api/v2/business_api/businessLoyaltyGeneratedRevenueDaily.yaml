@@ -28,4 +28,4 @@ paths:
         "200":
           description: List of loyalty generated revenue by day
           schema:
-            $ref: 'schemas/businessInsights/businessInsights.yaml#/definitions/InsightsResultModel'
+            $ref: 'schemas/businessInsights/businessInsights.yaml#/definitions/InsightsResult'

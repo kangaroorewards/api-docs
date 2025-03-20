@@ -28,4 +28,4 @@ paths:
         "200":
           description: List of total signup by day
           schema:
-            $ref: 'schemas/businessInsights/businessInsights.yaml#/definitions/InsightsResultModel'
+            $ref: 'schemas/businessInsights/businessInsights.yaml#/definitions/InsightsResult'
