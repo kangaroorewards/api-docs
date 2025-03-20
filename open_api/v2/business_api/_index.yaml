@@ -370,16 +370,16 @@ paths:
       operationId: getBusinessMonthlyLoyaltyGeneratedRevenue
       tags:
         - core
-  businessTotalSignUpDaily:
+  businessSignUpDaily:
     get:
-      x-file: businessTotalSignUpDaily.yaml
-      operationId: getBusinessDailyTotalSignUp
+      x-file: businessSignUpDaily.yaml
+      operationId: getBusinessDailySignUp
       tags:
         - core
-  businessTotalSignUpMonthly:
+  businessSignUpMonthly:
     get:
-      x-file: businessTotalSignUpMonthly.yaml
-      operationId: getBusinessMonthlyTotalSignUp
+      x-file: businessSignUpMonthly.yaml
+      operationId: getBusinessMonthlySignUp
       tags:
         - core
   businessTouchPointsDaily:

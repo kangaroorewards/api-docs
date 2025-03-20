@@ -13,19 +13,19 @@ consumes:
 produces:
   - application/json
 paths:
-  /insights/total-signup-v2?months_back={monthsCount}:
+  /insights/total-signup-v2?days_back={daysCount}:
     get:
-      summary: Get a list of total signup by month
-      operationId: getBusinessMonthlyTotalSignUp
+      summary: Get a list of total signup by day
+      operationId: getBusinessDailySignUp
       tags:
-        - businessTotalSignUpMonthly
+        - businessSignUpDaily
       parameters:
         - in: path
-          name: monthsCount
+          name: daysCount
           required: true
           type: integer
       responses:
         "200":
-          description: List of total signup by month
+          description: List of total signup by day
           schema:
             $ref: 'schemas/businessInsights/businessInsights.yaml#/definitions/InsightsResult'
