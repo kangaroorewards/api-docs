@@ -358,16 +358,10 @@ paths:
       operationId: getCountries
       tags:
         - core
-  businessLoyaltyGeneratedRevenueXDaily:
+  businessLoyaltyGeneratedRevenueDaily:
     get:
-      x-file: businessLoyaltyGeneratedRevenueXDaily.yaml
-      operationId: getBusinessXDailyLoyaltyGeneratedRevenue
-      tags:
-        - core
-  businessLoyaltyGeneratedRevenueYDaily:
-    get:
-      x-file: businessLoyaltyGeneratedRevenueYDaily.yaml
-      operationId: getBusinessYDailyLoyaltyGeneratedRevenue
+      x-file: businessLoyaltyGeneratedRevenueDaily.yaml
+      operationId: getBusinessDailyLoyaltyGeneratedRevenue
       tags:
         - core
   businessLoyaltyGeneratedRevenueMonthly:
@@ -376,34 +370,22 @@ paths:
       operationId: getBusinessMonthlyLoyaltyGeneratedRevenue
       tags:
         - core
-  businessSignUpXDaily:
+  businessTotalSignUpDaily:
     get:
-      x-file: businessSignUpXDaily.yaml
-      operationId: getBusinessXDailySignUp
+      x-file: businessTotalSignUpDaily.yaml
+      operationId: getBusinessDailyTotalSignUp
       tags:
         - core
-  businessSignUpYDaily:
+  businessTotalSignUpMonthly:
     get:
-      x-file: businessSignUpYDaily.yaml
-      operationId: getBusinessYDailySignUp
+      x-file: businessTotalSignUpMonthly.yaml
+      operationId: getBusinessMonthlyTotalSignUp
       tags:
         - core
-  businessSignUpMonthly:
+  businessTouchPointsDaily:
     get:
-      x-file: businessSignUpMonthly.yaml
-      operationId: getBusinessMonthlySignUp
-      tags:
-        - core
-  businessTouchPointsXDaily:
-    get:
-      x-file: businessTouchPointsXDaily.yaml
-      operationId: getBusinessXDailyTouchPoints
-      tags:
-        - core
-  businessTouchPointsYDaily:
-    get:
-      x-file: businessTouchPointsYDaily.yaml
-      operationId: getBusinessYDailyTouchPoints
+      x-file: businessTouchPointsDaily.yaml
+      operationId: getBusinessDailyTouchPoints
       tags:
         - core
   businessTouchPointsMonthly:
