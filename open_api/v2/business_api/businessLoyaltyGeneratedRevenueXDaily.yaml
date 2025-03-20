@@ -13,12 +13,12 @@ consumes:
 produces:
   - application/json
 paths:
-  /insights/touch-points-v2?days_back={daysCount}:
+  /insights/loyalty-generated-revenue?days_back={daysCount}:
     get:
-      summary: Get a list of touch points by day
-      operationId: getBusinessDailyTouchPoints
+      summary: Get a list of loyalty generated revenue by day
+      operationId: getBusinessXDailyLoyaltyGeneratedRevenue
       tags:
-        - businessTouchPointsDaily
+        - businessLoyaltyGeneratedRevenueXDaily
       parameters:
         - in: path
           name: daysCount
@@ -26,6 +26,6 @@ paths:
           type: integer
       responses:
         "200":
-          description: List of touch points by day
+          description: List of loyalty generated revenue by day
           schema:
             $ref: 'schemas/businessInsights/businessInsights.yaml#/definitions/InsightsResult'

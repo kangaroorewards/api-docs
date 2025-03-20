@@ -41,3 +41,5 @@ definitions:
         format: double
       type:
         type: string
+      id:
+        type: string

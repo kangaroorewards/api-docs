@@ -1,0 +1,31 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Business Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /insights/loyalty-generated-revenue?days_back={daysCount}:
+    get:
+      summary: Get a list of loyalty generated revenue by day
+      operationId: getBusinessYDailyLoyaltyGeneratedRevenue
+      tags:
+        - businessLoyaltyGeneratedRevenueYDaily
+      parameters:
+        - in: path
+          name: daysCount
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: List of loyalty generated revenue by day
+          schema:
+            $ref: 'schemas/businessInsights/businessInsights.yaml#/definitions/InsightsResult'
