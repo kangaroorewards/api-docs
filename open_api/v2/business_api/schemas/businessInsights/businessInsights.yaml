@@ -1,63 +1,43 @@
 definitions:
-  TouchPointsResult:
+  InsightsResult:
     type: "object"
-    x-model: TouchPointsResultModel
+    x-model: InsightsResultModel
     required:
       - data
     properties:
       data:
-        type: array
-        description: A list of total touch points, broken down by month.
-        items:
-          $ref: '#/definitions/TouchPointsTotal'
-  TouchPointsTotal:
-    type: object
-    description: |
-      The total amount of touch points for this period. Touch points are a combination
-      of check-in events, sales events, and redemption events.
-    properties:
-      date:
-        type: string
-      total:
-        type: integer
-  SignUpsResult:
+        type: object
+        description: An object holding all this insight's details
+        properties:
+          type:
+            type: string
+          dataset:
+            type: array
+            description: A list of insight's data sets
+            items:
+              $ref: '#/definitions/InsightDataset'
+          totals:
+            type: array
+            description: A list of insight's totals
+            items:
+              $ref: '#/definitions/InsightTotals'
+  InsightDataset:
     type: "object"
-    x-model: SignUpsResultModel
-    required:
-      - data
+    x-model: InsightDatasetModel
     properties:
-      data:
-        type: array
-        description: A list of total sign ups for this period.
-        items:
-          $ref: '#/definitions/SignUpsTotal'
-  SignUpsTotal:
-    type: object
-    description: |
-      The total amount of sign ups for this period.
-    properties:
-      date:
+      key:
         type: string
-      total:
-        type: integer
-  SalesTotalResult:
-    type: "object"
-    x-model: SalesTotalResultModel
-    required:
-      - data
-    properties:
-      data:
-        type: array
-        description: A list of sales total for this period.
-        items:
-          $ref: '#/definitions/SalesTotal'
-  SalesTotal:
-    type: object
-    description: |
-      The sales total amount for this period.
-    properties:
-      date:
-        type: string
-      total:
+      value:
         type: number
-        format: float
+        format: double
+  InsightTotals:
+    type: "object"
+    x-model: InsightTotalsModel
+    properties:
+      title:
+        type: string
+      value:
+        type: number
+        format: double
+      type:
+        type: string

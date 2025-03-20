@@ -136,42 +136,6 @@ paths:
       operationId: getBusinessCampaignById
       tags:
         - core
-  businessDailySalesTotals:
-    get:
-      x-file: businessInsightsSalesTotalDaily.yaml
-      operationId: getBusinessDailySalesTotalInsight
-      tags:
-        - core
-  businessMonthlySalesTotals:
-    get:
-      x-file: businessInsightsSalesTotalMonthly.yaml
-      operationId: getBusinessMonthlySalesTotalInsight
-      tags:
-        - core
-  businessDailySignUps:
-    get:
-      x-file: businessInsightsSignUpsDaily.yaml
-      operationId: getBusinessDailySignUpsInsight
-      tags:
-        - core
-  businessMonthlySignUps:
-    get:
-      x-file: businessInsightsSignUpsMonthly.yaml
-      operationId: getBusinessMonthlySignUpsInsight
-      tags:
-        - core
-  businessDailyTouchPoints:
-    get:
-      x-file: businessInsightsTouchPointsDaily.yaml
-      operationId: getBusinessDailyTouchPointsInsight
-      tags:
-        - core
-  businessMonthlyTouchPoints:
-    get:
-      x-file: businessInsightsTouchPointsMonthly.yaml
-      operationId: getBusinessMonthlyTouchPointsInsight
-      tags:
-        - core
   userDeviceToken:
     get:
       x-file: userDeviceToken.yaml
@@ -392,5 +356,41 @@ paths:
     get:
       x-file: countries.yaml
       operationId: getCountries
+      tags:
+        - core
+  businessLoyaltyGeneratedRevenueDaily:
+    get:
+      x-file: businessLoyaltyGeneratedRevenueDaily.yaml
+      operationId: getBusinessDailyLoyaltyGeneratedRevenue
+      tags:
+        - core
+  businessLoyaltyGeneratedRevenueMonthly:
+    get:
+      x-file: businessLoyaltyGeneratedRevenueMonthly.yaml
+      operationId: getBusinessMonthlyLoyaltyGeneratedRevenue
+      tags:
+        - core
+  businessTotalSignUpDaily:
+    get:
+      x-file: businessTotalSignUpDaily.yaml
+      operationId: getBusinessDailyTotalSignUp
+      tags:
+        - core
+  businessTotalSignUpMonthly:
+    get:
+      x-file: businessTotalSignUpMonthly.yaml
+      operationId: getBusinessMonthlyTotalSignUp
+      tags:
+        - core
+  businessTouchPointsDaily:
+    get:
+      x-file: businessTouchPointsDaily.yaml
+      operationId: getBusinessDailyTouchPoints
+      tags:
+        - core
+  businessTouchPointsMonthly:
+    get:
+      x-file: businessTouchPointsMonthly.yaml
+      operationId: getBusinessMonthlyTouchPoints
       tags:
         - core

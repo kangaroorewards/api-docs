@@ -13,12 +13,12 @@ consumes:
 produces:
   - application/json
 paths:
-  /insights/total-purchases?days_back={daysCount}:
+  /insights/touch-points-v2?days_back={daysCount}:
     get:
-      summary: Get a list of sales totals by day
-      operationId: getBusinessDailySalesTotalInsight
+      summary: Get a list of touch points by day
+      operationId: getBusinessDailyTouchPoints
       tags:
-        - businessDailySalesTotals
+        - businessTouchPointsDaily
       parameters:
         - in: path
           name: daysCount
@@ -26,6 +26,6 @@ paths:
           type: integer
       responses:
         "200":
-          description: List of sales totals by day
+          description: List of touch points by day
           schema:
-            $ref: 'schemas/businessInsights/businessInsights.yaml#/definitions/SalesTotalResult'
+            $ref: 'schemas/businessInsights/businessInsights.yaml#/definitions/InsightsResultModel'
