@@ -1,0 +1,33 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Business Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  insights/campaign-performance:
+    post:
+      summary: Get a campaign's performance
+      operationId: getBusinessCampaignPerformance
+      tags:
+        - businessCampaignPerformance
+      parameters:
+        - in: body
+          name: getCampaignReportDetails
+          required: true
+          schema:
+            type: object
+            $ref: 'schemas/businessInsights/businessInsights.yaml#/definitions/CampaignReportDetailsRequest'
+      responses:
+        "200":
+          description: Business campaign's performance response
+          schema:
+            $ref: 'schemas/businessInsights/businessInsights.yaml#/definitions/InsightsResult'

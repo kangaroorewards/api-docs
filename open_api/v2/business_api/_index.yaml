@@ -394,3 +394,27 @@ paths:
       operationId: getBusinessMonthlyTouchPoints
       tags:
         - core
+  businessCampaignsEligibleForReports:
+    get:
+      x-file: businessCampaignsEligibleForReports.yaml
+      operationId: getBusinessCampaignsEligibleForReports
+      tags:
+        - core
+  businessCampaignPerformance:
+    post:
+      x-file: businessCampaignPerformance.yaml
+      operationId: getBusinessCampaignPerformance
+      tags:
+        - core
+  businessCampaignRevenue:
+    post:
+      x-file: businessCampaignRevenue.yaml
+      operationId: getBusinessCampaignRevenue
+      tags:
+        - core
+  businessCampaignReachedCustomers:
+    post:
+      x-file: businessCampaignReachedCustomers.yaml
+      operationId: getBusinessCampaignReachedCustomers
+      tags:
+        - core

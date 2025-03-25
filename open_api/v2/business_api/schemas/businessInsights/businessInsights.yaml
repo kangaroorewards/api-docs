@@ -43,3 +43,60 @@ definitions:
         type: string
       id:
         type: string
+  CampaignReportDetailsRequest:
+    type: "object"
+    x-model: CampaignReportDetailsRequestModel
+    properties:
+      date_from:
+        type: string
+      date_to:
+        type: string
+      filters:
+        type: array
+        items:
+          $ref: '#/definitions/CampaignReportFilter'
+      page:
+        type: integer
+        format: int64
+      per_page:
+        type: integer
+        format: int64
+  CampaignReportFilter:
+    type: "object"
+    x-model: CampaignReportFilterModel
+    properties:
+      type:
+        type: string
+      field:
+        type: string
+      operator:
+        type: string
+      value:
+        type: string
+  InsightsReachedCustomersResult:
+    type: "object"
+    x-model: InsightsReachedCustomersResultModel
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        description: An object holding all this insight's reached customers
+        items:
+          $ref: '#/definitions/ReachedCustomerDetails'
+  ReachedCustomerDetails:
+    type: "object"
+    x-model: ReachedCustomerDetailsModel
+    properties:
+      first_name:
+        type: string
+      last_name:
+        type: string
+      email:
+        type: string
+      phone:
+        type: string
+      campaign_name:
+        type: string
+      targeted_at:
+        type: string

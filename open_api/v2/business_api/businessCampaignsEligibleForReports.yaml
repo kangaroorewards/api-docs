@@ -1,0 +1,47 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Business Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /campaigns?page={pageNumber}&per_page={perPage}&canceled={canceledFilter}&enabled={enabledFilter}&draft={draftFilter}&sort={sortFilter}:
+    get:
+      summary: Get a list of business marketing campaigns that are eligible for reports
+      operationId: getBusinessCampaignsEligibleForReports
+      tags:
+        - businessCampaignsEligibleForReports
+      parameters:
+        - in: path
+          name: pageNumber
+          type: integer
+          default: 50
+        - in: path
+          name: perPage
+          type: integer
+          default: 50
+        - in: path
+          name: canceledFilter
+          type: string
+        - in: path
+          name: enabledFilter
+          type: string
+        - in: path
+          name: draftFilter
+          type: string
+        - in: path
+          name: sortFilter
+          type: string
+      responses:
+        "200":
+          description: Business marketing campaigns that are eligible for reports
+          schema:
+            $ref: 'schemas/businessCampaigns/businessCampaigns.yaml#/definitions/CampaignsResponse'

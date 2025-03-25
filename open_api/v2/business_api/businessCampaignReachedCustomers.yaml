@@ -1,0 +1,33 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Business Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  insights/campaign-reached-customers:
+    post:
+      summary: Get a campaign's reached customers
+      operationId: getBusinessCampaignReachedCustomers
+      tags:
+        - businessCampaignReachedCustomers
+      parameters:
+        - in: body
+          name: getCampaignReportDetails
+          required: true
+          schema:
+            type: object
+            $ref: 'schemas/businessInsights/businessInsights.yaml#/definitions/CampaignReportDetailsRequest'
+      responses:
+        "200":
+          description: Business campaign's reached customers response
+          schema:
+            $ref: 'schemas/businessInsights/businessInsights.yaml#/definitions/InsightsReachedCustomersResult'
