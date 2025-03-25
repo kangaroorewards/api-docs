@@ -13,7 +13,7 @@ consumes:
 produces:
   - application/json
 paths:
-  /campaigns?page={pageNumber}&per_page={perPage}&canceled={canceledFilter}&enabled={enabledFilter}&draft={draftFilter}&sort={sortFilter}:
+  /campaigns?page={pageNumber}&per_page={perPage}&canceled={canceledFilter}&enabled={enabledFilter}&draft={draftFilter}&auto={autoFilter}&sort={sortFilter}:
     get:
       summary: Get a list of business marketing campaigns that are eligible for reports
       operationId: getBusinessCampaignsEligibleForReports
@@ -36,6 +36,9 @@ paths:
           type: string
         - in: path
           name: draftFilter
+          type: string
+        - in: path
+          name: autoFilter
           type: string
         - in: path
           name: sortFilter
