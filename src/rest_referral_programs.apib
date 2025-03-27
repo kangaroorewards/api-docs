@@ -58,6 +58,68 @@ Response Body
     + Attributes
         - data (Referral Programs Base)
 
+
+### Specific Referral Program [GET]
+
+List Referral Programs.
+
+**Query Parameters**
+
+|Name|Type|Description|
+|-----|----|-----------|
+|page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
+|per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15; Maximum value 100|
+|include|string|`Optional.` Provide this to get the general analytics of the referral program|
+
+Example
+
+```
+GET /referral-programs/{referral_program_id} HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC
+Accept: application/vnd.kangaroorewards.api.v1+json;
+Content-Type: application/json
+```
+
+Response Body
+```
+{
+  "data": [
+        {
+            "id": 1056,
+            "rule_name": "REFERRAL_RULES_PURCHASE",
+            "cond_min_amount": 5,
+            "referee_earns": 10,
+            "referer_earns": 50,
+            "expires_in": 60,
+            "enabled": true,
+            "link_referral_enabled": true,
+            "referral_link": ""
+        }
+    ],
+  	"included": {
+  		"analytics": {
+  			"total_referee_met": 0,
+  			"total_referrees": 4,
+  			"total_referrers": 2,
+  			"total_referee_pending": 2,
+  			"total_referee_not_met": 0
+  		}
+  	}
+}
+```
+
+
++ Request
+    + Headers
+
+            Authorization: Bearer <access_token>
+            Accept: application/vnd.kangaroorewards.api.v1+json;
+
++ Response 200 (application/json)
+    + Attributes
+        - data (Referral Programs Base)
+
 ### Create a new referral program [POST]
 
 Create a referral program.
