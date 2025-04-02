@@ -1,0 +1,35 @@
+definitions:
+  CustomerTransactionHistoryResponse:
+    type: "object"
+    x-model: CustomerTransactionHistoryResponseModel
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        description: A list of a customer's transaction history
+        items:
+          $ref: '#/definitions/CustomerTransactionHistory'
+  CustomerTransactionHistory:
+    type: "object"
+    x-model: CustomerTransactionHistoryModel
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+      amount:
+        type: number
+        format: float
+      points:
+        type: integer
+      name:
+        type: string
+      display_name:
+        type: string
+      transaction_type:
+        type: integer
+      created_at:
+        type: integer
+      updated_at:
+        type: integer

@@ -418,3 +418,9 @@ paths:
       operationId: getBusinessCampaignReachedCustomers
       tags:
         - core
+  customerTransactionHistory:
+    get:
+      x-file: customerTransactionHistory.yaml
+      operationId: getCustomerTransactionHistory
+      tags:
+        - core

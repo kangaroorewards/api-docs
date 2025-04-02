@@ -1,0 +1,35 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Business Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  customers/{customerId}/transactions?per_page={perPage}&include=display_name:
+    get:
+      summary: Get a list of a customer's transaction history
+      operationId: getCustomerTransactionHistory
+      tags:
+        - customerTransactionHistory
+      parameters:
+        - in: path
+          name: perPage
+          type: integer
+          default: 50
+        - in: path
+          name: customerId
+          type: string
+          required: true
+      responses:
+        "200":
+          description: List of a customer's transaction history
+          schema:
+            $ref: 'schemas/businessCustomers/customerTransactionHistory.yaml#/definitions/CustomerTransactionHistoryResponse'
