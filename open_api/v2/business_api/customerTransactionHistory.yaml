@@ -13,13 +13,16 @@ consumes:
 produces:
   - application/json
 paths:
-  customers/{customerId}/transactions?per_page={perPage}&include=display_name:
+  customers/{customerId}/transactions?page={pageNumber}&per_page={perPage}&include=display_name:
     get:
       summary: Get a list of a customer's transaction history
       operationId: getCustomerTransactionHistory
       tags:
         - customerTransactionHistory
       parameters:
+        - in: path
+          name: pageNumber
+          type: integer
         - in: path
           name: perPage
           type: integer
