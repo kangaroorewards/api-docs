@@ -30,6 +30,6 @@ definitions:
       transaction_type:
         type: integer
       created_at:
-        type: integer
+        type: string
       updated_at:
-        type: integer
+        type: string
