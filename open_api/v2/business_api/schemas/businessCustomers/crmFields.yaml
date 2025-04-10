@@ -21,11 +21,7 @@ definitions:
       label:
         type: string
       value:
-        oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
+        type: string
       is_hidden:
         type: boolean
       is_required:
