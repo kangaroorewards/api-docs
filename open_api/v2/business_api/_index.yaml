@@ -424,3 +424,9 @@ paths:
       operationId: getCustomerTransactionHistory
       tags:
         - core
+  customerCrmFields:
+    get:
+      x-file: customerCrmFields.yaml
+      operationId: getCustomerCrmFields
+      tags:
+        - core
