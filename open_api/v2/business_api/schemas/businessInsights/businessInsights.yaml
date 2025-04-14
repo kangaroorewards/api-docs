@@ -96,6 +96,8 @@ definitions:
         type: string
       phone:
         type: string
+      profile_photo:
+        type: string
       campaign_name:
         type: string
       targeted_at:
