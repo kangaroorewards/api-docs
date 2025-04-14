@@ -13,7 +13,7 @@ consumes:
 produces:
   - application/json
 paths:
-  insights/campaign-reached-customers:
+  reports/campaign-reached-customers:
     post:
       summary: Get a campaign's reached customers
       operationId: getBusinessCampaignReachedCustomers
