@@ -12,8 +12,7 @@ definitions:
           $ref: '#/definitions/IntegrationProduct'
       search_criteria:
         type: object
-        items:
-          $ref: '#/definitions/SearchCriteria'
+        $ref: '#/definitions/SearchCriteria'
       total_count:
         type: integer
         format: int64
