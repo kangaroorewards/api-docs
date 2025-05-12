@@ -430,3 +430,15 @@ paths:
       operationId: getCustomerCrmFields
       tags:
         - core
+  businessMagentoCategories:
+    get:
+      x-file: businessMagentoCategories.yaml
+      operationId: getBusinessMagentoCategories
+      tags:
+        - core
+  businessMagentoProducts:
+    get:
+      x-file: businessMagentoProducts.yaml
+      operationId: getBusinessMagentoProducts
+      tags:
+        - core

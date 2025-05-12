@@ -1,0 +1,83 @@
+definitions:
+  BusinessIntegrationsProductsResponse:
+    type: "object"
+    x-model: BusinessIntegrationsProductsResponseModel
+    required:
+      - data
+    properties:
+      items:
+        type: array
+        description: A list of an integration products
+        items:
+          $ref: '#/definitions/IntegrationProduct'
+      search_criteria:
+        type: object
+        items:
+          $ref: '#/definitions/SearchCriteria'
+      total_count:
+        type: integer
+        format: int64
+  IntegrationProduct:
+    type: "object"
+    x-model: IntegrationProductModel
+    required:
+      - id
+      - sku
+      - name
+    properties:
+      id:
+        type: integer
+        format: int64
+      sku:
+        type: string
+      name:
+        type: string
+      attribute_set_id:
+        type: integer
+        format: int64
+      price:
+        type: number
+        format: float
+      status:
+        type: integer
+        format: int32
+      visibility:
+        type: integer
+        format: int32
+      type_id:
+        type: string
+      created_at:
+        type: string
+        format: date-time
+      updated_at:
+        type: string
+        format: date-time
+      weight:
+        type: number
+        format: float
+  SearchCriteria:
+    type: "object"
+    x-model: SearchCriteriaModel
+    properties:
+      filter_groups:
+        type: array
+        items:
+          $ref: '#/definitions/FilterGroup'
+  FilterGroup:
+    type: "object"
+    x-model: FilterGroupModel
+    properties:
+      filters:
+        type: array
+        items:
+          $ref: '#/definitions/FilterGroupItem'
+  FilterGroupItem:
+    type: "object"
+    x-model: FilterGroupItemModel
+    properties:
+      field:
+        type: string
+      value:
+        type: string
+      condition_type:
+        type: string

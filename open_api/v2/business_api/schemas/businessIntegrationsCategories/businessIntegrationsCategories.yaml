@@ -1,0 +1,35 @@
+definitions:
+  BusinessIntegrationsCategoriesResponse:
+    type: "object"
+    x-model: BusinessIntegrationsCategoriesResponseModel
+    $ref: '#/definitions/IntegrationCategory'
+  IntegrationCategory:
+    type: "object"
+    x-model: IntegrationCategoryModel
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        format: int64
+      parent_id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      is_active:
+        type: boolean
+      position:
+        type: integer
+        format: int64
+      level:
+        type: integer
+        format: int64
+      product_count:
+        type: integer
+        format: int64
+      children_data:
+        type: array
+        description: A list of sub categories
+        items:
+          $ref: '#/definitions/IntegrationCategory'

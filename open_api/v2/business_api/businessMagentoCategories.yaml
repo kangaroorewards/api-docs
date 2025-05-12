@@ -1,0 +1,32 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Business Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  magento/categories?domain={magentoDomain}:
+    get:
+      summary: Retrieves the business's categories on magento
+      operationId: getBusinessMagentoCategories
+      x-server-host-id: 1
+      tags:
+        - businessMagentoCategories
+      parameters:
+        - in: path
+          name: magentoDomain
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Retrieved business's categories on magento
+          schema:
+            $ref: "schemas/businessIntegrationsCategories/businessIntegrationsCategories.yaml#/definitions/BusinessIntegrationsCategoriesResponse"
