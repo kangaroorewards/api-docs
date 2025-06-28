@@ -504,3 +504,10 @@ paths:
       operationId: getPublicCampaign
       tags:
         - core
+
+  geofences:
+    get:
+      x-file: geofences.yaml
+      operationId: getBusinessGeofences
+      tags:
+        - core

@@ -1,0 +1,35 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /geofences?page={pageNumber}&per_page={perPage}:
+    get:
+      summary: Get the list of geofences of a business
+      operationId: getBusinessGeofences
+      tags:
+        - geofences
+      parameters:
+        - in: path
+          name: pageNumber
+          type: integer
+          default: 1
+        - in: path
+          name: perPage
+          type: integer
+          default: 20
+      responses:
+        "200":
+          description: Business geofences list
+          schema:
+            $ref: "schemas/geofences/geofences.yaml#/definitions/GeofencesResponse"

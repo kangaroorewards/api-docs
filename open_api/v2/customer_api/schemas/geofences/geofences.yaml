@@ -1,0 +1,44 @@
+definitions:
+  GeofencesResponse:
+    type: "object"
+    x-model: GeofencesModel
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        description: A list of of geofences of a business
+        items:
+          $ref: '#/definitions/Geofence'
+  Geofence:
+    type: "object"
+    x-model: GeofenceModel
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        description: A unique ID identifying this geofence
+      title:
+        type: string
+      latitude:
+        type: number
+        format: double
+      longitude:
+        type: number
+        format: double
+      radius:
+        type: number
+        format: double
+      track:
+        type: boolean
+      use_exact_address:
+        type: boolean
+      active:
+        type: boolean
+      linked_campaigns:
+        type: array
+        items:
+          type: integer
+      created_at:
+        type: string
