@@ -1,4 +1,3 @@
-
 # Reviews
 
 Before using the reviews API, please make sure you have connected the Kangaroo Reviews app from the business portal.
@@ -712,111 +711,6 @@ Response Body
         + carousel_max_slides (array)
             + `The selected carousel max slides is invalid.` (string)
 
-## Questions [/questions]
-
-### Create a question [POST]
-
-*Body parameters*
-|Name|Type|Description|
-|-----|----|-----------|
-|email|string|`Optional` Between 1 and 255 characters in length|
-|first_name|string|`Optional` Between 1 and 255 characters in length|
-|body|string|`Required` Minimum 15 characters|
-|product_id|string|`Optional` Required if the type is 1 - product review|
-|type|integer|`Required` (1, 2) 1: product question, 2: website question |
-|source|integer|`Required` (1, 2) The platform where the question was left. 1: website page, 2: review widget |
-
-Example create a question
-
-```
-POST /questions HTTP/1.1
-Host: api.kangaroorewards.com
-Authorization: Bearer eyJ0eXAiOiJKV1QiLC
-X-Application-Key: eyXai0XD7SLLzaOeJW
-Accept: application/vnd.kangaroorewards.api.v1+json;
-Content-Type: application/json
-X-Store-Domain: example.com
-
-{
-	"email": "lisa@example.com",
-	"first_name": "Lisa",
-	"body": "What are the key features and benefits of this product?",
-	"type": 1,
-	"source": 1,
-	"product_id": "5157526"
-}
-```
-
-+ Request (application/json)
-    + Headers
-
-            Authorization: Bearer <access_token>
-            X-Application-Key: <X-Application-Key>
-            Accept: application/vnd.kangaroorewards.api.v1+json;
-            X-Store-Domain: <store_domain>;
-
-
-    + Attributes (QuestionCreate)
-+ Response 200 (No Content)
-
-+ Response 401 (application/json)
-    + Attributes (Reviews Error 401)
-
-+ Response 422 (application/json)
-    + Attributes
-        + body (array)
-            + `The body field is required.` (string)
-        + source (array)
-            + `The source field is required.` (string)
-
-## Question Replies [/questions/{id}/replies]
-
-### Create a reply[POST]
-
-*Body parameters*
-|Name|Type|Description|
-|-----|----|-----------|
-|body|string|`Required` Reply content|
-|email|string|`Optional`|
-
-Example create a reply
-
-```
-POST /questions/603b051e-9ba0-49cf-a111-b9f622c5c9a6/replies HTTP/1.1
-Host: api.kangaroorewards.com
-Authorization: Bearer eyJ0eXAiOiJKV1QiLC
-X-Application-Key: eyXai0XD7SLLzaOeJW
-Accept: application/vnd.kangaroorewards.api.v1+json;
-Content-Type: application/json
-X-Store-Domain: example.com
-
-{
-    "body": "Reply",
-	"email": "john@example.com"
-}
-```
-
-+ Request (application/json)
-    + Headers
-
-            Authorization: Bearer <access_token>
-            X-Application-Key: <X-Application-Key>
-            Accept: application/vnd.kangaroorewards.api.v1+json;
-            X-Store-Domain: <store_domain>;
-
-    + Attributes (QuestionReplyCreate)
-+ Response 200 (No Content)
-
-+ Response 401 (application/json)
-    + Attributes (Reviews Error 401)
-
-+ Response 403 (application/json)
-    + Attributes (Reviews Error 403)
-
-+ Response 422 (application/json)
-    + Attributes
-        + body(array)
-            + `The body field is required.` (string)
 
 # Data Structures
 
@@ -927,21 +821,6 @@ X-Store-Domain: example.com
 	+ `keyword2` (string)
 + community_enabled: false (boolean) - Display the verified buyer badge to the website
 + community_reply_permission: 1 (number) - Who can reply to the questions. 1: business employee, 2: business employee + verified buyer
-
-## QuestionCreate(object)
-+ email: `lisa@example.com` (string)
-+ first_name: `Lisa` (string)
-+ body: `What are the key features and benefits of this product?` (string) - question
-+ product_id: `5157526` (string) - product id in the integration system
-+ type: 1 (number) - 1: product question 2: general question
-+ source: 1 (number) - 1: website 2: widget
-
-
-## QuestionReplyCreate(object)
-+ question_id: `603b051e-9ba0-49cf-a111-b9f622c5c9a6` (string) - The question id that your are trying to reply to.
-+ body: `Reply` (string) - The reply content
-+ email: `john@example.com` (string) - email address
-
 
 ## Reviews Error 401 (object)
 

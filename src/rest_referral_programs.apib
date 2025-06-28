@@ -1,12 +1,10 @@
 # Referral Programs
 
-
 # Group Referral Programs
 
-## Referral program [/referral-programs]
+## Referral Program [/referral-programs]
 
-
-### List referral programs [GET]
+### List Referral Programs [GET]
 
 List Referral Programs.
 
@@ -14,8 +12,8 @@ List Referral Programs.
 
 |Name|Type|Description|
 |-----|----|-----------|
-|page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
-|per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15; Maximum value 100|
+|page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default: page=1|
+|per_page|integer|`Optional.` Provide this to set the number of items in the page. Default: 15; Maximum: 100|
 
 
 Example
@@ -59,16 +57,17 @@ Response Body
         - data (Referral Programs Base)
 
 
-### Specific Referral Program [GET]
+### Retieve a Referral Program [GET /referral-programs/{referral_program_id}]
 
-List Referral Programs.
+Get a specific referral program.
+
 
 **Query Parameters**
 
 |Name|Type|Description|
 |-----|----|-----------|
-|page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default value page=1|
-|per_page|integer|`Optional.` Provide this to set the number of items in the page. Default value 15; Maximum value 100|
+|page|integer|`Optional.` Provide this to retrieve the next set of results for your original query. Default: page=1|
+|per_page|integer|`Optional.` Provide this to set the number of items in the page. Default: 15; Maximum: 100|
 |include|string|`Optional.` Provide this to get the general analytics of the referral program|
 
 Example
@@ -85,27 +84,27 @@ Response Body
 ```
 {
   "data": [
-        {
-            "id": 1056,
-            "rule_name": "REFERRAL_RULES_PURCHASE",
-            "cond_min_amount": 5,
-            "referee_earns": 10,
-            "referer_earns": 50,
-            "expires_in": 60,
-            "enabled": true,
-            "link_referral_enabled": true,
-            "referral_link": ""
-        }
-    ],
-  	"included": {
-  		"analytics": {
-  			"total_referee_met": 0,
-  			"total_referrees": 4,
-  			"total_referrers": 2,
-  			"total_referee_pending": 2,
-  			"total_referee_not_met": 0
-  		}
-  	}
+    {
+        "id": 1056,
+        "rule_name": "REFERRAL_RULES_PURCHASE",
+        "cond_min_amount": 5,
+        "referee_earns": 10,
+        "referer_earns": 50,
+        "expires_in": 60,
+        "enabled": true,
+        "link_referral_enabled": true,
+        "referral_link": ""
+    }
+  ],
+  "included": {
+    "analytics": {
+      "total_referee_met": 0,
+      "total_referrees": 4,
+      "total_referrers": 2,
+      "total_referee_pending": 2,
+      "total_referee_not_met": 0
+    }
+  }
 }
 ```
 
@@ -120,7 +119,7 @@ Response Body
     + Attributes
         - data (Referral Programs Base)
 
-### Create a new referral program [POST]
+### Create a Referral Program [POST]
 
 Create a referral program.
 Currently the business can only have one referral program enabled.
@@ -131,7 +130,7 @@ So this request will disable the current referral program.
 |cond_min_amount|numeric|`Required` The minimum purchase amount condition.|
 |expires_in|integer|`Required` Expires in number of days. |
 |referee_earns|integer|`Required` How many points the referee earns.|
-|referer_earns|integer|`Required` How many points the referer earns.|
+|referer_earns|integer|`Required` How many points the referrer earns.|
 |link_referral_enabled|boolean|`Optional` Default true. Is referral link enabled.|
 |enabled|boolean|`Optional` Default true|
 
@@ -199,7 +198,7 @@ Content-Type: application/json
 ## CreateReferralProgramData
 + cond_min_amount: 10.00 (number) - The minimum purchase amount condition.
 + referee_earns: 150 (number) - How many points the referee earns
-+ referer_earns: 50 (number) - How many points the referer earns
++ referer_earns: 50 (number) - How many points the referrer earns
 + expires_in: 30 (number) - Expires in number of days
 + enabled: true (boolean)
 + link_referral_enabled: true (boolean) - Is referral link enabled
@@ -224,4 +223,4 @@ Content-Type: application/json
 + referee_earns (array)
     + `The referee earns field is required.` (string)
 + referer_earns (array)
-    + `The referer earns field is required.` (string)
+    + `The referrer earns field is required.` (string)
