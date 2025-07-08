@@ -1,0 +1,52 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/geofence-triggers:
+    post:
+      summary: Trigger a geofence event.
+      operationId: triggerGeofence
+      tags:
+        - triggerGeofence
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: triggerGeofenceRequest
+          description: The geofence event to trigger.
+          required: true
+          schema:
+            type: object
+            required:
+              - geofence_id
+              - trigger_condition
+            properties:
+              geofence_id:
+                type: integer
+              trigger_condition:
+                type: string
+      responses:
+        "200":
+          description: The geofence event has been triggered successfully.
+          schema:
+            $ref: '#/definitions/TriggerGeofenceResponse'
+definitions:
+  TriggerGeofenceResponse:
+    type: object
+    x-model: TriggerGeofenceResponseModel
+    required:
+      - data
+    properties:
+      data:
+        $ref: 'schemas/messages/campaignMessages.yaml#/definitions/Campaign'

@@ -511,3 +511,10 @@ paths:
       operationId: getBusinessGeofences
       tags:
         - core
+        -
+  triggerGeofence:
+    post:
+      x-file: triggerGeofence.yaml
+      operationId: triggerGeofence
+      tags:
+        - core
