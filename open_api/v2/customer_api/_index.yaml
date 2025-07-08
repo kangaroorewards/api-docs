@@ -512,7 +512,7 @@ paths:
       tags:
         - core
         -
-  triggerGeofence:
+  triggerGeofences:
     post:
       x-file: triggerGeofence.yaml
       operationId: triggerGeofence
