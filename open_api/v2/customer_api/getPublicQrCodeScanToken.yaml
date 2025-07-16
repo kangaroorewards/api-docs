@@ -21,6 +21,23 @@ paths:
         - getPublicQrCodeScanToken
       consumes:
         - application/x-www-form-urlencoded
+      parameters:
+        - in: formData
+          name: grant_type
+          required: true
+          type: string
+        - in: formData
+          name: client_id
+          required: true
+          type: string
+        - in: formData
+          name: client_secret
+          required: true
+          type: string
+        - in: formData
+          name: scope
+          required: true
+          type: string
       responses:
         "200":
           description: The token has been successfully generated.
