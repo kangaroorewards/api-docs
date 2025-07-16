@@ -14,7 +14,7 @@ produces:
   - application/json
 paths:
   /oauth/token:
-    postForm:
+    post:
       summary: Get Public QR Code Scan Token
       operationId: getPublicQrCodeScanToken
       tags:
