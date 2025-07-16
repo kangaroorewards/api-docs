@@ -14,7 +14,7 @@ produces:
   - application/json
 paths:
   /oauth/token:
-    post:
+    postForm:
       summary: Get Public QR Code Scan Token
       operationId: getPublicQrCodeScanToken
       tags:
@@ -27,16 +27,6 @@ paths:
           required: true
           type: string
           default: "client_credentials"
-        - in: formData
-          name: client_id
-          required: true
-          type: string
-          default: "client_id"
-        - in: formData
-          name: client_secret
-          required: true
-          type: string
-          default: "client_secret"
         - in: formData
           name: scope
           required: true
