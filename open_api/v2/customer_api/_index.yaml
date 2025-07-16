@@ -525,3 +525,10 @@ paths:
       operationId: scanPublicQrCode
       tags:
         - core
+        -
+  getPublicQrCodeScanToken:
+    post:
+      x-file: getPublicQrCodeScanToken.yaml
+      operationId: getPublicQrCodeScanToken
+      tags:
+        - core

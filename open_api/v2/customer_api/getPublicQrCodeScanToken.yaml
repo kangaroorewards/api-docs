@@ -1,0 +1,40 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /oauth/token:
+    post:
+      summary: Get Public QR Code Scan Token
+      operationId: getPublicQrCodeScanToken
+      tags:
+        - getPublicQrCodeScanToken
+      consumes:
+        - application/x-www-form-urlencoded
+      responses:
+        "200":
+          description: The token has been successfully generated.
+          schema:
+            $ref: '#/definitions/GetPublicQrCodeScanTokenResponse'
+definitions:
+  GetPublicQrCodeScanTokenResponse:
+    type: object
+    x-model: GetPublicQrCodeScanTokenResponseModel
+    properties:
+      expires_in:
+        type: integer
+        format: int64
+      token_type:
+        type: string
+      access_token:
+        type: string
