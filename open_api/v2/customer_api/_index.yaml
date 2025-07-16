@@ -521,7 +521,7 @@ paths:
 
   scanningPublicQrCode:
     post:
-      x-file: scanPublicQrCode.yaml
+      x-file: publicQrCodeScan.yaml
       operationId: scanPublicQrCode
       tags:
         - core
