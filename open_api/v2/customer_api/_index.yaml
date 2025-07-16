@@ -518,3 +518,10 @@ paths:
       operationId: triggerGeofence
       tags:
         - core
+
+  scanningPublicQrCode:
+    post:
+      x-file: scanPublicQrCode.yaml
+      operationId: scanPublicQrCode
+      tags:
+        - core

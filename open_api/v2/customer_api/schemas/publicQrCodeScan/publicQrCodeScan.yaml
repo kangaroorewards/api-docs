@@ -1,0 +1,90 @@
+definitions:
+  PublicQrCodeScanResponse:
+    type: "object"
+    x-model: PublicQrCodeScanResponseModel
+    required:
+      - data
+    properties:
+      data:
+        $ref: '#/definitions/PublicQrCodeScanResponseData'
+  PublicQrCodeScanResponseData:
+    type: "object"
+    x-model: PublicQrCodeScanResponseDataModel
+    properties:
+      id:
+        type: integer
+        format: int64
+      amount:
+        type: number
+        format: double
+      points:
+        type: number
+        format: double
+      name:
+        type: string
+      transaction_type:
+        type: integer
+        format: int64
+      comments:
+        type: string
+      created_at:
+        type: string
+      updated_at:
+        type: string
+      customer:
+        type: object
+        $ref: "#/definitions/CustomerDetails"
+  CustomerDetails:
+    type: "object"
+    x-model: CustomerDetailsModel
+    required:
+      - id
+    properties:
+      id:
+        type: string
+        description: A unique ID identifying this customer
+      display_name:
+        type: string
+      email:
+        type: string
+      phone:
+        type: string
+      first_name:
+        type: string
+      last_name:
+        type: string
+      qrcode:
+        type: string
+      gender:
+        type: string
+      birth_date:
+        type: string
+      language:
+        type: string
+      country_code:
+        type: string
+      profile_photo:
+        type: string
+      created_at:
+        type: string
+      updated_at:
+        type: string
+      enabled:
+        type: boolean
+      email_verified:
+        type: boolean
+      phone_verified:
+        type: boolean
+      balance:
+        type: object
+        $ref: "#/definitions/BalanceDetails"
+  BalanceDetails:
+    type: "object"
+    x-model: BalanceDetailsModel
+    properties:
+      points:
+        type: number
+        format: double
+      giftcard:
+        type: number
+        format: double

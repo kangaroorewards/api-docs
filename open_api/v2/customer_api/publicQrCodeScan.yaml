@@ -1,0 +1,43 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/qr-scan:
+    post:
+      summary: Scan a QR code.
+      operationId: scanPublicQrCode
+      tags:
+        - scanningPublicQrCode
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: scanPublicQrCodeRequest
+          description: The QR code scan request.
+          required: true
+          schema:
+            type: object
+            required:
+              - business_id
+              - token
+            properties:
+              business_id:
+                type: string
+              token:
+                type: string
+      responses:
+        "200":
+          description: The QR code scan was successful.
+          schema:
+            $ref: 'schemas/publicQrCodeScan/publicQrCodeScan.yaml#/definitions/PublicQrCodeScanResponse'
