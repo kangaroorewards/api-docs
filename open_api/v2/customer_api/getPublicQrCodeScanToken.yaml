@@ -20,18 +20,28 @@ paths:
       tags:
         - getPublicQrCodeScanToken
       consumes:
-        - application/x-www-form-urlencoded
+        - application/json
       parameters:
-        - in: formData
-          name: grant_type
+        - in: body
+          name: publicQrCodeScanTokenRequest
+          description: The request body for generating a public QR code scan token.
           required: true
-          type: string
-          default: "client_credentials"
-        - in: formData
-          name: scope
-          required: true
-          type: string
-          default: "admin"
+          schema:
+            type: object
+            required:
+              - grant_type
+              - client_id
+              - client_secret
+              - scope
+            properties:
+              grant_type:
+                type: string
+              client_id:
+                type: string
+              client_secret:
+                type: string
+              scope:
+                type: string
       responses:
         "200":
           description: The token has been successfully generated.
