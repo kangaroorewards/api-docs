@@ -527,7 +527,7 @@ paths:
         - core
         -
   getPublicQrCodeScanToken:
-    postForm:
+    post:
       x-file: getPublicQrCodeScanToken.yaml
       operationId: getPublicQrCodeScanToken
       tags:
