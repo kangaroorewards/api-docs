@@ -31,11 +31,17 @@ paths:
             required:
               - business_id
               - token
+              - recaptcha_token
+              - platform_id
             properties:
               business_id:
                 type: string
               token:
                 type: string
+              recaptcha_token:
+                type: string
+              platform_id:
+                type: integer # 1 -> Web, 3 -> iOS, 4 -> Android
       responses:
         "200":
           description: The QR code scan was successful.
