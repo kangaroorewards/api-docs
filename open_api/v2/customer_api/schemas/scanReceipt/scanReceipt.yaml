@@ -2,8 +2,35 @@ definitions:
   ScanReceiptResponse:
     type: "object"
     x-model: ScanReceiptResponseModel
+    required:
+      - data
     properties:
-      qr_code_info:
-        type: array
-        items:
-          type: string
+      data:
+        $ref: '#/definitions/ScanReceiptResponseData'
+  ScanReceiptResponseData:
+    type: "object"
+    x-model: ScanReceiptResponseDataModel
+    properties:
+      id:
+        type: integer
+        format: int64
+      amount:
+        type: number
+        format: double
+      points:
+        type: number
+        format: double
+      name:
+        type: string
+      transaction_type:
+        type: integer
+        format: int64
+      comments:
+        type: string
+      created_at:
+        type: string
+      updated_at:
+        type: string
+      customer:
+        type: object
+        $ref: '../../schemas/publicQrCodeScan/publicQrCodeScan.yaml#/definitions/CustomerDetails'
