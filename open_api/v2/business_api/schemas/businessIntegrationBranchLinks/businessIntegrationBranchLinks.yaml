@@ -1,0 +1,38 @@
+definitions:
+  BusinessIntegrationsBranchLinksResponse:
+    type: "object"
+    x-model: BusinessIntegrationsBranchLinksResponseModel
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        description: A list of an integration branch links
+        items:
+          $ref: '#/definitions/BranchLink'
+  BranchLink:
+    type: "object"
+    x-model: BranchLinkModel
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        format: int64
+      integration_id:
+        type: integer
+        format: int64
+      enabled:
+        type: boolean
+      shop_id:
+        type: string
+      store_domain:
+        type: string
+      store_name:
+        type: string
+      account_id:
+        type: string
+      branch_id:
+        type: string
+      created_at:
+        type: string
