@@ -1,0 +1,26 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/businesses?only_memberships=1&include=default_branch,balance,tier_level,catalog_items:
+    get:
+      summary: Get the conglomerate children of a business
+      operationId: getBusinessMemberships
+      tags:
+        - memberships
+      responses:
+        "200":
+          description: Business data
+          schema:
+            $ref: "schemas/business/business.yaml#/definitions/Businesses"
