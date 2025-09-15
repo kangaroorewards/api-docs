@@ -16,9 +16,9 @@ paths:
   /users/me/businesses?only_memberships=1&include=default_branch,balance,tier_level,catalog_items:
     get:
       summary: Get the conglomerate children of a business
-      operationId: getBusinessMemberships
+      operationId: getConglomerateMemberships
       tags:
-        - memberships
+        - conglomerateMemberships
       responses:
         "200":
           description: Business data
