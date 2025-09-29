@@ -67,6 +67,22 @@ definitions:
       category:
         type: object
         $ref: "#/definitions/BusinessCategory"
+      default_branch:
+        type: object
+        description: "The default branch for this business"
+        $ref: "#/definitions/Branch"
+      balance:
+        type: object
+        description: "The users point and gift card balance"
+        $ref: '../users/userProfile.yaml#/definitions/UserBalance'
+      tier_level:
+        description: "The users tier status"
+        $ref: "../tiers/tiers.yaml#/definitions/TierLevel"
+      catalog_items:
+        description: "Contains a list of all rewards available to this user"
+        x-model:
+        $ref: '../rewards/rewards.yaml#/definitions/Rewards'
+
   BusinessCategory:
     type: "object"
     description: |
@@ -185,9 +201,9 @@ definitions:
         description: Details about the business public settings
         $ref: '#/definitions/PublicBusinessSettingsData'
   PublicBusinessSettingsData:
-     type: "object"
-     description: business public settings data
-     properties:
-       business:
-         description: business
-         $ref: '#/definitions/BusinessData'
+    type: "object"
+    description: business public settings data
+    properties:
+      business:
+        description: business
+        $ref: '#/definitions/BusinessData'
