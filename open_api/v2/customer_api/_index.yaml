@@ -22,6 +22,12 @@ paths:
       operationId: getBusiness
       tags:
         - core
+  conglomerateMemberships:
+    get:
+      x-file: conglomerateMemberships.yaml
+      operationId: getConglomerateMemberships
+      tags:
+        - core
   businesses:
     get:
       x-file: businessList.yaml
