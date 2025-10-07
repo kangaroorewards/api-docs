@@ -13,8 +13,8 @@ Currently 4 main types of offers can be created:
 - Free Product  type_id: 2
 - Bonus Points type_id: 3
 
-Basic Offers can be claimed as coupoons and after that, the coupon can be redeemed.
-See #Offer Types
+Basic Offers can be claimed as coupons and after that, the coupon can be redeemed.
+See [Offer Types](#offer_types)
 
 > **NOTE:** Offer images MUST be uploaded first using POST /offers/images endpoint, before creating an offer
 > Images must be uploaded to Kangaroo Rewards. External images are not allowed
@@ -31,7 +31,7 @@ See #Offer Types
 |images|array|`Required` Up to 4 items|
 |images.*.original|string,url|`Required` The uploaded image path, max: 255|
 |images.*.large|string,url|`Required` The uploaded image path, max: 255|
-|images.*.*medium|string,url|`Required` The uploaded image path, max: 255|
+|images.*.medium|string,url|`Required` The uploaded image path, max: 255|
 |images.*.thumbnail|string,url|`Required` The uploaded image path, max: 255|
 |available_at_branches|array|`Required` - A list of branches where the offer is available at. At least one branch is required|
 |available_at_branches.*.id|string|`Required` Branch ID|
@@ -64,11 +64,11 @@ All common +
 |offer_frequency_id|integer|`Required` Default 1. Possible options: 1 - Daily, 2 - Weekly, 3 - Specific day and time, 4 - Once|
 |multip_factor|numeric|`Required` Multiplication factor > 0. Example: 2 - 2x the points, 1.5 - 1.5x the points|
 |min_purchase|numeric|`Required` - Minimum purchase amount >= 0|
-|max_purchase|numeric|`Required` - Maximum purcase amount, cannot be less than min purchase amount|
+|max_purchase|numeric|`Required` - Maximum purchase amount, cannot be less than min purchase amount|
 |apps_only|boolean|`Optional` Default false. If true - Customers must log in with QR code to be eligible|
 |freq_details|array|`Required` when offer frequency id is `3` (Specific day and time). Must be an array in the following format: ["1","2","3","4","5","6","7"]|
-|peak_from|string,time|`Required` with frequncy details. 24-hour format of an hour with leading zeros and minutes with leading zeros. Min: 00:00, max: 23:59. Must be before peak_to Ex: "09:00"|
-|peak_to|string,time|`Required` with frequncy details. 24-hour format of an hour with leading zeros and minutes with leading zeros. Min: 00:00, max: 23:59. Must be after peak_from Ex: "17:45"|
+|peak_from|string,time|`Required` with frequency details. 24-hour format of an hour with leading zeros and minutes with leading zeros. Min: 00:00, max: 23:59. Must be before peak_to Ex: "09:00"|
+|peak_to|string,time|`Required` with frequency details. 24-hour format of an hour with leading zeros and minutes with leading zeros. Min: 00:00, max: 23:59. Must be after peak_from Ex: "17:45"|
 
 > **NOTE:** freq_details field must be an array in the following format: ["1","2","3","4","5","6","7"]
 > containing the days of the week from Monday to Sunday as numbers. Where 
@@ -79,7 +79,7 @@ All common +
 
 *Body parameters* specific for Free Product Offer
 
-All common + Points Multiplier Offer (exept multip_factor) +
+All common + Points Multiplier Offer (except multip_factor) +
 
 |Name|Type|Description|
 |-----|----|-----------|
@@ -88,7 +88,7 @@ All common + Points Multiplier Offer (exept multip_factor) +
 
 *Body parameters* specific for Bonus Points Offer
 
-All common + Points Multiplier Offer (exept multip_factor) +
+All common + Points Multiplier Offer (except multip_factor) +
 
 |Name|Type|Description|
 |-----|----|-----------|
