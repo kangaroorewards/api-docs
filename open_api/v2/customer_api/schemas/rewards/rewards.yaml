@@ -7,6 +7,12 @@ definitions:
         description: "Contains a list of all rewards available to this user"
         x-model:
         $ref: '#/definitions/UserRewardsData'
+      meta:
+        $ref: '#/definitions/Meta'
+      searchRefinements:
+        type: array
+        items:
+          $ref: '#/definitions/SearchRefinement'
   PublicRewardResponse:
     type: "object"
     x-model: PublicRewardResponseModel
@@ -15,6 +21,14 @@ definitions:
     properties:
       data:
         $ref: '#/definitions/PublicReward'
+  RewardResponse:
+    type: "object"
+    x-model: RewardResponseModel
+    required:
+      - data
+    properties:
+      data:
+        $ref: '#/definitions/Reward'
   UserBusinessRewardsResponse:
     type: "object"
     x-model: UserBusinessRewardsModel
@@ -39,6 +53,12 @@ definitions:
       description: "Contains a list of rewards available to all users"
       data:
         $ref: '#/definitions/Rewards'
+      meta:
+        $ref: '#/definitions/Meta'
+      searchRefinements:
+        type: array
+        items:
+          $ref: '#/definitions/SearchRefinement'
   Rewards:
     type: array
     items:
@@ -96,6 +116,10 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/RewardTranslation'
+      external_products:
+        type: array
+        items:
+          $ref: '#/definitions/ExternalProducts'
   PublicReward:
     type: "object"
     x-model: PublicRewardModel
@@ -149,6 +173,10 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/RewardTranslation'
+      external_products:
+        type: array
+        items:
+          $ref: '#/definitions/ExternalProducts'
       branch:
         type: object
         $ref: './../business/business.yaml#/definitions/Branch'
@@ -174,4 +202,137 @@ definitions:
         type: object
         $ref: './../languages/language.yaml'
       note:
+        type: string
+  ExternalProducts:
+    type: object
+    properties:
+      integration_id:
+        type: integer
+      id:
+        type: string
+      type:
+        type: string
+      title:
+        type: string
+      url:
+        type: string
+      variations:
+        type: object
+        properties:
+          dimensions:
+            type: array
+            items:
+              $ref: '#/definitions/ExternalProductDimension'
+          variations:
+            type: array
+            items:
+              $ref: '#/definitions/ExternalProductVariation'
+      properties:
+        type: array
+        items:
+          $ref: '#/definitions/ExternalProductProperty'
+      images:
+        type: array
+        items:
+          $ref: '#/definitions/ExternalProductImage'
+      price:
+        type: number
+        format: float
+      points:
+        type: integer
+  ExternalProductDimension:
+    type: object
+    properties:
+      index:
+        type: integer
+      displayString:
+        type: string
+      dimensionValues:
+        type: array
+        items:
+          $ref: '#/definitions/ExternalProductDimensionValue'
+  ExternalProductDimensionValue:
+    type: object
+    properties:
+      index:
+        type: integer
+      displayString:
+        type: string
+  ExternalProductVariation:
+    type: object
+    properties:
+      asin:
+        type: string
+      variationValues:
+        type: array
+        items:
+          $ref: '#/definitions/ExternalProductVariationValue'
+  ExternalProductVariationValue:
+    type: object
+    properties:
+      index:
+        type: integer
+      value:
+        type: integer
+  ExternalProductProperty:
+    type: object
+    properties:
+      displayString:
+        type: string
+      value:
+        type: string
+  ExternalProductImage:
+    type: object
+    properties:
+      altText:
+        type: string
+      original:
+        $ref: '#/definitions/ExternalProductImageSize'
+      large:
+        $ref: '#/definitions/ExternalProductImageSize'
+      medium:
+        $ref: '#/definitions/ExternalProductImageSize'
+      small:
+        $ref: '#/definitions/ExternalProductImageSize'
+      thumbnail:
+        $ref: '#/definitions/ExternalProductImageSize'
+  ExternalProductImageSize:
+    type: object
+    properties:
+      height:
+        type: integer
+      url:
+        type: string
+      width:
+        type: integer
+  Meta:
+    type: object
+    properties:
+      current_page:
+        type: integer
+      from:
+        type: integer
+      path:
+        type: string
+      per_page:
+        type: integer
+      to:
+        type: integer
+  SearchRefinement:
+    type: object
+    properties:
+      selectionType:
+        type: string
+      displayValue:
+        type: string
+      refinementValues:
+        type: array
+        items:
+          $ref: '#/definitions/SearchRefinementValue'
+  SearchRefinementValue:
+    type: object
+    properties:
+      displayName:
+        type: string
+      searchRefinementValue:
         type: string

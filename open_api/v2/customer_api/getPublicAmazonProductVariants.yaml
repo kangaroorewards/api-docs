@@ -1,0 +1,35 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /public/rewards/{rewardSlug}?include=external_products,external_product_variants&external_product_id={externalProductId}:
+    get:
+      summary: Get a public reward with external product variants by external product id
+      operationId: getPublicAmazonProductVariants
+      tags:
+        - getPublicAmazonProductVariants
+      parameters:
+        - in: path
+          name: rewardSlug
+          required: true
+          type: string
+        - in: path
+          name: externalProductId
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Public reward with external product variants by external product id
+          schema:
+            $ref: 'schemas/rewards/rewards.yaml#/definitions/PublicRewardResponse'

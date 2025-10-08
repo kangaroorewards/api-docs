@@ -531,10 +531,38 @@ paths:
       operationId: scanPublicQrCode
       tags:
         - core
-        -
+
   getPublicQrCodeScanToken:
     post:
       x-file: getPublicQrCodeScanToken.yaml
       operationId: getPublicQrCodeScanToken
+      tags:
+        - core
+
+  userAmazonCatalogue:
+    get:
+      x-file: userAmazonCatalogue.yaml
+      operationId: getUserAmazonCatalogue
+      tags:
+        - core
+
+  publicAmazonCatalogue:
+    get:
+      x-file: publicAmazonCatalogue.yaml
+      operationId: getPublicAmazonCatalogue
+      tags:
+        - core
+
+  getPublicAmazonProductVariants:
+    get:
+      x-file: getPublicAmazonProductVariants.yaml
+      operationId: getPublicAmazonProductVariants
+      tags:
+        - core
+
+  getAmazonProductVariants:
+    get:
+      x-file: getAmazonProductVariants.yaml
+      operationId: getAmazonProductVariants
       tags:
         - core

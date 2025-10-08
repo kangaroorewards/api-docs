@@ -1,0 +1,43 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/rewards?page={pageNumber}&per_page={perPage}&include=external_products&keywords={keywords}&searchRefinements={filters}:
+    get:
+      summary: Get a list of rewards available to this user including the amazon catalogue.
+      operationId: getUserAmazonCatalogue
+      tags:
+        - userAmazonCatalogue
+      parameters:
+        - in: path
+          name: pageNumber
+          required: true
+          type: integer
+        - in: path
+          name: perPage
+          type: integer
+          default: 50
+        - in: path
+          name: keywords
+          required: false
+          type: string
+        - in: path
+          name: filters
+          required: false
+          type: string
+      responses:
+        "200":
+          description: User rewards list including the amazon catalogue.
+          schema:
+            $ref: 'schemas/rewards/rewards.yaml#/definitions/RewardsResponse'
