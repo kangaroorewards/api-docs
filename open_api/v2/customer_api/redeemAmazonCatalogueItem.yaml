@@ -1,0 +1,122 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/transactions:
+    post:
+      summary: |
+        Redeem an Amazon catalogue item.
+      operationId: redeemAmazonCatalogueItem
+      tags:
+        - redeemAmazonCatalogueItems
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: redeemAmazonItemRequest
+          description: The amazon rewards to redeem.
+          required: true
+          schema:
+            type: object
+            required:
+              - intent
+              - catalog_items
+              - trial_mode
+              - branch
+              - customer
+            properties:
+              intent:
+                type: string
+                default: "redeem"
+              catalog_items:
+                type: array
+                description: A list of rewards to redeem.
+                items:
+                  $ref: '#/definitions/AmazonRedemption'
+              trial_mode:
+                type: bool
+              branch:
+                type: object
+                $ref: '#/definitions/AmazonRedemptionBranch'
+              customer:
+                type: object
+                $ref: '#/definitions/AmazonRedemptionCustomer'
+
+      responses:
+        "200":
+          description: The users' updated balance.
+          schema:
+            $ref: '#/definitions/RedeemResponse'
+definitions:
+  AmazonRedemption:
+    type: "object"
+    x-model: AmazonRedemptionModel
+    required:
+      - id
+      - quantity
+      - external_product_id
+    properties:
+      id:
+        type: integer
+      quantity:
+        type: integer
+        default: 0
+      external_product_id:
+        type: string
+  AmazonRedemptionBranch:
+    type: "object"
+    x-model: AmazonRedemptionBranchModel
+    required:
+      - id
+    properties:
+      id:
+        type: string
+  AmazonRedemptionCustomer:
+    type: "object"
+    x-model: AmazonRedemptionCustomerModel
+    required:
+      - id
+    properties:
+      id:
+        type: string
+  RedeemResponse:
+    type: object
+    x-model: RedeemResponseModel
+    required:
+      - data
+    properties:
+      data:
+        $ref: '#/definitions/RedeemResponseData'
+  RedeemResponseData:
+    type: "object"
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+      amount:
+        type: number
+        format: double
+      points:
+        type: integer
+        format: int64
+      name:
+        type: string
+      created_at:
+        type: string
+      updated_at:
+        type: string
+      customer:
+        type: object
+        $ref: "schemas/users/userProfile.yaml#/definitions/UserProfile"
