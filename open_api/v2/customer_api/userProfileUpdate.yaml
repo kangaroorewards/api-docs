@@ -62,6 +62,29 @@ paths:
             be used in this api.
           required: false
           type: string
+        - in: body
+          name: updateUserAddressRequest
+          description: The new user address request
+          required: false
+          schema:
+            type: object
+            properties:
+              street:
+                type: string
+              city:
+                type: string
+              region:
+                type: string
+              country:
+                type: string
+              country_code:
+                type: string
+              lat:
+                type: integer
+              long:
+                type: integer
+              zip_code:
+                type: string
       responses:
         "200":
           description: Updated user profile data
