@@ -1,0 +1,31 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/businesses/{businessId}/messages:
+    get:
+      summary: Get a list of messages for the order status
+      operationId: getOrderStatus
+      tags:
+        - orderStatus
+      parameters:
+        - in: path
+          name: businessId
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Get a list of messages for the order status
+          schema:
+            $ref: 'schemas/orderStatus/orderStatus.yaml#/definitions/OrderStatusResponse'

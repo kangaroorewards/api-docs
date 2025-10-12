@@ -1,0 +1,35 @@
+definitions:
+  OrderStatusResponse:
+    type: "object"
+    x-model: OrderStatusResponseModel
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        description: A list of messages for the order status
+        items:
+          $ref: '#/definitions/OrderStatus'
+  OrderStatus:
+    type: "object"
+    x-model: OrderStatusModel
+    properties:
+      id:
+        type: integer
+      type_id:
+        type: integer
+      type:
+        type: string
+      description:
+        type: string
+      points:
+        type: integer
+      amount:
+        type: number
+        format: double
+      hidden:
+        type: boolean
+      created_at:
+        type: string
+      archived:
+        type: boolean
