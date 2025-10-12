@@ -13,7 +13,7 @@ consumes:
 produces:
   - application/json
 paths:
-  /users/me?include=balance,tier_level,tier_progress,referral_programs:
+  /users/me?include=balance,tier_level,tier_progress,referral_programs&relationships=address:
     get:
       summary: Get user profile data for this user.
       operationId: getUserProfile

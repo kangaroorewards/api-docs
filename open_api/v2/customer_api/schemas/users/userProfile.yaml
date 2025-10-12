@@ -98,6 +98,35 @@ definitions:
         description: A list business this user is associated to
         items:
           $ref: "#/definitions/ProfilesData"
+      address:
+        type: object
+        $ref: "#/definitions/AddressData"
+  AddressData:
+    type: "object"
+    x-model: AddressDataModel
+    properties:
+      street:
+        type: string
+      city:
+        type: string
+      region:
+        type: string
+      country:
+        type: string
+      country_code:
+        type: string
+      formatted:
+        type: string
+      lat:
+        type: integer
+      long:
+        type: integer
+      zip_code:
+        type: string
+      unit:
+        type: string
+      address:
+        type: string
   ProfilesData:
     type: "object"
     x-model: ProfilesDataModel
