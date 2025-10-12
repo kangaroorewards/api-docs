@@ -566,3 +566,17 @@ paths:
       operationId: getAmazonProductVariants
       tags:
         - core
+
+  orderStatus:
+    get:
+      x-file: orderStatus.yaml
+      operationId: getOrderStatus
+      tags:
+        - core
+
+  redeemAmazonCatalogueItems:
+    post:
+      x-file: redeemAmazonCatalogueItem.yaml
+      operationId: redeemAmazonCatalogueItem
+      tags:
+        - core
