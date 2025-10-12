@@ -82,6 +82,9 @@ definitions:
         description: "Contains a list of all rewards available to this user"
         x-model:
         $ref: '../rewards/rewards.yaml#/definitions/Rewards'
+      address:
+        type: object
+        $ref: '../users/userProfile.yaml#/definitions/AddressData'
 
   BusinessCategory:
     type: "object"

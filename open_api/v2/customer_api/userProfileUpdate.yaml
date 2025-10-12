@@ -93,3 +93,5 @@ definitions:
         type: integer
       zip_code:
         type: string
+      unit:
+        type: string
