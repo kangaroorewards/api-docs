@@ -88,9 +88,11 @@ definitions:
       country_code:
         type: string
       lat:
-        type: integer
+        type: number
+        format: double
       long:
-        type: integer
+        type: number
+        format: double
       zip_code:
         type: string
       unit:
