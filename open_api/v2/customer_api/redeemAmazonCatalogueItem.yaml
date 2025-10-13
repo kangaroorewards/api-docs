@@ -45,7 +45,7 @@ paths:
                 items:
                   $ref: '#/definitions/AmazonRedemption'
               trial_mode:
-                type: bool
+                type: boolean
               branch:
                 type: object
                 $ref: '#/definitions/AmazonRedemptionBranch'
