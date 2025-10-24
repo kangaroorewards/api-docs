@@ -36,6 +36,8 @@ definitions:
         type: boolean
       active:
         type: boolean
+      status:
+        type: string
       linked_campaigns:
         type: array
         items:
