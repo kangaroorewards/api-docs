@@ -1,0 +1,32 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Business Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /api/v1/branch-links/{branchLinkId}/products:
+    get:
+      summary: Retrieves the business's integration products
+      operationId: getBusinessIntegrationsProducts
+      x-server-host-id: 1
+      tags:
+        - businessIntegrationsProducts
+      parameters:
+        - in: path
+          name: branchLinkId
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: Retrieved the business's integration products
+          schema:
+            $ref: "schemas/businessIntegrationsProducts/businessIntegrationsProducts.yaml#/definitions/BusinessIntegrationsProductsResponse"

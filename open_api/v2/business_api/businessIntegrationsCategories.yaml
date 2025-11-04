@@ -13,20 +13,20 @@ consumes:
 produces:
   - application/json
 paths:
-  magento/categories?domain={magentoDomain}:
+  /api/v1/branch-links/{branchLinkId}/categories:
     get:
-      summary: Retrieves the business's categories on magento
-      operationId: getBusinessMagentoCategories
+      summary: Retrieves the business's integration categories
+      operationId: getBusinessIntegrationsCategories
       x-server-host-id: 1
       tags:
-        - businessMagentoCategories
+        - businessIntegrationsCategories
       parameters:
         - in: path
-          name: magentoDomain
+          name: branchLinkId
           required: true
-          type: string
+          type: integer
       responses:
         "200":
-          description: Retrieved business's categories on magento
+          description: Retrieved the business's integration categories
           schema:
             $ref: "schemas/businessIntegrationsCategories/businessIntegrationsCategories.yaml#/definitions/BusinessIntegrationsCategoriesResponse"

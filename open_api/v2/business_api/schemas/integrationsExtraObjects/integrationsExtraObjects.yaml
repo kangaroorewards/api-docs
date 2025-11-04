@@ -1,0 +1,30 @@
+definitions:
+  IntegrationPagination:
+    type: "object"
+    x-model: IntegrationPaginationModel
+    properties:
+      pagination:
+        type: object
+        properties:
+          end_cursor:
+            type: string
+            nullable: true
+          current_page:
+            type: integer
+            nullable: true
+          per_page:
+            type: integer
+          has_next:
+            type: boolean
+  IntegrationFilters:
+    type: "object"
+    x-model: IntegrationFiltersModel
+    properties:
+      title:
+        type: array
+        items:
+          type: string
+      external_id:
+        type: array
+        items:
+          type: string

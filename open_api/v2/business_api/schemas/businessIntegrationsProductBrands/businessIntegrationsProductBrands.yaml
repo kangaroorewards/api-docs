@@ -1,28 +1,26 @@
 definitions:
-  BusinessIntegrationsProductsResponse:
+  BusinessIntegrationsProductBrandsResponse:
     type: "object"
-    x-model: BusinessIntegrationsProductsResponseModel
+    x-model: BusinessIntegrationsProductBrandsResponseModel
     required:
       - data
     properties:
       data:
         type: array
-        description: A list of an integration products
+        description: A list of an integration product brands
         items:
-          $ref: '#/definitions/IntegrationProduct'
+          $ref: '#/definitions/IntegrationProductBrand'
       pagination:
         type: object
         $ref: "../../schemas/integrationsExtraObjects/integrationsExtraObjects.yaml#/definitions/IntegrationPagination"
       filters:
         type: object
         $ref: "../../schemas/integrationsExtraObjects/integrationsExtraObjects.yaml#/definitions/IntegrationFilters"
-  IntegrationProduct:
+  IntegrationProductBrand:
     type: "object"
-    x-model: IntegrationProductModel
+    x-model: IntegrationProductBrandModel
     properties:
       external_id:
         type: string
       title:
-        type: string
-      sku:
         type: string
