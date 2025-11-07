@@ -13,9 +13,9 @@ definitions:
       pagination:
         type: object
         $ref: "../../schemas/integrationsExtraObjects/integrationsExtraObjects.yaml#/definitions/IntegrationPagination"
-#      filters:
-#        type: object
-#        $ref: "../../schemas/integrationsExtraObjects/integrationsExtraObjects.yaml#/definitions/IntegrationFilters"
+      filters:
+        type: object
+        $ref: "../../schemas/integrationsExtraObjects/integrationsExtraObjects.yaml#/definitions/IntegrationFilters"
   IntegrationCategory:
     type: "object"
     x-model: IntegrationCategoryModel

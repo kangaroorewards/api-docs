@@ -13,9 +13,9 @@ definitions:
       pagination:
         type: object
         $ref: "../../schemas/integrationsExtraObjects/integrationsExtraObjects.yaml#/definitions/IntegrationPagination"
-#      filters:
-#        type: object
-#        $ref: "../../schemas/integrationsExtraObjects/integrationsExtraObjects.yaml#/definitions/IntegrationFilters"
+      filters:
+        type: object
+        $ref: "../../schemas/integrationsExtraObjects/integrationsExtraObjects.yaml#/definitions/IntegrationFilters"
   IntegrationProductBrand:
     type: "object"
     x-model: IntegrationProductBrandModel
