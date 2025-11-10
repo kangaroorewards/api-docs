@@ -13,7 +13,7 @@ consumes:
 produces:
   - application/json
 paths:
-  /api/v1/branch-links/{branchLinkId}/product-tags:
+  /api/v1/branch-links/{branchLinkId}/product-tags&per_page={perPage}&page={pageNumber}&after={afterValue}{filteringQuery}:
     get:
       summary: Retrieves the business's integration product brands
       operationId: getBusinessIntegrationsProductBrands
@@ -25,6 +25,20 @@ paths:
           name: branchLinkId
           required: true
           type: integer
+        - in: path
+          name: perPage
+          type: integer
+          default: 100
+        - in: path
+          name: pageNumber
+          default: 100
+          type: integer
+        - in: path
+          name: afterValue
+          type: string
+        - in: path
+          name: filteringQuery
+          type: string
       responses:
         "200":
           description: Retrieved the business's integration product brands
