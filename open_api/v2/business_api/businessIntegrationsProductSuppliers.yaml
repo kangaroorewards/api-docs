@@ -18,6 +18,8 @@ paths:
       summary: Retrieves the business's integration product suppliers
       operationId: getBusinessIntegrationsProductSuppliers
       x-server-host-id: 1
+      consumes:
+        - application/json
       tags:
         - businessIntegrationsProductSuppliers
       parameters:
