@@ -28,3 +28,33 @@ definitions:
         type: array
         items:
           type: string
+  IntegrationExtraRequest:
+    type: "object"
+    x-model: IntegrationExtraRequestModel
+    properties:
+      per_page:
+        type: integer
+      page:
+        type: integer
+      after:
+        type: string
+        description: Cursor or marker to fetch results after a given value
+      filters:
+        type: array
+        description: A list of filter objects
+        items:
+          $ref: '#/definitions/IntegrationExtraFilters'
+  IntegrationExtraFilters:
+    type: "object"
+    x-model: IntegrationExtraFiltersModel
+    required:
+      - field
+      - operator
+      - value
+    properties:
+      field:
+        type: string
+      operator:
+        type: string
+      value:
+        type: string

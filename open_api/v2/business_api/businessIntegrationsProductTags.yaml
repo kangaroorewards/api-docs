@@ -13,7 +13,7 @@ consumes:
 produces:
   - application/json
 paths:
-  /api/v1/branch-links/{branchLinkId}/product-tags&per_page={perPage}&page={pageNumber}&after={afterValue}{filteringQuery}:
+  /api/v1/branch-links/{branchLinkId}/product-tags:
     get:
       summary: Retrieves the business's integration product tags
       operationId: getBusinessIntegrationsProductTags
@@ -25,20 +25,12 @@ paths:
           name: branchLinkId
           required: true
           type: integer
-        - in: path
-          name: perPage
-          type: integer
-          default: 100
-        - in: path
-          name: pageNumber
-          default: 100
-          type: integer
-        - in: path
-          name: afterValue
-          type: string
-        - in: path
-          name: filteringQuery
-          type: string
+        - in: body
+          name: productTagsIntegrationExtraRequest
+          required: false
+          schema:
+            type: object
+            $ref: 'schemas/integrationsExtraObjects/integrationsExtraObjects.yaml#/definitions/IntegrationExtraRequest'
       responses:
         "200":
           description: Retrieved the business's integration product tags
