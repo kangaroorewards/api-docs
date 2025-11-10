@@ -26,8 +26,8 @@ paths:
           required: true
           type: integer
         - in: body
-          name: productBrandsIntegrationExtraRequest
-          required: false
+          name: integrationExtraRequestPayload
+          required: true
           schema:
             type: object
             $ref: 'schemas/integrationsExtraObjects/integrationsExtraObjects.yaml#/definitions/IntegrationExtraRequest'
