@@ -502,16 +502,13 @@ definitions:
       account_id:
         type: string
         required: false
+      shopify_account:
+        type: string
+        required: false
       shopify_categories:
         type: array
         items:
-          type: object
-          x-model: FilterShopifyCategories
-          properties:
-            id:
-              type: string
-            name:
-              type: string
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
         required: false
       shopify_categories_days:
         type: integer
@@ -520,13 +517,7 @@ definitions:
       shopify_products:
         type: array
         items:
-          type: object
-          x-model: FilterShopifyProducts
-          properties:
-            id:
-              type: string
-            name:
-              type: string
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
         required: false
       shopify_products_days:
         type: integer
@@ -535,13 +526,7 @@ definitions:
       shopify_product_vendors:
         type: array
         items:
-          type: object
-          x-model: FilterShopifyVendors
-          properties:
-            id:
-              type: string
-            name:
-              type: string
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
         required: false
       shopify_product_vendors_days:
         type: integer
@@ -550,15 +535,316 @@ definitions:
       shopify_product_tags:
         type: array
         items:
-          type: object
-          x-model: FilterShopifyProductTags
-          properties:
-            id:
-              type: string
-            name:
-              type: string
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
         required: false
       shopify_product_tags_days:
         type: integer
         format: int64
         required: false
+      ls_retail_products:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      ls_retail_products_days:
+        type: integer
+        format: int64
+        required: false
+      ls_retail_products_branches:
+        type: array
+        items:
+          type: integer
+          format: int64
+        required: false
+      ls_product_brands:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      ls_product_brands_days:
+        type: integer
+        format: int64
+        required: false
+      lsr_product_tags:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      lsr_product_tags_days:
+        type: integer
+        format: int64
+        required: false
+      lsr_product_categories:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      lsr_product_categories_days:
+        type: integer
+        format: int64
+        required: false
+      lsx_products:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      lsx_products_days:
+        type: integer
+        format: int64
+        required: false
+      lsx_product_vendors:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      lsx_product_vendors_days:
+        type: integer
+        format: int64
+        required: false
+      lsx_product_tags:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      lsx_product_tags_days:
+        type: integer
+        format: int64
+        required: false
+      lsx_product_brands:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      lsx_product_brands_days:
+        type: integer
+        format: int64
+        required: false
+      lsk_products:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      lsk_products_days:
+        type: integer
+        format: int64
+        required: false
+      lsk_products_branches:
+        type: array
+        items:
+          type: integer
+          format: int64
+        required: false
+      lsk_accounting_groups:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      lsk_accounting_groups_days:
+        type: integer
+        format: int64
+        required: false
+      lsk_accounting_groups_branches:
+        type: array
+        items:
+          type: integer
+          format: int64
+        required: false
+      ecwid_account:
+        type: string
+        required: false
+      ecwid_products:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      ecwid_products_days:
+        type: integer
+        format: int64
+        required: false
+      ecwid_categories:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      ecwid_categories_days:
+        type: integer
+        format: int64
+        required: false
+      ecwid_brands:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      ecwid_brands_days:
+        type: integer
+        format: int64
+        required: false
+      ls_ecom_account:
+        type: string
+        required: false
+      ls_ecom_products:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      ls_ecom_products_days:
+        type: integer
+        format: int64
+        required: false
+      ls_ecom_brands:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      ls_ecom_brands_days:
+        type: integer
+        format: int64
+        required: false
+      ls_ecom_vendors:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      ls_ecom_vendors_days:
+        type: integer
+        format: int64
+        required: false
+      ls_ecom_tags:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      ls_ecom_tags_days:
+        type: integer
+        format: int64
+        required: false
+      ls_ecom_categories:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      ls_ecom_categories_days:
+        type: integer
+        format: int64
+        required: false
+      woo_account:
+        type: string
+        required: false
+      woo_products:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      woo_products_days:
+        type: integer
+        format: int64
+        required: false
+      woo_tags:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      woo_tags_days:
+        type: integer
+        format: int64
+        required: false
+      woo_categories:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      woo_categories_days:
+        type: integer
+        format: int64
+        required: false
+      magento_account:
+        type: string
+        required: false
+      magento_products:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      magento_products_days:
+        type: integer
+        format: int64
+        required: false
+      magento_categories:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      magento_categories_days:
+        type: integer
+        format: int64
+        required: false
+      bc_account:
+        type: string
+        required: false
+      bc_products:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      bc_products_days:
+        type: integer
+        format: int64
+        required: false
+      bc_brands:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      bc_brands_days:
+        type: integer
+        format: int64
+        required: false
+      bc_categories:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      bc_categories_days:
+        type: integer
+        format: int64
+        required: false
+      heartland_account:
+        type: string
+        required: false
+      heartland_categories:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      heartland_categories_days:
+        type: integer
+        format: int64
+        required: false
+      heartland_products:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      heartland_products_days:
+        type: integer
+        format: int64
+        required: false
+      heartland_vendors:
+        type: array
+        items:
+          $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
+        required: false
+      heartland_vendors_days:
+        type: integer
+        format: int64
+        required: false
+  FilterProductsCategoriesTagsBrandsVendors:
+    type: object
+    x-model: FilterProductsCategoriesTagsBrandsVendorsModel
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      account_id:
+        type: string
