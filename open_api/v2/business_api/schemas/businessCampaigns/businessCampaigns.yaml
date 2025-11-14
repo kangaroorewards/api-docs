@@ -553,8 +553,7 @@ definitions:
       ls_retail_products_branches:
         type: array
         items:
-          type: integer
-          format: int64
+          type: string
         required: false
       ls_product_brands:
         type: array
@@ -631,8 +630,7 @@ definitions:
       lsk_products_branches:
         type: array
         items:
-          type: integer
-          format: int64
+          type: string
         required: false
       lsk_accounting_groups:
         type: array
@@ -646,8 +644,7 @@ definitions:
       lsk_accounting_groups_branches:
         type: array
         items:
-          type: integer
-          format: int64
+          type: string
         required: false
       ecwid_account:
         type: string
