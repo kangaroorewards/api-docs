@@ -68,6 +68,107 @@ Among other things, this could mean that you did not authenticate correctly, tha
 If you receive a status in the `500` range, this generally indicates a server-side problem. This means that
 we are having an issue on our end and cannot fulfill your request currently.
 
+### Common HTTP Status Codes
+
+<table class="table">
+    <tr class="bg-primary">
+        <th>Status Code</th> <th>Description</th> <th>Common Causes</th>
+    </tr>
+    <tr>
+        <td><strong>200 OK</strong></td>
+        <td>The request was successful</td>
+        <td>Standard response for successful HTTP requests</td>
+    </tr>
+    <tr>
+        <td><strong>201 Created</strong></td>
+        <td>The request was successful and a resource was created</td>
+        <td>Returned when a POST request successfully creates a new resource</td>
+    </tr>
+    <tr>
+        <td><strong>204 No Content</strong></td>
+        <td>The request was successful but there is no content to return</td>
+        <td>Common response for successful DELETE operations</td>
+    </tr>
+    <tr>
+        <td><strong>400 Bad Request</strong></td>
+        <td>The request was malformed or invalid</td>
+        <td>Missing required fields, invalid JSON format, or incorrect parameter types</td>
+    </tr>
+    <tr>
+        <td><strong>401 Unauthorized</strong></td>
+        <td>Authentication is required and has failed or not been provided</td>
+        <td>Missing or invalid access token, expired token</td>
+    </tr>
+    <tr>
+        <td><strong>403 Forbidden</strong></td>
+        <td>The request is valid but the server is refusing to respond</td>
+        <td>Insufficient permissions to access the resource or perform the action</td>
+    </tr>
+    <tr>
+        <td><strong>404 Not Found</strong></td>
+        <td>The requested resource could not be found</td>
+        <td>Invalid resource ID, resource has been deleted, or incorrect endpoint URL</td>
+    </tr>
+    <tr>
+        <td><strong>422 Unprocessable Entity</strong></td>
+        <td>The request was well-formed but contains semantic errors</td>
+        <td>Validation errors, business rule violations, or invalid data combinations</td>
+    </tr>
+    <tr>
+        <td><strong>429 Too Many Requests</strong></td>
+        <td>Rate limit has been exceeded</td>
+        <td>Too many requests in a given time period. See Rate Limit section for details</td>
+    </tr>
+    <tr>
+        <td><strong>500 Internal Server Error</strong></td>
+        <td>An error occurred on the server</td>
+        <td>Unexpected server-side error. Contact support if this persists</td>
+    </tr>
+    <tr>
+        <td><strong>503 Service Unavailable</strong></td>
+        <td>The service is temporarily unavailable</td>
+        <td>Server maintenance or temporary overload. Retry after a delay</td>
+    </tr>
+</table>
+
+### Error Response Format
+
+When an error occurs, the API returns a JSON response with details about the error:
+
+**Example 400 Bad Request Response:**
+```json
+{
+  "error": {
+    "status_code": 400,
+    "message": "Invalid ID supplied",
+    "description": "Bad Request"
+  }
+}
+```
+
+**Example 401 Unauthorized Response:**
+```json
+{
+  "error": {
+    "status_code": 401,
+    "message": "Unauthenticated",
+    "description": "The access token is invalid or has expired"
+  }
+}
+```
+
+**Example 422 Validation Error Response:**
+```json
+{
+  "email": [
+    "The email field is required"
+  ],
+  "phone": [
+    "The phone field must be a valid phone number"
+  ]
+}
+```
+
 ## Responses
 
 When a request is successful, a response body will typically be sent back in the form of a JSON object. An exception to this is when a DELETE request is processed, which will result in a successful HTTP 204 status and an empty response body.
@@ -135,4 +236,162 @@ X-RateLimit-Reset: 1476571703
 - **Feedback and Support:** Provide feedback on usability, documentation, and feature requests. Utilize support channels if you encounter issues or have questions.
 
 By following these best practices, you can ensure efficient, secure, and reliable integration with Kangaroo Rewards' APIs.
+
+# Troubleshooting
+
+This section covers common issues and their solutions when working with the Kangaroo Rewards API.
+
+## Authentication Issues
+
+**Problem: 401 Unauthorized Error**
+
+*Symptoms:* Receiving a 401 status code when making API requests.
+
+*Common Causes & Solutions:*
+- **Expired Access Token:** Access tokens expire after 24 hours. Use the refresh token to obtain a new access token.
+- **Missing Authorization Header:** Ensure your request includes the `Authorization: Bearer <access_token>` header.
+- **Invalid Token Format:** Verify that the token is properly formatted and not corrupted.
+- **Revoked Access:** The user may have revoked your application's access. Request new authorization.
+
+**Example Fix:**
+```bash
+# Refresh the access token
+curl -X POST https://api.kangaroorewards.com/oauth/token \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -H "X-Application-Key: YOUR_APP_KEY" \
+  -d "grant_type=refresh_token" \
+  -d "refresh_token=YOUR_REFRESH_TOKEN" \
+  -d "client_id=YOUR_CLIENT_ID" \
+  -d "client_secret=YOUR_CLIENT_SECRET" \
+  -d "scope=admin"
+```
+
+**Problem: 403 Forbidden Error**
+
+*Symptoms:* Request is authenticated but access is denied.
+
+*Common Causes & Solutions:*
+- **Insufficient Permissions:** The access token doesn't have the required scope. Request authorization with the appropriate scope (e.g., `admin`).
+- **Application Not Approved:** Contact Kangaroo Rewards Support to get your application approved.
+- **Resource Access Restrictions:** You may be trying to access resources that don't belong to the authenticated account.
+
+## Rate Limiting Issues
+
+**Problem: 429 Too Many Requests**
+
+*Symptoms:* Receiving a 429 status code after multiple API calls.
+
+*Solution:*
+Implement exponential backoff and respect the rate limit headers:
+
+```javascript
+// Example: Handle rate limiting with exponential backoff
+async function apiCallWithRetry(url, options, maxRetries = 3) {
+  for (let i = 0; i < maxRetries; i++) {
+    const response = await fetch(url, options);
+    
+    if (response.status === 429) {
+      const resetTime = response.headers.get('X-RateLimit-Reset');
+      const waitTime = Math.min(Math.pow(2, i) * 1000, 60000); // Max 60s
+      console.log(`Rate limited. Waiting ${waitTime}ms before retry...`);
+      await new Promise(resolve => setTimeout(resolve, waitTime));
+      continue;
+    }
+    
+    return response;
+  }
+  throw new Error('Max retries exceeded');
+}
+```
+
+## Validation Errors
+
+**Problem: 422 Unprocessable Entity**
+
+*Symptoms:* Request is well-formed but contains validation errors.
+
+*Common Causes & Solutions:*
+- **Missing Required Fields:** Check that all required fields are included in your request body.
+- **Invalid Data Format:** Ensure dates are in ISO 8601 format, emails are valid, phone numbers include country codes, etc.
+- **Business Rule Violations:** Review the error response for specific validation messages.
+
+**Example Error Response:**
+```json
+{
+  "email": ["The email field is required"],
+  "country_code": ["The country code field is required when phone is present"]
+}
+```
+
+## Common Request Issues
+
+**Problem: Missing X-Application-Key Header**
+
+*Solution:* All requests must include the `X-Application-Key` header. Obtain your application key from the business portal.
+
+```bash
+curl -X GET https://api.kangaroorewards.com/customers \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
+  -H "X-Application-Key: YOUR_APP_KEY" \
+  -H "Accept: application/vnd.kangaroorewards.api.v1+json"
+```
+
+**Problem: Incorrect Content-Type Header**
+
+*Solution:* All POST, PUT, and PATCH requests must have `Content-Type: application/json` header.
+
+```bash
+curl -X POST https://api.kangaroorewards.com/customers \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
+  -H "X-Application-Key: YOUR_APP_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/vnd.kangaroorewards.api.v1+json" \
+  -d '{"email":"customer@example.com","first_name":"John"}'
+```
+
+## Pagination Issues
+
+**Problem: Not All Data Returned**
+
+*Solution:* The API returns paginated results (default 100 items per page). Use the `page` parameter to retrieve additional pages.
+
+```bash
+# Get first page
+GET /customers?page=1
+
+# Get second page
+GET /customers?page=2
+
+# Check meta.total to know the total count
+```
+
+## Debugging Tips
+
+1. **Enable Verbose Logging:** Use curl's `-v` flag to see full request/response headers:
+   ```bash
+   curl -v -X GET https://api.kangaroorewards.com/customers ...
+   ```
+
+2. **Validate JSON:** Use online JSON validators to ensure your request body is valid JSON.
+
+3. **Check Response Headers:** Rate limit information and error details are often in response headers.
+
+4. **Test with Simple Requests:** Start with basic GET requests before attempting complex POST/PUT operations.
+
+5. **Review API Version:** Ensure you're using the correct API version in the Accept header:
+   ```
+   Accept: application/vnd.kangaroorewards.api.v1+json
+   ```
+
+## Getting Help
+
+If you continue to experience issues:
+
+- Check the [API Documentation](https://api.kangaroorewards.com/docs) for endpoint-specific requirements
+- Review [Tutorials](https://github.com/kangaroorewards/api-docs/wiki) for common use cases
+- Contact Kangaroo Rewards Support with:
+  - Request/response details (remove sensitive data)
+  - Timestamps of the issue
+  - Your application ID
+  - Description of what you're trying to accomplish
 
