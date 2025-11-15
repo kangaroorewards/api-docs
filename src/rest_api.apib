@@ -237,6 +237,400 @@ X-RateLimit-Reset: 1476571703
 
 By following these best practices, you can ensure efficient, secure, and reliable integration with Kangaroo Rewards' APIs.
 
+# Code Examples
+
+This section provides practical code examples for common operations in multiple programming languages.
+
+## Making API Requests
+
+### PHP
+
+```php
+<?php
+// Using cURL to make API requests
+$accessToken = 'your_access_token_here';
+$appKey = 'your_application_key_here';
+
+$ch = curl_init('https://api.kangaroorewards.com/customers');
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Authorization: Bearer ' . $accessToken,
+    'X-Application-Key: ' . $appKey,
+    'Accept: application/vnd.kangaroorewards.api.v1+json',
+    'Content-Type: application/json'
+]);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($ch);
+$statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+
+if ($statusCode === 200) {
+    $customers = json_decode($response, true);
+    print_r($customers);
+} else {
+    echo "Error: " . $statusCode . "\n";
+    echo $response;
+}
+?>
+```
+
+### Python
+
+```python
+import requests
+
+# Configuration
+access_token = 'your_access_token_here'
+app_key = 'your_application_key_here'
+base_url = 'https://api.kangaroorewards.com'
+
+# Set up headers
+headers = {
+    'Authorization': f'Bearer {access_token}',
+    'X-Application-Key': app_key,
+    'Accept': 'application/vnd.kangaroorewards.api.v1+json',
+    'Content-Type': 'application/json'
+}
+
+# Make GET request
+response = requests.get(f'{base_url}/customers', headers=headers)
+
+if response.status_code == 200:
+    customers = response.json()
+    print(customers)
+else:
+    print(f'Error: {response.status_code}')
+    print(response.text)
+```
+
+### JavaScript (Node.js)
+
+```javascript
+const axios = require('axios');
+
+// Configuration
+const accessToken = 'your_access_token_here';
+const appKey = 'your_application_key_here';
+const baseURL = 'https://api.kangaroorewards.com';
+
+// Set up axios instance
+const api = axios.create({
+  baseURL: baseURL,
+  headers: {
+    'Authorization': `Bearer ${accessToken}`,
+    'X-Application-Key': appKey,
+    'Accept': 'application/vnd.kangaroorewards.api.v1+json',
+    'Content-Type': 'application/json'
+  }
+});
+
+// Make GET request
+api.get('/customers')
+  .then(response => {
+    console.log(response.data);
+  })
+  .catch(error => {
+    console.error('Error:', error.response?.status);
+    console.error(error.response?.data);
+  });
+```
+
+### Ruby
+
+```ruby
+require 'net/http'
+require 'json'
+require 'uri'
+
+# Configuration
+access_token = 'your_access_token_here'
+app_key = 'your_application_key_here'
+base_url = 'https://api.kangaroorewards.com'
+
+# Make GET request
+uri = URI("#{base_url}/customers")
+request = Net::HTTP::Get.new(uri)
+request['Authorization'] = "Bearer #{access_token}"
+request['X-Application-Key'] = app_key
+request['Accept'] = 'application/vnd.kangaroorewards.api.v1+json'
+request['Content-Type'] = 'application/json'
+
+response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+  http.request(request)
+end
+
+if response.code == '200'
+  customers = JSON.parse(response.body)
+  puts customers
+else
+  puts "Error: #{response.code}"
+  puts response.body
+end
+```
+
+## Creating a Customer
+
+### PHP
+
+```php
+<?php
+$customerData = [
+    'email' => 'newcustomer@example.com',
+    'first_name' => 'Jane',
+    'last_name' => 'Smith',
+    'phone' => '5551234567',
+    'country_code' => 'US'
+];
+
+$ch = curl_init('https://api.kangaroorewards.com/customers');
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($customerData));
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Authorization: Bearer ' . $accessToken,
+    'X-Application-Key: ' . $appKey,
+    'Accept: application/vnd.kangaroorewards.api.v1+json',
+    'Content-Type: application/json'
+]);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($ch);
+$statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+
+if ($statusCode === 200) {
+    $customer = json_decode($response, true);
+    echo "Customer created: " . $customer['data']['id'];
+} else {
+    echo "Error: " . $statusCode;
+}
+?>
+```
+
+### Python
+
+```python
+customer_data = {
+    'email': 'newcustomer@example.com',
+    'first_name': 'Jane',
+    'last_name': 'Smith',
+    'phone': '5551234567',
+    'country_code': 'US'
+}
+
+response = requests.post(
+    f'{base_url}/customers',
+    headers=headers,
+    json=customer_data
+)
+
+if response.status_code == 200:
+    customer = response.json()
+    print(f"Customer created: {customer['data']['id']}")
+else:
+    print(f'Error: {response.status_code}')
+    print(response.json())
+```
+
+### JavaScript (Node.js)
+
+```javascript
+const customerData = {
+  email: 'newcustomer@example.com',
+  first_name: 'Jane',
+  last_name: 'Smith',
+  phone: '5551234567',
+  country_code: 'US'
+};
+
+api.post('/customers', customerData)
+  .then(response => {
+    console.log(`Customer created: ${response.data.data.id}`);
+  })
+  .catch(error => {
+    console.error('Error:', error.response?.status);
+    console.error(error.response?.data);
+  });
+```
+
+## Handling Pagination
+
+### Python Example
+
+```python
+def get_all_customers(base_url, headers):
+    """Fetch all customers across multiple pages"""
+    all_customers = []
+    page = 1
+    
+    while True:
+        response = requests.get(
+            f'{base_url}/customers',
+            headers=headers,
+            params={'page': page}
+        )
+        
+        if response.status_code != 200:
+            break
+            
+        data = response.json()
+        customers = data.get('data', [])
+        
+        if not customers:
+            break
+            
+        all_customers.extend(customers)
+        
+        # Check if there are more pages
+        cursor = data.get('cursor', {})
+        if not cursor.get('next'):
+            break
+            
+        page += 1
+    
+    return all_customers
+
+# Usage
+all_customers = get_all_customers(base_url, headers)
+print(f"Total customers: {len(all_customers)}")
+```
+
+### JavaScript Example
+
+```javascript
+async function getAllCustomers() {
+  let allCustomers = [];
+  let page = 1;
+  let hasMore = true;
+
+  while (hasMore) {
+    try {
+      const response = await api.get('/customers', {
+        params: { page }
+      });
+
+      const customers = response.data.data || [];
+      allCustomers = allCustomers.concat(customers);
+
+      // Check if there are more pages
+      hasMore = response.data.cursor?.next !== undefined;
+      page++;
+    } catch (error) {
+      console.error('Error fetching customers:', error);
+      hasMore = false;
+    }
+  }
+
+  return allCustomers;
+}
+
+// Usage
+getAllCustomers().then(customers => {
+  console.log(`Total customers: ${customers.length}`);
+});
+```
+
+## Error Handling Best Practices
+
+### Python with Retry Logic
+
+```python
+import time
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
+
+def create_session_with_retries():
+    """Create a requests session with automatic retry logic"""
+    session = requests.Session()
+    
+    # Configure retry strategy
+    retry_strategy = Retry(
+        total=3,  # Total number of retries
+        backoff_factor=1,  # Wait 1, 2, 4 seconds between retries
+        status_forcelist=[429, 500, 502, 503, 504],
+        method_whitelist=["GET", "POST", "PUT", "DELETE"]
+    )
+    
+    adapter = HTTPAdapter(max_retries=retry_strategy)
+    session.mount("https://", adapter)
+    session.mount("http://", adapter)
+    
+    return session
+
+# Usage
+session = create_session_with_retries()
+session.headers.update(headers)
+
+try:
+    response = session.get(f'{base_url}/customers')
+    response.raise_for_status()
+    customers = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Request failed: {e}")
+```
+
+### JavaScript with Error Handling
+
+```javascript
+async function makeApiCallWithErrorHandling(endpoint, method = 'GET', data = null) {
+  try {
+    const config = {
+      method,
+      url: endpoint,
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'X-Application-Key': appKey,
+        'Accept': 'application/vnd.kangaroorewards.api.v1+json',
+        'Content-Type': 'application/json'
+      }
+    };
+
+    if (data) {
+      config.data = data;
+    }
+
+    const response = await axios(config);
+    return { success: true, data: response.data };
+    
+  } catch (error) {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      switch (error.response.status) {
+        case 401:
+          console.error('Unauthorized: Token may be expired');
+          // Implement token refresh logic here
+          break;
+        case 429:
+          console.error('Rate limit exceeded. Retry after delay');
+          // Implement backoff logic here
+          break;
+        case 422:
+          console.error('Validation error:', error.response.data);
+          break;
+        default:
+          console.error(`Error ${error.response.status}:`, error.response.data);
+      }
+    } else if (error.request) {
+      // The request was made but no response was received
+      console.error('No response received from server');
+    } else {
+      // Something happened in setting up the request
+      console.error('Error setting up request:', error.message);
+    }
+    
+    return { success: false, error: error.message };
+  }
+}
+
+// Usage
+const result = await makeApiCallWithErrorHandling('/customers');
+if (result.success) {
+  console.log('Customers:', result.data);
+} else {
+  console.error('Failed to fetch customers');
+}
+```
+
 # Troubleshooting
 
 This section covers common issues and their solutions when working with the Kangaroo Rewards API.
