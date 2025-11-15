@@ -4,7 +4,7 @@ HOST: https://api.kangaroorewards.com
 # Kangaroo Rewards - API Reference
 
 >**Note.**
-If you are looking for Users API Reference, it is awailable at [User API Reference](https://api.kangaroorewards.com/docs/user)
+If you are looking for Users API Reference, it is available at [User API Reference](https://api.kangaroorewards.com/docs/user)
 
 The Kangaroo Rewards API uses HTTP methods and a RESTful endpoint structure. The API authorization framework is OAuth 2.0. You format requests in JSON and the APIs return JSON-formatted responses.
 
@@ -176,7 +176,7 @@ https://api.kangaroorewards.com/oauth/authorize?client_id=12345
 ```
 **2. Handling the OAuth 2.0 server response**
 
-If the user approves the client they will be redirected from the authorisation server back to the client (specifically to the redirect URI) with the following parameters in the query string:
+If the user approves the client they will be redirected from the authorization server back to the client (specifically to the redirect URI) with the following parameters in the query string:
 
 - *code* with the authorization code
 - *state* with the state parameter sent in the original request. You should compare this value with the value stored in the user’s session to ensure the authorization code obtained is in response to requests made by this client rather than another client application.
@@ -371,7 +371,7 @@ You must write your code to anticipate the possibility that a granted refresh to
 - The user has revoked your app's access.
 - The refresh token has not been used for 30 days.
 
->**Note:** A Refresh Token will expie in 30 days. After 30 days the Refresh Token MUST be refreshed or a new Refresh Token can be obtained by requesting a new Access Token
+>**Note:** A Refresh Token will expire in 30 days. After 30 days the Refresh Token MUST be refreshed or a new Refresh Token can be obtained by requesting a new Access Token
 
 
 #### OAuth - Password Credentials Grant
