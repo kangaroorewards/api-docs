@@ -71,7 +71,7 @@ X-Application-Key: eyXai0XD7SLLzaOeJW...
 Content-Type: application/json
 
 {
- "name": "Happy  birthday",
+ "name": "Happy birthday",
  "send_by": 1,
  "sms_body": "Happy birthday! 1000 points for you",
  "send_by_priority": "email,sms,push",
@@ -82,12 +82,11 @@ Content-Type: application/json
   }
  ],
  "auto": true,
- "email_subject": "Happy  birthday",
+ "email_subject": "Happy birthday",
  "offers":[
     {
      "id": 1485,
-     "type":
-     "bonus_points"
+     "type": "bonus_points"
     }
  ],
  "include_offer_link_in_sms": false,
@@ -121,8 +120,7 @@ Content-Type: application/json
   "offers":[
    {
     "id": 1485,
-    "type":
-    "bonus_points"
+    "type": "bonus_points"
    }
   ],
   "include_offer_link_in_sms": false,
@@ -204,10 +202,10 @@ Content-Type: application/json
 + exclude_customer_in_previous_automated_campaign_past_days: 7 (number) `Optional` Exclude customers reached in automated campaigns in the last X days
 + exclude_customer_in_previous_automated_campaign_past_hours: 10 (number) `Optional` Exclude customers reached in automated campaigns in the last X hours
 + exclude_customer_in_previous_campaign: false (boolean) `Optional` Default false. Exclude customers reached in previous campaigns
-+ email_subject:  `email subject` (string)
-+ email_body:  `email html content` (string)
++ email_subject: `email subject` (string)
++ email_body: `email html content` (string)
 + sms_body: `sms content` (string)
-+ push_title: `push title`(string)
++ push_title: `push title` (string)
 + push_text: `push text` (string)
 + push_link: `push link` (string)
 + delivery_date: `2000-07-01T00:00:00+00:00` (string) `Optional` ISO 8601 date.
@@ -234,7 +232,7 @@ Content-Type: application/json
 + error (object)
     - status_code: 400 (number)
     - message: `Bad Request` (string)
-    - description: `Birthday campaign can not combine with other criteria.` (string)
+    - description: `Birthday campaign cannot combine with other criteria.` (string)
 
 ## Error 422 (object)
 
