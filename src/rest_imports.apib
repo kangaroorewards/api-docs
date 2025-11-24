@@ -68,7 +68,7 @@ Upload a CSV file to import transactions with field mapping configuration.
 
 |Name|Type|Description|
 |-----|----|-----------|
-|file|string|`Required.` CSV file to import. Must be uploaded as a binary file (multipart/form-data)|
+|file|string|`Required.` CSV file to import. Must be uploaded as a binary file (multipart/form-data). Maximum file size: 10MB|
 |type|string|`Required.` Import type (e.g., "transactions")|
 |options|object|`Required.` Object containing import options|
 |options.branch_id|string|`Required.` Branch identifier|
@@ -104,7 +104,7 @@ Upload a CSV file to import transactions with field mapping configuration.
 > When mapping fields are not provided, the system will attempt to auto-detect columns based on common names (e.g., Email, Phone, Type, Amount, Points, Date Time).
 >
 > **Accepted values in CSV file:**
-> - **Transaction type:** 'adjust increase points', 'adjust decrease points', 'reward', 'refund points', 'redemption'
+> - **Transaction type:** 'adjust increase points', 'adjust decrease points', 'reward', 'refund points', 'redemption'. Points are required for all types except 'reward'. By default, if no transaction type is specified, it's 'reward' transactions.
 > - **Language:** Must match supported language codes for the business (2-letter ISO 639-1 code)
 > - **Email consent / SMS consent:** 'yes', 'no', '1', '0', 'y', 'n', 't', 'f', 'on', 'off', 'true', 'false'
 > - **Tags:** Multiple tags can be separated by semicolon or comma
