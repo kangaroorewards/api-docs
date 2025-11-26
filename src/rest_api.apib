@@ -85,7 +85,7 @@ When a request is successful, a response body will typically be sent back in the
 ## Meta
 In addition to the main resource root, the response MAY also contain a **meta** object. This object contains information about the response itself.
 The **meta** object MIGHT contain a **total** key that is set to the total number of objects returned by the request. This has implications on the pagination.
-The **meta** object MIGHT not be presend or it will only be displayed when it has a value. Currently, the meta object will have a value when a request is made on a collection (like customers).
+The **meta** object MIGHT not be present or it will only be displayed when it has a value. Currently, the meta object will have a value when a request is made on a collection (like customers).
 
 ## Pagination
 The **meta** object is returned as part of the response body when pagination is enabled. By default, 100 objects are returned per page.

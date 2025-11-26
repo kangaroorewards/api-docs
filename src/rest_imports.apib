@@ -1,0 +1,413 @@
+# Imports
+
+# Group Imports
+
+## Import [/imports]
+
+### List Imports [GET /imports]
+
+Retrieve a list of imports for the authenticated business.
+
++ Request
+    + Headers
+
+            Accept: application/vnd.kangaroorewards.api.v1+json
+            Authorization: Bearer {access_token}
+            X-Application-Key: <your_application_key>
+
++ Response 200 (application/json)
+    + Attributes (object)
+        + data (array)
+            + (object)
+                + id: 312 (number) - Import identifier
+                + status: `In progress` (string) - Import status (In progress, Pending, Finished, Finished with errors, Failed)
+                + type: `Transaction Import` (string) - Import type (Transaction Import)
+                + created_by: `XX@example.com` (string) - Email of user who created the import
+                + created_at: `2025-11-21T21:22:56+00:00` (string) - Creation timestamp
+
++ Response 401 (application/json)
+    + Attributes (object)
+        + error: `Unauthorized` (string) - Authentication error
+
+### Get Import Details [GET /imports/{id}]
+
+Retrieve details of a specific import by its ID.
+
++ Parameters
+    + id: `312` (number, required) - Import identifier
+
++ Request
+    + Headers
+
+            Accept: application/vnd.kangaroorewards.api.v1+json
+            Authorization: Bearer {access_token}
+            X-Application-Key: <your_application_key>
+
++ Response 200 (application/json)
+    + Attributes (object)
+        + data (object)
+            + id: 312 (number) - Import identifier
+            + status: `In progress` (string) - Import status (In progress, Pending, Finished, Finished with errors, Failed)
+            + type: `Transaction Import` (string) - Import type (Transaction Import)
+            + created_by: `XX@example.com` (string) - Email of user who created the import
+            + created_at: `2025-11-21T21:22:56+00:00` (string) - Creation timestamp
+
++ Response 404 (application/json)
+    + Attributes (object)
+        + error: `Import not found` (string) - Import does not exist
+
++ Response 401 (application/json)
+    + Attributes (object)
+        + error: `Unauthorized` (string) - Authentication error
+
+### Upload Transaction Import [POST /imports/uploads]
+
+Upload a CSV file to import transactions with field mapping configuration.
+
+**Body Parameters**
+
+|Name|Type|Description|
+|-----|----|-----------|
+|file|string|`Required.` CSV file to import. Must be uploaded as a binary file (multipart/form-data). Maximum file size: 10MB|
+|type|string|`Required.` Import type (e.g., "transactions")|
+|options|object|`Required.` Object containing import options|
+|options.branch_id|string|`Required.` Branch identifier|
+|options.phone_country_code|string|`Optional.` Phone country code (ISO 3166-1 alpha-2). If not provided, the phone number in the CSV must include the country code|
+|mapping|object|`Optional.` Object containing CSV column mappings|
+|mapping.transaction_type|string|`Optional.` CSV column name for transaction type|
+|mapping.first_name|string|`Optional.` CSV column name for first name|
+|mapping.last_name|string|`Optional.` CSV column name for last name|
+|mapping.email|string|`Optional.` CSV column name for email|
+|mapping.phone|string|`Optional.` CSV column name for phone|
+|mapping.transaction_amount|string|`Optional.` CSV column name for transaction amount|
+|mapping.transaction_points|string|`Optional.` CSV column name for transaction points|
+|mapping.date_time|string|`Optional.` CSV column name for datetime|
+|mapping.card_number|string|`Optional.` CSV column name for card number. The card number must be enabled in the import transaction settings|
+|mapping.card_balance|string|`Optional.` CSV column name for card balance. The card balance must be enabled in the import transaction settings|
+|mapping.custom_field_1|string|`Optional.` CSV column name for custom field 1. The custom field must be enabled in the import transaction settings|
+|mapping.custom_field_2|string|`Optional.` CSV column name for custom field 2. The custom field must be enabled in the import transaction settings|
+|mapping.custom_field_3|string|`Optional.` CSV column name for custom field 3. The custom field must be enabled in the import transaction settings|
+|mapping.custom_field_4|string|`Optional.` CSV column name for custom field 4. The custom field must be enabled in the import transaction settings|
+|mapping.custom_field_5|string|`Optional.` CSV column name for custom field 5. The custom field must be enabled in the import transaction settings|
+|mapping.custom_field_6|string|`Optional.` CSV column name for custom field 6. The custom field must be enabled in the import transaction settings|
+|mapping.language|string|`Optional.` CSV column name for language. The language must be enabled in the import transaction settings|
+|mapping.email_consent|string|`Optional.` CSV column name for email consent|
+|mapping.sms_consent|string|`Optional.` CSV column name for SMS consent|
+|mapping.tags|string|`Optional.` CSV column name for tags|
+|mapping.transaction_detail_custom_field_1|string|`Optional.` CSV column name for transaction detail custom field 1. The custom field must be enabled in the system (Contact support)|
+|mapping.transaction_detail_custom_field_2|string|`Optional.` CSV column name for transaction detail custom field 2. The custom field must be enabled in the system (Contact support)|
+|mapping.transaction_detail_custom_field_3|string|`Optional.` CSV column name for transaction detail custom field 3. The custom field must be enabled in the system (Contact support)|
+|mapping.transaction_detail_custom_field_4|string|`Optional.` CSV column name for transaction detail custom field 4. The custom field must be enabled in the system (Contact support)|
+|mapping.transaction_detail_custom_field_5|string|`Optional.` CSV column name for transaction detail custom field 5. The custom field must be enabled in the system (Contact support)|
+
+> **NOTE:**
+> When mapping fields are not provided, the system will attempt to auto-detect columns based on common names (e.g., Email, Phone, Type, Amount, Points, Date Time).
+>
+> **Accepted values in CSV file:**
+> - **Transaction type:** 'adjust increase points', 'adjust decrease points', 'reward', 'refund points', 'redemption'. Points are required for all types except 'reward'. By default, if no transaction type is specified, it's 'reward' transactions.
+> - **Language:** Must match supported language codes for the business (2-letter ISO 639-1 code)
+> - **Email consent / SMS consent:** 'yes', 'no', '1', '0', 'y', 'n', 't', 'f', 'on', 'off', 'true', 'false'
+> - **Tags:** Multiple tags can be separated by semicolon or comma
+> - **Date / Time:** Supported formats include 'YYYY-MM-DD HH:MM:SS', 'MM/DD/YYYY HH:MM AM/PM', 'DD-MM-YYYY HH:MM', and ISO 8601 format. All datetime values are treated as UTC. If no datetime is provided or the format is invalid, the current UTC time will be used
+
+Example updating a csv file
+```
+POST /imports/uploads HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC...
+Accept: application/vnd.kangaroorewards.api.v1+json;
+X-Application-Key: eyXai0XD7SLLzaOeJW...
+Content-Type: multipart/form-data
+
+{
+	"file": csv file,
+	"type": "transactions",
+	"options": {
+		"branch_id": "11eb0fca4cbebcc39f48e2865c66d9cc",
+		"phone_country_code": "ca"
+	},
+	"mapping": {
+		"transaction_type": "Transaction type",
+		"first_name": "First name",
+		"last_name": "Last name",
+		"email": "Email address",
+		"phone": "Phone number",
+		"transaction_amount": "Transaction amount",
+		"transaction_points": "Transaction points",
+		"date_time": "Date / Time",
+		"card_number": "card number",
+		"card_balance": "card balance",
+		"custom_field_1": "Custom field 1",
+		"custom_field_2": "custom Field 2",
+		"custom_field_3": "custom Field 3",
+		"custom_field_4": "custom Field 4",
+		"custom_field_5": "custom Field 5",
+		"custom_field_6": "Custom field 6",
+		"language": "language",
+		"email_consent": "email consent",
+		"sms_consent": "sms consent",
+		"tags": "tags",
+		"transaction_detail_custom_field_1": "Detail custom Field 1",
+		"transaction_detail_custom_field_2": "Detail custom Field 2",
+		"transaction_detail_custom_field_3": "Detail custom Field 3",
+		"transaction_detail_custom_field_4": "Detail custom Field 4",
+		"transaction_detail_custom_field_5": "Detail custom Field 5"
+	}
+}
+```
+
++ Request (multipart/form-data)
+    + Headers
+
+            Accept: application/vnd.kangaroorewards.api.v1+json
+            Authorization: Bearer {access_token}
+            X-Application-Key: <your_application_key>
+
+    + Attributes
+        + file: `sample_transactions.csv` (string, required) - CSV file to import
+        + type: `transactions` (string, required) - Import type
+        + options (object, required)
+            + branch_id: `11eb0fca4cbebcc39f48e2865c66d9cc` (string, required) - Branch identifier
+            + phone_country_code: `ca` (string, optional) - Phone country code (ISO 3166-1 alpha-2)
+        + mapping (object, optional)
+            + transaction_type: `Transaction Type` (string, optional) - CSV column name for transaction type
+            + first_name: `First Name` (string, optional) - CSV column name for first name
+            + last_name: `Last Name` (string, optional) - CSV column name for last name
+            + email: `Email Address` (string, optional) - CSV column name for email
+            + phone: `Phone Number` (string, optional) - CSV column name for phone
+            + transaction_amount: `Transaction Amount` (string, optional) - CSV column name for transaction amount
+            + transaction_points: `Transaction Points` (string, optional) - CSV column name for transaction points
+            + date_time: `Date Time` (string, optional) - CSV column name for date/time
+            + card_number: `Card Number` (string, optional) - CSV column name for card number
+            + card_balance: `Card Balance` (string, optional) - CSV column name for card balance
+            + custom_field_1: `Custom field 1` (string, optional) - CSV column name for custom field 1
+            + custom_field_2: `custom Field 2` (string, optional) - CSV column name for custom field 2
+            + custom_field_3: `custom Field 3` (string, optional) - CSV column name for custom field 3
+            + custom_field_4: `custom Field 4` (string, optional) - CSV column name for custom field 4
+            + custom_field_5: `custom Field 5` (string, optional) - CSV column name for custom field 5
+            + custom_field_6: `Custom field 6` (string, optional) - CSV column name for custom field 6
+            + language: `Language` (string, optional) - CSV column name for language
+            + email_consent: `Email Consent` (string, optional) - CSV column name for email consent
+            + sms_consent: `Sms Consent` (string, optional) - CSV column name for SMS consent
+            + tags: `Tags` (string, optional) - CSV column name for tags
+            + transaction_detail_custom_field_1: `Transaction Custom Field 1` (string, optional) - CSV column name for transaction detail custom field 1
+            + transaction_detail_custom_field_2: `Transaction Custom Field 2` (string, optional) - CSV column name for transaction detail custom field 2
+            + transaction_detail_custom_field_3: `Transaction Custom Field 3` (string, optional) - CSV column name for transaction detail custom field 3
+            + transaction_detail_custom_field_4: `Transaction Custom Field 4` (string, optional) - CSV column name for transaction detail custom field 4
+            + transaction_detail_custom_field_5: `Transaction Custom Field 5` (string, optional) - CSV column name for transaction detail custom field 5
+
++ Response 200 (application/json)
+    + Attributes (object)
+        + data (object)
+            + file_id: `MTc2MzkyMDc4Nl82OTIzNGI5MmYxYTVkMy40NTUwODI3OS5jc3Y` (string) - Identifier for the uploaded file to be used in subsequent import processing.
+            + file_header_columns (array[string]) - List of columns exactly as found in the CSV file.
+                + **List of columns exactly as found in the CSV file.**
+                + `Transaction Type`
+                + `First Name`
+                + `Email`
+                + `Transaction Amount`
+                + `Date Time`
+            + import_fields (object) - Key/value pairs of **system field → label**.
+                + Only contains fields the client requested to map.
+                + transaction_type: `Transaction Type` (string)
+                + first_name: `First Name` (string)
+                + email: `Email` (string)
+                + transaction_amount: `Transaction Amount` (string)
+                + date_time: `Date Time` (string)
+            + totals (object)
+                + total_records: 10 (number)
+                + total_mapped: 0 (number)
+                + total_duplicate: 1 (number)
+                + total_warning: 1 (number)
+                + total_error: 1 (number)
+            + preview_entry (object)
+                + Contains **only the columns present in the CSV**, with parsed sample result.
+                + first_name: null,
+                + email: `XX@example`,
+                + transaction_amount: `100.50`,
+                + date_time: `2023-11-20T14:30:00+00:00`
+                + transaction_type: `reward`
+            + mapping_status_list (array[MappingStatus])
+                Contains entries **only for fields present in the CSV**.
+            + mapped_list (array[MappedRecord])
+            + duplicate_list (array[MappedRecord])
+            + warning_list (array[MappedRecord])
+            + error_list (array[MappedRecord])
+
++ Response 401 (application/json)
+    + Attributes (object)
+        + error: `Unauthorized` (string) - Authentication error
+
+### Start Transaction Import [POST]
+
+Start processing a previously uploaded CSV file. This endpoint begins the actual import process after the file has been uploaded and validated via the `/imports/uploads` endpoint.
+
+**Body Parameters**
+
+|Name|Type|Description|
+|-----|----|-----------|
+|file_id|string|`Required.` The file identifier returned from the upload endpoint|
+|type|string|`Required.` Import type (e.g., "transactions")|
+|options|object|`Required.` Object containing import options|
+|options.branch_id|string|`Required.` Branch identifier|
+|options.phone_country_code|string|`Optional.` Phone country code (ISO 3166-1 alpha-2). If not provided, the phone number in the CSV must include the country code|
+|mapping|object|`Optional.` Object containing CSV column mappings|
+|mapping.transaction_type|string|`Optional.` CSV column name for transaction type|
+|mapping.first_name|string|`Optional.` CSV column name for first name|
+|mapping.last_name|string|`Optional.` CSV column name for last name|
+|mapping.email|string|`Optional.` CSV column name for email|
+|mapping.phone|string|`Optional.` CSV column name for phone|
+|mapping.transaction_amount|string|`Optional.` CSV column name for transaction amount|
+|mapping.transaction_points|string|`Optional.` CSV column name for transaction points|
+|mapping.date_time|string|`Optional.` CSV column name for datetime|
+|mapping.card_number|string|`Optional.` CSV column name for card number. The card number must be enabled in the import transaction settings|
+|mapping.card_balance|string|`Optional.` CSV column name for card balance. The card balance must be enabled in the import transaction settings|
+|mapping.custom_field_1|string|`Optional.` CSV column name for custom field 1. The custom field must be enabled in the import transaction settings|
+|mapping.custom_field_2|string|`Optional.` CSV column name for custom field 2. The custom field must be enabled in the import transaction settings|
+|mapping.custom_field_3|string|`Optional.` CSV column name for custom field 3. The custom field must be enabled in the import transaction settings|
+|mapping.custom_field_4|string|`Optional.` CSV column name for custom field 4. The custom field must be enabled in the import transaction settings|
+|mapping.custom_field_5|string|`Optional.` CSV column name for custom field 5. The custom field must be enabled in the import transaction settings|
+|mapping.custom_field_6|string|`Optional.` CSV column name for custom field 6. The custom field must be enabled in the import transaction settings|
+|mapping.language|string|`Optional.` CSV column name for language. The language must be enabled in the import transaction settings|
+|mapping.email_consent|string|`Optional.` CSV column name for email consent|
+|mapping.sms_consent|string|`Optional.` CSV column name for SMS consent|
+|mapping.tags|string|`Optional.` CSV column name for tags|
+|mapping.transaction_detail_custom_field_1|string|`Optional.` CSV column name for transaction detail custom field 1. The custom field must be enabled in the system (Contact support)|
+|mapping.transaction_detail_custom_field_2|string|`Optional.` CSV column name for transaction detail custom field 2. The custom field must be enabled in the system (Contact support)|
+|mapping.transaction_detail_custom_field_3|string|`Optional.` CSV column name for transaction detail custom field 3. The custom field must be enabled in the system (Contact support)|
+|mapping.transaction_detail_custom_field_4|string|`Optional.` CSV column name for transaction detail custom field 4. The custom field must be enabled in the system (Contact support)|
+|mapping.transaction_detail_custom_field_5|string|`Optional.` CSV column name for transaction detail custom field 5. The custom field must be enabled in the system (Contact support)|
+
+> **NOTE:**
+> - The `file_id` must be obtained from the `/imports/uploads` endpoint response
+> - The mapping configuration should match what was used during file upload
+> - Once started, the import process runs asynchronously. Use the `GET /imports/{id}` endpoint to check the import status
+
+Example start imports
+```
+POST /imports HTTP/1.1
+Host: api.kangaroorewards.com
+Authorization: Bearer eyJ0eXAiOiJKV1QiLC...
+Accept: application/vnd.kangaroorewards.api.v1+json;
+X-Application-Key: eyXai0XD7SLLzaOeJW...
+Content-Type: application/json
+
+{
+	"file_id": "MTc2Mzc1OTcwMF82OTIwZDY1NDM5MTlkNS4wMzU1MjYyMi5jc3",
+	"type": "transactions",
+	"options": {
+		"branch_id": "11eb0fca4cbebcc39f48e2865c66d9cc",
+		"phone_country_code": "ca"
+	},
+	"mapping": {
+		"transaction_type": "Transaction type",
+		"first_name": "First name",
+		"last_name": "Last name",
+		"email": "Email address",
+		"phone": "Phone number",
+		"transaction_amount": "Transaction amount",
+		"transaction_points": "Transaction points",
+		"date_time": "Date / Time",
+		"card_number": "card number",
+		"card_balance": "card balance",
+		"custom_field_1": "Custom field 1",
+		"custom_field_2": "custom Field 2",
+		"custom_field_3": "custom Field 3",
+		"custom_field_4": "custom Field 4",
+		"custom_field_5": "custom Field 5",
+		"custom_field_6": "Custom field 6",
+		"language": "language",
+		"email_consent": "email consent",
+		"sms_consent": "sms consent",
+		"tags": "tags",
+		"transaction_detail_custom_field_1": "Detail custom Field 1",
+		"transaction_detail_custom_field_2": "Detail custom Field 2",
+		"transaction_detail_custom_field_3": "Detail custom Field 3",
+		"transaction_detail_custom_field_4": "Detail custom Field 4",
+		"transaction_detail_custom_field_5": "Detail custom Field 5"
+	}
+}
+```
++ Request (application/json)
+    + Headers
+
+            Accept: application/vnd.kangaroorewards.api.v1+json
+            Authorization: Bearer {access_token}
+            X-Application-Key: <your_application_key>
+
+    + Body
+
+            {
+                "file_id": "MTc2Mzc1OTcwMF82OTIwZDY1NDM5MTlkNS4wMzU1MjYyMi5jc3Y",
+                "type": "transactions",
+                "options": {
+                    "branch_id": "11eb0fca4cbebcc39f48e2865c66d9cc",
+                    "phone_country_code": "ca"
+                },
+                "mapping": {
+                    "transaction_type": "Transaction type",
+                    "first_name": "First name",
+                    "last_name": "Last name",
+                    "email": "Email address",
+                    "phone": "Phone number",
+                    "transaction_amount": "Transaction amount",
+                    "transaction_points": "Transaction points",
+                    "date_time": "Date / Time",
+                    "card_number": "card number",
+                    "card_balance": "card balance",
+                    "custom_field_1": "Custom field 1",
+                    "custom_field_2": "custom Field 2",
+                    "custom_field_3": "custom Field 3",
+                    "custom_field_4": "custom Field 4",
+                    "custom_field_5": "custom Field 5",
+                    "custom_field_6": "Custom field 6",
+                    "language": "language",
+                    "email_consent": "email consent",
+                    "sms_consent": "sms consent",
+                    "tags": "tags",
+                    "transaction_detail_custom_field_1": "Detail custom Field 1",
+                    "transaction_detail_custom_field_2": "Detail custom Field 2",
+                    "transaction_detail_custom_field_3": "Detail custom Field 3",
+                    "transaction_detail_custom_field_4": "Detail custom Field 4",
+                    "transaction_detail_custom_field_5": "Detail custom Field 5"
+                }
+            }
+
++ Response 202 (application/json)
+    + Attributes (object)
+        + status_code: 202 (number) - HTTP status code
+        + message: `Accepted` (string) - Response message
+        + description: `The request has been accepted for processing.` (string) - Detailed description
+
++ Response 422 (application/json)
+    + Attributes (object)
+        + errors (object)
+            + file (array[string])
+                + `File does not exist`
+
++ Response 409 (application/json)
+    + Attributes (object)
+        + status_code: 409 (number) - HTTP status code
+        + message: `Conflict` (string) - Response message
+        + description: `Import has been already started` (string) - Detailed description
+
++ Response 401 (application/json)
+    + Attributes (object)
+        + error: `Unauthorized` (string) - Authentication error
+
+# Data Structures
+
+## MappingStatus (object)
++ key: `first_name` (string)
++ status: `warning` (string) - Status of the mapping (mapped, duplicate, warning, error, ignored, unknown)
+
+## MappedRecord (object)
++ Dynamic object containing only fields present in the CSV row. Each field has status information.
++ first_name (object, optional)
+    + status: `mapped` (string) - Field status (mapped, duplicate, warning, error, ignored, unknown)
+    + value: `Doe` (string, nullable) - Parsed field value
+    + message: null (string, nullable) - Error or warning message if applicable
++ email (object, optional)
+    + status: `warning` (string) - Field status
+    + value: `invalid@email` (string, nullable) - Parsed field value
+    + message: `Invalid email format` (string, nullable) - Error or warning message if applicable
