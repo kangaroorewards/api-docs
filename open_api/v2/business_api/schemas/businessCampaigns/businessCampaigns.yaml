@@ -745,7 +745,7 @@ definitions:
         items:
           $ref: "#/definitions/FilterProductsCategoriesTagsBrandsVendors"
         required: false
-      woo_tags_days:
+      woo_product_tags_days:
         type: integer
         format: int64
         required: false
