@@ -202,30 +202,6 @@ paths:
       operationId: getResetPasswordToken
       tags:
         - core
-  businessShopifyProducts:
-    get:
-      x-file: businessShopifyProducts.yaml
-      operationId: getBusinessShopifyProducts
-      tags:
-        - core
-  businessShopifyVendors:
-    get:
-      x-file: businessShopifyVendors.yaml
-      operationId: getBusinessShopifyVendors
-      tags:
-        - core
-  businessShopifyProductsTags:
-    get:
-      x-file: businessShopifyProductsTags.yaml
-      operationId: getBusinessShopifyProductsTags
-      tags:
-        - core
-  businessShopifyCategories:
-    get:
-      x-file: businessShopifyCategories.yaml
-      operationId: getBusinessShopifyCategories
-      tags:
-        - core
   businessSettingsIntegrations:
     get:
       x-file: businessSettingsIntegrations.yaml
