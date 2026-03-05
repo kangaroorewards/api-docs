@@ -30,15 +30,9 @@ paths:
             type: object
             required:
               - grant_type
-              - client_id
-              - client_secret
               - scope
             properties:
               grant_type:
-                type: string
-              client_id:
-                type: string
-              client_secret:
                 type: string
               scope:
                 type: string
