@@ -11,9 +11,8 @@ definitions:
     type: "object"
     description: Business settings and integrations data
     properties:
-      business:
-        type: object
-        $ref: "../../schemas/userDetails/userDetails.yaml#/definitions/Business"
+      earning_redeeming:
+        $ref: "#/definitions/EarningRedeeming"
       integrations:
         type: array
         items:
@@ -21,12 +20,204 @@ definitions:
       languages:
         type: array
         items:
-          $ref: './../languages/language.yaml'
-      app_context:
-        type: object
-        $ref: '#/definitions/AppContext'
+          $ref: "#/definitions/Language"
+      business:
+        $ref: "../../schemas/userDetails/userDetails.yaml#/definitions/Business"
+      about_us_app:
+        type: string
+      about_us_app_link:
+        type: string
+      about_link:
+        type: string
+  EarningRedeeming:
+    type: object
+    properties:
+      earn:
+        $ref: "#/definitions/Earn"
+      round_up_points:
+        type: boolean
+      welcome_points:
+        type: integer
+      use_earning_tiers:
+        type: boolean
+      use_custom_points_labels:
+        type: boolean
+      label_languages:
+        type: array
+        items:
+          $ref: "#/definitions/LabelLanguage"
+      purchases:
+        $ref: "#/definitions/Purchases"
+      sharing:
+        $ref: "#/definitions/Sharing"
+      store_credit:
+        $ref: "#/definitions/StoreCredit"
+      check_in:
+        $ref: "#/definitions/CheckIn"
+      inactive_points_expiry:
+        $ref: "#/definitions/PointsExpiry"
+      rolling_points_expiry:
+        $ref: "#/definitions/PointsExpiry"
+      pay_with_points:
+        $ref: "#/definitions/PayWithPoints"
+      pay_with_credits:
+        $ref: "#/definitions/PayWithCredits"
+  Earn:
+    type: object
+    properties:
+      points:
+        type: string
+      amount:
+        type: integer
+  LabelLanguage:
+    type: object
+    properties:
+      language_id:
+        type: integer
+      points_plural:
+        type: string
+      points_singular:
+        type: string
+      points_plural_abbreviation:
+        type: string
+      points_singular_abbreviation:
+        type: string
+  Purchases:
+    type: object
+    properties:
+      reward_method:
+        type: integer
+      purchase_amount:
+        type: integer
+      avg_purchase_amount:
+        type: integer
+      use_peak_hours:
+        type: boolean
+      peak_period:
+        type: string
+      points_delay_days:
+        type: integer
+      show_transaction_id:
+        type: boolean
+      use_atm_formatting:
+        type: boolean
+      enable_quick_claim:
+        type: boolean
+      claim_points_cooldown_minutes:
+        type: integer
+      claim_points_aggregation:
+        $ref: "#/definitions/ClaimPointsAggregation"
+      tax:
+        $ref: "#/definitions/Tax"
+      import_rewards:
+        $ref: "#/definitions/ImportRewards"
+  ClaimPointsAggregation:
+    type: object
+    properties:
+      enabled:
+        type: boolean
+      limit:
+        type: integer
+  Tax:
+    type: object
+    properties:
+      enabled:
+        type: boolean
+      rate_percentage:
+        type: string
+  ImportRewards:
+    type: object
+    properties:
+      override_earning_rule:
+        type: boolean
+      extra_points_product_reward_id:
+        type: string
+  Sharing:
+    type: object
+    properties:
+      enabled:
+        type: boolean
+      points:
+        type: integer
+  StoreCredit:
+    type: object
+    properties:
+      spend_percentage:
+        type: string
+      use_store_credit_tiers:
+        type: boolean
+  CheckIn:
+    type: object
+    properties:
+      enabled:
+        type: boolean
+      type:
+        type: integer
+      points:
+        type: integer
+      frequency:
+        $ref: "#/definitions/Frequency"
+  Frequency:
+    type: object
+    properties:
+      value:
+        type: integer
+      unit:
+        type: integer
+  PointsExpiry:
+    type: object
+    properties:
+      enabled:
+        type: boolean
+      period:
+        $ref: "#/definitions/Period"
+  Period:
+    type: object
+    properties:
+      value:
+        type: integer
+      unit:
+        type: string
+  PayWithPoints:
+    type: object
+    properties:
+      enabled:
+        type: boolean
+      default_enabled:
+        type: boolean
+      apply_to_all_platforms:
+        type: boolean
+      min_purchase_amount:
+        type: integer
+      min_points_redeemable:
+        type: integer
+      max_redemption_percentage:
+        type: integer
+      min_points_exchange_increment:
+        type: integer
+      default_redemption_amount:
+        type: integer
+      default_redemption_ratio:
+        type: integer
+      pos_redemption_amount:
+        type: integer
+      pos_redemption_ratio:
+        type: integer
+      ecommerce_redemption_amount:
+        type: integer
+      ecommerce_redemption_ratio:
+        type: integer
+  PayWithCredits:
+    type: object
+    properties:
+      enabled:
+        type: boolean
+      min_amount_redeemable:
+        type: integer
+      max_redemption_percentage:
+        type: integer
   Integration:
-    type: "object"
+    type: object
     properties:
       id:
         type: integer
@@ -36,33 +227,17 @@ definitions:
       accounts:
         type: array
         items:
-          $ref: '#/definitions/Account'
+          $ref: "#/definitions/Account"
       is_ecom:
         type: boolean
+      type:
+        type: integer
+      sub_type:
+        type: integer
       active:
         type: boolean
-  AppContext:
-    type: "object"
-    properties:
-      user_signup:
-        type: integer
-        format: int64
-      points_label:
-        type: object
-        $ref: '#/definitions/PointsLabel'
-  PointsLabel:
-    type: "object"
-    properties:
-      plural:
-        type: string
-      singular:
-        type: string
-      plural_short:
-        type: string
-      singular_short:
-        type: string
   Account:
-    type: "object"
+    type: object
     properties:
       id:
         type: string
@@ -70,3 +245,14 @@ definitions:
         type: string
       store_domain:
         type: string
+  Language:
+    type: object
+    properties:
+      id:
+        type: integer
+      abbreviation:
+        type: string
+      name:
+        type: string
+      default:
+        type: boolean
