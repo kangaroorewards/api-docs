@@ -6,15 +6,10 @@ definitions:
       - data
     properties:
       data:
-        description: "Contains all notifications items"
-        $ref: '#/definitions/UserBusinessNotifications'
-  UserBusinessNotifications:
-    type: "object"
-    properties:
-      branches:
         type: array
+        description: A list of all notifications available to this user from a business
         items:
-          $ref: "#/definitions/Notification"
+          $ref: '#/definitions/Notification'
   Notification:
     type: object
     properties:
