@@ -580,3 +580,10 @@ paths:
       operationId: redeemAmazonCatalogueItem
       tags:
         - core
+
+  userBusinessNotifications:
+    patch:
+      x-file: userBusinessNotifications.yaml
+      operationId: getUserBusinessNotifications
+      tags:
+        - core
