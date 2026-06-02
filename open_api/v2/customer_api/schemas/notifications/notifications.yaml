@@ -15,48 +15,20 @@ definitions:
     properties:
       id:
         type: string
-        description: Unique ID for this branch
-      name:
+      type_id:
+        type: integer
+      type:
         type: string
-        description: The name of this branch
-      web_site:
+      title:
         type: string
-        description: The website for this branch
-      phone:
-        type: object
-        properties:
-          number:
-            type: string
-          country_code:
-            type: string
-          national_format:
-            type: string
-          intl_format:
-            type: string
-      logo:
-        type: object
-        $ref: '../../schemas/images/images.yaml#/definitions/Images'
-      cover_photo:
-        type: object
-        $ref: '../../schemas/images/images.yaml#/definitions/Images'
-      address:
-        type: object
-        properties:
-          formatted:
-            type: string
-          street:
-            type: string
-          city:
-            type: string
-          region:
-            type: string
-          country:
-            type: string
-          lat:
-            type: number
-            format: float
-          long:
-            type: number
-            format: float
-        virtual_branch_flag:
-          type: boolean
+      description:
+        type: string
+      points:
+        type: integer
+      amount:
+        type: number
+        format: float
+      hidden:
+        type: boolean
+      created_at:
+        type: string
