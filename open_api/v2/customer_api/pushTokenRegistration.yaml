@@ -24,11 +24,15 @@ paths:
       parameters:
         - in: formData
           name: android_device_token
-          description: Firebase token for Push notification in android
+          description: Firebase token for Push notification on Android
           type: string
         - in: formData
           name: ios_device_token
-          description: Firebase token for Push notification in iOS
+          description: Firebase token for Push notification on iOS
+          type: string
+        - in: formData
+          name: web_device_token
+          description: Firebase token for Push notification on Web
           type: string
       responses:
         "200":
