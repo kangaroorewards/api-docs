@@ -1,0 +1,69 @@
+definitions:
+  Participations:
+    type: object
+    x-model: ParticipationsModel
+    description: Business draw participations.
+    properties:
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/Participation'
+
+  Participation:
+    type: object
+    x-model: ParticipationModel
+    description: A participation entry in a business draw.
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Unique participation id.
+      start_date:
+        type: string
+        description: Start date of the participation period.
+      end_date:
+        type: string
+        description: End date of the participation period.
+      prize_claim_deadline:
+        type: string
+        description: Deadline to claim prize.
+      draw_rule_id:
+        type: integer
+        format: int64
+        description: Associated draw rule id.
+      visits_count:
+        type: integer
+        description: Required visits count for participation.
+      draw_languages:
+        type: array
+        description: Localized title/description for the draw.
+        items:
+          $ref: '#/definitions/DrawLanguages'
+      available_at_branches:
+        type: array
+        description: List of branch ids where this participation is available.
+        items:
+          type: string
+      images:
+        type: array
+        description: Participation images in thumbnail/medium/large sizes.
+        items:
+          $ref: '../../schemas/images/images.yaml#/definitions/Images'
+      created_at:
+        type: string
+        description: Participation creation date.
+      updated_at:
+        type: string
+        description: Participation last update date.
+      participation_count:
+        type: integer
+        description: Number of participations.
+  DrawLanguages:
+    type: object
+    properties:
+      language_id:
+        type: integer
+      title:
+        type: string
+      description:
+        type: string

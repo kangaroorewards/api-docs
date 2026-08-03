@@ -587,3 +587,17 @@ paths:
       operationId: getUserBusinessNotifications
       tags:
         - core
+
+  drawsParticipations:
+    get:
+      x-file: drawsParticipations.yaml
+      operationId: getDrawsParticipations
+      tags:
+        - core
+
+  userBusinessDrawsParticipations:
+    get:
+      x-file: userBusinessDrawsParticipations.yaml
+      operationId: getUserBusinessDrawsParticipations
+      tags:
+        - core

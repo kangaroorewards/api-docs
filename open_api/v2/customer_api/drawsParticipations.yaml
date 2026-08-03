@@ -1,0 +1,26 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Kangaroo Customer Api
+  license:
+    name: MIT
+host: com.kangaroo.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/me/draws/participation:
+    get:
+      summary: Acquires business draws participations.
+      operationId: getDrawsParticipations
+      tags:
+        - drawsParticipations
+      responses:
+        "200":
+          description: Acquires business draws participations.
+          schema:
+            $ref: "schemas/draws/participations.yaml#/definitions/Participations"
