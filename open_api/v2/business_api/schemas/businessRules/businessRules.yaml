@@ -48,7 +48,7 @@ definitions:
           $ref: './../languages/language.yaml'
       a2p_10dlc:
         type: object
-        $ref: '#/definitions/AToPTenDLC'
+        $ref: '#/definitions/ATwoPTenDLC'
   EarningRules:
     type: "object"
     properties:
@@ -149,7 +149,7 @@ definitions:
       points:
         type: number
         format: double
-  AToPTenDLC:
+  ATwoPTenDLC:
     type: "object"
     properties:
       title:
