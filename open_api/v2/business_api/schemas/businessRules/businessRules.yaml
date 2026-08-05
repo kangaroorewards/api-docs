@@ -46,6 +46,9 @@ definitions:
         type: array
         items:
           $ref: './../languages/language.yaml'
+      a2p_10dlc:
+        type: object
+        $ref: '#/definitions/AToPTenDLC'
   EarningRules:
     type: "object"
     properties:
@@ -146,3 +149,18 @@ definitions:
       points:
         type: number
         format: double
+  AToPTenDLC:
+    type: "object"
+    properties:
+      title:
+        type: string
+      message:
+        type: string
+      button:
+        type: string
+      actionable:
+        type: boolean
+      block:
+        type: boolean
+      show:
+        type: boolean
