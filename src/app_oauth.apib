@@ -474,3 +474,208 @@ Scopes limit the type of access that an access token will allow. The Kangaroo Re
     </tr>
 </table>
 
+
+#### OAuth - Authorization Code Grant with PKCE
+
+The Kangaroo Rewards OAuth API supports **PKCE** (Proof Key for Code Exchange, [RFC 7636](https://datatracker.ietf.org/doc/html/rfc7636)),
+which is suitable for applications that **cannot keep a client secret confidential** — native mobile
+apps, desktop and CLI tools, and browser-based single page applications. Anything shipped to a user's
+device can be decompiled or inspected, so a secret embedded in it is not a secret.
+
+These are called **public clients**. A public client is issued **no client secret**. Instead, it proves
+at the token step that it is the same application that started the flow, by sending a `code_verifier`
+that matches the `code_challenge` it sent at the authorization step.
+
+PKCE is **not a separate grant type**. It is an extension of the Authorization Code flow described
+above, and the token request still uses `grant_type=authorization_code`.
+
+To register one, open the [Developer Portal](https://api.kangaroorewards.com/developers/applications),
+choose **Register a new application**, and select the grant type
+**"Authorization Code with PKCE (public client)"**.
+
+**Note:** Your application should always use HTTPS in this scenario.
+
+##### Requirements and limits
+
+| Rule | Detail |
+|------|--------|
+| Client secret | Never issued. Do not send `client_secret` on any request. |
+| `code_challenge_method` | **`S256` only.** `plain` is rejected with `400`, as is omitting the challenge entirely. |
+| Callback URL | Must match the registered value **exactly**, including scheme, case and any trailing `/`. |
+| Multiple callbacks | Supported — separate them with commas when registering. |
+| Changing a callback | **Not possible after registration.** Contact support. |
+| Approval | A newly registered app is inactive until the API agreement is signed and the app is approved. Until then the authorization endpoint returns `invalid_client`. |
+| `X-Application-Key` | **Not required** for this grant (unlike the Password Credentials Grant). |
+
+##### Allowed callback URL formats
+
+| Format | Example | Use |
+|--------|---------|-----|
+| HTTPS | `https://app.example.com/callback` | Web and single page applications |
+| Loopback | `http://127.0.0.1:8080/callback` | Desktop and CLI apps ([RFC 8252 §7.3](https://datatracker.ietf.org/doc/html/rfc8252#section-7.3)) |
+| Private-use scheme | `com.example.app:/oauth2redirect` | Native mobile apps ([RFC 8252 §7.1](https://datatracker.ietf.org/doc/html/rfc8252#section-7.1)) |
+
+A private-use scheme must be based on a domain you control (it must contain a dot), so that another
+application cannot claim the same scheme and intercept your redirect. Single-label schemes such as
+`myapp://` are rejected. Plain `http://` is only accepted for loopback addresses. Fragments (`#`) and
+wildcards (`*`) are never accepted.
+
+##### 1. Generate a code verifier and code challenge
+
+Generate these **fresh for every authorization request** and keep the verifier in memory — never log
+it, never reuse it, and never ship it in your app bundle.
+
+The `code_verifier` is a cryptographically random string, 43 to 128 characters, using only
+`A-Z a-z 0-9 - . _ ~`. The `code_challenge` is its SHA-256 hash, base64url-encoded without padding.
+
+```shell
+# Shell
+CODE_VERIFIER=$(openssl rand -base64 48 | tr -d '\n=' | tr '+/' '-_')
+CODE_CHALLENGE=$(printf '%s' "$CODE_VERIFIER" | openssl dgst -binary -sha256 | base64 | tr -d '\n=' | tr '+/' '-_')
+```
+
+```javascript
+// JavaScript (browser / React Native)
+const b64url = buf => btoa(String.fromCharCode(...new Uint8Array(buf)))
+  .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+
+const codeVerifier = b64url(crypto.getRandomValues(new Uint8Array(48)));
+const codeChallenge = b64url(
+  await crypto.subtle.digest('SHA-256', new TextEncoder().encode(codeVerifier))
+);
+```
+
+##### 2. Request Authorization
+
+Redirect the user to the authorization endpoint. This endpoint is accessible over SSL, and HTTP
+connections are refused.
+
+**Auth Code Request Endpoint**
+
+`https://api.kangaroorewards.com/oauth/authorize`
+
+| Parameter | Values | Description |
+|-----------|--------|-------------|
+| `client_id` | The client ID you obtain from the Developer Portal when you registered your app | Identifies the client making the request. Must exactly match the value shown in the Developer Portal. |
+| `redirect_uri` | The URL in your application where users will be sent after authorization | Must exactly match a callback URL registered for this app, including scheme, case and any trailing `/`. |
+| `response_type` | `code` | Must be set to `code` to request an authorization code. |
+| `code_challenge` | Base64url-encoded SHA-256 hash of your `code_verifier` | **Required.** Omitting it returns `400`. |
+| `code_challenge_method` | `S256` | **Required and must be `S256`.** `plain` is rejected with `400`. |
+| `scope` | Space-delimited set of permissions the application requests | Identifies the API access your application is requesting. See scopes. |
+| `state` | Random string | Optional but strongly recommended. Store it in the user's session and compare it when they return. |
+
+An example URL is shown below:
+
+```
+https://api.kangaroorewards.com/oauth/authorize?client_id=12345
+    &redirect_uri=com.example.app:/oauth2redirect
+    &response_type=code
+    &scope=admin
+    &code_challenge=v3VCKlOlN1VrEJcR_OzYwfu1yRwJGwUmMmYIFx_a3Bk
+    &code_challenge_method=S256
+    &state=xyzABC123
+```
+
+The user is asked to log in to the authorization server and approve the client. The consent screen
+shows your application's name, the callback destination, and the permissions requested.
+
+##### 3. Handling the OAuth 2.0 server response
+
+If the user approves the client they are redirected to your `redirect_uri` with:
+
+- `code` — the authorization code
+- `state` — the exact value you sent. **Compare it with the value in the user's session** and discard
+  the response if it does not match.
+
+An error response:
+
+```
+com.example.app:/oauth2redirect?error=access_denied&state=xyzABC123
+```
+
+An authorization code response:
+
+```
+com.example.app:/oauth2redirect?code=def502009ac5c81&state=xyzABC123
+```
+
+If your app is not yet approved, or the `redirect_uri` does not exactly match a registered callback,
+the request fails with `invalid_client` instead.
+
+##### 4. Request Access Token
+
+Send a `POST` to the token endpoint with your `code_verifier`. **No `client_secret` is sent** — the
+verifier replaces it.
+
+**Access Token Request Endpoint**
+
+`https://api.kangaroorewards.com/oauth/token`
+
+| Parameter | Values | Description |
+|-----------|--------|-------------|
+| `grant_type` | `authorization_code` | There is no separate "pkce" grant type. |
+| `client_id` | The client ID from the Developer Portal | Identifies the client making the request. |
+| `code` | Authorization code | The code you received in Step 3. |
+| `redirect_uri` | The callback used in Step 2 | Must be identical to the one sent in the authorization request. |
+| `code_verifier` | The verifier generated in Step 1 | Proves this is the same app that began the flow. |
+
+**Example with curl**
+
+```shell
+curl -v -X POST https://api.kangaroorewards.com/oauth/token \
+   -H "Accept: application/json" \
+   -H "Content-Type: application/x-www-form-urlencoded" \
+   -d "grant_type=authorization_code \
+        &client_id=12345 \
+        &code=def502009ac5c81 \
+        &redirect_uri=com.example.app:/oauth2redirect \
+        &code_verifier=2no2wxcGwRZEUFRjrCfH7K9lwqSufCVWxoTiKXU1bVLDj7ALxSoYln5ANwm_t9-a"
+```
+
+A successful response is returned as JSON:
+
+```json
+{
+    "token_type": "Bearer",
+    "expires_in": 86400,
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1N...",
+    "refresh_token": "def50200f2b1c8a9e4..."
+}
+```
+
+The authorization code is **single use**. Exchanging it twice returns:
+
+```json
+{
+    "error": "invalid_grant",
+    "hint": "Authorization code has been revoked"
+}
+```
+
+##### 5. Refresh the access token
+
+Refresh tokens also require no client secret for a public client.
+
+```shell
+curl -v -X POST https://api.kangaroorewards.com/oauth/token \
+   -H "Accept: application/json" \
+   -H "Content-Type: application/x-www-form-urlencoded" \
+   -d "grant_type=refresh_token \
+        &client_id=12345 \
+        &refresh_token=def50200f2b1c8a9e4..."
+```
+
+##### Common errors
+
+| Error | Cause |
+|-------|-------|
+| `invalid_request` — *Code challenge must be provided for public clients* | `code_challenge` was omitted. Public clients must use PKCE. |
+| `invalid_request` — *Public clients must use the S256 PKCE code challenge method* | You sent `code_challenge_method=plain`. Use `S256`. |
+| `invalid_client` | The app is not approved yet, or `redirect_uri` does not exactly match a registered callback. |
+| `invalid_grant` — *Authorization code has been revoked* | The code was already exchanged, or it expired (codes are short-lived). |
+| `invalid_grant` — *Failed to verify code_verifier* | The `code_verifier` does not match the `code_challenge` sent in Step 2. |
+
+##### Testing in Postman
+
+Postman's built-in OAuth 2.0 helper defaults `code_challenge_method` to **`plain`**, which Kangaroo
+rejects. Set **Code Challenge Method** to **SHA-256**, or build the two requests manually as shown above.
