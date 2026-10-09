@@ -1,0 +1,29 @@
+name: release-please
+
+# Maintains a standing "release PR" on every push to master that accumulates
+# a version bump + changelog entry based on Conventional Commits
+# (https://www.conventionalcommits.org/) found in the merged commit messages:
+#   feat: ...        -> minor bump
+#   fix: ...          -> patch bump
+#   feat!: / "BREAKING CHANGE:" footer -> major bump
+#   anything else (chore:, docs:, etc.) -> no version bump, not included in changelog
+#
+# Nothing is tagged or released automatically. Merging the bot's release PR
+# is the one deliberate action that cuts the actual git tag + GitHub Release.
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v4
+        with:
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
