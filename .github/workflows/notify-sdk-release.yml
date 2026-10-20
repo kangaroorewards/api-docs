@@ -1,14 +1,33 @@
 name: Notify Kangaroo-App-SDK of a new release
 
 # Fires a repository_dispatch into the private Kangaroo-App-SDK repo whenever
-# a GitHub Release is published here (whether cut manually or via the
-# release-please bot). That repo's .github/workflows/spec-bump.yml then
+# a GitHub Release is published here manually, or release-please calls this
+# workflow explicitly (GITHUB_TOKEN releases do not emit workflow triggers).
+# That repo's .github/workflows/spec-bump.yml then
 # resolves this release's commit, bumps its pinned spec properties, and
 # opens a PR for review -- this workflow only notifies, it does not touch
 # Kangaroo-App-SDK's contents directly.
 on:
   release:
     types: [published]
+  workflow_call:
+    inputs:
+      tag:
+        description: Existing published API release tag
+        required: true
+        type: string
+    secrets:
+      SDK_REPO_DISPATCH_TOKEN:
+        required: true
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing published API release tag to notify or retry
+        required: true
+        type: string
+
+permissions:
+  contents: read
 
 jobs:
   notify:
@@ -17,10 +36,22 @@ jobs:
       - name: Dispatch api-docs-release event
         env:
           GH_TOKEN: ${{ secrets.SDK_REPO_DISPATCH_TOKEN }}
-          TAG: ${{ github.event.release.tag_name }}
+          RELEASE_READ_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag || github.event.release.tag_name }}
         run: |
           if [[ -z "$GH_TOKEN" ]]; then
             echo "::error::Configure SDK_REPO_DISPATCH_TOKEN (fine-grained PAT, Contents: Read and write on kangaroorewards/Kangaroo-App-SDK only) as a repository secret before this can run."
+            exit 1
+          fi
+          if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Expected an API release tag in vX.Y.Z format."
+            exit 1
+          fi
+          # This release is public; the dispatch token only needs SDK access.
+          draft="$(GH_TOKEN="$RELEASE_READ_TOKEN" gh api \
+            "repos/$GITHUB_REPOSITORY/releases/tags/$TAG" --jq .draft)"
+          if [[ "$draft" != "false" ]]; then
+            echo "::error::The API release must be published before notifying the SDK."
             exit 1
           fi
           gh api repos/kangaroorewards/Kangaroo-App-SDK/dispatches \
