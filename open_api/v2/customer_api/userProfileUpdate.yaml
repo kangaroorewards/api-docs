@@ -28,6 +28,18 @@ paths:
           schema:
             type: object
             properties:
+              phone:
+                description: The users' updated phone number
+                required: false
+                type: string
+              country_code:
+                description: The users' updated country code
+                required: false
+                type: string
+              email:
+                description: The users' updated email address
+                required: false
+                type: string
               first_name:
                 description: The users' updated first name
                 required: false
