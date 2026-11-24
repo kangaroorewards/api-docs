@@ -47,6 +47,9 @@ definitions:
       link:
         type: string
         description: First name associated with this user.
+      order:
+        type: integer
+        description: Banner order, or null when no order is set.
       created_at:
         type: string
         description: Last name associated with this user.
